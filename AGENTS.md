@@ -130,6 +130,7 @@
 - 用 `sklearn.svm.SVC` 冒充手写 SVM。
 - 用 `torch.optim.Adam` 冒充手写 Adam。
 - 用 `torch.nn.MultiheadAttention` 冒充手写 multi-head attention。
+- 即使允许使用 `torch`，也不得调用现成高层模型或单个高层模块替代目标架构的核心实现。
 - 用现成 BLAST、FASTA、minimap2、BioPython 接口冒充生物信息学算法。
 - 用数据库、图算法、优化器或密码学现成库直接完成目标算法。
 

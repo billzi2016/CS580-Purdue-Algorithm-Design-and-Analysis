@@ -8,9 +8,9 @@ def _sha(data: bytes) -> bytes:
     spec = importlib.util.spec_from_file_location(
         "sha_core", Path(__file__).with_name("007_sha256_core.py")
     )
-    module = importlib.util.module_from_spec(spec)
     if spec is None or spec.loader is None:
         raise RuntimeError("无法加载 SHA-256 实现")
+    module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module.sha256_digest(data)
 

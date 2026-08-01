@@ -1,8 +1,8 @@
 # CS 580：算法设计与分析
 
-本仓库用于整理 **Purdue University CS 580: Algorithm Design and Analysis** 相关的算法实现、学习笔记和可运行示例，并把实现规划扩展映射到更多 Purdue Computer Science 课程。同时覆盖 LeetCode 常见题型、Codeforces 竞赛算法、数学算法、启发式优化、蒙特卡洛树搜索、机器学习优化、深度学习网络架构，以及非 AI 生物信息学算法。目标是构建一个结构清晰、按章节组织的算法参考仓库，将 Purdue 课程主题与实际刷题、竞赛、数学计算、优化实现和工程化实现结合起来。
+本仓库用于整理 **Purdue University CS 580: Algorithm Design and Analysis** 相关的算法实现、学习笔记和可运行示例，并把实现规划扩展映射到更多 Purdue Computer Science 课程。同时覆盖 LeetCode 常见题型、Codeforces 竞赛算法、Olympiad/OI 风格算法竞赛、ICPC 风格训练、蓝桥杯风格程序设计竞赛、数学算法、启发式优化、蒙特卡洛树搜索、机器学习优化、深度学习网络架构，以及非 AI 生物信息学算法。目标是构建一个结构清晰、按章节组织的算法参考仓库，将 Purdue 课程主题与实际刷题、竞赛、数学计算、优化实现和工程化实现结合起来。
 
-在过去八年里，我作为 TA 参与了七门 Purdue CS 课程，并基于这些教学和课程支持经历整理出这些笔记与实现：**Numerical Methods**、**Data Mining and Machine Learning**、**Introduction to Cryptography**、**Algorithm Design, Analysis, and Implementation**、**Programming Languages**、**Statistical Machine Learning** 和 **Database Systems**。本仓库希望把这些方向中的核心方法系统整理成一个可维护、以实现为核心的算法手册。
+在过去八年里，我作为 TA 参与了九门 Purdue CS 课程，并基于这些教学和课程支持经历整理出这些笔记与实现：**Numerical Methods**、**Data Mining and Machine Learning**、**Introduction to Cryptography**、**Algorithm Design, Analysis, and Implementation**、**Programming Languages**、**Statistical Machine Learning**、**Database Systems**、**Data Visualization** 和 **Computer Graphics**。本仓库希望把这些方向中的核心方法系统整理成一个可维护、以实现为核心的算法手册。
 
 仓库会按照章节划分主题，使每个算法都便于查找、测试和扩展。每个实现都应包含简明说明、复杂度分析，以及可以直接运行的本地 `main` 示例。
 
@@ -94,7 +94,7 @@ chapter_XX_topic_name/
 
 ## 算法任务清单
 
-章节设计同时覆盖标准算法设计课程内容、LeetCode 常见题型、Codeforces 竞赛算法、数学算法、非 AI 生物信息学算法、启发式搜索与优化、ML/DL 优化算法、深度学习网络架构、压缩与信息编码、密码学、编译器、数据库、分布式系统、操作系统调度、强化学习和图机器学习采样。完成后可把对应条目从 `- [ ]` 改成 `- [x]`。
+章节设计同时覆盖标准算法设计课程内容、LeetCode 常见题型、Codeforces 竞赛算法、Olympiad/OI 风格算法竞赛、ICPC 风格训练、蓝桥杯风格程序设计竞赛、数学算法、非 AI 生物信息学算法、启发式搜索与优化、ML/DL 优化算法、深度学习网络架构、压缩与信息编码、密码学、编译器、数据库、分布式系统、操作系统调度、强化学习和图机器学习采样。完成后可把对应条目从 `- [ ]` 改成 `- [x]`。
 
 ### Chapter 01：基础方法
 
@@ -444,6 +444,8 @@ chapter_XX_topic_name/
 
 ### Chapter 28：深度学习网络架构
 
+`chapter_28_deep_learning_architectures/` 聚焦神经网络架构组件的手写教学实现。允许使用 `torch` 完成 tensor、autograd 实验和底层神经网络计算，但不得调用预训练高层模型或一击式模块替代目标架构逻辑。
+
 - [x] `chapter_28_deep_learning_architectures/001_perceptron.py` — Perceptron
 - [x] `chapter_28_deep_learning_architectures/002_multilayer_perceptron.py` — MLP
 - [x] `chapter_28_deep_learning_architectures/003_autoencoder.py` — Autoencoder
@@ -613,7 +615,7 @@ chapter_XX_topic_name/
 - 不能使用“一击必杀”的库调用直接完成目标算法。
 - 标准库只能用于基础容器、类型标注、简单数学工具和测试辅助。
 - 可以使用 `numpy` 做数组存储和基础向量化计算，但不能用它替代目标算法本身。
-- 可以使用 `torch` 做 tensor、autograd 实验和底层神经网络计算，但不能用高层模块一行替代目标结构。
+- 可以使用 `torch` 完成 tensor、autograd 实验和底层网络组件，但不得用预训练高层模型或一击式模块替代目标架构。
 - 如果文件目标是 heap、binary search、FFT、SVM、ResNet block、BLAST seed extension 等命名算法，源码里必须清楚写出该算法的核心逻辑。
 - 不允许用 `heapq` 直接冒充手写堆实现。
 - 不允许用 `bisect` 直接冒充手写二分实现。

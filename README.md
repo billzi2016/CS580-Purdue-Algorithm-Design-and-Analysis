@@ -2,9 +2,9 @@
 
 中文版本: [README.cn.md](README.cn.md)
 
-This repository organizes implementations, notes, and runnable examples for **Purdue University CS 580: Algorithm Design and Analysis**, while also mapping the implementation plan to a broader set of Purdue Computer Science courses. It additionally covers LeetCode patterns, Codeforces-style competitive programming, mathematical algorithms, heuristic optimization, Monte Carlo Tree Search, machine-learning optimization, deep-learning architectures, and classical non-AI bioinformatics algorithms. The goal is to build a clean, chapter-based algorithm reference that connects Purdue course topics with practical implementation patterns.
+This repository organizes implementations, notes, and runnable examples for **Purdue University CS 580: Algorithm Design and Analysis**, while also mapping the implementation plan to a broader set of Purdue Computer Science courses. It additionally covers LeetCode patterns, Codeforces-style competitive programming, Olympiad-style algorithm contests, ICPC-style training, Lanqiao Cup-style programming contests, mathematical algorithms, heuristic optimization, Monte Carlo Tree Search, machine-learning optimization, deep-learning architectures, and classical non-AI bioinformatics algorithms. The goal is to build a clean, chapter-based algorithm reference that connects Purdue course topics with practical implementation patterns.
 
-Over the past eight years, I have organized these notes and implementations through my work as a TA for seven Purdue CS courses: **Numerical Methods**, **Data Mining and Machine Learning**, **Introduction to Cryptography**, **Algorithm Design, Analysis, and Implementation**, **Programming Languages**, **Statistical Machine Learning**, and **Database Systems**. The repository is intended to consolidate the core methods from those areas into a maintainable, implementation-first algorithm handbook.
+Over the past eight years, I have organized these notes and implementations through my work as a TA for nine Purdue CS courses: **Numerical Methods**, **Data Mining and Machine Learning**, **Introduction to Cryptography**, **Algorithm Design, Analysis, and Implementation**, **Programming Languages**, **Statistical Machine Learning**, **Database Systems**, **Data Visualization**, and **Computer Graphics**. The repository is intended to consolidate the core methods from those areas into a maintainable, implementation-first algorithm handbook.
 
 The repository is structured so that each algorithm is easy to find, test, and extend. Every implementation should include a concise explanation, complexity analysis, and executable examples through a local `main` entry point.
 
@@ -96,7 +96,7 @@ This repository starts from CS 580 and expands into a broader Purdue CS algorith
 
 ## Algorithm Task List
 
-The chapter map is designed to cover standard algorithm-design material, LeetCode-style interview algorithms, Codeforces-style competitive-programming techniques, mathematical algorithms, classical non-AI bioinformatics algorithms, heuristic search and optimization, ML/DL optimization algorithms, deep-learning architectures, compression, cryptography, compiler algorithms, database algorithms, distributed systems algorithms, operating-system scheduling, reinforcement learning, and graph machine-learning sampling. Completed implementations can be marked with `- [x]`.
+The chapter map is designed to cover standard algorithm-design material, LeetCode-style interview algorithms, Codeforces-style competitive-programming techniques, Olympiad-style contest algorithms, ICPC-style training patterns, Lanqiao Cup-style programming contest problems, mathematical algorithms, classical non-AI bioinformatics algorithms, heuristic search and optimization, ML/DL optimization algorithms, deep-learning architectures, compression, cryptography, compiler algorithms, database algorithms, distributed systems algorithms, operating-system scheduling, reinforcement learning, and graph machine-learning sampling. Completed implementations can be marked with `- [x]`.
 
 ### Chapter 01: Foundations
 
@@ -457,7 +457,7 @@ Bioinformatics implementations should clearly state whether an algorithm is exac
 
 ### Chapter 28: Deep Learning Architectures
 
-`chapter_28_deep_learning_architectures/` focuses on hand-written educational implementations of neural-network architecture components. Tensor libraries such as `torch` may be used for tensors and automatic differentiation, but the target architecture logic must not be replaced by one-shot high-level modules.
+`chapter_28_deep_learning_architectures/` focuses on hand-written educational implementations of neural-network architecture components. `torch` may be used for tensors, automatic differentiation, and low-level neural-network calculations, but high-level pretrained models or one-shot modules must not replace the target architecture logic.
 
 - [x] `chapter_28_deep_learning_architectures/001_perceptron.py` — perceptron
 - [x] `chapter_28_deep_learning_architectures/002_multilayer_perceptron.py` — multilayer perceptron
@@ -644,7 +644,7 @@ Each Python implementation should follow a consistent structure:
 - Do not use one-shot library calls that solve the target algorithm directly.
 - Standard libraries may be used for basic containers, typing, math helpers, and test scaffolding.
 - `numpy` may be used for array storage and basic vectorized arithmetic, but not to replace the target algorithm.
-- `torch` may be used for tensors, autograd experiments, and low-level neural-network building blocks, but not for one-shot replacements such as using `torch.optim.Adam` to implement Adam, `sklearn.svm.SVC` to implement SVM, or `torch.nn.MultiheadAttention` to implement multi-head attention.
+- `torch` may support tensors, autograd experiments, and low-level neural-network building blocks, but it must not provide a pretrained model or one-shot replacement for the target architecture. Prohibited shortcuts include using `torch.optim.Adam` to implement Adam, `sklearn.svm.SVC` to implement SVM, or `torch.nn.MultiheadAttention` to implement multi-head attention.
 - If the file is about implementing a heap, binary search, FFT, SVM, ResNet block, BLAST-style seed extension, or any other named algorithm, the named core must be visible in the source code.
 - Every source file must start with a Chinese intent comment explaining what the file implements, why the algorithm matters, expected inputs, outputs, and complexity.
 - Every public function must include a clear Chinese docstring explaining parameters, return values, edge cases, and the core idea.
