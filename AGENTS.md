@@ -43,6 +43,34 @@
 
 如果当前任务边界已经明确，例如“继续 Chapter 02”，这些触发词表示继续该边界内的剩余工作。
 
+## 数字 chapter 触发规则
+
+如果用户只回复一个纯数字 `N`，例如：
+
+- `1`
+- `2`
+- `3`
+- `10`
+
+则表示用户要求 agent 实现 README checklist 中第 `N` 个 chapter。chapter 编号从 1 开始，对应 README 中的 `Chapter 01`、`Chapter 02`、`Chapter 03` 等。
+
+执行规则：
+
+1. 先阅读 `README.md`，必要时对照 `README.cn.md`。
+2. 根据数字 `N` 定位对应 chapter。
+3. 如果该 chapter 已完成，说明当前状态，并转向该 chapter 中未完成的细项；如果完全完成，则询问是否继续下一个 chapter。
+4. 如果该 chapter 未完成，按本文件规则实现该 chapter。
+5. 实现后运行测试。
+6. 测试通过后更新 checklist。
+7. commit/push 仍然遵守 Git 规则；数字本身不表示允许 push。
+
+示例：
+
+- 用户回复 `3`：实现 `Chapter 03: Divide and Conquer`。
+- 用户回复 `8`：实现 `Chapter 08: Dynamic Programming I`。
+
+数字触发不允许跳过测试、不允许 mock、不允许一击必杀式库调用、不允许扩大到其他 chapter。
+
 ## 文件与目录规则
 
 - chapter 目录使用固定格式：`chapter_XX_topic_name/`。

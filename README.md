@@ -113,22 +113,22 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 02: Sorting and Selection
 
-- [ ] `chapter_02_sorting_and_selection/001_merge_sort.py` — merge sort
-- [ ] `chapter_02_sorting_and_selection/002_quick_sort.py` — quick sort
-- [ ] `chapter_02_sorting_and_selection/003_heap_sort.py` — heap sort
-- [ ] `chapter_02_sorting_and_selection/004_counting_sort.py` — counting sort
-- [ ] `chapter_02_sorting_and_selection/005_radix_sort.py` — radix sort
-- [ ] `chapter_02_sorting_and_selection/006_bucket_sort.py` — bucket sort
-- [ ] `chapter_02_sorting_and_selection/007_quick_select.py` — quickselect
-- [ ] `chapter_02_sorting_and_selection/008_median_of_medians.py` — deterministic selection
+- [x] `chapter_02_sorting_and_selection/001_merge_sort.py` — merge sort
+- [x] `chapter_02_sorting_and_selection/002_quick_sort.py` — quick sort
+- [x] `chapter_02_sorting_and_selection/003_heap_sort.py` — heap sort
+- [x] `chapter_02_sorting_and_selection/004_counting_sort.py` — counting sort
+- [x] `chapter_02_sorting_and_selection/005_radix_sort.py` — radix sort
+- [x] `chapter_02_sorting_and_selection/006_bucket_sort.py` — bucket sort
+- [x] `chapter_02_sorting_and_selection/007_quick_select.py` — quickselect
+- [x] `chapter_02_sorting_and_selection/008_median_of_medians.py` — deterministic selection
 
 ### Chapter 03: Divide and Conquer
 
-- [ ] `chapter_03_divide_and_conquer/001_count_inversions.py` — inversion counting
-- [ ] `chapter_03_divide_and_conquer/002_closest_pair_of_points.py` — closest pair of points
-- [ ] `chapter_03_divide_and_conquer/003_karatsuba_multiplication.py` — Karatsuba multiplication
-- [ ] `chapter_03_divide_and_conquer/004_matrix_multiplication.py` — divide-and-conquer matrix multiplication
-- [ ] `chapter_03_divide_and_conquer/005_master_theorem_examples.py` — recurrence examples
+- [x] `chapter_03_divide_and_conquer/001_count_inversions.py` — inversion counting
+- [x] `chapter_03_divide_and_conquer/002_closest_pair_of_points.py` — closest pair of points
+- [x] `chapter_03_divide_and_conquer/003_karatsuba_multiplication.py` — Karatsuba multiplication
+- [x] `chapter_03_divide_and_conquer/004_matrix_multiplication.py` — divide-and-conquer matrix multiplication
+- [x] `chapter_03_divide_and_conquer/005_master_theorem_examples.py` — recurrence examples
 
 ### Chapter 04: Graph Traversal
 
