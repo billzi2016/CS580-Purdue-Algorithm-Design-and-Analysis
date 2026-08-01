@@ -100,16 +100,16 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 01: Foundations
 
-- [ ] `chapter_01_foundations/001_binary_search.py` — binary search
-- [ ] `chapter_01_foundations/002_lower_bound_upper_bound.py` — lower bound and upper bound
-- [ ] `chapter_01_foundations/003_prefix_sum.py` — prefix sum
-- [ ] `chapter_01_foundations/004_2d_prefix_sum.py` — 2D prefix sum
-- [ ] `chapter_01_foundations/005_difference_array.py` — difference array
-- [ ] `chapter_01_foundations/006_two_pointers.py` — two pointers
-- [ ] `chapter_01_foundations/007_sliding_window.py` — sliding window
-- [ ] `chapter_01_foundations/008_fast_power.py` — binary exponentiation
-- [ ] `chapter_01_foundations/009_bit_operations.py` — bit operations
-- [ ] `chapter_01_foundations/010_recursion_and_iteration.py` — recursion and iteration patterns
+- [x] `chapter_01_foundations/001_binary_search.py` — binary search
+- [x] `chapter_01_foundations/002_lower_bound_upper_bound.py` — lower bound and upper bound
+- [x] `chapter_01_foundations/003_prefix_sum.py` — prefix sum
+- [x] `chapter_01_foundations/004_2d_prefix_sum.py` — 2D prefix sum
+- [x] `chapter_01_foundations/005_difference_array.py` — difference array
+- [x] `chapter_01_foundations/006_two_pointers.py` — two pointers
+- [x] `chapter_01_foundations/007_sliding_window.py` — sliding window
+- [x] `chapter_01_foundations/008_fast_power.py` — binary exponentiation
+- [x] `chapter_01_foundations/009_bit_operations.py` — bit operations
+- [x] `chapter_01_foundations/010_recursion_and_iteration.py` — recursion and iteration patterns
 
 ### Chapter 02: Sorting and Selection
 
