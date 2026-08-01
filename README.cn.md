@@ -139,49 +139,49 @@ chapter_XX_topic_name/
 
 ### Chapter 05：最短路径
 
-- [ ] `chapter_05_shortest_paths/001_dijkstra.py` — Dijkstra 算法
-- [ ] `chapter_05_shortest_paths/002_bellman_ford.py` — Bellman-Ford 算法
-- [ ] `chapter_05_shortest_paths/003_floyd_warshall.py` — Floyd-Warshall 算法
-- [ ] `chapter_05_shortest_paths/004_zero_one_bfs.py` — 0-1 BFS
-- [ ] `chapter_05_shortest_paths/005_dag_shortest_path.py` — DAG 最短路
-- [ ] `chapter_05_shortest_paths/006_johnson_algorithm.py` — Johnson 算法
+- [x] `chapter_05_shortest_paths/001_dijkstra.py` — Dijkstra 算法
+- [x] `chapter_05_shortest_paths/002_bellman_ford.py` — Bellman-Ford 算法
+- [x] `chapter_05_shortest_paths/003_floyd_warshall.py` — Floyd-Warshall 算法
+- [x] `chapter_05_shortest_paths/004_zero_one_bfs.py` — 0-1 BFS
+- [x] `chapter_05_shortest_paths/005_dag_shortest_path.py` — DAG 最短路
+- [x] `chapter_05_shortest_paths/006_johnson_algorithm.py` — Johnson 算法
 
 ### Chapter 06：最小生成树
 
-- [ ] `chapter_06_minimum_spanning_trees/001_union_find.py` — 并查集
-- [ ] `chapter_06_minimum_spanning_trees/002_kruskal.py` — Kruskal 算法
-- [ ] `chapter_06_minimum_spanning_trees/003_prim.py` — Prim 算法
-- [ ] `chapter_06_minimum_spanning_trees/004_cut_and_cycle_properties.py` — 割性质与环性质
-- [ ] `chapter_06_minimum_spanning_trees/005_second_best_mst.py` — 次小生成树
+- [x] `chapter_06_minimum_spanning_trees/001_union_find.py` — 并查集
+- [x] `chapter_06_minimum_spanning_trees/002_kruskal.py` — Kruskal 算法
+- [x] `chapter_06_minimum_spanning_trees/003_prim.py` — Prim 算法
+- [x] `chapter_06_minimum_spanning_trees/004_cut_and_cycle_properties.py` — 割性质与环性质
+- [x] `chapter_06_minimum_spanning_trees/005_second_best_mst.py` — 次小生成树
 
 ### Chapter 07：贪心算法
 
-- [ ] `chapter_07_greedy_algorithms/001_interval_scheduling.py` — 区间调度
-- [ ] `chapter_07_greedy_algorithms/002_activity_selection.py` — 活动选择
-- [ ] `chapter_07_greedy_algorithms/003_huffman_coding.py` — Huffman 编码
-- [ ] `chapter_07_greedy_algorithms/004_fractional_knapsack.py` — 分数背包
-- [ ] `chapter_07_greedy_algorithms/005_exchange_argument_examples.py` — 交换论证示例
+- [x] `chapter_07_greedy_algorithms/001_interval_scheduling.py` — 区间调度
+- [x] `chapter_07_greedy_algorithms/002_activity_selection.py` — 活动选择
+- [x] `chapter_07_greedy_algorithms/003_huffman_coding.py` — Huffman 编码
+- [x] `chapter_07_greedy_algorithms/004_fractional_knapsack.py` — 分数背包
+- [x] `chapter_07_greedy_algorithms/005_exchange_argument_examples.py` — 交换论证示例
 
 ### Chapter 08：动态规划 I
 
-- [ ] `chapter_08_dynamic_programming_i/001_fibonacci_variants.py` — Fibonacci 变体
-- [ ] `chapter_08_dynamic_programming_i/002_zero_one_knapsack.py` — 0/1 背包
-- [ ] `chapter_08_dynamic_programming_i/003_unbounded_knapsack.py` — 完全背包
-- [ ] `chapter_08_dynamic_programming_i/004_longest_increasing_subsequence.py` — 最长递增子序列
-- [ ] `chapter_08_dynamic_programming_i/005_edit_distance.py` — 编辑距离
-- [ ] `chapter_08_dynamic_programming_i/006_coin_change.py` — 零钱兑换
-- [ ] `chapter_08_dynamic_programming_i/007_longest_common_subsequence.py` — 最长公共子序列
+- [x] `chapter_08_dynamic_programming_i/001_fibonacci_variants.py` — Fibonacci 变体
+- [x] `chapter_08_dynamic_programming_i/002_zero_one_knapsack.py` — 0/1 背包
+- [x] `chapter_08_dynamic_programming_i/003_unbounded_knapsack.py` — 完全背包
+- [x] `chapter_08_dynamic_programming_i/004_longest_increasing_subsequence.py` — 最长递增子序列
+- [x] `chapter_08_dynamic_programming_i/005_edit_distance.py` — 编辑距离
+- [x] `chapter_08_dynamic_programming_i/006_coin_change.py` — 零钱兑换
+- [x] `chapter_08_dynamic_programming_i/007_longest_common_subsequence.py` — 最长公共子序列
 
 ### Chapter 09：动态规划 II
 
-- [ ] `chapter_09_dynamic_programming_ii/001_bitmask_dp.py` — 状压 DP
-- [ ] `chapter_09_dynamic_programming_ii/002_tree_dp.py` — 树形 DP
-- [ ] `chapter_09_dynamic_programming_ii/003_digit_dp.py` — 数位 DP
-- [ ] `chapter_09_dynamic_programming_ii/004_interval_dp.py` — 区间 DP
-- [ ] `chapter_09_dynamic_programming_ii/005_profile_dp.py` — 轮廓线 DP
-- [ ] `chapter_09_dynamic_programming_ii/006_convex_hull_trick.py` — 凸包优化
-- [ ] `chapter_09_dynamic_programming_ii/007_knuth_optimization.py` — Knuth 优化
-- [ ] `chapter_09_dynamic_programming_ii/008_divide_and_conquer_dp.py` — 分治 DP 优化
+- [x] `chapter_09_dynamic_programming_ii/001_bitmask_dp.py` — 状压 DP
+- [x] `chapter_09_dynamic_programming_ii/002_tree_dp.py` — 树形 DP
+- [x] `chapter_09_dynamic_programming_ii/003_digit_dp.py` — 数位 DP
+- [x] `chapter_09_dynamic_programming_ii/004_interval_dp.py` — 区间 DP
+- [x] `chapter_09_dynamic_programming_ii/005_profile_dp.py` — 轮廓线 DP
+- [x] `chapter_09_dynamic_programming_ii/006_convex_hull_trick.py` — 凸包优化
+- [x] `chapter_09_dynamic_programming_ii/007_knuth_optimization.py` — Knuth 优化
+- [x] `chapter_09_dynamic_programming_ii/008_divide_and_conquer_dp.py` — 分治 DP 优化
 
 ### Chapter 10：网络流与匹配
 
@@ -215,34 +215,34 @@ chapter_XX_topic_name/
 
 ### Chapter 13：数论
 
-- [ ] `chapter_13_number_theory/001_gcd_lcm.py` — gcd 与 lcm
-- [ ] `chapter_13_number_theory/002_extended_gcd.py` — 扩展 gcd
-- [ ] `chapter_13_number_theory/003_modular_exponentiation.py` — 模快速幂
-- [ ] `chapter_13_number_theory/004_modular_inverse.py` — 模逆元
-- [ ] `chapter_13_number_theory/005_sieve_of_eratosthenes.py` — 埃氏筛
-- [ ] `chapter_13_number_theory/006_prime_factorization.py` — 质因数分解
-- [ ] `chapter_13_number_theory/007_chinese_remainder_theorem.py` — 中国剩余定理
-- [ ] `chapter_13_number_theory/008_miller_rabin.py` — Miller-Rabin 素性测试
+- [x] `chapter_13_number_theory/001_gcd_lcm.py` — gcd 与 lcm
+- [x] `chapter_13_number_theory/002_extended_gcd.py` — 扩展 gcd
+- [x] `chapter_13_number_theory/003_modular_exponentiation.py` — 模快速幂
+- [x] `chapter_13_number_theory/004_modular_inverse.py` — 模逆元
+- [x] `chapter_13_number_theory/005_sieve_of_eratosthenes.py` — 埃氏筛
+- [x] `chapter_13_number_theory/006_prime_factorization.py` — 质因数分解
+- [x] `chapter_13_number_theory/007_chinese_remainder_theorem.py` — 中国剩余定理
+- [x] `chapter_13_number_theory/008_miller_rabin.py` — Miller-Rabin 素性测试
 
 ### Chapter 14：计算几何
 
-- [ ] `chapter_14_computational_geometry/001_orientation.py` — 方向判断
-- [ ] `chapter_14_computational_geometry/002_segment_intersection.py` — 线段相交
-- [ ] `chapter_14_computational_geometry/003_polygon_area.py` — 多边形面积
-- [ ] `chapter_14_computational_geometry/004_convex_hull.py` — 凸包
-- [ ] `chapter_14_computational_geometry/005_rotating_calipers.py` — 旋转卡壳
-- [ ] `chapter_14_computational_geometry/006_sweep_line.py` — 扫描线
+- [x] `chapter_14_computational_geometry/001_orientation.py` — 方向判断
+- [x] `chapter_14_computational_geometry/002_segment_intersection.py` — 线段相交
+- [x] `chapter_14_computational_geometry/003_polygon_area.py` — 多边形面积
+- [x] `chapter_14_computational_geometry/004_convex_hull.py` — 凸包
+- [x] `chapter_14_computational_geometry/005_rotating_calipers.py` — 旋转卡壳
+- [x] `chapter_14_computational_geometry/006_sweep_line.py` — 扫描线
 
 ### Chapter 15：数据结构
 
-- [ ] `chapter_15_data_structures/001_heap.py` — 堆
-- [ ] `chapter_15_data_structures/002_monotonic_stack.py` — 单调栈
-- [ ] `chapter_15_data_structures/003_monotonic_queue.py` — 单调队列
-- [ ] `chapter_15_data_structures/004_fenwick_tree.py` — Fenwick 树
-- [ ] `chapter_15_data_structures/005_segment_tree.py` — 线段树
-- [ ] `chapter_15_data_structures/006_lazy_segment_tree.py` — 懒标记线段树
-- [ ] `chapter_15_data_structures/007_sparse_table.py` — 稀疏表
-- [ ] `chapter_15_data_structures/008_disjoint_sparse_table.py` — 离散稀疏表
+- [x] `chapter_15_data_structures/001_heap.py` — 堆
+- [x] `chapter_15_data_structures/002_monotonic_stack.py` — 单调栈
+- [x] `chapter_15_data_structures/003_monotonic_queue.py` — 单调队列
+- [x] `chapter_15_data_structures/004_fenwick_tree.py` — Fenwick 树
+- [x] `chapter_15_data_structures/005_segment_tree.py` — 线段树
+- [x] `chapter_15_data_structures/006_lazy_segment_tree.py` — 懒标记线段树
+- [x] `chapter_15_data_structures/007_sparse_table.py` — 稀疏表
+- [x] `chapter_15_data_structures/008_disjoint_sparse_table.py` — 离散稀疏表
 
 ### Chapter 16：随机化算法
 
@@ -287,11 +287,11 @@ chapter_XX_topic_name/
 
 ### Chapter 21：离线与区间查询算法
 
-- [ ] `chapter_21_offline_and_range_query_algorithms/001_mos_algorithm.py` — 莫队
-- [ ] `chapter_21_offline_and_range_query_algorithms/002_mos_algorithm_on_tree.py` — 树上莫队
-- [ ] `chapter_21_offline_and_range_query_algorithms/003_cdq_divide_and_conquer.py` — CDQ 分治
-- [ ] `chapter_21_offline_and_range_query_algorithms/004_parallel_binary_search.py` — 整体二分
-- [ ] `chapter_21_offline_and_range_query_algorithms/005_offline_dynamic_connectivity.py` — 离线动态连通性
+- [x] `chapter_21_offline_and_range_query_algorithms/001_mos_algorithm.py` — 莫队
+- [x] `chapter_21_offline_and_range_query_algorithms/002_mos_algorithm_on_tree.py` — 树上莫队
+- [x] `chapter_21_offline_and_range_query_algorithms/003_cdq_divide_and_conquer.py` — CDQ 分治
+- [x] `chapter_21_offline_and_range_query_algorithms/004_parallel_binary_search.py` — 整体二分
+- [x] `chapter_21_offline_and_range_query_algorithms/005_offline_dynamic_connectivity.py` — 离线动态连通性
 
 ### Chapter 22：组合数学与多项式算法
 
@@ -500,29 +500,29 @@ chapter_XX_topic_name/
 - [x] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — RLE
 - [x] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman 编码
 - [x] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — Canonical Huffman
-- [ ] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — Arithmetic Coding
-- [ ] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
-- [ ] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
-- [ ] `chapter_30_compression_and_information_coding/007_lzw.py` — LZW
-- [ ] `chapter_30_compression_and_information_coding/008_bwt_compression_pipeline.py` — BWT compression pipeline
-- [ ] `chapter_30_compression_and_information_coding/009_move_to_front.py` — Move-to-Front
-- [ ] `chapter_30_compression_and_information_coding/010_delta_encoding.py` — Delta Encoding
-- [ ] `chapter_30_compression_and_information_coding/011_varint_encoding.py` — Varint
-- [ ] `chapter_30_compression_and_information_coding/012_crc32.py` — CRC32
-- [ ] `chapter_30_compression_and_information_coding/013_hamming_code.py` — Hamming Code
-- [ ] `chapter_30_compression_and_information_coding/014_reed_solomon_basics.py` — Reed-Solomon 基础
+- [x] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — Arithmetic Coding
+- [x] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
+- [x] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
+- [x] `chapter_30_compression_and_information_coding/007_lzw.py` — LZW
+- [x] `chapter_30_compression_and_information_coding/008_bwt_compression_pipeline.py` — BWT compression pipeline
+- [x] `chapter_30_compression_and_information_coding/009_move_to_front.py` — Move-to-Front
+- [x] `chapter_30_compression_and_information_coding/010_delta_encoding.py` — Delta Encoding
+- [x] `chapter_30_compression_and_information_coding/011_varint_encoding.py` — Varint
+- [x] `chapter_30_compression_and_information_coding/012_crc32.py` — CRC32
+- [x] `chapter_30_compression_and_information_coding/013_hamming_code.py` — Hamming Code
+- [x] `chapter_30_compression_and_information_coding/014_reed_solomon_basics.py` — Reed-Solomon 基础
 
 ### Chapter 31：密码学算法
 
-- [ ] `chapter_31_cryptography_algorithms/001_caesar_cipher.py` — Caesar cipher
-- [ ] `chapter_31_cryptography_algorithms/002_vigenere_cipher.py` — Vigenere cipher
-- [ ] `chapter_31_cryptography_algorithms/003_diffie_hellman.py` — Diffie-Hellman
-- [ ] `chapter_31_cryptography_algorithms/004_rsa_key_generation.py` — RSA key generation
-- [ ] `chapter_31_cryptography_algorithms/005_rsa_encrypt_decrypt.py` — RSA encrypt/decrypt
-- [ ] `chapter_31_cryptography_algorithms/006_elgamal.py` — ElGamal
-- [ ] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core
-- [ ] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
-- [ ] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle Tree
+- [x] `chapter_31_cryptography_algorithms/001_caesar_cipher.py` — Caesar cipher
+- [x] `chapter_31_cryptography_algorithms/002_vigenere_cipher.py` — Vigenere cipher
+- [x] `chapter_31_cryptography_algorithms/003_diffie_hellman.py` — Diffie-Hellman
+- [x] `chapter_31_cryptography_algorithms/004_rsa_key_generation.py` — RSA key generation
+- [x] `chapter_31_cryptography_algorithms/005_rsa_encrypt_decrypt.py` — RSA encrypt/decrypt
+- [x] `chapter_31_cryptography_algorithms/006_elgamal.py` — ElGamal
+- [x] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core
+- [x] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
+- [x] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle Tree
 - [ ] `chapter_31_cryptography_algorithms/010_aes_sbox_and_rounds.py` — AES S-box 与 round
 - [ ] `chapter_31_cryptography_algorithms/011_elliptic_curve_group.py` — 椭圆曲线群运算
 - [ ] `chapter_31_cryptography_algorithms/012_ecdsa_basics.py` — ECDSA 基础

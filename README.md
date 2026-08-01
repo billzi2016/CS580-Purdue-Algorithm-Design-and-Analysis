@@ -141,49 +141,49 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 05: Shortest Paths
 
-- [ ] `chapter_05_shortest_paths/001_dijkstra.py` — Dijkstra
-- [ ] `chapter_05_shortest_paths/002_bellman_ford.py` — Bellman-Ford
-- [ ] `chapter_05_shortest_paths/003_floyd_warshall.py` — Floyd-Warshall
-- [ ] `chapter_05_shortest_paths/004_zero_one_bfs.py` — 0-1 BFS
-- [ ] `chapter_05_shortest_paths/005_dag_shortest_path.py` — shortest path in DAG
-- [ ] `chapter_05_shortest_paths/006_johnson_algorithm.py` — Johnson's algorithm
+- [x] `chapter_05_shortest_paths/001_dijkstra.py` — Dijkstra
+- [x] `chapter_05_shortest_paths/002_bellman_ford.py` — Bellman-Ford
+- [x] `chapter_05_shortest_paths/003_floyd_warshall.py` — Floyd-Warshall
+- [x] `chapter_05_shortest_paths/004_zero_one_bfs.py` — 0-1 BFS
+- [x] `chapter_05_shortest_paths/005_dag_shortest_path.py` — shortest path in DAG
+- [x] `chapter_05_shortest_paths/006_johnson_algorithm.py` — Johnson's algorithm
 
 ### Chapter 06: Minimum Spanning Trees
 
-- [ ] `chapter_06_minimum_spanning_trees/001_union_find.py` — union-find
-- [ ] `chapter_06_minimum_spanning_trees/002_kruskal.py` — Kruskal
-- [ ] `chapter_06_minimum_spanning_trees/003_prim.py` — Prim
-- [ ] `chapter_06_minimum_spanning_trees/004_cut_and_cycle_properties.py` — cut and cycle properties
-- [ ] `chapter_06_minimum_spanning_trees/005_second_best_mst.py` — second-best MST
+- [x] `chapter_06_minimum_spanning_trees/001_union_find.py` — union-find
+- [x] `chapter_06_minimum_spanning_trees/002_kruskal.py` — Kruskal
+- [x] `chapter_06_minimum_spanning_trees/003_prim.py` — Prim
+- [x] `chapter_06_minimum_spanning_trees/004_cut_and_cycle_properties.py` — cut and cycle properties
+- [x] `chapter_06_minimum_spanning_trees/005_second_best_mst.py` — second-best MST
 
 ### Chapter 07: Greedy Algorithms
 
-- [ ] `chapter_07_greedy_algorithms/001_interval_scheduling.py` — interval scheduling
-- [ ] `chapter_07_greedy_algorithms/002_activity_selection.py` — activity selection
-- [ ] `chapter_07_greedy_algorithms/003_huffman_coding.py` — Huffman coding
-- [ ] `chapter_07_greedy_algorithms/004_fractional_knapsack.py` — fractional knapsack
-- [ ] `chapter_07_greedy_algorithms/005_exchange_argument_examples.py` — exchange argument examples
+- [x] `chapter_07_greedy_algorithms/001_interval_scheduling.py` — interval scheduling
+- [x] `chapter_07_greedy_algorithms/002_activity_selection.py` — activity selection
+- [x] `chapter_07_greedy_algorithms/003_huffman_coding.py` — Huffman coding
+- [x] `chapter_07_greedy_algorithms/004_fractional_knapsack.py` — fractional knapsack
+- [x] `chapter_07_greedy_algorithms/005_exchange_argument_examples.py` — exchange argument examples
 
 ### Chapter 08: Dynamic Programming I
 
-- [ ] `chapter_08_dynamic_programming_i/001_fibonacci_variants.py` — Fibonacci variants
-- [ ] `chapter_08_dynamic_programming_i/002_zero_one_knapsack.py` — 0/1 knapsack
-- [ ] `chapter_08_dynamic_programming_i/003_unbounded_knapsack.py` — unbounded knapsack
-- [ ] `chapter_08_dynamic_programming_i/004_longest_increasing_subsequence.py` — LIS
-- [ ] `chapter_08_dynamic_programming_i/005_edit_distance.py` — edit distance
-- [ ] `chapter_08_dynamic_programming_i/006_coin_change.py` — coin change
-- [ ] `chapter_08_dynamic_programming_i/007_longest_common_subsequence.py` — LCS
+- [x] `chapter_08_dynamic_programming_i/001_fibonacci_variants.py` — Fibonacci variants
+- [x] `chapter_08_dynamic_programming_i/002_zero_one_knapsack.py` — 0/1 knapsack
+- [x] `chapter_08_dynamic_programming_i/003_unbounded_knapsack.py` — unbounded knapsack
+- [x] `chapter_08_dynamic_programming_i/004_longest_increasing_subsequence.py` — LIS
+- [x] `chapter_08_dynamic_programming_i/005_edit_distance.py` — edit distance
+- [x] `chapter_08_dynamic_programming_i/006_coin_change.py` — coin change
+- [x] `chapter_08_dynamic_programming_i/007_longest_common_subsequence.py` — LCS
 
 ### Chapter 09: Dynamic Programming II
 
-- [ ] `chapter_09_dynamic_programming_ii/001_bitmask_dp.py` — bitmask DP
-- [ ] `chapter_09_dynamic_programming_ii/002_tree_dp.py` — tree DP
-- [ ] `chapter_09_dynamic_programming_ii/003_digit_dp.py` — digit DP
-- [ ] `chapter_09_dynamic_programming_ii/004_interval_dp.py` — interval DP
-- [ ] `chapter_09_dynamic_programming_ii/005_profile_dp.py` — profile DP
-- [ ] `chapter_09_dynamic_programming_ii/006_convex_hull_trick.py` — convex hull trick
-- [ ] `chapter_09_dynamic_programming_ii/007_knuth_optimization.py` — Knuth optimization
-- [ ] `chapter_09_dynamic_programming_ii/008_divide_and_conquer_dp.py` — divide-and-conquer DP optimization
+- [x] `chapter_09_dynamic_programming_ii/001_bitmask_dp.py` — bitmask DP
+- [x] `chapter_09_dynamic_programming_ii/002_tree_dp.py` — tree DP
+- [x] `chapter_09_dynamic_programming_ii/003_digit_dp.py` — digit DP
+- [x] `chapter_09_dynamic_programming_ii/004_interval_dp.py` — interval DP
+- [x] `chapter_09_dynamic_programming_ii/005_profile_dp.py` — profile DP
+- [x] `chapter_09_dynamic_programming_ii/006_convex_hull_trick.py` — convex hull trick
+- [x] `chapter_09_dynamic_programming_ii/007_knuth_optimization.py` — Knuth optimization
+- [x] `chapter_09_dynamic_programming_ii/008_divide_and_conquer_dp.py` — divide-and-conquer DP optimization
 
 ### Chapter 10: Network Flow and Matching
 
@@ -217,34 +217,34 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 13: Number Theory
 
-- [ ] `chapter_13_number_theory/001_gcd_lcm.py` — gcd and lcm
-- [ ] `chapter_13_number_theory/002_extended_gcd.py` — extended gcd
-- [ ] `chapter_13_number_theory/003_modular_exponentiation.py` — modular exponentiation
-- [ ] `chapter_13_number_theory/004_modular_inverse.py` — modular inverse
-- [ ] `chapter_13_number_theory/005_sieve_of_eratosthenes.py` — sieve of Eratosthenes
-- [ ] `chapter_13_number_theory/006_prime_factorization.py` — prime factorization
-- [ ] `chapter_13_number_theory/007_chinese_remainder_theorem.py` — CRT
-- [ ] `chapter_13_number_theory/008_miller_rabin.py` — Miller-Rabin primality test
+- [x] `chapter_13_number_theory/001_gcd_lcm.py` — gcd and lcm
+- [x] `chapter_13_number_theory/002_extended_gcd.py` — extended gcd
+- [x] `chapter_13_number_theory/003_modular_exponentiation.py` — modular exponentiation
+- [x] `chapter_13_number_theory/004_modular_inverse.py` — modular inverse
+- [x] `chapter_13_number_theory/005_sieve_of_eratosthenes.py` — sieve of Eratosthenes
+- [x] `chapter_13_number_theory/006_prime_factorization.py` — prime factorization
+- [x] `chapter_13_number_theory/007_chinese_remainder_theorem.py` — CRT
+- [x] `chapter_13_number_theory/008_miller_rabin.py` — Miller-Rabin primality test
 
 ### Chapter 14: Computational Geometry
 
-- [ ] `chapter_14_computational_geometry/001_orientation.py` — orientation test
-- [ ] `chapter_14_computational_geometry/002_segment_intersection.py` — segment intersection
-- [ ] `chapter_14_computational_geometry/003_polygon_area.py` — polygon area
-- [ ] `chapter_14_computational_geometry/004_convex_hull.py` — convex hull
-- [ ] `chapter_14_computational_geometry/005_rotating_calipers.py` — rotating calipers
-- [ ] `chapter_14_computational_geometry/006_sweep_line.py` — sweep line
+- [x] `chapter_14_computational_geometry/001_orientation.py` — orientation test
+- [x] `chapter_14_computational_geometry/002_segment_intersection.py` — segment intersection
+- [x] `chapter_14_computational_geometry/003_polygon_area.py` — polygon area
+- [x] `chapter_14_computational_geometry/004_convex_hull.py` — convex hull
+- [x] `chapter_14_computational_geometry/005_rotating_calipers.py` — rotating calipers
+- [x] `chapter_14_computational_geometry/006_sweep_line.py` — sweep line
 
 ### Chapter 15: Data Structures
 
-- [ ] `chapter_15_data_structures/001_heap.py` — heap
-- [ ] `chapter_15_data_structures/002_monotonic_stack.py` — monotonic stack
-- [ ] `chapter_15_data_structures/003_monotonic_queue.py` — monotonic queue
-- [ ] `chapter_15_data_structures/004_fenwick_tree.py` — Fenwick tree
-- [ ] `chapter_15_data_structures/005_segment_tree.py` — segment tree
-- [ ] `chapter_15_data_structures/006_lazy_segment_tree.py` — lazy segment tree
-- [ ] `chapter_15_data_structures/007_sparse_table.py` — sparse table
-- [ ] `chapter_15_data_structures/008_disjoint_sparse_table.py` — disjoint sparse table
+- [x] `chapter_15_data_structures/001_heap.py` — heap
+- [x] `chapter_15_data_structures/002_monotonic_stack.py` — monotonic stack
+- [x] `chapter_15_data_structures/003_monotonic_queue.py` — monotonic queue
+- [x] `chapter_15_data_structures/004_fenwick_tree.py` — Fenwick tree
+- [x] `chapter_15_data_structures/005_segment_tree.py` — segment tree
+- [x] `chapter_15_data_structures/006_lazy_segment_tree.py` — lazy segment tree
+- [x] `chapter_15_data_structures/007_sparse_table.py` — sparse table
+- [x] `chapter_15_data_structures/008_disjoint_sparse_table.py` — disjoint sparse table
 
 ### Chapter 16: Randomized Algorithms
 
@@ -290,11 +290,11 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 21: Offline and Range Query Algorithms
 
-- [ ] `chapter_21_offline_and_range_query_algorithms/001_mos_algorithm.py` — Mo's algorithm
-- [ ] `chapter_21_offline_and_range_query_algorithms/002_mos_algorithm_on_tree.py` — Mo's algorithm on tree
-- [ ] `chapter_21_offline_and_range_query_algorithms/003_cdq_divide_and_conquer.py` — CDQ divide and conquer
-- [ ] `chapter_21_offline_and_range_query_algorithms/004_parallel_binary_search.py` — parallel binary search
-- [ ] `chapter_21_offline_and_range_query_algorithms/005_offline_dynamic_connectivity.py` — offline dynamic connectivity
+- [x] `chapter_21_offline_and_range_query_algorithms/001_mos_algorithm.py` — Mo's algorithm
+- [x] `chapter_21_offline_and_range_query_algorithms/002_mos_algorithm_on_tree.py` — Mo's algorithm on tree
+- [x] `chapter_21_offline_and_range_query_algorithms/003_cdq_divide_and_conquer.py` — CDQ divide and conquer
+- [x] `chapter_21_offline_and_range_query_algorithms/004_parallel_binary_search.py` — parallel binary search
+- [x] `chapter_21_offline_and_range_query_algorithms/005_offline_dynamic_connectivity.py` — offline dynamic connectivity
 
 ### Chapter 22: Combinatorics and Polynomial Algorithms
 
@@ -519,31 +519,31 @@ Bioinformatics implementations should clearly state whether an algorithm is exac
 - [x] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — run-length encoding
 - [x] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman coding
 - [x] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — canonical Huffman coding
-- [ ] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — arithmetic coding
-- [ ] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
-- [ ] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
-- [ ] `chapter_30_compression_and_information_coding/007_lzw.py` — LZW
-- [ ] `chapter_30_compression_and_information_coding/008_bwt_compression_pipeline.py` — BWT compression pipeline
-- [ ] `chapter_30_compression_and_information_coding/009_move_to_front.py` — move-to-front transform
-- [ ] `chapter_30_compression_and_information_coding/010_delta_encoding.py` — delta encoding
-- [ ] `chapter_30_compression_and_information_coding/011_varint_encoding.py` — variable-length integer encoding
-- [ ] `chapter_30_compression_and_information_coding/012_crc32.py` — CRC32
-- [ ] `chapter_30_compression_and_information_coding/013_hamming_code.py` — Hamming code
-- [ ] `chapter_30_compression_and_information_coding/014_reed_solomon_basics.py` — Reed-Solomon basics
+- [x] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — arithmetic coding
+- [x] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
+- [x] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
+- [x] `chapter_30_compression_and_information_coding/007_lzw.py` — LZW
+- [x] `chapter_30_compression_and_information_coding/008_bwt_compression_pipeline.py` — BWT compression pipeline
+- [x] `chapter_30_compression_and_information_coding/009_move_to_front.py` — move-to-front transform
+- [x] `chapter_30_compression_and_information_coding/010_delta_encoding.py` — delta encoding
+- [x] `chapter_30_compression_and_information_coding/011_varint_encoding.py` — variable-length integer encoding
+- [x] `chapter_30_compression_and_information_coding/012_crc32.py` — CRC32
+- [x] `chapter_30_compression_and_information_coding/013_hamming_code.py` — Hamming code
+- [x] `chapter_30_compression_and_information_coding/014_reed_solomon_basics.py` — Reed-Solomon basics
 
 ### Chapter 31: Cryptography Algorithms
 
 `chapter_31_cryptography_algorithms/` focuses on educational implementations of cryptographic primitives and protocols. These files are for learning and must not be used as production security code.
 
-- [ ] `chapter_31_cryptography_algorithms/001_caesar_cipher.py` — Caesar cipher
-- [ ] `chapter_31_cryptography_algorithms/002_vigenere_cipher.py` — Vigenere cipher
-- [ ] `chapter_31_cryptography_algorithms/003_diffie_hellman.py` — Diffie-Hellman key exchange
-- [ ] `chapter_31_cryptography_algorithms/004_rsa_key_generation.py` — RSA key generation
-- [ ] `chapter_31_cryptography_algorithms/005_rsa_encrypt_decrypt.py` — RSA encryption and decryption
-- [ ] `chapter_31_cryptography_algorithms/006_elgamal.py` — ElGamal
-- [ ] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core structure
-- [ ] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
-- [ ] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle tree
+- [x] `chapter_31_cryptography_algorithms/001_caesar_cipher.py` — Caesar cipher
+- [x] `chapter_31_cryptography_algorithms/002_vigenere_cipher.py` — Vigenere cipher
+- [x] `chapter_31_cryptography_algorithms/003_diffie_hellman.py` — Diffie-Hellman key exchange
+- [x] `chapter_31_cryptography_algorithms/004_rsa_key_generation.py` — RSA key generation
+- [x] `chapter_31_cryptography_algorithms/005_rsa_encrypt_decrypt.py` — RSA encryption and decryption
+- [x] `chapter_31_cryptography_algorithms/006_elgamal.py` — ElGamal
+- [x] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core structure
+- [x] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
+- [x] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle tree
 - [ ] `chapter_31_cryptography_algorithms/010_aes_sbox_and_rounds.py` — AES S-box and round structure
 - [ ] `chapter_31_cryptography_algorithms/011_elliptic_curve_group.py` — elliptic-curve group operations
 - [ ] `chapter_31_cryptography_algorithms/012_ecdsa_basics.py` — ECDSA basics
