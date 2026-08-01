@@ -58,15 +58,17 @@
 则表示用户要求 agent：
 
 1. 先阅读 `README.md`，必要时对照 `README.cn.md`。
-2. 找到 README checklist 中下一个未完成的 chapter 或明确小批次。
-3. 按本文件规则继续实现。
-4. 实现后运行测试。
-5. 测试通过后更新 checklist。
-6. 按需 commit；是否 push 仍取决于用户是否明确要求。
+2. 优先继续当前正在实现但尚未完成的 chapter 的下一部分。
+3. 如果当前 chapter 已经完成，则按 README checklist 顺序进入下一章。
+4. 如果没有明确当前 chapter，则找到 README checklist 中第一个未完成的 chapter 或小批次。
+5. 按本文件规则继续实现。
+6. 实现后运行测试。
+7. 测试通过后更新 checklist。
+8. 按需 commit；是否 push 仍取决于用户是否明确要求。
 
 这些触发词不表示允许跳过测试、不表示允许 mock、不表示允许 push、不表示允许扩大范围。
 
-如果当前任务边界已经明确，例如“继续 Chapter 02”，这些触发词表示继续该边界内的剩余工作。
+如果当前任务边界已经明确，例如“继续 Chapter 02”，这些触发词表示继续该边界内的剩余工作；如果 Chapter 02 已完成，则继续 README 中 Chapter 02 后面的下一章。
 
 ## 数字 chapter 触发规则
 

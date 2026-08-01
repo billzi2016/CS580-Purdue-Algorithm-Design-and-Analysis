@@ -130,12 +130,12 @@ chapter_XX_topic_name/
 
 ### Chapter 04：图遍历
 
-- [ ] `chapter_04_graph_traversal/001_bfs.py` — 广度优先搜索
-- [ ] `chapter_04_graph_traversal/002_dfs.py` — 深度优先搜索
-- [ ] `chapter_04_graph_traversal/003_connected_components.py` — 连通分量
-- [ ] `chapter_04_graph_traversal/004_topological_sort.py` — 拓扑排序
-- [ ] `chapter_04_graph_traversal/005_cycle_detection.py` — 环检测
-- [ ] `chapter_04_graph_traversal/006_bipartite_check.py` — 二分图检测
+- [x] `chapter_04_graph_traversal/001_bfs.py` — 广度优先搜索
+- [x] `chapter_04_graph_traversal/002_dfs.py` — 深度优先搜索
+- [x] `chapter_04_graph_traversal/003_connected_components.py` — 连通分量
+- [x] `chapter_04_graph_traversal/004_topological_sort.py` — 拓扑排序
+- [x] `chapter_04_graph_traversal/005_cycle_detection.py` — 环检测
+- [x] `chapter_04_graph_traversal/006_bipartite_check.py` — 二分图检测
 
 ### Chapter 05：最短路径
 
@@ -204,14 +204,14 @@ chapter_XX_topic_name/
 
 ### Chapter 12：字符串算法
 
-- [ ] `chapter_12_string_algorithms/001_kmp.py` — KMP
-- [ ] `chapter_12_string_algorithms/002_z_algorithm.py` — Z Algorithm
-- [ ] `chapter_12_string_algorithms/003_rabin_karp.py` — Rabin-Karp
-- [ ] `chapter_12_string_algorithms/004_trie.py` — Trie
-- [ ] `chapter_12_string_algorithms/005_aho_corasick.py` — Aho-Corasick
-- [ ] `chapter_12_string_algorithms/006_suffix_array.py` — 后缀数组
-- [ ] `chapter_12_string_algorithms/007_lcp_array.py` — LCP 数组
-- [ ] `chapter_12_string_algorithms/008_manacher.py` — Manacher
+- [x] `chapter_12_string_algorithms/001_kmp.py` — KMP
+- [x] `chapter_12_string_algorithms/002_z_algorithm.py` — Z Algorithm
+- [x] `chapter_12_string_algorithms/003_rabin_karp.py` — Rabin-Karp
+- [x] `chapter_12_string_algorithms/004_trie.py` — Trie
+- [x] `chapter_12_string_algorithms/005_aho_corasick.py` — Aho-Corasick
+- [x] `chapter_12_string_algorithms/006_suffix_array.py` — 后缀数组
+- [x] `chapter_12_string_algorithms/007_lcp_array.py` — LCP 数组
+- [x] `chapter_12_string_algorithms/008_manacher.py` — Manacher
 
 ### Chapter 13：数论
 
@@ -279,11 +279,11 @@ chapter_XX_topic_name/
 
 ### Chapter 20：高级树算法
 
-- [ ] `chapter_20_advanced_tree_algorithms/001_euler_tour.py` — Euler Tour
-- [ ] `chapter_20_advanced_tree_algorithms/002_binary_lifting.py` — 倍增
-- [ ] `chapter_20_advanced_tree_algorithms/003_heavy_light_decomposition.py` — 树链剖分
-- [ ] `chapter_20_advanced_tree_algorithms/004_dsu_on_tree.py` — DSU on Tree
-- [ ] `chapter_20_advanced_tree_algorithms/005_centroid_decomposition.py` — 点分治
+- [x] `chapter_20_advanced_tree_algorithms/001_euler_tour.py` — Euler Tour
+- [x] `chapter_20_advanced_tree_algorithms/002_binary_lifting.py` — 倍增
+- [x] `chapter_20_advanced_tree_algorithms/003_heavy_light_decomposition.py` — 树链剖分
+- [x] `chapter_20_advanced_tree_algorithms/004_dsu_on_tree.py` — DSU on Tree
+- [x] `chapter_20_advanced_tree_algorithms/005_centroid_decomposition.py` — 点分治
 
 ### Chapter 21：离线与区间查询算法
 
@@ -497,9 +497,9 @@ chapter_XX_topic_name/
 
 ### Chapter 30：压缩与信息编码
 
-- [ ] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — RLE
-- [ ] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman 编码
-- [ ] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — Canonical Huffman
+- [x] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — RLE
+- [x] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman 编码
+- [x] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — Canonical Huffman
 - [ ] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — Arithmetic Coding
 - [ ] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
 - [ ] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78

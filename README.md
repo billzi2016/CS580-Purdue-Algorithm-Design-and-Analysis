@@ -132,12 +132,12 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 04: Graph Traversal
 
-- [ ] `chapter_04_graph_traversal/001_bfs.py` — breadth-first search
-- [ ] `chapter_04_graph_traversal/002_dfs.py` — depth-first search
-- [ ] `chapter_04_graph_traversal/003_connected_components.py` — connected components
-- [ ] `chapter_04_graph_traversal/004_topological_sort.py` — topological sort
-- [ ] `chapter_04_graph_traversal/005_cycle_detection.py` — cycle detection
-- [ ] `chapter_04_graph_traversal/006_bipartite_check.py` — bipartite graph check
+- [x] `chapter_04_graph_traversal/001_bfs.py` — breadth-first search
+- [x] `chapter_04_graph_traversal/002_dfs.py` — depth-first search
+- [x] `chapter_04_graph_traversal/003_connected_components.py` — connected components
+- [x] `chapter_04_graph_traversal/004_topological_sort.py` — topological sort
+- [x] `chapter_04_graph_traversal/005_cycle_detection.py` — cycle detection
+- [x] `chapter_04_graph_traversal/006_bipartite_check.py` — bipartite graph check
 
 ### Chapter 05: Shortest Paths
 
@@ -206,14 +206,14 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 12: String Algorithms
 
-- [ ] `chapter_12_string_algorithms/001_kmp.py` — KMP
-- [ ] `chapter_12_string_algorithms/002_z_algorithm.py` — Z algorithm
-- [ ] `chapter_12_string_algorithms/003_rabin_karp.py` — Rabin-Karp
-- [ ] `chapter_12_string_algorithms/004_trie.py` — trie
-- [ ] `chapter_12_string_algorithms/005_aho_corasick.py` — Aho-Corasick
-- [ ] `chapter_12_string_algorithms/006_suffix_array.py` — suffix array
-- [ ] `chapter_12_string_algorithms/007_lcp_array.py` — LCP array
-- [ ] `chapter_12_string_algorithms/008_manacher.py` — Manacher
+- [x] `chapter_12_string_algorithms/001_kmp.py` — KMP
+- [x] `chapter_12_string_algorithms/002_z_algorithm.py` — Z algorithm
+- [x] `chapter_12_string_algorithms/003_rabin_karp.py` — Rabin-Karp
+- [x] `chapter_12_string_algorithms/004_trie.py` — trie
+- [x] `chapter_12_string_algorithms/005_aho_corasick.py` — Aho-Corasick
+- [x] `chapter_12_string_algorithms/006_suffix_array.py` — suffix array
+- [x] `chapter_12_string_algorithms/007_lcp_array.py` — LCP array
+- [x] `chapter_12_string_algorithms/008_manacher.py` — Manacher
 
 ### Chapter 13: Number Theory
 
@@ -282,11 +282,11 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 20: Advanced Tree Algorithms
 
-- [ ] `chapter_20_advanced_tree_algorithms/001_euler_tour.py` — Euler tour
-- [ ] `chapter_20_advanced_tree_algorithms/002_binary_lifting.py` — binary lifting
-- [ ] `chapter_20_advanced_tree_algorithms/003_heavy_light_decomposition.py` — heavy-light decomposition
-- [ ] `chapter_20_advanced_tree_algorithms/004_dsu_on_tree.py` — DSU on tree
-- [ ] `chapter_20_advanced_tree_algorithms/005_centroid_decomposition.py` — centroid decomposition
+- [x] `chapter_20_advanced_tree_algorithms/001_euler_tour.py` — Euler tour
+- [x] `chapter_20_advanced_tree_algorithms/002_binary_lifting.py` — binary lifting
+- [x] `chapter_20_advanced_tree_algorithms/003_heavy_light_decomposition.py` — heavy-light decomposition
+- [x] `chapter_20_advanced_tree_algorithms/004_dsu_on_tree.py` — DSU on tree
+- [x] `chapter_20_advanced_tree_algorithms/005_centroid_decomposition.py` — centroid decomposition
 
 ### Chapter 21: Offline and Range Query Algorithms
 
@@ -516,9 +516,9 @@ Bioinformatics implementations should clearly state whether an algorithm is exac
 
 `chapter_30_compression_and_information_coding/` focuses on lossless compression, entropy coding, error detection, and error-correcting codes.
 
-- [ ] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — run-length encoding
-- [ ] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman coding
-- [ ] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — canonical Huffman coding
+- [x] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — run-length encoding
+- [x] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman coding
+- [x] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — canonical Huffman coding
 - [ ] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — arithmetic coding
 - [ ] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
 - [ ] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
