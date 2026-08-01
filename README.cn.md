@@ -185,13 +185,13 @@ chapter_XX_topic_name/
 
 ### Chapter 10：网络流与匹配
 
-- [ ] `chapter_10_network_flow_and_matching/001_ford_fulkerson.py` — Ford-Fulkerson
-- [ ] `chapter_10_network_flow_and_matching/002_edmonds_karp.py` — Edmonds-Karp
-- [ ] `chapter_10_network_flow_and_matching/003_dinic.py` — Dinic
-- [ ] `chapter_10_network_flow_and_matching/004_min_cut.py` — 最小割
-- [ ] `chapter_10_network_flow_and_matching/005_bipartite_matching.py` — 二分图匹配
-- [ ] `chapter_10_network_flow_and_matching/006_hopcroft_karp.py` — Hopcroft-Karp
-- [ ] `chapter_10_network_flow_and_matching/007_min_cost_max_flow.py` — 最小费用最大流
+- [x] `chapter_10_network_flow_and_matching/001_ford_fulkerson.py` — Ford-Fulkerson
+- [x] `chapter_10_network_flow_and_matching/002_edmonds_karp.py` — Edmonds-Karp
+- [x] `chapter_10_network_flow_and_matching/003_dinic.py` — Dinic
+- [x] `chapter_10_network_flow_and_matching/004_min_cut.py` — 最小割
+- [x] `chapter_10_network_flow_and_matching/005_bipartite_matching.py` — 二分图匹配
+- [x] `chapter_10_network_flow_and_matching/006_hopcroft_karp.py` — Hopcroft-Karp
+- [x] `chapter_10_network_flow_and_matching/007_min_cost_max_flow.py` — 最小费用最大流
 
 ### Chapter 11：高级图算法
 
@@ -246,36 +246,36 @@ chapter_XX_topic_name/
 
 ### Chapter 16：随机化算法
 
-- [ ] `chapter_16_randomized_algorithms/001_randomized_quicksort.py` — 随机化快速排序
-- [ ] `chapter_16_randomized_algorithms/002_randomized_select.py` — 随机化选择
-- [ ] `chapter_16_randomized_algorithms/003_reservoir_sampling.py` — 蓄水池抽样
-- [ ] `chapter_16_randomized_algorithms/004_universal_hashing.py` — 通用哈希
-- [ ] `chapter_16_randomized_algorithms/005_monte_carlo_primality.py` — Monte Carlo 素性检查
+- [x] `chapter_16_randomized_algorithms/001_randomized_quicksort.py` — 随机化快速排序
+- [x] `chapter_16_randomized_algorithms/002_randomized_select.py` — 随机化选择
+- [x] `chapter_16_randomized_algorithms/003_reservoir_sampling.py` — 蓄水池抽样
+- [x] `chapter_16_randomized_algorithms/004_universal_hashing.py` — 通用哈希
+- [x] `chapter_16_randomized_algorithms/005_monte_carlo_primality.py` — Monte Carlo 素性检查
 ### Chapter 17：近似算法与复杂性
 
-- [ ] `chapter_17_approximation_and_hardness/001_vertex_cover_approximation.py` — 点覆盖近似
-- [ ] `chapter_17_approximation_and_hardness/002_set_cover_greedy.py` — 集合覆盖贪心
-- [ ] `chapter_17_approximation_and_hardness/003_bin_packing_heuristics.py` — 装箱启发式
-- [ ] `chapter_17_approximation_and_hardness/004_reduction_examples.py` — 归约示例
-- [ ] `chapter_17_approximation_and_hardness/005_np_completeness_notes.py` — NP 完全性笔记
+- [x] `chapter_17_approximation_and_hardness/001_vertex_cover_approximation.py` — 点覆盖近似
+- [x] `chapter_17_approximation_and_hardness/002_set_cover_greedy.py` — 集合覆盖贪心
+- [x] `chapter_17_approximation_and_hardness/003_bin_packing_heuristics.py` — 装箱启发式
+- [x] `chapter_17_approximation_and_hardness/004_reduction_examples.py` — 归约示例
+- [x] `chapter_17_approximation_and_hardness/005_np_completeness_notes.py` — NP 完全性笔记
 
 ### Chapter 18：竞赛常用模式
 
-- [ ] `chapter_18_contest_patterns/001_coordinate_compression.py` — 坐标压缩
-- [ ] `chapter_18_contest_patterns/002_offline_queries.py` — 离线查询
-- [ ] `chapter_18_contest_patterns/003_binary_search_on_answer.py` — 答案二分
-- [ ] `chapter_18_contest_patterns/004_meet_in_the_middle.py` — 折半搜索
-- [ ] `chapter_18_contest_patterns/005_sweep_line_events.py` — 事件扫描线
-- [ ] `chapter_18_contest_patterns/006_difference_constraints.py` — 差分约束
-- [ ] `chapter_18_contest_patterns/007_constructive_patterns.py` — 构造题模式
+- [x] `chapter_18_contest_patterns/001_coordinate_compression.py` — 坐标压缩
+- [x] `chapter_18_contest_patterns/002_offline_queries.py` — 离线查询
+- [x] `chapter_18_contest_patterns/003_binary_search_on_answer.py` — 答案二分
+- [x] `chapter_18_contest_patterns/004_meet_in_the_middle.py` — 折半搜索
+- [x] `chapter_18_contest_patterns/005_sweep_line_events.py` — 事件扫描线
+- [x] `chapter_18_contest_patterns/006_difference_constraints.py` — 差分约束
+- [x] `chapter_18_contest_patterns/007_constructive_patterns.py` — 构造题模式
 
 ### Chapter 19：高级竞赛数据结构
 
-- [ ] `chapter_19_advanced_contest_data_structures/001_persistent_segment_tree.py` — 可持久化线段树
-- [ ] `chapter_19_advanced_contest_data_structures/002_implicit_treap.py` — 隐式 Treap
-- [ ] `chapter_19_advanced_contest_data_structures/003_li_chao_tree.py` — Li Chao Tree
-- [ ] `chapter_19_advanced_contest_data_structures/004_order_statistic_tree.py` — 顺序统计树模式
-- [ ] `chapter_19_advanced_contest_data_structures/005_rollback_union_find.py` — 可回滚并查集
+- [x] `chapter_19_advanced_contest_data_structures/001_persistent_segment_tree.py` — 可持久化线段树
+- [x] `chapter_19_advanced_contest_data_structures/002_implicit_treap.py` — 隐式 Treap
+- [x] `chapter_19_advanced_contest_data_structures/003_li_chao_tree.py` — Li Chao Tree
+- [x] `chapter_19_advanced_contest_data_structures/004_order_statistic_tree.py` — 顺序统计树模式
+- [x] `chapter_19_advanced_contest_data_structures/005_rollback_union_find.py` — 可回滚并查集
 
 ### Chapter 20：高级树算法
 
@@ -295,205 +295,205 @@ chapter_XX_topic_name/
 
 ### Chapter 22：组合数学与多项式算法
 
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/001_factorials_and_combinations.py` — 阶乘与组合数
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/002_inclusion_exclusion.py` — 容斥
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/003_catalan_numbers.py` — Catalan 数
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/004_generating_functions.py` — 生成函数
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/005_fft.py` — FFT
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/006_ntt.py` — NTT
-- [ ] `chapter_22_combinatorics_and_polynomial_algorithms/007_subset_convolution_basics.py` — 子集卷积基础
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/001_factorials_and_combinations.py` — 阶乘与组合数
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/002_inclusion_exclusion.py` — 容斥
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/003_catalan_numbers.py` — Catalan 数
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/004_generating_functions.py` — 生成函数
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/005_fft.py` — FFT
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/006_ntt.py` — NTT
+- [x] `chapter_22_combinatorics_and_polynomial_algorithms/007_subset_convolution_basics.py` — 子集卷积基础
 
 ### Chapter 23：博弈论与构造方法
 
-- [ ] `chapter_23_game_theory_and_constructive_methods/001_nim.py` — Nim
-- [ ] `chapter_23_game_theory_and_constructive_methods/002_sprague_grundy.py` — Sprague-Grundy 定理
-- [ ] `chapter_23_game_theory_and_constructive_methods/003_mex.py` — mex
-- [ ] `chapter_23_game_theory_and_constructive_methods/004_invariant_construction.py` — 不变量构造
-- [ ] `chapter_23_game_theory_and_constructive_methods/005_extremal_construction.py` — 极值构造
+- [x] `chapter_23_game_theory_and_constructive_methods/001_nim.py` — Nim
+- [x] `chapter_23_game_theory_and_constructive_methods/002_sprague_grundy.py` — Sprague-Grundy 定理
+- [x] `chapter_23_game_theory_and_constructive_methods/003_mex.py` — mex
+- [x] `chapter_23_game_theory_and_constructive_methods/004_invariant_construction.py` — 不变量构造
+- [x] `chapter_23_game_theory_and_constructive_methods/005_extremal_construction.py` — 极值构造
 
 ### Chapter 24：生物信息学算法
 
-- [ ] `chapter_24_bioinformatics/001_naive_dna_matching.py` — 朴素 DNA 精确匹配
-- [ ] `chapter_24_bioinformatics/002_kmp_dna_matching.py` — KMP DNA 匹配
-- [ ] `chapter_24_bioinformatics/003_rabin_karp_kmer_search.py` — Rabin-Karp k-mer 搜索
-- [ ] `chapter_24_bioinformatics/004_aho_corasick_motif_matching.py` — 多模式 motif 匹配
-- [ ] `chapter_24_bioinformatics/005_hamming_distance.py` — Hamming 距离
-- [ ] `chapter_24_bioinformatics/006_edit_distance.py` — 编辑距离
-- [ ] `chapter_24_bioinformatics/007_needleman_wunsch.py` — 全局序列比对
-- [ ] `chapter_24_bioinformatics/008_smith_waterman.py` — 局部序列比对
-- [ ] `chapter_24_bioinformatics/009_affine_gap_alignment.py` — affine gap 比对
-- [ ] `chapter_24_bioinformatics/010_hirschberg_alignment.py` — 线性空间比对
-- [ ] `chapter_24_bioinformatics/011_suffix_array.py` — 后缀数组
-- [ ] `chapter_24_bioinformatics/012_lcp_array.py` — LCP 数组
-- [ ] `chapter_24_bioinformatics/013_burrows_wheeler_transform.py` — Burrows-Wheeler Transform
-- [ ] `chapter_24_bioinformatics/014_fm_index.py` — FM-index
-- [ ] `chapter_24_bioinformatics/015_fasta_seed_lookup.py` — FASTA 风格 seed 查找
-- [ ] `chapter_24_bioinformatics/016_blast_seed_extend.py` — BLAST 风格 seed-and-extend
-- [ ] `chapter_24_bioinformatics/017_spaced_seeds.py` — spaced seeds
-- [ ] `chapter_24_bioinformatics/018_minimizer_index.py` — minimizer index
-- [ ] `chapter_24_bioinformatics/019_winnowing.py` — winnowing
-- [ ] `chapter_24_bioinformatics/020_syncmers.py` — syncmers
-- [ ] `chapter_24_bioinformatics/021_seed_chaining.py` — seed chaining
-- [ ] `chapter_24_bioinformatics/022_banded_dynamic_programming.py` — 带状 DP 比对
-- [ ] `chapter_24_bioinformatics/023_minimap2_style_mapping.py` — minimap2 风格长读段 mapping
-- [ ] `chapter_24_bioinformatics/024_progressive_msa.py` — progressive MSA
-- [ ] `chapter_24_bioinformatics/025_profile_alignment.py` — profile alignment
-- [ ] `chapter_24_bioinformatics/026_partial_order_alignment.py` — partial-order alignment
-- [ ] `chapter_24_bioinformatics/027_overlap_layout_consensus.py` — OLC 组装
-- [ ] `chapter_24_bioinformatics/028_de_bruijn_graph_assembly.py` — de Bruijn graph 组装
-- [ ] `chapter_24_bioinformatics/029_eulerian_assembly.py` — Eulerian path 组装建模
-- [ ] `chapter_24_bioinformatics/030_string_graph_assembly.py` — string graph 组装
-- [ ] `chapter_24_bioinformatics/031_unitig_compaction.py` — unitig 压缩
-- [ ] `chapter_24_bioinformatics/032_viterbi_hmm_genotyping.py` — HMM genotyping 的 Viterbi 解码
-- [ ] `chapter_24_bioinformatics/033_forward_backward.py` — Forward-Backward 算法
-- [ ] `chapter_24_bioinformatics/034_upgma_tree.py` — UPGMA 系统发育树
-- [ ] `chapter_24_bioinformatics/035_neighbor_joining.py` — neighbor joining
-- [ ] `chapter_24_bioinformatics/036_maximum_parsimony.py` — maximum parsimony
-- [ ] `chapter_24_bioinformatics/037_kmer_counting.py` — k-mer 计数
-- [ ] `chapter_24_bioinformatics/038_bloom_filter_kmers.py` — k-mer Bloom Filter
-- [ ] `chapter_24_bioinformatics/039_count_min_sketch_kmers.py` — k-mer Count-Min Sketch
-- [ ] `chapter_24_bioinformatics/040_minhash_sequence_distance.py` — MinHash 序列距离
-- [ ] `chapter_24_bioinformatics/041_mash_style_distance.py` — Mash 风格 sketch 距离
-- [ ] `chapter_24_bioinformatics/042_variation_graph_basics.py` — variation graph 基础
-- [ ] `chapter_24_bioinformatics/043_sequence_to_graph_alignment.py` — sequence-to-graph alignment
-- [ ] `chapter_24_bioinformatics/044_graph_indexing_basics.py` — graph indexing 基础
-- [ ] `chapter_24_bioinformatics/045_pangenome_mapping_basics.py` — pangenome mapping 基础
+- [x] `chapter_24_bioinformatics/001_naive_dna_matching.py` — 朴素 DNA 精确匹配
+- [x] `chapter_24_bioinformatics/002_kmp_dna_matching.py` — KMP DNA 匹配
+- [x] `chapter_24_bioinformatics/003_rabin_karp_kmer_search.py` — Rabin-Karp k-mer 搜索
+- [x] `chapter_24_bioinformatics/004_aho_corasick_motif_matching.py` — 多模式 motif 匹配
+- [x] `chapter_24_bioinformatics/005_hamming_distance.py` — Hamming 距离
+- [x] `chapter_24_bioinformatics/006_edit_distance.py` — 编辑距离
+- [x] `chapter_24_bioinformatics/007_needleman_wunsch.py` — 全局序列比对
+- [x] `chapter_24_bioinformatics/008_smith_waterman.py` — 局部序列比对
+- [x] `chapter_24_bioinformatics/009_affine_gap_alignment.py` — affine gap 比对
+- [x] `chapter_24_bioinformatics/010_hirschberg_alignment.py` — 线性空间比对
+- [x] `chapter_24_bioinformatics/011_suffix_array.py` — 后缀数组
+- [x] `chapter_24_bioinformatics/012_lcp_array.py` — LCP 数组
+- [x] `chapter_24_bioinformatics/013_burrows_wheeler_transform.py` — Burrows-Wheeler Transform
+- [x] `chapter_24_bioinformatics/014_fm_index.py` — FM-index
+- [x] `chapter_24_bioinformatics/015_fasta_seed_lookup.py` — FASTA 风格 seed 查找
+- [x] `chapter_24_bioinformatics/016_blast_seed_extend.py` — BLAST 风格 seed-and-extend
+- [x] `chapter_24_bioinformatics/017_spaced_seeds.py` — spaced seeds
+- [x] `chapter_24_bioinformatics/018_minimizer_index.py` — minimizer index
+- [x] `chapter_24_bioinformatics/019_winnowing.py` — winnowing
+- [x] `chapter_24_bioinformatics/020_syncmers.py` — syncmers
+- [x] `chapter_24_bioinformatics/021_seed_chaining.py` — seed chaining
+- [x] `chapter_24_bioinformatics/022_banded_dynamic_programming.py` — 带状 DP 比对
+- [x] `chapter_24_bioinformatics/023_minimap2_style_mapping.py` — minimap2 风格长读段 mapping
+- [x] `chapter_24_bioinformatics/024_progressive_msa.py` — progressive MSA
+- [x] `chapter_24_bioinformatics/025_profile_alignment.py` — profile alignment
+- [x] `chapter_24_bioinformatics/026_partial_order_alignment.py` — partial-order alignment
+- [x] `chapter_24_bioinformatics/027_overlap_layout_consensus.py` — OLC 组装
+- [x] `chapter_24_bioinformatics/028_de_bruijn_graph_assembly.py` — de Bruijn graph 组装
+- [x] `chapter_24_bioinformatics/029_eulerian_assembly.py` — Eulerian path 组装建模
+- [x] `chapter_24_bioinformatics/030_string_graph_assembly.py` — string graph 组装
+- [x] `chapter_24_bioinformatics/031_unitig_compaction.py` — unitig 压缩
+- [x] `chapter_24_bioinformatics/032_viterbi_hmm_genotyping.py` — HMM genotyping 的 Viterbi 解码
+- [x] `chapter_24_bioinformatics/033_forward_backward.py` — Forward-Backward 算法
+- [x] `chapter_24_bioinformatics/034_upgma_tree.py` — UPGMA 系统发育树
+- [x] `chapter_24_bioinformatics/035_neighbor_joining.py` — neighbor joining
+- [x] `chapter_24_bioinformatics/036_maximum_parsimony.py` — maximum parsimony
+- [x] `chapter_24_bioinformatics/037_kmer_counting.py` — k-mer 计数
+- [x] `chapter_24_bioinformatics/038_bloom_filter_kmers.py` — k-mer Bloom Filter
+- [x] `chapter_24_bioinformatics/039_count_min_sketch_kmers.py` — k-mer Count-Min Sketch
+- [x] `chapter_24_bioinformatics/040_minhash_sequence_distance.py` — MinHash 序列距离
+- [x] `chapter_24_bioinformatics/041_mash_style_distance.py` — Mash 风格 sketch 距离
+- [x] `chapter_24_bioinformatics/042_variation_graph_basics.py` — variation graph 基础
+- [x] `chapter_24_bioinformatics/043_sequence_to_graph_alignment.py` — sequence-to-graph alignment
+- [x] `chapter_24_bioinformatics/044_graph_indexing_basics.py` — graph indexing 基础
+- [x] `chapter_24_bioinformatics/045_pangenome_mapping_basics.py` — pangenome mapping 基础
 
 ### Chapter 25：ML/DL 优化算法
 
-- [ ] `chapter_25_ml_dl_optimization/001_gradient_descent.py` — batch gradient descent
-- [ ] `chapter_25_ml_dl_optimization/002_stochastic_gradient_descent.py` — stochastic gradient descent
-- [ ] `chapter_25_ml_dl_optimization/003_mini_batch_gradient_descent.py` — mini-batch gradient descent
-- [ ] `chapter_25_ml_dl_optimization/004_momentum.py` — momentum
-- [ ] `chapter_25_ml_dl_optimization/005_nesterov_accelerated_gradient.py` — Nesterov 加速梯度
-- [ ] `chapter_25_ml_dl_optimization/006_adagrad.py` — AdaGrad
-- [ ] `chapter_25_ml_dl_optimization/007_rmsprop.py` — RMSProp
-- [ ] `chapter_25_ml_dl_optimization/008_adam.py` — Adam
-- [ ] `chapter_25_ml_dl_optimization/009_adamw.py` — AdamW
-- [ ] `chapter_25_ml_dl_optimization/010_nadam.py` — Nadam
-- [ ] `chapter_25_ml_dl_optimization/011_amsgrad.py` — AMSGrad
-- [ ] `chapter_25_ml_dl_optimization/012_learning_rate_decay.py` — 学习率衰减
-- [ ] `chapter_25_ml_dl_optimization/013_cosine_annealing.py` — cosine annealing
-- [ ] `chapter_25_ml_dl_optimization/014_warmup_schedule.py` — warmup schedule
-- [ ] `chapter_25_ml_dl_optimization/015_gradient_clipping.py` — 梯度裁剪
-- [ ] `chapter_25_ml_dl_optimization/016_weight_decay.py` — weight decay
-- [ ] `chapter_25_ml_dl_optimization/017_l1_l2_regularization.py` — L1/L2 正则
-- [ ] `chapter_25_ml_dl_optimization/018_early_stopping.py` — early stopping
-- [ ] `chapter_25_ml_dl_optimization/019_batch_normalization_math.py` — BatchNorm 优化行为
-- [ ] `chapter_25_ml_dl_optimization/020_layer_normalization_math.py` — LayerNorm 优化行为
-- [ ] `chapter_25_ml_dl_optimization/021_newton_method.py` — Newton 方法
-- [ ] `chapter_25_ml_dl_optimization/022_quasi_newton_bfgs.py` — BFGS
-- [ ] `chapter_25_ml_dl_optimization/023_l_bfgs.py` — L-BFGS
-- [ ] `chapter_25_ml_dl_optimization/024_conjugate_gradient.py` — 共轭梯度
-- [ ] `chapter_25_ml_dl_optimization/025_coordinate_descent.py` — 坐标下降
-- [ ] `chapter_25_ml_dl_optimization/026_projected_gradient_descent.py` — 投影梯度下降
-- [ ] `chapter_25_ml_dl_optimization/027_proximal_gradient_method.py` — 近端梯度
-- [ ] `chapter_25_ml_dl_optimization/028_mirror_descent.py` — mirror descent
-- [ ] `chapter_25_ml_dl_optimization/029_dual_averaging.py` — dual averaging
-- [ ] `chapter_25_ml_dl_optimization/030_gradient_checking.py` — 数值梯度检查
-- [ ] `chapter_25_ml_dl_optimization/031_backtracking_line_search.py` — backtracking line search
-- [ ] `chapter_25_ml_dl_optimization/032_hyperparameter_grid_search.py` — grid search
-- [ ] `chapter_25_ml_dl_optimization/033_random_search.py` — random search
-- [ ] `chapter_25_ml_dl_optimization/034_bayesian_optimization_basics.py` — Bayesian optimization 基础
+- [x] `chapter_25_ml_dl_optimization/001_gradient_descent.py` — batch gradient descent
+- [x] `chapter_25_ml_dl_optimization/002_stochastic_gradient_descent.py` — stochastic gradient descent
+- [x] `chapter_25_ml_dl_optimization/003_mini_batch_gradient_descent.py` — mini-batch gradient descent
+- [x] `chapter_25_ml_dl_optimization/004_momentum.py` — momentum
+- [x] `chapter_25_ml_dl_optimization/005_nesterov_accelerated_gradient.py` — Nesterov 加速梯度
+- [x] `chapter_25_ml_dl_optimization/006_adagrad.py` — AdaGrad
+- [x] `chapter_25_ml_dl_optimization/007_rmsprop.py` — RMSProp
+- [x] `chapter_25_ml_dl_optimization/008_adam.py` — Adam
+- [x] `chapter_25_ml_dl_optimization/009_adamw.py` — AdamW
+- [x] `chapter_25_ml_dl_optimization/010_nadam.py` — Nadam
+- [x] `chapter_25_ml_dl_optimization/011_amsgrad.py` — AMSGrad
+- [x] `chapter_25_ml_dl_optimization/012_learning_rate_decay.py` — 学习率衰减
+- [x] `chapter_25_ml_dl_optimization/013_cosine_annealing.py` — cosine annealing
+- [x] `chapter_25_ml_dl_optimization/014_warmup_schedule.py` — warmup schedule
+- [x] `chapter_25_ml_dl_optimization/015_gradient_clipping.py` — 梯度裁剪
+- [x] `chapter_25_ml_dl_optimization/016_weight_decay.py` — weight decay
+- [x] `chapter_25_ml_dl_optimization/017_l1_l2_regularization.py` — L1/L2 正则
+- [x] `chapter_25_ml_dl_optimization/018_early_stopping.py` — early stopping
+- [x] `chapter_25_ml_dl_optimization/019_batch_normalization_math.py` — BatchNorm 优化行为
+- [x] `chapter_25_ml_dl_optimization/020_layer_normalization_math.py` — LayerNorm 优化行为
+- [x] `chapter_25_ml_dl_optimization/021_newton_method.py` — Newton 方法
+- [x] `chapter_25_ml_dl_optimization/022_quasi_newton_bfgs.py` — BFGS
+- [x] `chapter_25_ml_dl_optimization/023_l_bfgs.py` — L-BFGS
+- [x] `chapter_25_ml_dl_optimization/024_conjugate_gradient.py` — 共轭梯度
+- [x] `chapter_25_ml_dl_optimization/025_coordinate_descent.py` — 坐标下降
+- [x] `chapter_25_ml_dl_optimization/026_projected_gradient_descent.py` — 投影梯度下降
+- [x] `chapter_25_ml_dl_optimization/027_proximal_gradient_method.py` — 近端梯度
+- [x] `chapter_25_ml_dl_optimization/028_mirror_descent.py` — mirror descent
+- [x] `chapter_25_ml_dl_optimization/029_dual_averaging.py` — dual averaging
+- [x] `chapter_25_ml_dl_optimization/030_gradient_checking.py` — 数值梯度检查
+- [x] `chapter_25_ml_dl_optimization/031_backtracking_line_search.py` — backtracking line search
+- [x] `chapter_25_ml_dl_optimization/032_hyperparameter_grid_search.py` — grid search
+- [x] `chapter_25_ml_dl_optimization/033_random_search.py` — random search
+- [x] `chapter_25_ml_dl_optimization/034_bayesian_optimization_basics.py` — Bayesian optimization 基础
 
 ### Chapter 26：启发式搜索与元启发式优化
 
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/001_hill_climbing.py` — 爬山法
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/002_random_restart_hill_climbing.py` — 随机重启爬山
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/003_simulated_annealing.py` — 模拟退火
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/004_particle_swarm_optimization.py` — 粒子群优化
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/005_genetic_algorithm.py` — 遗传算法
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/006_differential_evolution.py` — 差分进化
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/007_ant_colony_optimization.py` — 蚁群算法
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/008_tabu_search.py` — 禁忌搜索
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/009_beam_search.py` — Beam Search
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/010_a_star.py` — A* 搜索
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/011_ida_star.py` — IDA* 搜索
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/012_monte_carlo_tree_search.py` — Monte Carlo Tree Search
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/013_upper_confidence_bound.py` — UCB 选择
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/014_cross_entropy_method.py` — 交叉熵方法
-- [ ] `chapter_26_heuristic_search_and_metaheuristics/015_covariance_matrix_adaptation.py` — CMA-ES 基础
+- [x] `chapter_26_heuristic_search_and_metaheuristics/001_hill_climbing.py` — 爬山法
+- [x] `chapter_26_heuristic_search_and_metaheuristics/002_random_restart_hill_climbing.py` — 随机重启爬山
+- [x] `chapter_26_heuristic_search_and_metaheuristics/003_simulated_annealing.py` — 模拟退火
+- [x] `chapter_26_heuristic_search_and_metaheuristics/004_particle_swarm_optimization.py` — 粒子群优化
+- [x] `chapter_26_heuristic_search_and_metaheuristics/005_genetic_algorithm.py` — 遗传算法
+- [x] `chapter_26_heuristic_search_and_metaheuristics/006_differential_evolution.py` — 差分进化
+- [x] `chapter_26_heuristic_search_and_metaheuristics/007_ant_colony_optimization.py` — 蚁群算法
+- [x] `chapter_26_heuristic_search_and_metaheuristics/008_tabu_search.py` — 禁忌搜索
+- [x] `chapter_26_heuristic_search_and_metaheuristics/009_beam_search.py` — Beam Search
+- [x] `chapter_26_heuristic_search_and_metaheuristics/010_a_star.py` — A* 搜索
+- [x] `chapter_26_heuristic_search_and_metaheuristics/011_ida_star.py` — IDA* 搜索
+- [x] `chapter_26_heuristic_search_and_metaheuristics/012_monte_carlo_tree_search.py` — Monte Carlo Tree Search
+- [x] `chapter_26_heuristic_search_and_metaheuristics/013_upper_confidence_bound.py` — UCB 选择
+- [x] `chapter_26_heuristic_search_and_metaheuristics/014_cross_entropy_method.py` — 交叉熵方法
+- [x] `chapter_26_heuristic_search_and_metaheuristics/015_covariance_matrix_adaptation.py` — CMA-ES 基础
 
 ### Chapter 27：数学与数值算法
 
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/001_finite_difference_derivative.py` — 有限差分求导
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/002_gradient_jacobian_hessian.py` — 梯度、Jacobian 与 Hessian
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/003_newton_root_finding.py` — Newton 求根
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/004_bisection_root_finding.py` — 二分求根
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/005_secant_method.py` — 割线法
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/006_fixed_point_iteration.py` — 不动点迭代
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/007_trapezoidal_rule.py` — 梯形积分
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/008_simpson_rule.py` — Simpson 积分
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/009_adaptive_simpson.py` — 自适应 Simpson
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/010_gaussian_quadrature.py` — Gaussian quadrature 基础
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/011_monte_carlo_integration.py` — Monte Carlo 积分
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/012_euler_method_ode.py` — Euler ODE 方法
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/013_runge_kutta_4.py` — RK4
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/014_gaussian_elimination.py` — Gaussian elimination
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/015_lu_decomposition.py` — LU 分解
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/016_qr_decomposition.py` — QR 分解
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/017_power_iteration.py` — 幂迭代
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/018_svd_basics.py` — SVD 基础
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/019_least_squares.py` — 最小二乘
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/020_polynomial_interpolation.py` — 多项式插值
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/021_lagrange_interpolation.py` — Lagrange 插值
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/022_newton_interpolation.py` — Newton 插值
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/023_spline_interpolation.py` — 样条插值基础
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/024_fast_fourier_transform_multiplication.py` — FFT 乘法
-- [ ] `chapter_27_mathematical_and_numerical_algorithms/025_number_theoretic_transform_multiplication.py` — NTT 乘法
+- [x] `chapter_27_mathematical_and_numerical_algorithms/001_finite_difference_derivative.py` — 有限差分求导
+- [x] `chapter_27_mathematical_and_numerical_algorithms/002_gradient_jacobian_hessian.py` — 梯度、Jacobian 与 Hessian
+- [x] `chapter_27_mathematical_and_numerical_algorithms/003_newton_root_finding.py` — Newton 求根
+- [x] `chapter_27_mathematical_and_numerical_algorithms/004_bisection_root_finding.py` — 二分求根
+- [x] `chapter_27_mathematical_and_numerical_algorithms/005_secant_method.py` — 割线法
+- [x] `chapter_27_mathematical_and_numerical_algorithms/006_fixed_point_iteration.py` — 不动点迭代
+- [x] `chapter_27_mathematical_and_numerical_algorithms/007_trapezoidal_rule.py` — 梯形积分
+- [x] `chapter_27_mathematical_and_numerical_algorithms/008_simpson_rule.py` — Simpson 积分
+- [x] `chapter_27_mathematical_and_numerical_algorithms/009_adaptive_simpson.py` — 自适应 Simpson
+- [x] `chapter_27_mathematical_and_numerical_algorithms/010_gaussian_quadrature.py` — Gaussian quadrature 基础
+- [x] `chapter_27_mathematical_and_numerical_algorithms/011_monte_carlo_integration.py` — Monte Carlo 积分
+- [x] `chapter_27_mathematical_and_numerical_algorithms/012_euler_method_ode.py` — Euler ODE 方法
+- [x] `chapter_27_mathematical_and_numerical_algorithms/013_runge_kutta_4.py` — RK4
+- [x] `chapter_27_mathematical_and_numerical_algorithms/014_gaussian_elimination.py` — Gaussian elimination
+- [x] `chapter_27_mathematical_and_numerical_algorithms/015_lu_decomposition.py` — LU 分解
+- [x] `chapter_27_mathematical_and_numerical_algorithms/016_qr_decomposition.py` — QR 分解
+- [x] `chapter_27_mathematical_and_numerical_algorithms/017_power_iteration.py` — 幂迭代
+- [x] `chapter_27_mathematical_and_numerical_algorithms/018_svd_basics.py` — SVD 基础
+- [x] `chapter_27_mathematical_and_numerical_algorithms/019_least_squares.py` — 最小二乘
+- [x] `chapter_27_mathematical_and_numerical_algorithms/020_polynomial_interpolation.py` — 多项式插值
+- [x] `chapter_27_mathematical_and_numerical_algorithms/021_lagrange_interpolation.py` — Lagrange 插值
+- [x] `chapter_27_mathematical_and_numerical_algorithms/022_newton_interpolation.py` — Newton 插值
+- [x] `chapter_27_mathematical_and_numerical_algorithms/023_spline_interpolation.py` — 样条插值基础
+- [x] `chapter_27_mathematical_and_numerical_algorithms/024_fast_fourier_transform_multiplication.py` — FFT 乘法
+- [x] `chapter_27_mathematical_and_numerical_algorithms/025_number_theoretic_transform_multiplication.py` — NTT 乘法
 
 ### Chapter 28：深度学习网络架构
 
-- [ ] `chapter_28_deep_learning_architectures/001_perceptron.py` — Perceptron
-- [ ] `chapter_28_deep_learning_architectures/002_multilayer_perceptron.py` — MLP
-- [ ] `chapter_28_deep_learning_architectures/003_autoencoder.py` — Autoencoder
-- [ ] `chapter_28_deep_learning_architectures/004_variational_autoencoder_core.py` — VAE core
-- [ ] `chapter_28_deep_learning_architectures/005_manual_2d_convolution.py` — 手写 2D convolution
-- [ ] `chapter_28_deep_learning_architectures/006_lenet.py` — LeNet
-- [ ] `chapter_28_deep_learning_architectures/007_alexnet.py` — AlexNet
-- [ ] `chapter_28_deep_learning_architectures/008_vgg_block.py` — VGG block
-- [ ] `chapter_28_deep_learning_architectures/009_resnet_basic_block.py` — ResNet basic block
-- [ ] `chapter_28_deep_learning_architectures/010_resnet_bottleneck_block.py` — ResNet bottleneck block
-- [ ] `chapter_28_deep_learning_architectures/011_densenet_block.py` — DenseNet block
-- [ ] `chapter_28_deep_learning_architectures/012_inception_block.py` — Inception block
-- [ ] `chapter_28_deep_learning_architectures/013_depthwise_separable_convolution.py` — depthwise separable convolution
-- [ ] `chapter_28_deep_learning_architectures/014_mobilenet_block.py` — MobileNet block
-- [ ] `chapter_28_deep_learning_architectures/015_rnn_cell.py` — RNN cell
-- [ ] `chapter_28_deep_learning_architectures/016_lstm_cell.py` — LSTM cell
-- [ ] `chapter_28_deep_learning_architectures/017_gru_cell.py` — GRU cell
-- [ ] `chapter_28_deep_learning_architectures/018_seq2seq_encoder_decoder.py` — Seq2Seq encoder-decoder
-- [ ] `chapter_28_deep_learning_architectures/019_scaled_dot_product_attention.py` — scaled dot-product attention
-- [ ] `chapter_28_deep_learning_architectures/020_multi_head_attention.py` — multi-head attention
-- [ ] `chapter_28_deep_learning_architectures/021_positional_encoding.py` — positional encoding
-- [ ] `chapter_28_deep_learning_architectures/022_transformer_encoder_block.py` — Transformer encoder block
-- [ ] `chapter_28_deep_learning_architectures/023_transformer_decoder_block.py` — Transformer decoder block
-- [ ] `chapter_28_deep_learning_architectures/024_vision_transformer_patch_embedding.py` — ViT patch embedding
-- [ ] `chapter_28_deep_learning_architectures/025_vision_transformer_block.py` — ViT block
-- [ ] `chapter_28_deep_learning_architectures/026_unet.py` — U-Net
-- [ ] `chapter_28_deep_learning_architectures/027_gan_minimal.py` — minimal GAN
-- [ ] `chapter_28_deep_learning_architectures/028_dcgan_blocks.py` — DCGAN blocks
-- [ ] `chapter_28_deep_learning_architectures/029_diffusion_forward_process.py` — diffusion forward process
-- [ ] `chapter_28_deep_learning_architectures/030_diffusion_reverse_step.py` — diffusion reverse step
-- [ ] `chapter_28_deep_learning_architectures/031_graph_convolution_layer.py` — GCN layer
-- [ ] `chapter_28_deep_learning_architectures/032_graph_attention_layer.py` — GAT layer
+- [x] `chapter_28_deep_learning_architectures/001_perceptron.py` — Perceptron
+- [x] `chapter_28_deep_learning_architectures/002_multilayer_perceptron.py` — MLP
+- [x] `chapter_28_deep_learning_architectures/003_autoencoder.py` — Autoencoder
+- [x] `chapter_28_deep_learning_architectures/004_variational_autoencoder_core.py` — VAE core
+- [x] `chapter_28_deep_learning_architectures/005_manual_2d_convolution.py` — 手写 2D convolution
+- [x] `chapter_28_deep_learning_architectures/006_lenet.py` — LeNet
+- [x] `chapter_28_deep_learning_architectures/007_alexnet.py` — AlexNet
+- [x] `chapter_28_deep_learning_architectures/008_vgg_block.py` — VGG block
+- [x] `chapter_28_deep_learning_architectures/009_resnet_basic_block.py` — ResNet basic block
+- [x] `chapter_28_deep_learning_architectures/010_resnet_bottleneck_block.py` — ResNet bottleneck block
+- [x] `chapter_28_deep_learning_architectures/011_densenet_block.py` — DenseNet block
+- [x] `chapter_28_deep_learning_architectures/012_inception_block.py` — Inception block
+- [x] `chapter_28_deep_learning_architectures/013_depthwise_separable_convolution.py` — depthwise separable convolution
+- [x] `chapter_28_deep_learning_architectures/014_mobilenet_block.py` — MobileNet block
+- [x] `chapter_28_deep_learning_architectures/015_rnn_cell.py` — RNN cell
+- [x] `chapter_28_deep_learning_architectures/016_lstm_cell.py` — LSTM cell
+- [x] `chapter_28_deep_learning_architectures/017_gru_cell.py` — GRU cell
+- [x] `chapter_28_deep_learning_architectures/018_seq2seq_encoder_decoder.py` — Seq2Seq encoder-decoder
+- [x] `chapter_28_deep_learning_architectures/019_scaled_dot_product_attention.py` — scaled dot-product attention
+- [x] `chapter_28_deep_learning_architectures/020_multi_head_attention.py` — multi-head attention
+- [x] `chapter_28_deep_learning_architectures/021_positional_encoding.py` — positional encoding
+- [x] `chapter_28_deep_learning_architectures/022_transformer_encoder_block.py` — Transformer encoder block
+- [x] `chapter_28_deep_learning_architectures/023_transformer_decoder_block.py` — Transformer decoder block
+- [x] `chapter_28_deep_learning_architectures/024_vision_transformer_patch_embedding.py` — ViT patch embedding
+- [x] `chapter_28_deep_learning_architectures/025_vision_transformer_block.py` — ViT block
+- [x] `chapter_28_deep_learning_architectures/026_unet.py` — U-Net
+- [x] `chapter_28_deep_learning_architectures/027_gan_minimal.py` — minimal GAN
+- [x] `chapter_28_deep_learning_architectures/028_dcgan_blocks.py` — DCGAN blocks
+- [x] `chapter_28_deep_learning_architectures/029_diffusion_forward_process.py` — diffusion forward process
+- [x] `chapter_28_deep_learning_architectures/030_diffusion_reverse_step.py` — diffusion reverse step
+- [x] `chapter_28_deep_learning_architectures/031_graph_convolution_layer.py` — GCN layer
+- [x] `chapter_28_deep_learning_architectures/032_graph_attention_layer.py` — GAT layer
 
 ### Chapter 29：强化学习算法
 
-- [ ] `chapter_29_reinforcement_learning_algorithms/001_markov_decision_process.py` — MDP 基础
-- [ ] `chapter_29_reinforcement_learning_algorithms/002_value_iteration.py` — Value Iteration
-- [ ] `chapter_29_reinforcement_learning_algorithms/003_policy_iteration.py` — Policy Iteration
-- [ ] `chapter_29_reinforcement_learning_algorithms/004_monte_carlo_prediction.py` — Monte Carlo prediction
-- [ ] `chapter_29_reinforcement_learning_algorithms/005_monte_carlo_control.py` — Monte Carlo control
-- [ ] `chapter_29_reinforcement_learning_algorithms/006_temporal_difference_prediction.py` — TD(0)
-- [ ] `chapter_29_reinforcement_learning_algorithms/007_sarsa.py` — SARSA
-- [ ] `chapter_29_reinforcement_learning_algorithms/008_q_learning.py` — Q-learning
-- [ ] `chapter_29_reinforcement_learning_algorithms/009_expected_sarsa.py` — Expected SARSA
-- [ ] `chapter_29_reinforcement_learning_algorithms/010_double_q_learning.py` — Double Q-learning
-- [ ] `chapter_29_reinforcement_learning_algorithms/011_dyna_q.py` — Dyna-Q
-- [ ] `chapter_29_reinforcement_learning_algorithms/012_policy_gradient_reinforce.py` — REINFORCE
-- [ ] `chapter_29_reinforcement_learning_algorithms/013_actor_critic_basics.py` — Actor-Critic 基础
-- [ ] `chapter_29_reinforcement_learning_algorithms/014_upper_confidence_bound_bandit.py` — UCB bandit
-- [ ] `chapter_29_reinforcement_learning_algorithms/015_thompson_sampling.py` — Thompson sampling
+- [x] `chapter_29_reinforcement_learning_algorithms/001_markov_decision_process.py` — MDP 基础
+- [x] `chapter_29_reinforcement_learning_algorithms/002_value_iteration.py` — Value Iteration
+- [x] `chapter_29_reinforcement_learning_algorithms/003_policy_iteration.py` — Policy Iteration
+- [x] `chapter_29_reinforcement_learning_algorithms/004_monte_carlo_prediction.py` — Monte Carlo prediction
+- [x] `chapter_29_reinforcement_learning_algorithms/005_monte_carlo_control.py` — Monte Carlo control
+- [x] `chapter_29_reinforcement_learning_algorithms/006_temporal_difference_prediction.py` — TD(0)
+- [x] `chapter_29_reinforcement_learning_algorithms/007_sarsa.py` — SARSA
+- [x] `chapter_29_reinforcement_learning_algorithms/008_q_learning.py` — Q-learning
+- [x] `chapter_29_reinforcement_learning_algorithms/009_expected_sarsa.py` — Expected SARSA
+- [x] `chapter_29_reinforcement_learning_algorithms/010_double_q_learning.py` — Double Q-learning
+- [x] `chapter_29_reinforcement_learning_algorithms/011_dyna_q.py` — Dyna-Q
+- [x] `chapter_29_reinforcement_learning_algorithms/012_policy_gradient_reinforce.py` — REINFORCE
+- [x] `chapter_29_reinforcement_learning_algorithms/013_actor_critic_basics.py` — Actor-Critic 基础
+- [x] `chapter_29_reinforcement_learning_algorithms/014_upper_confidence_bound_bandit.py` — UCB bandit
+- [x] `chapter_29_reinforcement_learning_algorithms/015_thompson_sampling.py` — Thompson sampling
 
 ### Chapter 30：压缩与信息编码
 
@@ -523,87 +523,87 @@ chapter_XX_topic_name/
 - [x] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core
 - [x] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
 - [x] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle Tree
-- [ ] `chapter_31_cryptography_algorithms/010_aes_sbox_and_rounds.py` — AES S-box 与 round
-- [ ] `chapter_31_cryptography_algorithms/011_elliptic_curve_group.py` — 椭圆曲线群运算
-- [ ] `chapter_31_cryptography_algorithms/012_ecdsa_basics.py` — ECDSA 基础
+- [x] `chapter_31_cryptography_algorithms/010_aes_sbox_and_rounds.py` — AES S-box 与 round
+- [x] `chapter_31_cryptography_algorithms/011_elliptic_curve_group.py` — 椭圆曲线群运算
+- [x] `chapter_31_cryptography_algorithms/012_ecdsa_basics.py` — ECDSA 基础
 
 ### Chapter 32：编译器算法
 
-- [ ] `chapter_32_compiler_algorithms/001_regex_to_nfa.py` — Regex to NFA
-- [ ] `chapter_32_compiler_algorithms/002_nfa_to_dfa.py` — NFA to DFA
-- [ ] `chapter_32_compiler_algorithms/003_dfa_minimization.py` — DFA 最小化
-- [ ] `chapter_32_compiler_algorithms/004_first_follow_sets.py` — FIRST/FOLLOW 集
-- [ ] `chapter_32_compiler_algorithms/005_ll1_parsing_table.py` — LL(1) parsing table
-- [ ] `chapter_32_compiler_algorithms/006_lr0_items.py` — LR(0) items
-- [ ] `chapter_32_compiler_algorithms/007_slr_parsing.py` — SLR parsing
-- [ ] `chapter_32_compiler_algorithms/008_shunting_yard.py` — Shunting-yard
-- [ ] `chapter_32_compiler_algorithms/009_three_address_code.py` — Three-address Code
-- [ ] `chapter_32_compiler_algorithms/010_basic_blocks_cfg.py` — Basic Blocks 与 CFG
-- [ ] `chapter_32_compiler_algorithms/011_dominators.py` — Dominator 计算
-- [ ] `chapter_32_compiler_algorithms/012_static_single_assignment.py` — SSA 构造基础
-- [ ] `chapter_32_compiler_algorithms/013_liveness_analysis.py` — Liveness Analysis
-- [ ] `chapter_32_compiler_algorithms/014_graph_coloring_register_allocation.py` — 图着色寄存器分配
+- [x] `chapter_32_compiler_algorithms/001_regex_to_nfa.py` — Regex to NFA
+- [x] `chapter_32_compiler_algorithms/002_nfa_to_dfa.py` — NFA to DFA
+- [x] `chapter_32_compiler_algorithms/003_dfa_minimization.py` — DFA 最小化
+- [x] `chapter_32_compiler_algorithms/004_first_follow_sets.py` — FIRST/FOLLOW 集
+- [x] `chapter_32_compiler_algorithms/005_ll1_parsing_table.py` — LL(1) parsing table
+- [x] `chapter_32_compiler_algorithms/006_lr0_items.py` — LR(0) items
+- [x] `chapter_32_compiler_algorithms/007_slr_parsing.py` — SLR parsing
+- [x] `chapter_32_compiler_algorithms/008_shunting_yard.py` — Shunting-yard
+- [x] `chapter_32_compiler_algorithms/009_three_address_code.py` — Three-address Code
+- [x] `chapter_32_compiler_algorithms/010_basic_blocks_cfg.py` — Basic Blocks 与 CFG
+- [x] `chapter_32_compiler_algorithms/011_dominators.py` — Dominator 计算
+- [x] `chapter_32_compiler_algorithms/012_static_single_assignment.py` — SSA 构造基础
+- [x] `chapter_32_compiler_algorithms/013_liveness_analysis.py` — Liveness Analysis
+- [x] `chapter_32_compiler_algorithms/014_graph_coloring_register_allocation.py` — 图着色寄存器分配
 
 ### Chapter 33：数据库算法
 
-- [ ] `chapter_33_database_algorithms/001_b_tree.py` — B-tree
-- [ ] `chapter_33_database_algorithms/002_b_plus_tree.py` — B+ tree
-- [ ] `chapter_33_database_algorithms/003_lsm_tree_basics.py` — LSM tree 基础
-- [ ] `chapter_33_database_algorithms/004_hash_index.py` — Hash Index
-- [ ] `chapter_33_database_algorithms/005_bitmap_index.py` — Bitmap Index
-- [ ] `chapter_33_database_algorithms/006_nested_loop_join.py` — Nested-loop Join
-- [ ] `chapter_33_database_algorithms/007_hash_join.py` — Hash Join
-- [ ] `chapter_33_database_algorithms/008_sort_merge_join.py` — Sort-merge Join
-- [ ] `chapter_33_database_algorithms/009_external_merge_sort.py` — External Merge Sort
-- [ ] `chapter_33_database_algorithms/010_grace_hash_join.py` — Grace Hash Join
-- [ ] `chapter_33_database_algorithms/011_volcano_iterator_model.py` — Volcano Iterator Model
-- [ ] `chapter_33_database_algorithms/012_dynamic_programming_join_order.py` — DP Join Ordering
-- [ ] `chapter_33_database_algorithms/013_two_phase_locking.py` — Two-phase Locking
-- [ ] `chapter_33_database_algorithms/014_mvcc_basics.py` — MVCC 基础
+- [x] `chapter_33_database_algorithms/001_b_tree.py` — B-tree
+- [x] `chapter_33_database_algorithms/002_b_plus_tree.py` — B+ tree
+- [x] `chapter_33_database_algorithms/003_lsm_tree_basics.py` — LSM tree 基础
+- [x] `chapter_33_database_algorithms/004_hash_index.py` — Hash Index
+- [x] `chapter_33_database_algorithms/005_bitmap_index.py` — Bitmap Index
+- [x] `chapter_33_database_algorithms/006_nested_loop_join.py` — Nested-loop Join
+- [x] `chapter_33_database_algorithms/007_hash_join.py` — Hash Join
+- [x] `chapter_33_database_algorithms/008_sort_merge_join.py` — Sort-merge Join
+- [x] `chapter_33_database_algorithms/009_external_merge_sort.py` — External Merge Sort
+- [x] `chapter_33_database_algorithms/010_grace_hash_join.py` — Grace Hash Join
+- [x] `chapter_33_database_algorithms/011_volcano_iterator_model.py` — Volcano Iterator Model
+- [x] `chapter_33_database_algorithms/012_dynamic_programming_join_order.py` — DP Join Ordering
+- [x] `chapter_33_database_algorithms/013_two_phase_locking.py` — Two-phase Locking
+- [x] `chapter_33_database_algorithms/014_mvcc_basics.py` — MVCC 基础
 
 ### Chapter 34：分布式系统算法
 
-- [ ] `chapter_34_distributed_systems_algorithms/001_consistent_hashing.py` — Consistent Hashing
-- [ ] `chapter_34_distributed_systems_algorithms/002_rendezvous_hashing.py` — Rendezvous Hashing
-- [ ] `chapter_34_distributed_systems_algorithms/003_vector_clock.py` — Vector Clock
-- [ ] `chapter_34_distributed_systems_algorithms/004_lamport_clock.py` — Lamport Clock
-- [ ] `chapter_34_distributed_systems_algorithms/005_gossip_protocol.py` — Gossip Protocol
-- [ ] `chapter_34_distributed_systems_algorithms/006_leader_election_bully.py` — Bully Leader Election
-- [ ] `chapter_34_distributed_systems_algorithms/007_leader_election_ring.py` — Ring Leader Election
-- [ ] `chapter_34_distributed_systems_algorithms/008_two_phase_commit.py` — Two-phase Commit
-- [ ] `chapter_34_distributed_systems_algorithms/009_three_phase_commit.py` — Three-phase Commit
-- [ ] `chapter_34_distributed_systems_algorithms/010_paxos_basics.py` — Paxos 基础
-- [ ] `chapter_34_distributed_systems_algorithms/011_raft_basics.py` — Raft 基础
-- [ ] `chapter_34_distributed_systems_algorithms/012_crdt_g_counter.py` — CRDT G-Counter
-- [ ] `chapter_34_distributed_systems_algorithms/013_merkle_tree_sync.py` — Merkle Tree Sync
+- [x] `chapter_34_distributed_systems_algorithms/001_consistent_hashing.py` — Consistent Hashing
+- [x] `chapter_34_distributed_systems_algorithms/002_rendezvous_hashing.py` — Rendezvous Hashing
+- [x] `chapter_34_distributed_systems_algorithms/003_vector_clock.py` — Vector Clock
+- [x] `chapter_34_distributed_systems_algorithms/004_lamport_clock.py` — Lamport Clock
+- [x] `chapter_34_distributed_systems_algorithms/005_gossip_protocol.py` — Gossip Protocol
+- [x] `chapter_34_distributed_systems_algorithms/006_leader_election_bully.py` — Bully Leader Election
+- [x] `chapter_34_distributed_systems_algorithms/007_leader_election_ring.py` — Ring Leader Election
+- [x] `chapter_34_distributed_systems_algorithms/008_two_phase_commit.py` — Two-phase Commit
+- [x] `chapter_34_distributed_systems_algorithms/009_three_phase_commit.py` — Three-phase Commit
+- [x] `chapter_34_distributed_systems_algorithms/010_paxos_basics.py` — Paxos 基础
+- [x] `chapter_34_distributed_systems_algorithms/011_raft_basics.py` — Raft 基础
+- [x] `chapter_34_distributed_systems_algorithms/012_crdt_g_counter.py` — CRDT G-Counter
+- [x] `chapter_34_distributed_systems_algorithms/013_merkle_tree_sync.py` — Merkle Tree Sync
 
 ### Chapter 35：操作系统调度算法
 
-- [ ] `chapter_35_operating_system_scheduling/001_first_come_first_served.py` — FCFS
-- [ ] `chapter_35_operating_system_scheduling/002_shortest_job_first.py` — SJF
-- [ ] `chapter_35_operating_system_scheduling/003_shortest_remaining_time_first.py` — SRTF
-- [ ] `chapter_35_operating_system_scheduling/004_round_robin.py` — Round Robin
-- [ ] `chapter_35_operating_system_scheduling/005_priority_scheduling.py` — Priority Scheduling
-- [ ] `chapter_35_operating_system_scheduling/006_multilevel_feedback_queue.py` — MLFQ
-- [ ] `chapter_35_operating_system_scheduling/007_rate_monotonic_scheduling.py` — Rate Monotonic
-- [ ] `chapter_35_operating_system_scheduling/008_earliest_deadline_first.py` — Earliest Deadline First
-- [ ] `chapter_35_operating_system_scheduling/009_fifo_page_replacement.py` — FIFO Page Replacement
-- [ ] `chapter_35_operating_system_scheduling/010_lru_page_replacement.py` — LRU
-- [ ] `chapter_35_operating_system_scheduling/011_clock_page_replacement.py` — Clock
-- [ ] `chapter_35_operating_system_scheduling/012_scan_disk_scheduling.py` — SCAN
-- [ ] `chapter_35_operating_system_scheduling/013_c_scan_disk_scheduling.py` — C-SCAN
+- [x] `chapter_35_operating_system_scheduling/001_first_come_first_served.py` — FCFS
+- [x] `chapter_35_operating_system_scheduling/002_shortest_job_first.py` — SJF
+- [x] `chapter_35_operating_system_scheduling/003_shortest_remaining_time_first.py` — SRTF
+- [x] `chapter_35_operating_system_scheduling/004_round_robin.py` — Round Robin
+- [x] `chapter_35_operating_system_scheduling/005_priority_scheduling.py` — Priority Scheduling
+- [x] `chapter_35_operating_system_scheduling/006_multilevel_feedback_queue.py` — MLFQ
+- [x] `chapter_35_operating_system_scheduling/007_rate_monotonic_scheduling.py` — Rate Monotonic
+- [x] `chapter_35_operating_system_scheduling/008_earliest_deadline_first.py` — Earliest Deadline First
+- [x] `chapter_35_operating_system_scheduling/009_fifo_page_replacement.py` — FIFO Page Replacement
+- [x] `chapter_35_operating_system_scheduling/010_lru_page_replacement.py` — LRU
+- [x] `chapter_35_operating_system_scheduling/011_clock_page_replacement.py` — Clock
+- [x] `chapter_35_operating_system_scheduling/012_scan_disk_scheduling.py` — SCAN
+- [x] `chapter_35_operating_system_scheduling/013_c_scan_disk_scheduling.py` — C-SCAN
 
 ### Chapter 36：图机器学习采样算法
 
-- [ ] `chapter_36_graph_machine_learning_sampling/001_random_walk.py` — Random Walk
-- [ ] `chapter_36_graph_machine_learning_sampling/002_personalized_pagerank.py` — Personalized PageRank
-- [ ] `chapter_36_graph_machine_learning_sampling/003_deepwalk_sampling.py` — DeepWalk Sampling
-- [ ] `chapter_36_graph_machine_learning_sampling/004_node2vec_sampling.py` — Node2Vec Sampling
-- [ ] `chapter_36_graph_machine_learning_sampling/005_negative_sampling.py` — Negative Sampling
-- [ ] `chapter_36_graph_machine_learning_sampling/006_graphsage_neighbor_sampling.py` — GraphSAGE Neighbor Sampling
-- [ ] `chapter_36_graph_machine_learning_sampling/007_ladies_sampling_basics.py` — LADIES Sampling 基础
-- [ ] `chapter_36_graph_machine_learning_sampling/008_random_edge_sampling.py` — Random Edge Sampling
-- [ ] `chapter_36_graph_machine_learning_sampling/009_subgraph_sampling.py` — Subgraph Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/001_random_walk.py` — Random Walk
+- [x] `chapter_36_graph_machine_learning_sampling/002_personalized_pagerank.py` — Personalized PageRank
+- [x] `chapter_36_graph_machine_learning_sampling/003_deepwalk_sampling.py` — DeepWalk Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/004_node2vec_sampling.py` — Node2Vec Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/005_negative_sampling.py` — Negative Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/006_graphsage_neighbor_sampling.py` — GraphSAGE Neighbor Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/007_ladies_sampling_basics.py` — LADIES Sampling 基础
+- [x] `chapter_36_graph_machine_learning_sampling/008_random_edge_sampling.py` — Random Edge Sampling
+- [x] `chapter_36_graph_machine_learning_sampling/009_subgraph_sampling.py` — Subgraph Sampling
 
 ## 实现规范
 
