@@ -197,12 +197,12 @@ The chapter map is designed to cover standard algorithm-design material, LeetCod
 
 ### Chapter 11: Advanced Graph Algorithms
 
-- [ ] `chapter_11_advanced_graph_algorithms/001_tarjan_scc.py` — Tarjan SCC
-- [ ] `chapter_11_advanced_graph_algorithms/002_kosaraju_scc.py` — Kosaraju SCC
-- [ ] `chapter_11_advanced_graph_algorithms/003_bridges.py` — bridges
-- [ ] `chapter_11_advanced_graph_algorithms/004_articulation_points.py` — articulation points
-- [ ] `chapter_11_advanced_graph_algorithms/005_euler_path.py` — Euler path
-- [ ] `chapter_11_advanced_graph_algorithms/006_lca_binary_lifting.py` — LCA by binary lifting
+- [x] `chapter_11_advanced_graph_algorithms/001_tarjan_scc.py` — Tarjan SCC
+- [x] `chapter_11_advanced_graph_algorithms/002_kosaraju_scc.py` — Kosaraju SCC
+- [x] `chapter_11_advanced_graph_algorithms/003_bridges.py` — bridges
+- [x] `chapter_11_advanced_graph_algorithms/004_articulation_points.py` — articulation points
+- [x] `chapter_11_advanced_graph_algorithms/005_euler_path.py` — Euler path
+- [x] `chapter_11_advanced_graph_algorithms/006_lca_binary_lifting.py` — LCA by binary lifting
 
 ### Chapter 12: String Algorithms
 
