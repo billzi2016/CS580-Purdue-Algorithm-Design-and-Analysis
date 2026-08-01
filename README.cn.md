@@ -2,6 +2,9 @@
 
 本仓库用于整理 **Purdue University CS 580: Algorithm Design and Analysis** 相关的算法实现、学习笔记和可运行示例，并把实现规划扩展映射到更多 Purdue Computer Science 课程。同时覆盖 LeetCode 常见题型、Codeforces 竞赛算法、Olympiad/OI 风格算法竞赛、ICPC 风格训练、蓝桥杯风格程序设计竞赛、数学算法、启发式优化、蒙特卡洛树搜索、机器学习优化、深度学习网络架构，以及非 AI 生物信息学算法。目标是构建一个结构清晰、按章节组织的算法参考仓库，将 Purdue 课程主题与实际刷题、竞赛、数学计算、优化实现和工程化实现结合起来。
 
+> [!WARNING]
+> 免责声明：本项目按现状提供，仅用于个人学习、课程练习和工程整理；本项目与 Purdue University 没有任何官方关系，也不代表 Purdue University 的课程要求、教学材料或官方立场。代码可能存在错误、遗漏或考虑不周全的地方；虽然会进行测试和验证，但测试可能并不完善，因此本项目不对正确性、完整性、适用性或使用后果作任何保证。
+
 在过去八年里，我作为 TA 参与了九门 Purdue CS 课程，并基于这些教学和课程支持经历整理出这些笔记与实现：**Numerical Methods**、**Data Mining and Machine Learning**、**Introduction to Cryptography**、**Algorithm Design, Analysis, and Implementation**、**Programming Languages**、**Statistical Machine Learning**、**Database Systems**、**Data Visualization** 和 **Computer Graphics**。本仓库希望把这些方向中的核心方法系统整理成一个可维护、以实现为核心的算法手册。
 
 仓库会按照章节划分主题，使每个算法都便于查找、测试和扩展。每个实现都应包含简明说明、复杂度分析，以及可以直接运行的本地 `main` 示例。
