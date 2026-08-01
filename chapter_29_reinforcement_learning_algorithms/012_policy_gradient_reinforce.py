@@ -32,7 +32,12 @@ def reinforce_update(
         total = episode[index][2] + discount * total
         returns[index] = total
     for (state, action, _), return_value in zip(episode, returns):
-        if state not in updated or not updated[state] or action < 0 or action >= len(updated[state]):
+        if (
+            state not in updated
+            or not updated[state]
+            or action < 0
+            or action >= len(updated[state])
+        ):
             raise ValueError("状态 logits 或动作下标无效")
         maximum = max(updated[state])
         exponentials = [math.exp(value - maximum) for value in updated[state]]
@@ -45,7 +50,7 @@ def reinforce_update(
 
 
 if __name__ == "__main__":
-    updated = reinforce_update([('S', 1, 1.0)], {'S': [0.0, 0.0]}, 1.0, 1.0)
-    assert updated['S'][1] > 0.0 and updated['S'][0] < 0.0
-    assert reinforce_update([], {'S': [0.0]}, 0.1, 0.9) == {'S': [0.0]}
+    updated = reinforce_update([("S", 1, 1.0)], {"S": [0.0, 0.0]}, 1.0, 1.0)
+    assert updated["S"][1] > 0.0 and updated["S"][0] < 0.0
+    assert reinforce_update([], {"S": [0.0]}, 0.1, 0.9) == {"S": [0.0]}
     print("012_policy_gradient_reinforce: all examples passed")

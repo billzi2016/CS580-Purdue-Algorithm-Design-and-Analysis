@@ -92,9 +92,7 @@ def build_lr0_automaton(grammar: Grammar, start_symbol: str) -> LR0Automaton:
         source = pending.pop(0)
         source_number = state_numbers[source]
         symbols = {
-            right_side[dot]
-            for _, right_side, dot in source
-            if dot < len(right_side)
+            right_side[dot] for _, right_side, dot in source if dot < len(right_side)
         }
         for symbol in symbols:
             target = goto(source, symbol, augmented_grammar)
@@ -137,7 +135,9 @@ def _validate_grammar(grammar: Grammar, start_symbol: str) -> None:
         if not isinstance(alternatives, list):
             raise ValueError("产生式集合必须是列表")
         for right_side in alternatives:
-            if not isinstance(right_side, list) or any(not symbol for symbol in right_side):
+            if not isinstance(right_side, list) or any(
+                not symbol for symbol in right_side
+            ):
                 raise ValueError("产生式右侧必须是符号列表")
 
 

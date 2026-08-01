@@ -15,6 +15,7 @@ from typing import Hashable, TypeVar
 State = TypeVar("State", bound=Hashable)
 Move = TypeVar("Move", bound=Hashable)
 
+
 @dataclass
 class _Node:
     state: State
@@ -25,7 +26,16 @@ class _Node:
     visits: int = 0
     value: float = 0.0
 
-def monte_carlo_tree_search(root_state: State, legal_moves: Callable[[State], list[Move]], apply_move: Callable[[State, Move], State], terminal_value: Callable[[State], float | None], simulations: int = 500, exploration: float = math.sqrt(2), seed: int | None = None) -> Move:
+
+def monte_carlo_tree_search(
+    root_state: State,
+    legal_moves: Callable[[State], list[Move]],
+    apply_move: Callable[[State, Move], State],
+    terminal_value: Callable[[State], float | None],
+    simulations: int = 500,
+    exploration: float = math.sqrt(2),
+    seed: int | None = None,
+) -> Move:
     """从根状态运行 MCTS，返回访问次数最多的根动作。"""
     if simulations < 1:
         raise ValueError("模拟次数至少为 1")
@@ -36,10 +46,19 @@ def monte_carlo_tree_search(root_state: State, legal_moves: Callable[[State], li
     for _ in range(simulations):
         node = root
         while not node.untried and node.children:
-            node = max(node.children, key=lambda child: child.value / child.visits + exploration * math.sqrt(math.log(node.visits) / child.visits))
+            node = max(
+                node.children,
+                key=lambda child: child.value / child.visits
+                + exploration * math.sqrt(math.log(node.visits) / child.visits),
+            )
         if node.untried:
             move = node.untried.pop(rng.randrange(len(node.untried)))
-            node = _Node(apply_move(node.state, move), node, move, untried=list(legal_moves(apply_move(node.state, move))))
+            node = _Node(
+                apply_move(node.state, move),
+                node,
+                move,
+                untried=list(legal_moves(apply_move(node.state, move))),
+            )
             node.parent.children.append(node)
         rollout = node.state
         while terminal_value(rollout) is None:
@@ -52,8 +71,16 @@ def monte_carlo_tree_search(root_state: State, legal_moves: Callable[[State], li
             node = node.parent
     return max(root.children, key=lambda child: child.visits).move  # type: ignore[return-value]
 
+
 if __name__ == "__main__":
     # 从剩余石子中取 1 或 2；取到最后一颗者获胜，状态为剩余石子数。
-    move = monte_carlo_tree_search(3, lambda state: list(range(1, min(2, state) + 1)), lambda state, action: state - action, lambda state: 1.0 if state == 0 else None, simulations=300, seed=8)
+    move = monte_carlo_tree_search(
+        3,
+        lambda state: list(range(1, min(2, state) + 1)),
+        lambda state, action: state - action,
+        lambda state: 1.0 if state == 0 else None,
+        simulations=300,
+        seed=8,
+    )
     assert move == 1
     print("012_monte_carlo_tree_search: all examples passed")

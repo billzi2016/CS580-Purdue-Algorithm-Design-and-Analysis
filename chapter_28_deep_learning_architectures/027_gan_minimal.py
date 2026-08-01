@@ -52,7 +52,9 @@ class MinimalGAN(torch.nn.Module):
         fake_samples = self.generate(noise)
         return fake_samples, self.discriminate(fake_samples)
 
-    def training_step(self, real_samples: torch.Tensor, noise: torch.Tensor, learning_rate: float) -> tuple[float, float]:
+    def training_step(
+        self, real_samples: torch.Tensor, noise: torch.Tensor, learning_rate: float
+    ) -> tuple[float, float]:
         """执行一轮判别器更新和生成器更新。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
@@ -66,10 +68,9 @@ class MinimalGAN(torch.nn.Module):
         fake_samples = self.generate(noise).detach()
         real_scores = self.discriminate(real_samples)
         fake_scores = self.discriminate(fake_samples)
-        discriminator_loss = (
-            F.binary_cross_entropy(real_scores, torch.ones_like(real_scores))
-            + F.binary_cross_entropy(fake_scores, torch.zeros_like(fake_scores))
-        )
+        discriminator_loss = F.binary_cross_entropy(
+            real_scores, torch.ones_like(real_scores)
+        ) + F.binary_cross_entropy(fake_scores, torch.zeros_like(fake_scores))
         discriminator_loss.backward()
 
         with torch.no_grad():
@@ -84,7 +85,9 @@ class MinimalGAN(torch.nn.Module):
 
         generated = self.generate(noise)
         generator_scores = self.discriminate(generated)
-        generator_loss = F.binary_cross_entropy(generator_scores, torch.ones_like(generator_scores))
+        generator_loss = F.binary_cross_entropy(
+            generator_scores, torch.ones_like(generator_scores)
+        )
         generator_loss.backward()
 
         with torch.no_grad():
@@ -109,10 +112,14 @@ if __name__ == "__main__":
     real_samples = torch.randn((4, 2))
     previous_generator = model.generator_fc2.weight.detach().clone()
     previous_discriminator = model.discriminator_fc2.weight.detach().clone()
-    discriminator_loss, generator_loss = model.training_step(real_samples, noise_tensor, 0.01)
+    discriminator_loss, generator_loss = model.training_step(
+        real_samples, noise_tensor, 0.01
+    )
     assert discriminator_loss >= 0.0
     assert generator_loss >= 0.0
     assert not torch.equal(previous_generator, model.generator_fc2.weight.detach())
-    assert not torch.equal(previous_discriminator, model.discriminator_fc2.weight.detach())
+    assert not torch.equal(
+        previous_discriminator, model.discriminator_fc2.weight.detach()
+    )
 
     print("027_gan_minimal: all examples passed")

@@ -82,7 +82,9 @@ class BloomFilter:
 
         encoded = item.encode("utf-8")
         first_hash = int.from_bytes(hashlib.sha256(b"seed1|" + encoded).digest(), "big")
-        second_hash = int.from_bytes(hashlib.sha256(b"seed2|" + encoded).digest(), "big")
+        second_hash = int.from_bytes(
+            hashlib.sha256(b"seed2|" + encoded).digest(), "big"
+        )
         second_hash = second_hash or 1
 
         return [

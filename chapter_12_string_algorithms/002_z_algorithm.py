@@ -21,7 +21,10 @@ def z_algorithm(text: str) -> list[int]:
     for index in range(1, len(text)):
         if index <= right:
             z_values[index] = min(right - index + 1, z_values[index - left])
-        while index + z_values[index] < len(text) and text[z_values[index]] == text[index + z_values[index]]:
+        while (
+            index + z_values[index] < len(text)
+            and text[z_values[index]] == text[index + z_values[index]]
+        ):
             z_values[index] += 1
         if index + z_values[index] - 1 > right:
             left, right = index, index + z_values[index] - 1
@@ -44,7 +47,11 @@ def z_search(text: str, pattern: str) -> list[int]:
     combined = pattern + separator + text
     z_values = z_algorithm(combined)
     offset = len(pattern) + len(separator)
-    return [index - offset for index in range(offset, len(combined)) if z_values[index] >= len(pattern)]
+    return [
+        index - offset
+        for index in range(offset, len(combined))
+        if z_values[index] >= len(pattern)
+    ]
 
 
 if __name__ == "__main__":

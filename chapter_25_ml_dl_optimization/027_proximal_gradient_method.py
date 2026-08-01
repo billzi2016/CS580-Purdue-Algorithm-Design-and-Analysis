@@ -15,7 +15,9 @@ def soft_threshold(value: float, threshold: float) -> float:
     return 0.0
 
 
-def proximal_gradient(initial_x: float, learning_rate: float, lambda_l1: float, steps: int) -> list[float]:
+def proximal_gradient(
+    initial_x: float, learning_rate: float, lambda_l1: float, steps: int
+) -> list[float]:
     """优化 0.5*(x-3)^2 + lambda*|x|。"""
 
     if learning_rate <= 0 or lambda_l1 < 0 or steps < 0:

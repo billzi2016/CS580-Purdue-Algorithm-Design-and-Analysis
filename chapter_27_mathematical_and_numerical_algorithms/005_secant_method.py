@@ -3,7 +3,9 @@
 """
 
 
-def secant_root(function, x0: float, x1: float, steps: int, tolerance: float = 1e-10) -> float:
+def secant_root(
+    function, x0: float, x1: float, steps: int, tolerance: float = 1e-10
+) -> float:
     """用两点割线替代导数。"""
 
     if steps < 0 or tolerance <= 0:

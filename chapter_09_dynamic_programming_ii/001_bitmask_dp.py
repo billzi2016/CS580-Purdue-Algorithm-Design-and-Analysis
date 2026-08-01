@@ -39,7 +39,9 @@ def shortest_hamiltonian_path_cost(cost: list[list[int]], start: int = 0) -> int
                 if mask & (1 << nxt):
                     continue
                 next_mask = mask | (1 << nxt)
-                dp[next_mask][nxt] = min(dp[next_mask][nxt], dp[mask][last] + cost[last][nxt])
+                dp[next_mask][nxt] = min(
+                    dp[next_mask][nxt], dp[mask][last] + cost[last][nxt]
+                )
 
     return min(dp[full_mask - 1])
 

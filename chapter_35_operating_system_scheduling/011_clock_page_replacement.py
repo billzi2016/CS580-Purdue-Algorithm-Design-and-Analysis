@@ -20,7 +20,9 @@ class ClockEvent:
     reference_bits: tuple[int, ...]
 
 
-def clock_page_replacement(references: list[int], frame_count: int) -> tuple[int, list[ClockEvent]]:
+def clock_page_replacement(
+    references: list[int], frame_count: int
+) -> tuple[int, list[ClockEvent]]:
     """执行 Clock 页面置换，返回缺页次数和事件列表。"""
 
     if frame_count <= 0:

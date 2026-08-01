@@ -19,7 +19,9 @@ class PeriodicTask:
     period: int
 
 
-def rate_monotonic_schedule(tasks: list[PeriodicTask], horizon: int) -> list[str | None]:
+def rate_monotonic_schedule(
+    tasks: list[PeriodicTask], horizon: int
+) -> list[str | None]:
     """模拟 [0, horizon) 内每个时间单位运行哪个任务；None 表示 CPU 空闲。"""
 
     _validate(tasks, horizon)
@@ -73,7 +75,16 @@ def _validate(tasks: list[PeriodicTask], horizon: int) -> None:
 
 if __name__ == "__main__":
     tasks = [PeriodicTask("T1", 1, 4), PeriodicTask("T2", 2, 5)]
-    assert rate_monotonic_schedule(tasks, 8) == ["T1", "T2", "T2", None, "T1", "T2", "T2", None]
+    assert rate_monotonic_schedule(tasks, 8) == [
+        "T1",
+        "T2",
+        "T2",
+        None,
+        "T1",
+        "T2",
+        "T2",
+        None,
+    ]
     assert round(utilization(tasks), 2) == 0.65
     assert round(liu_layland_bound(2), 3) == 0.828
 

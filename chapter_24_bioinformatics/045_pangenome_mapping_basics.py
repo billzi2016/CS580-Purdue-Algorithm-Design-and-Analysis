@@ -19,7 +19,9 @@ class PangenomeMappingCandidate:
     interval: tuple[int, int]
 
 
-def pangenome_map(paths: dict[str, str], query: str) -> PangenomeMappingCandidate | None:
+def pangenome_map(
+    paths: dict[str, str], query: str
+) -> PangenomeMappingCandidate | None:
     """在多路径 reference 中寻找 Hamming 错配最少的窗口。"""
 
     if not paths:
@@ -30,9 +32,17 @@ def pangenome_map(paths: dict[str, str], query: str) -> PangenomeMappingCandidat
             continue
         for start in range(len(sequence) - len(query) + 1):
             window = sequence[start : start + len(query)]
-            mismatches = sum(1 for left, right in zip(window, query, strict=True) if left != right)
-            candidate = PangenomeMappingCandidate(path_name, mismatches, (start, start + len(query)))
-            if best is None or (candidate.mismatches, candidate.path_name, candidate.interval) < (
+            mismatches = sum(
+                1 for left, right in zip(window, query, strict=True) if left != right
+            )
+            candidate = PangenomeMappingCandidate(
+                path_name, mismatches, (start, start + len(query))
+            )
+            if best is None or (
+                candidate.mismatches,
+                candidate.path_name,
+                candidate.interval,
+            ) < (
                 best.mismatches,
                 best.path_name,
                 best.interval,

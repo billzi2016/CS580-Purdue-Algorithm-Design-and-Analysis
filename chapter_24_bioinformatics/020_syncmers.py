@@ -34,7 +34,9 @@ def closed_syncmers(sequence: str, k: int, s: int) -> list[Syncmer]:
     return _select_syncmers(sequence, k, s, allowed_positions=None)
 
 
-def open_syncmers(sequence: str, k: int, s: int, allowed_positions: set[int]) -> list[Syncmer]:
+def open_syncmers(
+    sequence: str, k: int, s: int, allowed_positions: set[int]
+) -> list[Syncmer]:
     """选择内部最小 s-mer 出现在指定位置集合的开放 syncmer。
 
     参数：allowed_positions 是 k-mer 内 s-mer 的 0-based 起点集合。
@@ -44,7 +46,9 @@ def open_syncmers(sequence: str, k: int, s: int, allowed_positions: set[int]) ->
     """
     _validate_parameters(sequence, k, s)
     maximum_position = k - s
-    if any(position < 0 or position > maximum_position for position in allowed_positions):
+    if any(
+        position < 0 or position > maximum_position for position in allowed_positions
+    ):
         raise ValueError("开放 syncmer 位置必须在 0 到 k-s 之间")
     return _select_syncmers(sequence, k, s, allowed_positions)
 
@@ -62,10 +66,14 @@ def smallest_smer_positions(kmer: str, s: int) -> tuple[str, tuple[int, ...]]:
         raise ValueError("s 必须满足 1 <= s <= len(kmer)")
     words = [kmer[start : start + s] for start in range(len(kmer) - s + 1)]
     smallest = min(words)
-    return smallest, tuple(start for start, word in enumerate(words) if word == smallest)
+    return smallest, tuple(
+        start for start, word in enumerate(words) if word == smallest
+    )
 
 
-def _select_syncmers(sequence: str, k: int, s: int, allowed_positions: set[int] | None) -> list[Syncmer]:
+def _select_syncmers(
+    sequence: str, k: int, s: int, allowed_positions: set[int] | None
+) -> list[Syncmer]:
     """实现两类 syncmer 共享的扫描与平局处理。"""
     _validate_parameters(sequence, k, s)
     selected: list[Syncmer] = []
@@ -97,8 +105,14 @@ def _validate_dna(sequence: str) -> None:
 if __name__ == "__main__":
     assert smallest_smer_positions("AACGA", 2) == ("AA", (0,))
     assert smallest_smer_positions("AAAA", 2) == ("AA", (0, 1, 2))
-    assert [(item.position, item.kmer) for item in closed_syncmers("AACGAT", 4, 2)] == [(0, "AACG"), (1, "ACGA"), (2, "CGAT")]
-    assert [(item.position, item.kmer) for item in open_syncmers("CAGT", 4, 2, {1})] == [(0, "CAGT")]
+    assert [(item.position, item.kmer) for item in closed_syncmers("AACGAT", 4, 2)] == [
+        (0, "AACG"),
+        (1, "ACGA"),
+        (2, "CGAT"),
+    ]
+    assert [
+        (item.position, item.kmer) for item in open_syncmers("CAGT", 4, 2, {1})
+    ] == [(0, "CAGT")]
     assert closed_syncmers("AC", 3, 1) == []
     try:
         open_syncmers("ACGT", 3, 2, {2})

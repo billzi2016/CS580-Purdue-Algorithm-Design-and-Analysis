@@ -3,7 +3,9 @@ RK4：经典四阶 Runge-Kutta ODE 方法。
 """
 
 
-def runge_kutta_4(derivative, x0: float, y0: float, step: float, steps: int) -> list[tuple[float, float]]:
+def runge_kutta_4(
+    derivative, x0: float, y0: float, step: float, steps: int
+) -> list[tuple[float, float]]:
     """返回 RK4 轨迹。"""
 
     if step <= 0 or steps < 0:

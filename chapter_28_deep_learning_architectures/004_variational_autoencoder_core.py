@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -26,9 +27,19 @@ class VariationalAutoencoderCore:
         if input_size <= 0 or latent_size <= 0:
             raise ValueError("网络维度必须为正")
         generator = torch.Generator().manual_seed(seed)
-        self.mean_weight = torch.randn(input_size, latent_size, generator=generator, dtype=torch.float64) * 0.1
+        self.mean_weight = (
+            torch.randn(
+                input_size, latent_size, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.mean_bias = torch.zeros(latent_size, dtype=torch.float64)
-        self.log_variance_weight = torch.randn(input_size, latent_size, generator=generator, dtype=torch.float64) * 0.1
+        self.log_variance_weight = (
+            torch.randn(
+                input_size, latent_size, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.log_variance_bias = torch.zeros(latent_size, dtype=torch.float64)
 
     def encode(self, features: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -42,9 +53,14 @@ class VariationalAutoencoderCore:
         if features.ndim != 2 or features.shape[1] != self.mean_weight.shape[0]:
             raise ValueError("features 形状不匹配")
         data = features.to(torch.float64)
-        return data @ self.mean_weight + self.mean_bias, data @ self.log_variance_weight + self.log_variance_bias
+        return (
+            data @ self.mean_weight + self.mean_bias,
+            data @ self.log_variance_weight + self.log_variance_bias,
+        )
 
-    def reparameterize(self, mean: torch.Tensor, log_variance: torch.Tensor, training: bool = True) -> torch.Tensor:
+    def reparameterize(
+        self, mean: torch.Tensor, log_variance: torch.Tensor, training: bool = True
+    ) -> torch.Tensor:
         """以重参数化技巧从对角高斯后验获得 latent。
 
         参数：mean、log_variance 形状相同；training 控制是否注入标准正态噪声。
@@ -58,7 +74,9 @@ class VariationalAutoencoderCore:
             return mean
         return mean + torch.exp(0.5 * log_variance) * torch.randn_like(mean)
 
-    def forward(self, features: torch.Tensor, training: bool = True) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    def forward(
+        self, features: torch.Tensor, training: bool = True
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """返回 mean、log_variance 和重参数化 latent。
 
         参数：features 是输入批量，training 控制采样方式。
@@ -80,7 +98,9 @@ class VariationalAutoencoderCore:
         """
         if mean.shape != log_variance.shape or mean.ndim != 2:
             raise ValueError("mean 与 log_variance 必须是同形二维张量")
-        return -0.5 * torch.sum(1.0 + log_variance - mean.square() - torch.exp(log_variance), dim=1)
+        return -0.5 * torch.sum(
+            1.0 + log_variance - mean.square() - torch.exp(log_variance), dim=1
+        )
 
 
 if __name__ == "__main__":
@@ -88,5 +108,7 @@ if __name__ == "__main__":
     data = torch.tensor([[1.0, 0.0, 1.0]])
     mean, log_variance, latent = model.forward(data, training=False)
     assert torch.equal(latent, mean)
-    assert torch.all(VariationalAutoencoderCore.kl_divergence(mean, log_variance) >= 0.0)
+    assert torch.all(
+        VariationalAutoencoderCore.kl_divergence(mean, log_variance) >= 0.0
+    )
     print("004_variational_autoencoder_core: all examples passed")

@@ -124,11 +124,15 @@ def compact_dbg(kmers: list[str]) -> CompactedDBG:
             right = owner[target]
             if left != right:
                 adjacency_sets[left].add(right)
-    adjacency = {index: tuple(sorted(targets)) for index, targets in adjacency_sets.items()}
+    adjacency = {
+        index: tuple(sorted(targets)) for index, targets in adjacency_sets.items()
+    }
     return CompactedDBG(unitigs, adjacency)
 
 
-def _consume_unitig(graph: KmerGraph, first_edge: tuple[str, str], used_edges: set[tuple[str, str]]) -> list[str]:
+def _consume_unitig(
+    graph: KmerGraph, first_edge: tuple[str, str], used_edges: set[tuple[str, str]]
+) -> list[str]:
     """从一条边开始扩展 maximal unitig。"""
 
     source, target = first_edge
@@ -136,14 +140,20 @@ def _consume_unitig(graph: KmerGraph, first_edge: tuple[str, str], used_edges: s
     path = [source, target]
     current = target
     while _is_one_in_one_out(graph, current):
-        next_target = next(candidate for candidate in graph.adjacency[current] if (current, candidate) not in used_edges)
+        next_target = next(
+            candidate
+            for candidate in graph.adjacency[current]
+            if (current, candidate) not in used_edges
+        )
         used_edges.add((current, next_target))
         path.append(next_target)
         current = next_target
     return path
 
 
-def _consume_cycle(graph: KmerGraph, first_edge: tuple[str, str], used_edges: set[tuple[str, str]]) -> list[str]:
+def _consume_cycle(
+    graph: KmerGraph, first_edge: tuple[str, str], used_edges: set[tuple[str, str]]
+) -> list[str]:
     """提取纯 1 入 1 出环。"""
 
     source, target = first_edge
@@ -151,7 +161,11 @@ def _consume_cycle(graph: KmerGraph, first_edge: tuple[str, str], used_edges: se
     path = [source, target]
     current = target
     while current != source:
-        next_target = next(candidate for candidate in graph.adjacency[current] if (current, candidate) not in used_edges)
+        next_target = next(
+            candidate
+            for candidate in graph.adjacency[current]
+            if (current, candidate) not in used_edges
+        )
         used_edges.add((current, next_target))
         if next_target == source:
             break

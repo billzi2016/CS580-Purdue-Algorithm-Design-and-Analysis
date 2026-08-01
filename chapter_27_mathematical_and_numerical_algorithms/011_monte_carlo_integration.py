@@ -5,7 +5,9 @@ Monte Carlo 积分。
 from random import Random
 
 
-def monte_carlo_integration(function, left: float, right: float, samples: int, seed: int | None = None) -> float:
+def monte_carlo_integration(
+    function, left: float, right: float, samples: int, seed: int | None = None
+) -> float:
     """用均匀采样估计一维积分。"""
 
     if samples <= 0:
@@ -19,7 +21,9 @@ def monte_carlo_integration(function, left: float, right: float, samples: int, s
 
 
 if __name__ == "__main__":
-    estimate = monte_carlo_integration(lambda x_value: x_value * x_value, 0.0, 1.0, 100000, seed=7)
+    estimate = monte_carlo_integration(
+        lambda x_value: x_value * x_value, 0.0, 1.0, 100000, seed=7
+    )
     assert abs(estimate - 1 / 3) < 0.01
 
     print("011_monte_carlo_integration: all examples passed")

@@ -8,8 +8,10 @@
 关键边界：允许空堆；对空堆查看或删除会抛出 IndexError。
 """
 
+
 class MinHeap:
     """不借助 heapq 的最小堆。"""
+
     def __init__(self, values: list[int] | None = None) -> None:
         """以 values 建立最小堆。
 
@@ -21,30 +23,41 @@ class MinHeap:
         self._data = [] if values is None else values[:]
         for index in range(len(self._data) // 2 - 1, -1, -1):
             self._down(index)
+
     def _down(self, index: int) -> None:
         """使 index 向下移动直到子树满足最小堆不变量。"""
         while True:
             child = 2 * index + 1
-            if child >= len(self._data): return
-            if child + 1 < len(self._data) and self._data[child + 1] < self._data[child]:
+            if child >= len(self._data):
+                return
+            if (
+                child + 1 < len(self._data)
+                and self._data[child + 1] < self._data[child]
+            ):
                 child += 1
             if self._data[index] <= self._data[child]:
                 return
             self._data[index], self._data[child] = self._data[child], self._data[index]
             index = child
+
     def push(self, value: int) -> None:
         """插入 value；沿父链上浮以恢复堆序。"""
         self._data.append(value)
         index = len(self._data) - 1
         while index and self._data[(index - 1) // 2] > self._data[index]:
             parent = (index - 1) // 2
-            self._data[parent], self._data[index] = self._data[index], self._data[parent]
+            self._data[parent], self._data[index] = (
+                self._data[index],
+                self._data[parent],
+            )
             index = parent
+
     def peek(self) -> int:
         """返回最小值；空堆抛出 IndexError。"""
         if not self._data:
             raise IndexError("空堆没有最小值")
         return self._data[0]
+
     def pop(self) -> int:
         """删除并返回最小值；空堆抛出 IndexError。"""
         result = self.peek()
@@ -63,6 +76,8 @@ class MinHeap:
         关键算法点：数组长度就是完全二叉树的节点数。
         """
         return len(self._data)
+
+
 if __name__ == "__main__":
     heap = MinHeap([5, 1, 4, 1])
     assert [heap.pop() for _ in range(len(heap))] == [1, 1, 4, 5]

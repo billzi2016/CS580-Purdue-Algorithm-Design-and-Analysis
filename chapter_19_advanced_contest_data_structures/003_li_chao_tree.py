@@ -54,7 +54,9 @@ class LiChaoTree:
         边界情况：相同直线或平行直线可正常插入。
         关键算法点：中点较优直线留在节点，另一条只递归到端点相对胜负发生变化的一侧。
         """
-        self._root = self._insert(self._root, _Line(slope, intercept), self.domain_left, self.domain_right)
+        self._root = self._insert(
+            self._root, _Line(slope, intercept), self.domain_left, self.domain_right
+        )
 
     def _insert(self, node: _Node | None, line: _Line, left: int, right: int) -> _Node:
         """把 line 插入 node 所代表的整数闭区间。"""

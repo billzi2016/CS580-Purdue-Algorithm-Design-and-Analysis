@@ -17,7 +17,9 @@ import torch
 class MultilayerPerceptron:
     """使用手写梯度更新的单隐层 ReLU 多分类 MLP。"""
 
-    def __init__(self, input_size: int, hidden_size: int, class_count: int, seed: int = 0) -> None:
+    def __init__(
+        self, input_size: int, hidden_size: int, class_count: int, seed: int = 0
+    ) -> None:
         """按小随机值初始化两层参数。
 
         参数：input_size、hidden_size、class_count 必须为正；seed 控制初始化可复现。
@@ -28,12 +30,24 @@ class MultilayerPerceptron:
         if input_size <= 0 or hidden_size <= 0 or class_count <= 0:
             raise ValueError("网络维度必须为正")
         generator = torch.Generator().manual_seed(seed)
-        self.weight_input_hidden = torch.randn(input_size, hidden_size, generator=generator, dtype=torch.float64) * 0.1
+        self.weight_input_hidden = (
+            torch.randn(
+                input_size, hidden_size, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.bias_hidden = torch.zeros(hidden_size, dtype=torch.float64)
-        self.weight_hidden_output = torch.randn(hidden_size, class_count, generator=generator, dtype=torch.float64) * 0.1
+        self.weight_hidden_output = (
+            torch.randn(
+                hidden_size, class_count, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.bias_output = torch.zeros(class_count, dtype=torch.float64)
 
-    def _forward(self, features: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    def _forward(
+        self, features: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """计算隐藏线性值、ReLU 激活和输出 logits。"""
         hidden_linear = features @ self.weight_input_hidden + self.bias_hidden
         hidden = torch.clamp(hidden_linear, min=0.0)
@@ -53,7 +67,9 @@ class MultilayerPerceptron:
         _, _, logits = self._forward(features.to(torch.float64))
         return torch.argmax(logits, dim=1)
 
-    def train_step(self, features: torch.Tensor, labels: torch.Tensor, learning_rate: float) -> float:
+    def train_step(
+        self, features: torch.Tensor, labels: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次批量交叉熵梯度下降，并返回更新前平均损失。
 
         参数：features 为二维批量，labels 为类别下标，learning_rate 为正数。
@@ -61,7 +77,14 @@ class MultilayerPerceptron:
         边界情况：空批量、标签越界、形状不匹配或非正步长抛出 ValueError。
         关键算法点：输出梯度是 (softmax-one_hot)/batch，随后显式应用矩阵链式法则。
         """
-        if features.ndim != 2 or labels.ndim != 1 or features.shape[0] == 0 or labels.numel() != features.shape[0] or features.shape[1] != self.weight_input_hidden.shape[0] or learning_rate <= 0:
+        if (
+            features.ndim != 2
+            or labels.ndim != 1
+            or features.shape[0] == 0
+            or labels.numel() != features.shape[0]
+            or features.shape[1] != self.weight_input_hidden.shape[0]
+            or learning_rate <= 0
+        ):
             raise ValueError("训练数据形状或学习率无效")
         if torch.any(labels < 0) or torch.any(labels >= self.bias_output.numel()):
             raise ValueError("labels 包含无效类别")

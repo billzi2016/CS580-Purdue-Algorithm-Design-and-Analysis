@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -27,16 +28,29 @@ class AlexNet(torch.nn.Module):
         if class_count <= 0 or not 0 <= dropout < 1:
             raise ValueError("class_count 或 dropout 无效")
         self.features = torch.nn.Sequential(
-            torch.nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2), torch.nn.ReLU(), torch.nn.MaxPool2d(3, stride=2),
-            torch.nn.Conv2d(64, 192, kernel_size=5, padding=2), torch.nn.ReLU(), torch.nn.MaxPool2d(3, stride=2),
-            torch.nn.Conv2d(192, 384, kernel_size=3, padding=1), torch.nn.ReLU(),
-            torch.nn.Conv2d(384, 256, kernel_size=3, padding=1), torch.nn.ReLU(),
-            torch.nn.Conv2d(256, 256, kernel_size=3, padding=1), torch.nn.ReLU(), torch.nn.MaxPool2d(3, stride=2),
+            torch.nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(3, stride=2),
+            torch.nn.Conv2d(64, 192, kernel_size=5, padding=2),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(3, stride=2),
+            torch.nn.Conv2d(192, 384, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(384, 256, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(3, stride=2),
         )
         self.pool = torch.nn.AdaptiveAvgPool2d((6, 6))
         self.classifier = torch.nn.Sequential(
-            torch.nn.Dropout(dropout), torch.nn.Linear(256 * 6 * 6, 4096), torch.nn.ReLU(),
-            torch.nn.Dropout(dropout), torch.nn.Linear(4096, 4096), torch.nn.ReLU(), torch.nn.Linear(4096, class_count),
+            torch.nn.Dropout(dropout),
+            torch.nn.Linear(256 * 6 * 6, 4096),
+            torch.nn.ReLU(),
+            torch.nn.Dropout(dropout),
+            torch.nn.Linear(4096, 4096),
+            torch.nn.ReLU(),
+            torch.nn.Linear(4096, class_count),
         )
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
@@ -52,7 +66,9 @@ class AlexNet(torch.nn.Module):
         features = self.pool(self.features(images))
         return self.classifier(torch.flatten(features, 1))
 
-    def training_step(self, images: torch.Tensor, labels: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, images: torch.Tensor, labels: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次交叉熵反向传播和手写 SGD 参数更新。
 
         参数：images 是 RGB NCHW 批量，labels 是对应类别下标，learning_rate 为正步长。
@@ -60,7 +76,13 @@ class AlexNet(torch.nn.Module):
         边界情况：标签数、类别范围或学习率无效时抛出 ValueError。
         关键算法点：loss.backward() 生成所有参数梯度；随后在 no_grad 上下文中逐参数执行 param-=lr*grad，避免使用优化器黑箱。
         """
-        if learning_rate <= 0 or labels.ndim != 1 or labels.numel() != images.shape[0] or torch.any(labels < 0) or torch.any(labels >= self.classifier[-1].out_features):
+        if (
+            learning_rate <= 0
+            or labels.ndim != 1
+            or labels.numel() != images.shape[0]
+            or torch.any(labels < 0)
+            or torch.any(labels >= self.classifier[-1].out_features)
+        ):
             raise ValueError("labels 或 learning_rate 无效")
         self.train()
         for parameter in self.parameters():

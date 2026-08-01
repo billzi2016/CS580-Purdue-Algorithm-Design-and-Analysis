@@ -114,7 +114,9 @@ if __name__ == "__main__":
     assert topological_sort({}) == []
 
     value_only_node_graph = {"A": ["B"], "B": ["C"]}
-    assert is_valid_topological_order(value_only_node_graph, topological_sort(value_only_node_graph))
+    assert is_valid_topological_order(
+        value_only_node_graph, topological_sort(value_only_node_graph)
+    )
 
     try:
         topological_sort({"A": ["B"], "B": ["A"]})

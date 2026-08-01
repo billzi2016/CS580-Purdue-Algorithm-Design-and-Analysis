@@ -24,7 +24,11 @@ def negative_sampling(
     if exponent <= 0:
         raise ValueError("exponent 必须为正数")
 
-    candidates = [item for item in sorted(frequencies) if item not in positive_items and frequencies[item] > 0]
+    candidates = [
+        item
+        for item in sorted(frequencies)
+        if item not in positive_items and frequencies[item] > 0
+    ]
     if not candidates and sample_count:
         raise ValueError("没有可用负样本候选")
 

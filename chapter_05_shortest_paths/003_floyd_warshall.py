@@ -25,7 +25,9 @@ Node = Hashable
 Edge = tuple[Node, Node, float]
 
 
-def floyd_warshall(nodes: list[Node], edges: list[Edge]) -> dict[Node, dict[Node, float]]:
+def floyd_warshall(
+    nodes: list[Node], edges: list[Edge]
+) -> dict[Node, dict[Node, float]]:
     """
     计算所有点对最短距离。
 

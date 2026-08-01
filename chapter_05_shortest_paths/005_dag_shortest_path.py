@@ -26,7 +26,9 @@ Node = Hashable
 WeightedGraph = dict[Node, list[tuple[Node, float]]]
 
 
-def dag_shortest_path(graph: WeightedGraph, source: Node) -> tuple[dict[Node, float], dict[Node, Node | None]]:
+def dag_shortest_path(
+    graph: WeightedGraph, source: Node
+) -> tuple[dict[Node, float], dict[Node, Node | None]]:
     """
     计算 DAG 中 source 到所有节点的最短路径。
     """

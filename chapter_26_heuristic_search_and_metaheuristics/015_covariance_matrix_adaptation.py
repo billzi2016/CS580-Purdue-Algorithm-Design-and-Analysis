@@ -11,12 +11,21 @@ import random
 from collections.abc import Callable
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class CMAESResult:
     position: float
     value: float
 
-def cma_es_1d(objective: Callable[[float], float], lower: float, upper: float, population: int = 12, iterations: int = 80, seed: int | None = None) -> CMAESResult:
+
+def cma_es_1d(
+    objective: Callable[[float], float],
+    lower: float,
+    upper: float,
+    population: int = 12,
+    iterations: int = 80,
+    seed: int | None = None,
+) -> CMAESResult:
     """以一维高斯精英重组近似 CMA-ES 的均值与尺度更新。"""
     if lower >= upper or population < 2 or iterations < 0:
         raise ValueError("边界、种群或迭代次数无效")
@@ -24,14 +33,20 @@ def cma_es_1d(objective: Callable[[float], float], lower: float, upper: float, p
     best_position, best_value = mean, objective(mean)
     elite_count = population // 2
     for _ in range(iterations):
-        samples = [min(upper, max(lower, rng.gauss(mean, sigma))) for _ in range(population)]
+        samples = [
+            min(upper, max(lower, rng.gauss(mean, sigma))) for _ in range(population)
+        ]
         samples.sort(key=objective)
         if objective(samples[0]) < best_value:
             best_position, best_value = samples[0], objective(samples[0])
         elites = samples[:elite_count]
         mean = sum(elites) / elite_count
-        sigma = max((upper - lower) * 1e-6, math.sqrt(sum((sample - mean) ** 2 for sample in elites) / elite_count))
+        sigma = max(
+            (upper - lower) * 1e-6,
+            math.sqrt(sum((sample - mean) ** 2 for sample in elites) / elite_count),
+        )
     return CMAESResult(best_position, best_value)
+
 
 if __name__ == "__main__":
     result = cma_es_1d(

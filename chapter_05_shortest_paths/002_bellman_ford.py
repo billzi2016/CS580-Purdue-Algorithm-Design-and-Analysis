@@ -26,7 +26,9 @@ Node = Hashable
 Edge = tuple[Node, Node, float]
 
 
-def bellman_ford(nodes: Iterable[Node], edges: list[Edge], source: Node) -> tuple[dict[Node, float], dict[Node, Node | None]]:
+def bellman_ford(
+    nodes: Iterable[Node], edges: list[Edge], source: Node
+) -> tuple[dict[Node, float], dict[Node, Node | None]]:
     """
     计算 source 到所有节点的最短距离。
 

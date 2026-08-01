@@ -7,11 +7,15 @@
 关键边界：空数组只允许查询空区间；所有版本、下标与半开区间都会验证。
 """
 
+from __future__ import annotations
+
 
 class _Node:
     """持久化线段树节点，保存区间和与两个不可变子引用。"""
 
-    def __init__(self, total: int, left: _Node | None = None, right: _Node | None = None) -> None:
+    def __init__(
+        self, total: int, left: _Node | None = None, right: _Node | None = None
+    ) -> None:
         self.total = total
         self.left = left
         self.right = right
@@ -29,7 +33,9 @@ class PersistentSegmentTree:
         关键算法点：初始构建后节点从不修改，以确保旧版本始终可访问。
         """
         self.length = len(values)
-        self._roots: list[_Node | None] = [self._build(values, 0, self.length) if values else None]
+        self._roots: list[_Node | None] = [
+            self._build(values, 0, self.length) if values else None
+        ]
 
     def _build(self, values: list[int], left: int, right: int) -> _Node:
         """递归构建 [left, right) 的初始节点。"""
@@ -55,7 +61,9 @@ class PersistentSegmentTree:
         self._roots.append(root)
         return len(self._roots) - 1
 
-    def _update(self, node: _Node | None, left: int, right: int, index: int, value: int) -> _Node:
+    def _update(
+        self, node: _Node | None, left: int, right: int, index: int, value: int
+    ) -> _Node:
         """路径复制 [left, right) 中 index 所在节点。"""
         if node is None:
             raise RuntimeError("非空更新不应访问空根")
@@ -85,16 +93,27 @@ class PersistentSegmentTree:
             raise IndexError("区间越界")
         if self.length == 0:
             return 0
-        return self._range_sum(self._roots[version], 0, self.length, query_left, query_right)
+        return self._range_sum(
+            self._roots[version], 0, self.length, query_left, query_right
+        )
 
-    def _range_sum(self, node: _Node | None, left: int, right: int, query_left: int, query_right: int) -> int:
+    def _range_sum(
+        self,
+        node: _Node | None,
+        left: int,
+        right: int,
+        query_left: int,
+        query_right: int,
+    ) -> int:
         """递归查询指定节点和目标区间的交集。"""
         if node is None or query_right <= left or right <= query_left:
             return 0
         if query_left <= left and right <= query_right:
             return node.total
         middle = (left + right) // 2
-        return self._range_sum(node.left, left, middle, query_left, query_right) + self._range_sum(node.right, middle, right, query_left, query_right)
+        return self._range_sum(
+            node.left, left, middle, query_left, query_right
+        ) + self._range_sum(node.right, middle, right, query_left, query_right)
 
     def _check_version(self, version: int) -> None:
         """验证 version 是已有版本编号。"""

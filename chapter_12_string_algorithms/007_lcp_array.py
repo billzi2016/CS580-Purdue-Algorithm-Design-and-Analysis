@@ -32,7 +32,11 @@ def lcp_array(text: str, suffixes: list[int]) -> list[int]:
             matched = 0
             continue
         previous_start = suffixes[position - 1]
-        while start + matched < length and previous_start + matched < length and text[start + matched] == text[previous_start + matched]:
+        while (
+            start + matched < length
+            and previous_start + matched < length
+            and text[start + matched] == text[previous_start + matched]
+        ):
             matched += 1
         result[position] = matched
         if matched > 0:

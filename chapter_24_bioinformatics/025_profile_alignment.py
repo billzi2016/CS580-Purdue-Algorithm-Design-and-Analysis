@@ -15,11 +15,14 @@ DNA = frozenset("ACGTN")
 @dataclass(frozen=True)
 class ProfileAlignment:
     """包含旧 profile 与新序列的等长对齐以及累计评分。"""
+
     rows: tuple[str, ...]
     score: int
 
 
-def align_sequence_to_profile(profile: list[str], sequence: str, match: int = 1, mismatch: int = -1, gap: int = -1) -> ProfileAlignment:
+def align_sequence_to_profile(
+    profile: list[str], sequence: str, match: int = 1, mismatch: int = -1, gap: int = -1
+) -> ProfileAlignment:
     """将 sequence 全局对齐到已有 profile。
 
     参数：profile 是等长 DNA/gap 行，sequence 是无 gap DNA。
@@ -30,35 +33,69 @@ def align_sequence_to_profile(profile: list[str], sequence: str, match: int = 1,
     _validate(profile, sequence)
     columns, length = len(profile[0]), len(sequence)
     dp = [[0] * (length + 1) for _ in range(columns + 1)]
-    for i in range(1, columns + 1): dp[i][0] = dp[i-1][0] + gap * len(profile)
-    for j in range(1, length + 1): dp[0][j] = dp[0][j-1] + gap * len(profile)
+    for i in range(1, columns + 1):
+        dp[i][0] = dp[i - 1][0] + gap * len(profile)
+    for j in range(1, length + 1):
+        dp[0][j] = dp[0][j - 1] + gap * len(profile)
     for i in range(1, columns + 1):
         for j in range(1, length + 1):
-            diagonal = dp[i-1][j-1] + _column_score(profile, i-1, sequence[j-1], match, mismatch, gap)
-            dp[i][j] = max(diagonal, dp[i-1][j] + gap * len(profile), dp[i][j-1] + gap * len(profile))
-    rebuilt = ["" for _ in profile]; added: list[str] = []; i, j = columns, length
+            diagonal = dp[i - 1][j - 1] + _column_score(
+                profile, i - 1, sequence[j - 1], match, mismatch, gap
+            )
+            dp[i][j] = max(
+                diagonal,
+                dp[i - 1][j] + gap * len(profile),
+                dp[i][j - 1] + gap * len(profile),
+            )
+    rebuilt = ["" for _ in profile]
+    added: list[str] = []
+    i, j = columns, length
     while i or j:
-        if i and j and dp[i][j] == dp[i-1][j-1] + _column_score(profile, i-1, sequence[j-1], match, mismatch, gap):
-            for r, row in enumerate(profile): rebuilt[r] += row[i-1]
-            added.append(sequence[j-1]); i -= 1; j -= 1
-        elif i and dp[i][j] == dp[i-1][j] + gap * len(profile):
-            for r, row in enumerate(profile): rebuilt[r] += row[i-1]
-            added.append("-"); i -= 1
+        if (
+            i
+            and j
+            and dp[i][j]
+            == dp[i - 1][j - 1]
+            + _column_score(profile, i - 1, sequence[j - 1], match, mismatch, gap)
+        ):
+            for r, row in enumerate(profile):
+                rebuilt[r] += row[i - 1]
+            added.append(sequence[j - 1])
+            i -= 1
+            j -= 1
+        elif i and dp[i][j] == dp[i - 1][j] + gap * len(profile):
+            for r, row in enumerate(profile):
+                rebuilt[r] += row[i - 1]
+            added.append("-")
+            i -= 1
         else:
-            for r in range(len(profile)): rebuilt[r] += "-"
-            added.append(sequence[j-1]); j -= 1
-    return ProfileAlignment(tuple(row[::-1] for row in rebuilt) + ("".join(reversed(added)),), dp[-1][-1])
+            for r in range(len(profile)):
+                rebuilt[r] += "-"
+            added.append(sequence[j - 1])
+            j -= 1
+    return ProfileAlignment(
+        tuple(row[::-1] for row in rebuilt) + ("".join(reversed(added)),), dp[-1][-1]
+    )
 
 
-def _column_score(profile: list[str], column: int, symbol: str, match: int, mismatch: int, gap: int) -> int:
+def _column_score(
+    profile: list[str], column: int, symbol: str, match: int, mismatch: int, gap: int
+) -> int:
     """计算一个新字符同 profile 列全部行的累计评分，已有 gap 按 gap 罚分。"""
-    return sum(gap if row[column] == "-" else (match if row[column] == symbol else mismatch) for row in profile)
+    return sum(
+        gap if row[column] == "-" else (match if row[column] == symbol else mismatch)
+        for row in profile
+    )
 
 
 def _validate(profile: list[str], sequence: str) -> None:
     """验证 profile 等长并限制字符范围。"""
-    if not profile or len({len(row) for row in profile}) != 1: raise ValueError("profile 必须非空且所有行等长")
-    if any(c not in DNA | {"-"} for row in profile for c in row) or any(c not in DNA for c in sequence): raise ValueError("profile 只含 DNA/gap，序列只含 DNA")
+    if not profile or len({len(row) for row in profile}) != 1:
+        raise ValueError("profile 必须非空且所有行等长")
+    if any(c not in DNA | {"-"} for row in profile for c in row) or any(
+        c not in DNA for c in sequence
+    ):
+        raise ValueError("profile 只含 DNA/gap，序列只含 DNA")
 
 
 if __name__ == "__main__":
@@ -67,6 +104,9 @@ if __name__ == "__main__":
     assert result.rows[-1].replace("-", "") == "ACCT"
     assert result.rows[:2] == ("ACGT", "A-GT")
     assert align_sequence_to_profile(["AC"], "").rows == ("AC", "--")
-    try: align_sequence_to_profile(["A", "AA"], "A"); raise AssertionError("应拒绝不等长 profile")
-    except ValueError: pass
+    try:
+        align_sequence_to_profile(["A", "AA"], "A")
+        raise AssertionError("应拒绝不等长 profile")
+    except ValueError:
+        pass
     print("025_profile_alignment: all examples passed")

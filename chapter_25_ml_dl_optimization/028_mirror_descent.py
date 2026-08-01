@@ -14,12 +14,19 @@ def simplex_projection_by_softmax(logits: list[float]) -> list[float]:
     return [value / total for value in exps]
 
 
-def mirror_descent_simplex(initial_distribution: list[float], gradients: list[list[float]], learning_rate: float) -> list[list[float]]:
+def mirror_descent_simplex(
+    initial_distribution: list[float],
+    gradients: list[list[float]],
+    learning_rate: float,
+) -> list[list[float]]:
     """在概率单纯形上执行负熵镜像下降。"""
 
     if learning_rate <= 0 or not initial_distribution:
         raise ValueError("参数范围非法")
-    dual = [0.0 if probability <= 0 else log_probability(probability) for probability in initial_distribution]
+    dual = [
+        0.0 if probability <= 0 else log_probability(probability)
+        for probability in initial_distribution
+    ]
     history = [initial_distribution[:]]
     for gradient in gradients:
         dual = [dual[i] - learning_rate * gradient[i] for i in range(len(dual))]

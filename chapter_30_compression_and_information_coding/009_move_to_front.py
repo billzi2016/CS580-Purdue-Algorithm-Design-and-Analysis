@@ -28,7 +28,9 @@ def build_mtf_alphabet(text: str) -> list[str]:
 
 def _validate_alphabet(alphabet: list[str]) -> None:
     """验证 MTF 初始表中每个符号唯一且恰为一个字符。"""
-    if not isinstance(alphabet, list) or any(not isinstance(symbol, str) or len(symbol) != 1 for symbol in alphabet):
+    if not isinstance(alphabet, list) or any(
+        not isinstance(symbol, str) or len(symbol) != 1 for symbol in alphabet
+    ):
         raise ValueError("alphabet 必须是单字符列表")
     if len(set(alphabet)) != len(alphabet):
         raise ValueError("alphabet 不能包含重复字符")
@@ -70,7 +72,10 @@ def move_to_front_decode(positions: list[int], alphabet: list[str]) -> str:
     关键算法点：解码端选择位置对应符号后采用与编码端相同的“移到表首”操作，两个表持续同步。
     """
     _validate_alphabet(alphabet)
-    if not isinstance(positions, list) or any(isinstance(position, bool) or not isinstance(position, int) for position in positions):
+    if not isinstance(positions, list) or any(
+        isinstance(position, bool) or not isinstance(position, int)
+        for position in positions
+    ):
         raise ValueError("positions 必须是整数列表")
     if not positions:
         if alphabet:

@@ -25,15 +25,26 @@ def actor_critic_update(
     边界情况：空样本保持原表；非法学习率、折扣、状态或动作抛出 ValueError。
     关键算法点：TD 误差 reward+gamma*V(s')-V(s) 是策略梯度的低方差优势近似。
     """
-    if not 0 < actor_learning_rate or not 0 < critic_learning_rate or not 0 <= discount <= 1:
+    if (
+        not 0 < actor_learning_rate
+        or not 0 < critic_learning_rate
+        or not 0 <= discount <= 1
+    ):
         raise ValueError("学习率或折扣参数无效")
     updated_values = values.copy()
     updated_logits = {state: row[:] for state, row in logits.items()}
     for state, action, reward, next_state in transitions:
-        if state not in updated_logits or not updated_logits[state] or action < 0 or action >= len(updated_logits[state]):
+        if (
+            state not in updated_logits
+            or not updated_logits[state]
+            or action < 0
+            or action >= len(updated_logits[state])
+        ):
             raise ValueError("状态 logits 或动作下标无效")
         current = updated_values.get(state, 0.0)
-        next_value = updated_values.get(next_state, 0.0) if next_state is not None else 0.0
+        next_value = (
+            updated_values.get(next_state, 0.0) if next_state is not None else 0.0
+        )
         advantage = reward + discount * next_value - current
         updated_values[state] = current + critic_learning_rate * advantage
         maximum = max(updated_logits[state])
@@ -46,7 +57,9 @@ def actor_critic_update(
 
 
 if __name__ == "__main__":
-    values, logits = actor_critic_update([('S', 1, 2.0, None)], {}, {'S': [0.0, 0.0]}, 1.0, 0.5, 0.9)
-    assert values == {'S': 1.0}
-    assert logits['S'][1] > 0.0 and logits['S'][0] < 0.0
+    values, logits = actor_critic_update(
+        [("S", 1, 2.0, None)], {}, {"S": [0.0, 0.0]}, 1.0, 0.5, 0.9
+    )
+    assert values == {"S": 1.0}
+    assert logits["S"][1] > 0.0 and logits["S"][0] < 0.0
     print("013_actor_critic_basics: all examples passed")

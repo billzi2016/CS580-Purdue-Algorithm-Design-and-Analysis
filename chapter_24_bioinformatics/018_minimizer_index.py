@@ -51,7 +51,10 @@ def minimizers(sequence: str, k: int, window_kmers: int) -> list[Minimizer]:
     _validate_dna(sequence)
     if k <= 0 or window_kmers <= 0:
         raise ValueError("k 和 window_kmers 必须为正整数")
-    kmers = [canonical_kmer(sequence[start : start + k]) for start in range(max(0, len(sequence) - k + 1))]
+    kmers = [
+        canonical_kmer(sequence[start : start + k])
+        for start in range(max(0, len(sequence) - k + 1))
+    ]
     if len(kmers) < window_kmers:
         return []
     selected: list[Minimizer] = []
@@ -67,7 +70,9 @@ def minimizers(sequence: str, k: int, window_kmers: int) -> list[Minimizer]:
     return selected
 
 
-def build_minimizer_index(reference: str, k: int, window_kmers: int) -> dict[str, list[int]]:
+def build_minimizer_index(
+    reference: str, k: int, window_kmers: int
+) -> dict[str, list[int]]:
     """从 reference 的 minimizer 建立键到全部参考位置的倒排索引。"""
     index: dict[str, list[int]] = {}
     for item in minimizers(reference, k, window_kmers):

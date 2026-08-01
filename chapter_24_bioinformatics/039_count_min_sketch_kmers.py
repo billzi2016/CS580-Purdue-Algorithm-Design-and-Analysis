@@ -29,7 +29,10 @@ def iter_kmers(sequence: str, k: int) -> list[str]:
         raise ValueError("k 必须为正整数")
     if len(sequence) < k:
         return []
-    return [canonical_kmer(sequence[index : index + k]) for index in range(len(sequence) - k + 1)]
+    return [
+        canonical_kmer(sequence[index : index + k])
+        for index in range(len(sequence) - k + 1)
+    ]
 
 
 @dataclass
@@ -55,7 +58,9 @@ class CountMinSketch:
     def query(self, token: str) -> int:
         """返回 token 的频次估计。"""
 
-        return min(self.table[row][self._bucket(token, row)] for row in range(self.depth))
+        return min(
+            self.table[row][self._bucket(token, row)] for row in range(self.depth)
+        )
 
     def _bucket(self, token: str, row: int) -> int:
         """使用带 row 偏移的稳定哈希。"""
@@ -68,7 +73,9 @@ class CountMinSketch:
         return seed % self.width
 
 
-def build_kmer_sketch(sequences: list[str], k: int, width: int, depth: int) -> CountMinSketch:
+def build_kmer_sketch(
+    sequences: list[str], k: int, width: int, depth: int
+) -> CountMinSketch:
     """从多条 DNA 序列构建 k-mer Count-Min Sketch。"""
 
     sketch = CountMinSketch(width, depth)

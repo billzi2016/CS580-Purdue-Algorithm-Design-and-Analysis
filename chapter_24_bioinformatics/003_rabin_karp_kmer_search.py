@@ -33,7 +33,10 @@ def rabin_karp_kmer_matches(sequence: str, kmer: str) -> list[int]:
     window_hash = _hash(sequence[:pattern_length])
     matches: list[int] = []
     for start in range(len(sequence) - pattern_length + 1):
-        if window_hash == pattern_hash and sequence[start : start + pattern_length] == kmer:
+        if (
+            window_hash == pattern_hash
+            and sequence[start : start + pattern_length] == kmer
+        ):
             matches.append(start)
         if start + pattern_length == len(sequence):
             break

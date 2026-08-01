@@ -73,7 +73,9 @@ def find_composites_reported_probably_prime(
     for index, value in enumerate(candidates):
         if value < 4:
             continue
-        if _has_small_factor(value) and is_probably_prime_fermat(value, rounds, seed=index + (seed or 0)):
+        if _has_small_factor(value) and is_probably_prime_fermat(
+            value, rounds, seed=index + (seed or 0)
+        ):
             false_positives.append(value)
     return false_positives
 

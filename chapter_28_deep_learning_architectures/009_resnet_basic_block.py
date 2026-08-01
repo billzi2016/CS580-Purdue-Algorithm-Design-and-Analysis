@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -15,7 +16,9 @@ import torch
 class ResNetBasicBlock(torch.nn.Module):
     """两层卷积的 ResNet 残差基本块。"""
 
-    def __init__(self, input_channels: int, output_channels: int, stride: int = 1) -> None:
+    def __init__(
+        self, input_channels: int, output_channels: int, stride: int = 1
+    ) -> None:
         """创建残差分支与匹配形状的捷径分支。
 
         参数：通道数为正，stride 为正整数。
@@ -26,11 +29,24 @@ class ResNetBasicBlock(torch.nn.Module):
         super().__init__()
         if input_channels <= 0 or output_channels <= 0 or stride <= 0:
             raise ValueError("通道数和 stride 必须为正")
-        self.conv1 = torch.nn.Conv2d(input_channels, output_channels, 3, stride=stride, padding=1, bias=False)
+        self.conv1 = torch.nn.Conv2d(
+            input_channels, output_channels, 3, stride=stride, padding=1, bias=False
+        )
         self.norm1 = torch.nn.BatchNorm2d(output_channels)
-        self.conv2 = torch.nn.Conv2d(output_channels, output_channels, 3, padding=1, bias=False)
+        self.conv2 = torch.nn.Conv2d(
+            output_channels, output_channels, 3, padding=1, bias=False
+        )
         self.norm2 = torch.nn.BatchNorm2d(output_channels)
-        self.shortcut = torch.nn.Identity() if input_channels == output_channels and stride == 1 else torch.nn.Sequential(torch.nn.Conv2d(input_channels, output_channels, 1, stride=stride, bias=False), torch.nn.BatchNorm2d(output_channels))
+        self.shortcut = (
+            torch.nn.Identity()
+            if input_channels == output_channels and stride == 1
+            else torch.nn.Sequential(
+                torch.nn.Conv2d(
+                    input_channels, output_channels, 1, stride=stride, bias=False
+                ),
+                torch.nn.BatchNorm2d(output_channels),
+            )
+        )
         self.relu = torch.nn.ReLU()
 
     def forward(self, features: torch.Tensor) -> torch.Tensor:
@@ -46,7 +62,9 @@ class ResNetBasicBlock(torch.nn.Module):
         residual = self.norm2(self.conv2(self.relu(self.norm1(self.conv1(features)))))
         return self.relu(residual + self.shortcut(features))
 
-    def training_step(self, features: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, features: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """以 MSE 执行一次反向传播和手写 SGD 更新。
 
         参数：target 形状需匹配 forward 输出，learning_rate 为正。

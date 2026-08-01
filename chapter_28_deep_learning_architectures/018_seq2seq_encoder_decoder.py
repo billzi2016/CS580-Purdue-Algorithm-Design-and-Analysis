@@ -59,7 +59,9 @@ class Seq2SeqEncoderDecoder(torch.nn.Module):
 
         return hidden
 
-    def decode(self, target_inputs: torch.Tensor, initial_hidden: torch.Tensor) -> torch.Tensor:
+    def decode(
+        self, target_inputs: torch.Tensor, initial_hidden: torch.Tensor
+    ) -> torch.Tensor:
         """以 teacher forcing 方式解码目标序列。"""
         if target_inputs.ndim != 3 or target_inputs.shape[2] != self.output_size:
             raise ValueError("target_inputs 形状必须为 (batch,time,output_size)")
@@ -76,7 +78,9 @@ class Seq2SeqEncoderDecoder(torch.nn.Module):
 
         return torch.stack(predictions, dim=1)
 
-    def forward(self, source: torch.Tensor, target_inputs: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self, source: torch.Tensor, target_inputs: torch.Tensor
+    ) -> torch.Tensor:
         """先编码再解码，返回整个输出序列。"""
         context = self.encode(source)
         return self.decode(target_inputs, context)

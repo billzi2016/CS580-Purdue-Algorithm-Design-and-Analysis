@@ -3,7 +3,9 @@
 """
 
 
-def step_decay(initial_lr: float, step: int, drop_factor: float, drop_every: int) -> float:
+def step_decay(
+    initial_lr: float, step: int, drop_factor: float, drop_every: int
+) -> float:
     """阶梯衰减。"""
 
     if initial_lr <= 0 or not 0 < drop_factor <= 1 or drop_every <= 0 or step < 0:

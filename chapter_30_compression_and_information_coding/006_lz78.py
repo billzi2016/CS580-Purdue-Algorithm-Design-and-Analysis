@@ -63,7 +63,11 @@ def lz78_decode(tokens: list[LZ78Token]) -> str:
         if not isinstance(token, tuple) or len(token) != 2:
             raise ValueError("每个 token 必须是 (索引, 下一个字符) 元组")
         prefix_index, next_symbol = token
-        if isinstance(prefix_index, bool) or not isinstance(prefix_index, int) or not 0 <= prefix_index < len(dictionary):
+        if (
+            isinstance(prefix_index, bool)
+            or not isinstance(prefix_index, int)
+            or not 0 <= prefix_index < len(dictionary)
+        ):
             raise ValueError("token 引用了不存在的字典索引")
         prefix = dictionary[prefix_index]
         if next_symbol is None:

@@ -28,7 +28,10 @@ class _HuffmanNode:
 def _two_lightest(nodes: list[_HuffmanNode]) -> tuple[int, int]:
     """返回权重最小的两个结点下标，并以创建顺序稳定地处理并列权重。"""
     first_index, second_index = 0, 1
-    if (nodes[second_index].weight, nodes[second_index].order) < (nodes[first_index].weight, nodes[first_index].order):
+    if (nodes[second_index].weight, nodes[second_index].order) < (
+        nodes[first_index].weight,
+        nodes[first_index].order,
+    ):
         first_index, second_index = second_index, first_index
     for index in range(2, len(nodes)):
         node_key = (nodes[index].weight, nodes[index].order)
@@ -60,7 +63,10 @@ def build_huffman_codebook(text: str) -> dict[str, str]:
     for position, symbol in enumerate(text):
         frequencies[symbol] = frequencies.get(symbol, 0) + 1
         first_seen.setdefault(symbol, position)
-    nodes = [_HuffmanNode(frequencies[symbol], first_seen[symbol], symbol) for symbol in frequencies]
+    nodes = [
+        _HuffmanNode(frequencies[symbol], first_seen[symbol], symbol)
+        for symbol in frequencies
+    ]
     if len(nodes) == 1:
         return {nodes[0].symbol: "0"}  # type: ignore[index]
 
@@ -70,7 +76,14 @@ def build_huffman_codebook(text: str) -> dict[str, str]:
         # 先取较大的下标，避免删除第一个结点后第二个下标偏移。
         right_node = nodes.pop(max(first_index, second_index))
         left_node = nodes.pop(min(first_index, second_index))
-        nodes.append(_HuffmanNode(left_node.weight + right_node.weight, next_order, left=left_node, right=right_node))
+        nodes.append(
+            _HuffmanNode(
+                left_node.weight + right_node.weight,
+                next_order,
+                left=left_node,
+                right=right_node,
+            )
+        )
         next_order += 1
 
     codebook: dict[str, str] = {}
@@ -117,7 +130,12 @@ def huffman_decode(bits: str, codebook: dict[str, str]) -> str:
     tree: dict[str, object] = {}
     terminal = "_symbol"
     for symbol, code in codebook.items():
-        if not isinstance(symbol, str) or len(symbol) != 1 or not code or any(bit not in "01" for bit in code):
+        if (
+            not isinstance(symbol, str)
+            or len(symbol) != 1
+            or not code
+            or any(bit not in "01" for bit in code)
+        ):
             raise ValueError("码表包含非法码字")
         node = tree
         for bit in code:
@@ -152,7 +170,10 @@ def huffman_decode(bits: str, codebook: dict[str, str]) -> str:
 if __name__ == "__main__":
     sample = "BANANA_BANDANA"
     sample_codebook = build_huffman_codebook(sample)
-    assert huffman_decode(huffman_encode(sample, sample_codebook), sample_codebook) == sample
+    assert (
+        huffman_decode(huffman_encode(sample, sample_codebook), sample_codebook)
+        == sample
+    )
     assert build_huffman_codebook("") == {}
     assert build_huffman_codebook("AAAA") == {"A": "0"}
     assert huffman_decode("000", {"A": "0"}) == "AAA"

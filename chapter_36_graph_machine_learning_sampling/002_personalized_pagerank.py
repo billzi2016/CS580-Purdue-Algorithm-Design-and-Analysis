@@ -7,7 +7,6 @@ Personalized PageRank：带重启偏好的随机游走稳态分数。
 - 处理 dangling node：无出边节点按 personalization 分布跳转。
 """
 
-
 Graph = dict[str, list[str]]
 
 
@@ -45,7 +44,9 @@ def personalized_pagerank(
     return {node: value / total for node, value in scores.items()}
 
 
-def _normalize_distribution(weights: dict[str, float], nodes: list[str]) -> dict[str, float]:
+def _normalize_distribution(
+    weights: dict[str, float], nodes: list[str]
+) -> dict[str, float]:
     """把 personalization 权重归一化到图节点集合。"""
 
     total = sum(weights.get(node, 0.0) for node in nodes)

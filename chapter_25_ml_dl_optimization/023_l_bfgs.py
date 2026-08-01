@@ -2,7 +2,6 @@
 L-BFGS：只保留最近 m 组 s/y 向量的有限内存 BFGS。
 """
 
-
 Vector = list[float]
 
 
@@ -14,7 +13,9 @@ def gradient(point: Vector) -> Vector:
     return [2 * (point[0] - 1.0), 4 * (point[1] + 2.0)]
 
 
-def l_bfgs_optimize(initial_point: Vector, learning_rate: float, memory: int, steps: int) -> list[Vector]:
+def l_bfgs_optimize(
+    initial_point: Vector, learning_rate: float, memory: int, steps: int
+) -> list[Vector]:
     """执行二维教学版 L-BFGS。"""
 
     if len(initial_point) != 2 or learning_rate <= 0 or memory <= 0 or steps < 0:
@@ -39,7 +40,9 @@ def l_bfgs_optimize(initial_point: Vector, learning_rate: float, memory: int, st
     return history
 
 
-def two_loop_recursion(gradient_value: Vector, s_history: list[Vector], y_history: list[Vector]) -> Vector:
+def two_loop_recursion(
+    gradient_value: Vector, s_history: list[Vector], y_history: list[Vector]
+) -> Vector:
     """L-BFGS 的两层循环递推。"""
 
     q_vec = gradient_value[:]

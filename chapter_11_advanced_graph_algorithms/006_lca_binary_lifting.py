@@ -25,7 +25,12 @@ class LcaBinaryLifting:
         for vertex, neighbors in enumerate(tree):
             if len(set(neighbors)) != len(neighbors) or vertex in neighbors:
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= self.vertex_count or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0
+                or neighbor >= self.vertex_count
+                or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
         self.depth = [-1] * self.vertex_count
@@ -48,7 +53,9 @@ class LcaBinaryLifting:
         self.parent = [parent_zero]
         for level in range(1, self.levels):
             previous = self.parent[-1]
-            self.parent.append([previous[previous[vertex]] for vertex in range(self.vertex_count)])
+            self.parent.append(
+                [previous[previous[vertex]] for vertex in range(self.vertex_count)]
+            )
 
     def lca(self, first: int, second: int) -> int:
         """返回 first 与 second 在构造根树中的最近公共祖先。
@@ -58,7 +65,12 @@ class LcaBinaryLifting:
         边界情况：相同顶点返回自身，非法编号抛出 IndexError。
         关键算法点：深度对齐后，同时从最高可用位向下跳，避免越过最近公共祖先。
         """
-        if first < 0 or first >= self.vertex_count or second < 0 or second >= self.vertex_count:
+        if (
+            first < 0
+            or first >= self.vertex_count
+            or second < 0
+            or second >= self.vertex_count
+        ):
             raise IndexError("查询顶点必须在 tree 范围内")
         if self.depth[first] < self.depth[second]:
             first, second = second, first

@@ -17,7 +17,10 @@ def _distance_squared(first: Point, second: Point) -> int:
 
 def _double_area(first: Point, second: Point, third: Point) -> int:
     """返回三角形 first-second-third 的两倍绝对面积。"""
-    return abs((second[0] - first[0]) * (third[1] - first[1]) - (second[1] - first[1]) * (third[0] - first[0]))
+    return abs(
+        (second[0] - first[0]) * (third[1] - first[1])
+        - (second[1] - first[1]) * (third[0] - first[0])
+    )
 
 
 def convex_diameter_squared(polygon: list[Point]) -> int:
@@ -37,9 +40,15 @@ def convex_diameter_squared(polygon: list[Point]) -> int:
     best = 0
     for index in range(count):
         next_index = (index + 1) % count
-        while _double_area(polygon[index], polygon[next_index], polygon[(farthest + 1) % count]) > _double_area(polygon[index], polygon[next_index], polygon[farthest]):
+        while _double_area(
+            polygon[index], polygon[next_index], polygon[(farthest + 1) % count]
+        ) > _double_area(polygon[index], polygon[next_index], polygon[farthest]):
             farthest = (farthest + 1) % count
-        best = max(best, _distance_squared(polygon[index], polygon[farthest]), _distance_squared(polygon[next_index], polygon[farthest]))
+        best = max(
+            best,
+            _distance_squared(polygon[index], polygon[farthest]),
+            _distance_squared(polygon[next_index], polygon[farthest]),
+        )
     return best
 
 

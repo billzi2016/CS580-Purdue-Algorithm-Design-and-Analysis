@@ -10,7 +10,9 @@ from typing import Any
 Row = dict[str, Any]
 
 
-def hash_join(left_rows: list[Row], right_rows: list[Row], left_key: str, right_key: str) -> list[Row]:
+def hash_join(
+    left_rows: list[Row], right_rows: list[Row], left_key: str, right_key: str
+) -> list[Row]:
     """对较小表构建 hash table，然后执行等值连接。"""
 
     build_left = len(left_rows) <= len(right_rows)

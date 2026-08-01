@@ -2,7 +2,6 @@
 BFGS：用梯度差和步长差迭代近似 Hessian 逆矩阵。
 """
 
-
 Vector = list[float]
 Matrix = list[list[float]]
 
@@ -19,7 +18,9 @@ def quadratic_gradient(point: Vector) -> Vector:
     return [2 * (point[0] - 1.0), 4 * (point[1] + 2.0)]
 
 
-def bfgs_optimize(initial_point: Vector, learning_rate: float, steps: int) -> list[Vector]:
+def bfgs_optimize(
+    initial_point: Vector, learning_rate: float, steps: int
+) -> list[Vector]:
     """执行教学版 BFGS，返回点轨迹。"""
 
     if len(initial_point) != 2 or learning_rate <= 0 or steps < 0:
@@ -29,7 +30,9 @@ def bfgs_optimize(initial_point: Vector, learning_rate: float, steps: int) -> li
     history = [point[:]]
     for _ in range(steps):
         gradient = quadratic_gradient(point)
-        direction = multiply_matrix_vector(inverse_hessian, [-gradient[0], -gradient[1]])
+        direction = multiply_matrix_vector(
+            inverse_hessian, [-gradient[0], -gradient[1]]
+        )
         next_point = [point[i] + learning_rate * direction[i] for i in range(2)]
         s_vec = [next_point[i] - point[i] for i in range(2)]
         y_vec = [quadratic_gradient(next_point)[i] - gradient[i] for i in range(2)]
@@ -51,7 +54,10 @@ def dot(left: Vector, right: Vector) -> float:
 
 
 def multiply_matrix_vector(matrix: Matrix, vector: Vector) -> Vector:
-    return [sum(item * component for item, component in zip(row, vector, strict=True)) for row in matrix]
+    return [
+        sum(item * component for item, component in zip(row, vector, strict=True))
+        for row in matrix
+    ]
 
 
 def scalar_outer_product(scale: float, left: Vector, right: Vector) -> Matrix:
@@ -59,7 +65,10 @@ def scalar_outer_product(scale: float, left: Vector, right: Vector) -> Matrix:
 
 
 def multiply_matrix(left: Matrix, right: Matrix) -> Matrix:
-    return [[sum(left[i][k] * right[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+    return [
+        [sum(left[i][k] * right[k][j] for k in range(2)) for j in range(2)]
+        for i in range(2)
+    ]
 
 
 def add_matrix(left: Matrix, right: Matrix) -> Matrix:

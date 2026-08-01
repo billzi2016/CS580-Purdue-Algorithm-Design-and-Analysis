@@ -23,7 +23,9 @@ class SampledSubgraph:
     edges: set[Edge]
 
 
-def bfs_subgraph_sample(graph: Graph, seeds: list[str], max_nodes: int) -> SampledSubgraph:
+def bfs_subgraph_sample(
+    graph: Graph, seeds: list[str], max_nodes: int
+) -> SampledSubgraph:
     """从 seeds 出发按 BFS 扩展最多 max_nodes 个节点，并返回诱导子图。"""
 
     if max_nodes < 0:

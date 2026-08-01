@@ -56,8 +56,13 @@ def spaced_seed_matches(first: str, second: str, pattern: str) -> list[SpacedSee
         table.setdefault(signature, []).append(start)
     hits: list[SpacedSeedHit] = []
     for second_start in range(len(second) - span + 1):
-        signature = spaced_seed_signature(second[second_start : second_start + span], pattern)
-        hits.extend(SpacedSeedHit(first_start, second_start, signature) for first_start in table.get(signature, []))
+        signature = spaced_seed_signature(
+            second[second_start : second_start + span], pattern
+        )
+        hits.extend(
+            SpacedSeedHit(first_start, second_start, signature)
+            for first_start in table.get(signature, [])
+        )
     return sorted(hits, key=lambda hit: (hit.first_start, hit.second_start))
 
 

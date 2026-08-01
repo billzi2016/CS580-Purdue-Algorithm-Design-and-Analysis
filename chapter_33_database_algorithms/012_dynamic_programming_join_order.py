@@ -7,7 +7,9 @@
 from itertools import combinations
 
 
-def optimize_join_order(table_sizes: dict[str, int], selectivities: dict[frozenset[str], float]) -> tuple[list[str], float]:
+def optimize_join_order(
+    table_sizes: dict[str, int], selectivities: dict[frozenset[str], float]
+) -> tuple[list[str], float]:
     """返回估计代价最低的左深 join 顺序和代价。"""
 
     tables = sorted(table_sizes)
@@ -25,7 +27,11 @@ def optimize_join_order(table_sizes: dict[str, int], selectivities: dict[frozens
             for last in combo:
                 previous = subset - {last}
                 prev_order, prev_cost, prev_cardinality = dp[previous]
-                join_cardinality = prev_cardinality * table_sizes[last] * _selectivity(previous, last, selectivities)
+                join_cardinality = (
+                    prev_cardinality
+                    * table_sizes[last]
+                    * _selectivity(previous, last, selectivities)
+                )
                 cost = prev_cost + join_cardinality
                 if cost < best_cost:
                     best_order = prev_order + [last]
@@ -37,7 +43,9 @@ def optimize_join_order(table_sizes: dict[str, int], selectivities: dict[frozens
     return order, cost
 
 
-def _selectivity(existing: frozenset[str], new_table: str, selectivities: dict[frozenset[str], float]) -> float:
+def _selectivity(
+    existing: frozenset[str], new_table: str, selectivities: dict[frozenset[str], float]
+) -> float:
     value = 1.0
     for table in existing:
         value *= selectivities.get(frozenset([table, new_table]), 1.0)
@@ -46,7 +54,11 @@ def _selectivity(existing: frozenset[str], new_table: str, selectivities: dict[f
 
 if __name__ == "__main__":
     sizes = {"A": 1000, "B": 100, "C": 10}
-    sels = {frozenset(["A", "B"]): 0.01, frozenset(["B", "C"]): 0.1, frozenset(["A", "C"]): 0.5}
+    sels = {
+        frozenset(["A", "B"]): 0.01,
+        frozenset(["B", "C"]): 0.1,
+        frozenset(["A", "C"]): 0.5,
+    }
     order, cost = optimize_join_order(sizes, sels)
     assert order == ["C", "B", "A"]
     assert cost == 600.0

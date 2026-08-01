@@ -45,9 +45,16 @@ def select_max_non_overlapping_intervals(intervals: list[Interval]) -> list[Inte
 
 
 if __name__ == "__main__":
-    assert select_max_non_overlapping_intervals([(1, 3), (2, 4), (3, 5), (0, 7)]) == [(1, 3), (3, 5)]
+    assert select_max_non_overlapping_intervals([(1, 3), (2, 4), (3, 5), (0, 7)]) == [
+        (1, 3),
+        (3, 5),
+    ]
     assert select_max_non_overlapping_intervals([]) == []
-    assert select_max_non_overlapping_intervals([(1, 2), (2, 3), (3, 4)]) == [(1, 2), (2, 3), (3, 4)]
+    assert select_max_non_overlapping_intervals([(1, 2), (2, 3), (3, 4)]) == [
+        (1, 2),
+        (2, 3),
+        (3, 4),
+    ]
 
     try:
         select_max_non_overlapping_intervals([(5, 1)])

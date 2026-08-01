@@ -79,7 +79,9 @@ def find_eulerian_path(graph: EulerianDeBruijnGraph) -> list[str]:
         return []
     start = _choose_start_node(graph)
     _validate_connectivity(graph, start)
-    remaining = {node: list(reversed(targets)) for node, targets in graph.adjacency.items()}
+    remaining = {
+        node: list(reversed(targets)) for node, targets in graph.adjacency.items()
+    }
     stack = [start]
     path: list[str] = []
     while stack:
@@ -132,18 +134,33 @@ def spectrum_from_reads(reads: list[str], k: int) -> list[str]:
 def _choose_start_node(graph: EulerianDeBruijnGraph) -> str:
     """根据度数条件选择欧拉路径起点。"""
 
-    start_candidates = [node for node in graph.adjacency if graph.outdegree.get(node, 0) - graph.indegree.get(node, 0) == 1]
-    end_candidates = [node for node in graph.adjacency if graph.indegree.get(node, 0) - graph.outdegree.get(node, 0) == 1]
+    start_candidates = [
+        node
+        for node in graph.adjacency
+        if graph.outdegree.get(node, 0) - graph.indegree.get(node, 0) == 1
+    ]
+    end_candidates = [
+        node
+        for node in graph.adjacency
+        if graph.indegree.get(node, 0) - graph.outdegree.get(node, 0) == 1
+    ]
     invalid = [
         node
         for node in graph.adjacency
         if abs(graph.outdegree.get(node, 0) - graph.indegree.get(node, 0)) > 1
     ]
-    if invalid or len(start_candidates) not in (0, 1) or len(end_candidates) not in (0, 1):
+    if (
+        invalid
+        or len(start_candidates) not in (0, 1)
+        or len(end_candidates) not in (0, 1)
+    ):
         raise ValueError("图不满足欧拉路径的度数条件")
     if start_candidates:
         return start_candidates[0]
-    return min((node for node in graph.adjacency if graph.outdegree.get(node, 0) > 0), default="")
+    return min(
+        (node for node in graph.adjacency if graph.outdegree.get(node, 0) > 0),
+        default="",
+    )
 
 
 def _validate_connectivity(graph: EulerianDeBruijnGraph, start: str) -> None:
@@ -154,7 +171,11 @@ def _validate_connectivity(graph: EulerianDeBruijnGraph, start: str) -> None:
         for target in targets:
             undirected[source].add(target)
             undirected[target].add(source)
-    active = {node for node in graph.adjacency if graph.indegree.get(node, 0) + graph.outdegree.get(node, 0) > 0}
+    active = {
+        node
+        for node in graph.adjacency
+        if graph.indegree.get(node, 0) + graph.outdegree.get(node, 0) > 0
+    }
     if not active:
         return
     seen = {start}

@@ -55,8 +55,14 @@ def suffix_array(text: str) -> list[int]:
         for position in range(1, length):
             current = indices[position]
             previous = indices[position - 1]
-            current_key = (ranks[current], ranks[current + step] if current + step < length else -1)
-            previous_key = (ranks[previous], ranks[previous + step] if previous + step < length else -1)
+            current_key = (
+                ranks[current],
+                ranks[current + step] if current + step < length else -1,
+            )
+            previous_key = (
+                ranks[previous],
+                ranks[previous + step] if previous + step < length else -1,
+            )
             if current_key != previous_key:
                 rank += 1
             next_ranks[current] = rank

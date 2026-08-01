@@ -18,8 +18,14 @@ def singular_values_2x2(matrix: list[list[float]]) -> tuple[float, float]:
     """返回 2x2 矩阵的两个奇异值。"""
 
     ata = [
-        [matrix[0][0] ** 2 + matrix[1][0] ** 2, matrix[0][0] * matrix[0][1] + matrix[1][0] * matrix[1][1]],
-        [matrix[0][0] * matrix[0][1] + matrix[1][0] * matrix[1][1], matrix[0][1] ** 2 + matrix[1][1] ** 2],
+        [
+            matrix[0][0] ** 2 + matrix[1][0] ** 2,
+            matrix[0][0] * matrix[0][1] + matrix[1][0] * matrix[1][1],
+        ],
+        [
+            matrix[0][0] * matrix[0][1] + matrix[1][0] * matrix[1][1],
+            matrix[0][1] ** 2 + matrix[1][1] ** 2,
+        ],
     ]
     eigen1, eigen2 = symmetric_2x2_eigenvalues(ata)
     return sqrt(max(eigen1, 0.0)), sqrt(max(eigen2, 0.0))

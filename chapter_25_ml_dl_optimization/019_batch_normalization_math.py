@@ -5,7 +5,9 @@ BatchNorm 优化数学：按 batch 维度归一化特征。
 from math import sqrt
 
 
-def batch_norm_forward(values: list[list[float]], epsilon: float = 1e-5) -> tuple[list[list[float]], list[float], list[float]]:
+def batch_norm_forward(
+    values: list[list[float]], epsilon: float = 1e-5
+) -> tuple[list[list[float]], list[float], list[float]]:
     """返回归一化结果、每列均值和方差。"""
 
     if not values or not values[0] or epsilon <= 0:
@@ -26,7 +28,9 @@ def batch_norm_forward(values: list[list[float]], epsilon: float = 1e-5) -> tupl
     return normalized, means, variances
 
 
-def running_stat_update(old_value: float, new_batch_value: float, momentum: float) -> float:
+def running_stat_update(
+    old_value: float, new_batch_value: float, momentum: float
+) -> float:
     """BatchNorm 运行时统计的指数滑动平均更新。"""
 
     if not 0 <= momentum <= 1:

@@ -54,7 +54,13 @@ def shortest_job_first(processes: list[Process]) -> list[ScheduleEntry]:
         start = time
         finish = start + burst
         result.append(
-            ScheduleEntry(process.pid, start, finish, start - process.arrival, finish - process.arrival)
+            ScheduleEntry(
+                process.pid,
+                start,
+                finish,
+                start - process.arrival,
+                finish - process.arrival,
+            )
         )
         time = finish
 
@@ -70,10 +76,20 @@ def _validate(processes: list[Process]) -> None:
 
 
 if __name__ == "__main__":
-    jobs = [Process("P1", 0, 7), Process("P2", 2, 4), Process("P3", 4, 1), Process("P4", 5, 4)]
+    jobs = [
+        Process("P1", 0, 7),
+        Process("P2", 2, 4),
+        Process("P3", 4, 1),
+        Process("P4", 5, 4),
+    ]
     schedule = shortest_job_first(jobs)
     assert [item.pid for item in schedule] == ["P1", "P3", "P2", "P4"]
-    assert [(item.start, item.finish) for item in schedule] == [(0, 7), (7, 8), (8, 12), (12, 16)]
+    assert [(item.start, item.finish) for item in schedule] == [
+        (0, 7),
+        (7, 8),
+        (8, 12),
+        (12, 16),
+    ]
     assert [item.waiting for item in schedule] == [0, 3, 6, 7]
 
     delayed = shortest_job_first([Process("A", 5, 2)])

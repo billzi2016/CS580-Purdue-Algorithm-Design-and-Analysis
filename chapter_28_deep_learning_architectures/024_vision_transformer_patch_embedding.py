@@ -38,7 +38,10 @@ class VisionTransformerPatchEmbedding(torch.nn.Module):
         """手写提取所有 patch，并保持扫描顺序稳定。"""
         if images.ndim != 4 or images.shape[1] != self.in_channels:
             raise ValueError("images 形状必须为 (batch,channels,height,width)")
-        if images.shape[2] % self.patch_size != 0 or images.shape[3] % self.patch_size != 0:
+        if (
+            images.shape[2] % self.patch_size != 0
+            or images.shape[3] % self.patch_size != 0
+        ):
             raise ValueError("图像高宽必须能被 patch_size 整除")
 
         batch_size, _, height, width = images.shape
@@ -61,7 +64,9 @@ class VisionTransformerPatchEmbedding(torch.nn.Module):
         patches = self._extract_patches(images)
         return patches @ self.projection_weight + self.projection_bias
 
-    def training_step(self, images: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, images: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次 patch embedding 训练步。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
@@ -98,7 +103,9 @@ if __name__ == "__main__":
     random_images = torch.randn((2, 3, 4, 4))
     random_outputs = module(random_images)
     previous_weight = module.projection_weight.detach().clone()
-    loss_value = module.training_step(random_images, torch.zeros_like(random_outputs), 0.01)
+    loss_value = module.training_step(
+        random_images, torch.zeros_like(random_outputs), 0.01
+    )
     assert loss_value >= 0.0
     assert not torch.equal(previous_weight, module.projection_weight.detach())
 

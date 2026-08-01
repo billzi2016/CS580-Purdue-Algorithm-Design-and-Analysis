@@ -44,7 +44,9 @@ def lightest_crossing_edges(edges: list[Edge], left_side: set[Node]) -> list[Edg
     return [edge for edge in crossing if edge[2] == minimum_weight]
 
 
-def is_unique_lightest_crossing_edge(edges: list[Edge], left_side: set[Node], target: Edge) -> bool:
+def is_unique_lightest_crossing_edge(
+    edges: list[Edge], left_side: set[Node], target: Edge
+) -> bool:
     """
     判断 target 是否是某个割上的唯一最轻横切边。
     """

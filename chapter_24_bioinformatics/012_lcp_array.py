@@ -31,7 +31,11 @@ def build_lcp_array(text: str, suffix_array: list[int]) -> list[int]:
             common = 0
             continue
         previous_start = suffix_array[position - 1]
-        while start + common < size and previous_start + common < size and text[start + common] == text[previous_start + common]:
+        while (
+            start + common < size
+            and previous_start + common < size
+            and text[start + common] == text[previous_start + common]
+        ):
             common += 1
         lcp[position] = common
         # 下一轮的两个后缀都少了首字符，故保留的已知共同部分最多少一个。

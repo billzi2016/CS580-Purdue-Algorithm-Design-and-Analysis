@@ -8,7 +8,9 @@
 """
 
 
-def monte_carlo_control(episodes: list[list[tuple[str, str, float]]], discount: float) -> tuple[dict[tuple[str, str], float], dict[str, str]]:
+def monte_carlo_control(
+    episodes: list[list[tuple[str, str, float]]], discount: float
+) -> tuple[dict[tuple[str, str], float], dict[str, str]]:
     """从完整 episode 估计动作价值并提取贪心策略。
 
     参数：轨迹项是 (state, action, reward_after_action)，discount 为折扣。
@@ -42,7 +44,9 @@ def monte_carlo_control(episodes: list[list[tuple[str, str, float]]], discount: 
 
 
 if __name__ == "__main__":
-    values, policy = monte_carlo_control([[('S', 'left', 1.0)], [('S', 'right', 2.0)]], 1.0)
-    assert values == {('S', 'left'): 1.0, ('S', 'right'): 2.0}
-    assert policy == {'S': 'right'}
+    values, policy = monte_carlo_control(
+        [[("S", "left", 1.0)], [("S", "right", 2.0)]], 1.0
+    )
+    assert values == {("S", "left"): 1.0, ("S", "right"): 2.0}
+    assert policy == {"S": "right"}
     print("005_monte_carlo_control: all examples passed")

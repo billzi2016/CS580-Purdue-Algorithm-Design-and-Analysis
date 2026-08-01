@@ -68,7 +68,11 @@ if __name__ == "__main__":
     assert polynomial_hash("") == 0
     assert polynomial_hash("ACG") == polynomial_hash("ACG")
     fingerprints = winnow("ACGTAC", 2, 3)
-    assert [(item.position, item.gram) for item in fingerprints] == [(0, "AC"), (1, "CG"), (4, "AC")]
+    assert [(item.position, item.gram) for item in fingerprints] == [
+        (0, "AC"),
+        (1, "CG"),
+        (4, "AC"),
+    ]
     assert winnow("AC", 3, 1) == []
     try:
         winnow("ACG", 0, 2)

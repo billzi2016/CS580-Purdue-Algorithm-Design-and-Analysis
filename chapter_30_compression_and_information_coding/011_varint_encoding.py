@@ -8,7 +8,6 @@
 关键边界：0 编码为单个零字节；负数、截断序列、非规范冗余表示和越界偏移抛出 ValueError。
 """
 
-
 CONTINUATION_BIT = 0x80
 PAYLOAD_MASK = 0x7F
 
@@ -44,7 +43,11 @@ def decode_unsigned_varint(data: bytes, offset: int = 0) -> tuple[int, int]:
     """
     if not isinstance(data, bytes):
         raise ValueError("data 必须是 bytes")
-    if isinstance(offset, bool) or not isinstance(offset, int) or not 0 <= offset < len(data):
+    if (
+        isinstance(offset, bool)
+        or not isinstance(offset, int)
+        or not 0 <= offset < len(data)
+    ):
         raise ValueError("offset 必须指向 data 中的有效字节")
 
     value = 0

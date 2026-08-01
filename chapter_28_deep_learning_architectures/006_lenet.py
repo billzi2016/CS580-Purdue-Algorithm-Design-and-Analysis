@@ -8,17 +8,23 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
 
-def _valid_conv(inputs: torch.Tensor, weights: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
+def _valid_conv(
+    inputs: torch.Tensor, weights: torch.Tensor, bias: torch.Tensor
+) -> torch.Tensor:
     """以循环手写 stride=1、无 padding 的 NCHW 交叉相关卷积。"""
     batch, channels, height, width = inputs.shape
     outputs, kernel_channels, kernel_height, kernel_width = weights.shape
     if channels != kernel_channels:
         raise ValueError("卷积通道数不匹配")
-    result = torch.zeros((batch, outputs, height - kernel_height + 1, width - kernel_width + 1), dtype=torch.float64)
+    result = torch.zeros(
+        (batch, outputs, height - kernel_height + 1, width - kernel_width + 1),
+        dtype=torch.float64,
+    )
     for sample in range(batch):
         for output in range(outputs):
             for row in range(result.shape[2]):
@@ -27,7 +33,17 @@ def _valid_conv(inputs: torch.Tensor, weights: torch.Tensor, bias: torch.Tensor)
                     for channel in range(channels):
                         for kernel_row in range(kernel_height):
                             for kernel_column in range(kernel_width):
-                                value += float(inputs[sample, channel, row + kernel_row, column + kernel_column] * weights[output, channel, kernel_row, kernel_column])
+                                value += float(
+                                    inputs[
+                                        sample,
+                                        channel,
+                                        row + kernel_row,
+                                        column + kernel_column,
+                                    ]
+                                    * weights[
+                                        output, channel, kernel_row, kernel_column
+                                    ]
+                                )
                     result[sample, output, row, column] = value
     return result
 
@@ -37,10 +53,15 @@ def _average_pool_2x2(inputs: torch.Tensor) -> torch.Tensor:
     batch, channels, height, width = inputs.shape
     if height % 2 or width % 2:
         raise ValueError("池化输入高宽必须为偶数")
-    result = torch.zeros((batch, channels, height // 2, width // 2), dtype=torch.float64)
+    result = torch.zeros(
+        (batch, channels, height // 2, width // 2), dtype=torch.float64
+    )
     for row in range(height // 2):
         for column in range(width // 2):
-            result[:, :, row, column] = torch.mean(inputs[:, :, 2 * row:2 * row + 2, 2 * column:2 * column + 2], dim=(2, 3))
+            result[:, :, row, column] = torch.mean(
+                inputs[:, :, 2 * row : 2 * row + 2, 2 * column : 2 * column + 2],
+                dim=(2, 3),
+            )
     return result
 
 
@@ -58,11 +79,18 @@ class LeNet:
         if class_count <= 0:
             raise ValueError("class_count 必须为正")
         generator = torch.Generator().manual_seed(seed)
-        self.conv1_weight = torch.randn(6, 1, 5, 5, generator=generator, dtype=torch.float64) * 0.05
+        self.conv1_weight = (
+            torch.randn(6, 1, 5, 5, generator=generator, dtype=torch.float64) * 0.05
+        )
         self.conv1_bias = torch.zeros(6, dtype=torch.float64)
-        self.conv2_weight = torch.randn(16, 6, 5, 5, generator=generator, dtype=torch.float64) * 0.05
+        self.conv2_weight = (
+            torch.randn(16, 6, 5, 5, generator=generator, dtype=torch.float64) * 0.05
+        )
         self.conv2_bias = torch.zeros(16, dtype=torch.float64)
-        self.classifier_weight = torch.randn(400, class_count, generator=generator, dtype=torch.float64) * 0.05
+        self.classifier_weight = (
+            torch.randn(400, class_count, generator=generator, dtype=torch.float64)
+            * 0.05
+        )
         self.classifier_bias = torch.zeros(class_count, dtype=torch.float64)
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
@@ -75,9 +103,20 @@ class LeNet:
         """
         if images.ndim != 4 or tuple(images.shape[1:]) != (1, 32, 32):
             raise ValueError("LeNet 基础版只支持 (batch,1,32,32) 输入")
-        first = _average_pool_2x2(torch.tanh(_valid_conv(images.to(torch.float64), self.conv1_weight, self.conv1_bias)))
-        second = _average_pool_2x2(torch.tanh(_valid_conv(first, self.conv2_weight, self.conv2_bias)))
-        return second.reshape(second.shape[0], 400) @ self.classifier_weight + self.classifier_bias
+        first = _average_pool_2x2(
+            torch.tanh(
+                _valid_conv(
+                    images.to(torch.float64), self.conv1_weight, self.conv1_bias
+                )
+            )
+        )
+        second = _average_pool_2x2(
+            torch.tanh(_valid_conv(first, self.conv2_weight, self.conv2_bias))
+        )
+        return (
+            second.reshape(second.shape[0], 400) @ self.classifier_weight
+            + self.classifier_bias
+        )
 
 
 if __name__ == "__main__":

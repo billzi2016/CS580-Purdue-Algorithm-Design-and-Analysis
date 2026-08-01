@@ -38,16 +38,22 @@ class FMIndex:
         extended = text + terminator
         suffix_array = list(range(len(extended)))
         suffix_array.sort(key=lambda start: extended[start:])
-        bwt = "".join(extended[start - 1] if start else extended[-1] for start in suffix_array)
+        bwt = "".join(
+            extended[start - 1] if start else extended[-1] for start in suffix_array
+        )
         alphabet = sorted(set(extended))
         first_column = sorted(bwt)
         first_occurrence: dict[str, int] = {}
         for index, symbol in enumerate(first_column):
             first_occurrence.setdefault(symbol, index)
-        occurrences: dict[str, list[int]] = {symbol: [0] * (len(bwt) + 1) for symbol in alphabet}
+        occurrences: dict[str, list[int]] = {
+            symbol: [0] * (len(bwt) + 1) for symbol in alphabet
+        }
         for end, observed in enumerate(bwt, start=1):
             for symbol in alphabet:
-                occurrences[symbol][end] = occurrences[symbol][end - 1] + (symbol == observed)
+                occurrences[symbol][end] = occurrences[symbol][end - 1] + (
+                    symbol == observed
+                )
         return cls(text, bwt, first_occurrence, occurrences, suffix_array, terminator)
 
     def count(self, pattern: str) -> int:
@@ -70,7 +76,11 @@ class FMIndex:
         关键算法点：教学版保留完整后缀数组，因此可直接将最终行区间映射回起点。
         """
         left, right = self._interval(pattern)
-        positions = [start for start in self.suffix_array[left:right] if start <= len(self.text) - len(pattern)]
+        positions = [
+            start
+            for start in self.suffix_array[left:right]
+            if start <= len(self.text) - len(pattern)
+        ]
         return sorted(positions)
 
     def last_to_first(self, row: int) -> int:

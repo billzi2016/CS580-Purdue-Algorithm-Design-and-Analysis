@@ -21,7 +21,11 @@ class HeavyLightDecomposition:
         关键算法点：重儿子先分配位置，使得同一重链在底层数组中连续。
         """
         self.vertex_count = len(tree)
-        if self.vertex_count == 0 or len(values) != self.vertex_count or not 0 <= root < self.vertex_count:
+        if (
+            self.vertex_count == 0
+            or len(values) != self.vertex_count
+            or not 0 <= root < self.vertex_count
+        ):
             raise ValueError("tree、values 和 root 必须描述一棵非空树")
         self._validate_adjacency(tree)
         self.values = values[:]
@@ -68,7 +72,10 @@ class HeavyLightDecomposition:
                 next_position += 1
                 # 轻儿子必须另开链；逆序并不影响正确性，只影响位置的确定性。
                 for neighbor in reversed(tree[vertex]):
-                    if self.parent[neighbor] == vertex and neighbor != self.heavy[vertex]:
+                    if (
+                        self.parent[neighbor] == vertex
+                        and neighbor != self.heavy[vertex]
+                    ):
                         pending_chains.append((neighbor, neighbor))
                 vertex = self.heavy[vertex]
         self._segment_size = 1
@@ -78,7 +85,9 @@ class HeavyLightDecomposition:
         for index, value in enumerate(base):
             self._segment[self._segment_size + index] = value
         for index in range(self._segment_size - 1, 0, -1):
-            self._segment[index] = self._segment[index * 2] + self._segment[index * 2 + 1]
+            self._segment[index] = (
+                self._segment[index * 2] + self._segment[index * 2 + 1]
+            )
 
     def update(self, vertex: int, value: int) -> None:
         """将一个顶点的权值更新为 value。
@@ -94,7 +103,9 @@ class HeavyLightDecomposition:
         self._segment[index] = value
         while index > 1:
             index //= 2
-            self._segment[index] = self._segment[index * 2] + self._segment[index * 2 + 1]
+            self._segment[index] = (
+                self._segment[index * 2] + self._segment[index * 2 + 1]
+            )
 
     def path_sum(self, first: int, second: int) -> int:
         """返回 first 到 second 的唯一简单路径上的顶点权值和。
@@ -110,7 +121,9 @@ class HeavyLightDecomposition:
         while self.head[first] != self.head[second]:
             if self.depth[self.head[first]] < self.depth[self.head[second]]:
                 first, second = second, first
-            total += self._range_sum(self.position[self.head[first]], self.position[first] + 1)
+            total += self._range_sum(
+                self.position[self.head[first]], self.position[first] + 1
+            )
             first = self.parent[self.head[first]]
         if self.depth[first] > self.depth[second]:
             first, second = second, first
@@ -140,7 +153,10 @@ class HeavyLightDecomposition:
         for vertex, neighbors in enumerate(tree):
             if vertex in neighbors or len(set(neighbors)) != len(neighbors):
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
 

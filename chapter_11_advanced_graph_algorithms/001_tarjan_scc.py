@@ -17,7 +17,11 @@ def tarjan_scc(graph: list[list[int]]) -> list[list[int]]:
     关键算法点：只有仍在栈中的回边才能用于降低 low-link 值。
     """
     vertex_count = len(graph)
-    if any(neighbor < 0 or neighbor >= vertex_count for neighbors in graph for neighbor in neighbors):
+    if any(
+        neighbor < 0 or neighbor >= vertex_count
+        for neighbors in graph
+        for neighbor in neighbors
+    ):
         raise ValueError("graph 包含超出邻接表范围的顶点编号")
 
     discovery = [-1] * vertex_count
@@ -61,8 +65,13 @@ def tarjan_scc(graph: list[list[int]]) -> list[list[int]]:
 if __name__ == "__main__":
     graph = [[1], [2, 3], [0], [4], [3], []]
     assert {frozenset(component) for component in tarjan_scc(graph)} == {
-        frozenset({0, 1, 2}), frozenset({3, 4}), frozenset({5})
+        frozenset({0, 1, 2}),
+        frozenset({3, 4}),
+        frozenset({5}),
     }
     assert tarjan_scc([]) == []
-    assert {frozenset(component) for component in tarjan_scc([[0], []])} == {frozenset({0}), frozenset({1})}
+    assert {frozenset(component) for component in tarjan_scc([[0], []])} == {
+        frozenset({0}),
+        frozenset({1}),
+    }
     print("001_tarjan_scc: all examples passed")

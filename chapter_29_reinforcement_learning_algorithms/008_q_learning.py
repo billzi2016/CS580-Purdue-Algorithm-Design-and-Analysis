@@ -33,14 +33,20 @@ def q_learning(
             if choices:
                 best_next = values.get((next_state, choices[0]), 0.0)
                 for next_action in choices[1:]:
-                    best_next = max(best_next, values.get((next_state, next_action), 0.0))
+                    best_next = max(
+                        best_next, values.get((next_state, next_action), 0.0)
+                    )
         key = (state, action)
-        values[key] = values.get(key, 0.0) + learning_rate * (reward + discount * best_next - values.get(key, 0.0))
+        values[key] = values.get(key, 0.0) + learning_rate * (
+            reward + discount * best_next - values.get(key, 0.0)
+        )
     return values
 
 
 if __name__ == "__main__":
-    actions = {'A': ['go'], 'B': ['left', 'right']}
-    q_values = q_learning([('B', 'right', 2.0, None), ('A', 'go', 0.0, 'B')], actions, 1.0, 0.9)
-    assert q_values == {('B', 'right'): 2.0, ('A', 'go'): 1.8}
+    actions = {"A": ["go"], "B": ["left", "right"]}
+    q_values = q_learning(
+        [("B", "right", 2.0, None), ("A", "go", 0.0, "B")], actions, 1.0, 0.9
+    )
+    assert q_values == {("B", "right"): 2.0, ("A", "go"): 1.8}
     print("008_q_learning: all examples passed")

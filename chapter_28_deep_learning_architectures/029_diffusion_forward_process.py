@@ -30,9 +30,13 @@ class DiffusionForwardProcess(torch.nn.Module):
             torch.linspace(beta_start, beta_end, steps=num_steps), requires_grad=False
         )
         self.alphas = torch.nn.Parameter(1.0 - self.betas, requires_grad=False)
-        self.alpha_bars = torch.nn.Parameter(torch.cumprod(self.alphas, dim=0), requires_grad=False)
+        self.alpha_bars = torch.nn.Parameter(
+            torch.cumprod(self.alphas, dim=0), requires_grad=False
+        )
 
-    def forward(self, samples: torch.Tensor, time_steps: torch.Tensor, noise: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self, samples: torch.Tensor, time_steps: torch.Tensor, noise: torch.Tensor
+    ) -> torch.Tensor:
         """根据闭式公式生成加噪样本。"""
         if samples.shape != noise.shape:
             raise ValueError("samples 与 noise 形状必须一致")
@@ -41,7 +45,9 @@ class DiffusionForwardProcess(torch.nn.Module):
         if torch.any(time_steps < 0) or torch.any(time_steps >= self.num_steps):
             raise ValueError("time_steps 超出可用范围")
 
-        alpha_bar = self.alpha_bars[time_steps].reshape((-1,) + (1,) * (samples.ndim - 1))
+        alpha_bar = self.alpha_bars[time_steps].reshape(
+            (-1,) + (1,) * (samples.ndim - 1)
+        )
         return torch.sqrt(alpha_bar) * samples + torch.sqrt(1.0 - alpha_bar) * noise
 
     def training_step(

@@ -51,11 +51,15 @@ class VisionTransformerBlock(torch.nn.Module):
         variance = ((tensor - mean) ** 2).mean(dim=-1, keepdim=True)
         return (tensor - mean) / torch.sqrt(variance + epsilon)
 
-    def _project(self, tokens: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
+    def _project(
+        self, tokens: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor
+    ) -> torch.Tensor:
         """投影到多头表示。"""
         batch_size, num_tokens, _ = tokens.shape
         projected = tokens @ weight + bias
-        projected = projected.reshape(batch_size, num_tokens, self.num_heads, self.head_dim)
+        projected = projected.reshape(
+            batch_size, num_tokens, self.num_heads, self.head_dim
+        )
         return projected.permute(0, 2, 1, 3)
 
     def forward(self, tokens: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -70,7 +74,9 @@ class VisionTransformerBlock(torch.nn.Module):
         scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(self.head_dim)
         attention_weights = torch.softmax(scores, dim=-1)
         attended = torch.matmul(attention_weights, value)
-        attended = attended.permute(0, 2, 1, 3).reshape(tokens.shape[0], tokens.shape[1], self.embed_dim)
+        attended = attended.permute(0, 2, 1, 3).reshape(
+            tokens.shape[0], tokens.shape[1], self.embed_dim
+        )
         attention_output = attended @ self.output_weight + self.output_bias
 
         residual = self._layer_norm(tokens + attention_output)
@@ -78,7 +84,9 @@ class VisionTransformerBlock(torch.nn.Module):
         mlp_output = mlp_output @ self.mlp_weight_2 + self.mlp_bias_2
         return self._layer_norm(residual + mlp_output), attention_weights
 
-    def training_step(self, tokens: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, tokens: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次 ViT block 训练步。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
@@ -109,10 +117,14 @@ if __name__ == "__main__":
     output_tensor, attention_tensor = block(token_tensor)
     assert output_tensor.shape == (2, 5, 8)
     assert attention_tensor.shape == (2, 2, 5, 5)
-    assert torch.allclose(attention_tensor.sum(dim=-1), torch.ones((2, 2, 5)), atol=1e-5)
+    assert torch.allclose(
+        attention_tensor.sum(dim=-1), torch.ones((2, 2, 5)), atol=1e-5
+    )
 
     previous_weight = block.mlp_weight_2.detach().clone()
-    loss_value = block.training_step(token_tensor, torch.zeros_like(output_tensor), 0.01)
+    loss_value = block.training_step(
+        token_tensor, torch.zeros_like(output_tensor), 0.01
+    )
     assert loss_value >= 0.0
     assert not torch.equal(previous_weight, block.mlp_weight_2.detach())
 

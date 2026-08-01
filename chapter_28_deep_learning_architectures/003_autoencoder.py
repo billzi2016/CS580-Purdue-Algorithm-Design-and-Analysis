@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -26,9 +27,19 @@ class Autoencoder:
         if input_size <= 0 or latent_size <= 0:
             raise ValueError("网络维度必须为正")
         generator = torch.Generator().manual_seed(seed)
-        self.encoder_weight = torch.randn(input_size, latent_size, generator=generator, dtype=torch.float64) * 0.1
+        self.encoder_weight = (
+            torch.randn(
+                input_size, latent_size, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.encoder_bias = torch.zeros(latent_size, dtype=torch.float64)
-        self.decoder_weight = torch.randn(latent_size, input_size, generator=generator, dtype=torch.float64) * 0.1
+        self.decoder_weight = (
+            torch.randn(
+                latent_size, input_size, generator=generator, dtype=torch.float64
+            )
+            * 0.1
+        )
         self.decoder_bias = torch.zeros(input_size, dtype=torch.float64)
 
     def forward(self, features: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -41,7 +52,10 @@ class Autoencoder:
         """
         if features.ndim != 2 or features.shape[1] != self.encoder_weight.shape[0]:
             raise ValueError("features 形状不匹配")
-        latent = torch.clamp(features.to(torch.float64) @ self.encoder_weight + self.encoder_bias, min=0.0)
+        latent = torch.clamp(
+            features.to(torch.float64) @ self.encoder_weight + self.encoder_bias,
+            min=0.0,
+        )
         reconstruction = latent @ self.decoder_weight + self.decoder_bias
         return reconstruction, latent
 

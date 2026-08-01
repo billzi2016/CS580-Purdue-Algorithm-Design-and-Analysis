@@ -40,11 +40,15 @@ class MultiHeadAttention(torch.nn.Module):
         self.value_bias = torch.nn.Parameter(torch.zeros(embed_dim))
         self.output_bias = torch.nn.Parameter(torch.zeros(embed_dim))
 
-    def _project(self, tensor: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
+    def _project(
+        self, tensor: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor
+    ) -> torch.Tensor:
         """把输入投影并重排成多头表示。"""
         batch_size, time_steps, _ = tensor.shape
         projected = tensor @ weight + bias
-        projected = projected.reshape(batch_size, time_steps, self.num_heads, self.head_dim)
+        projected = projected.reshape(
+            batch_size, time_steps, self.num_heads, self.head_dim
+        )
         return projected.permute(0, 2, 1, 3)
 
     def forward(
@@ -61,14 +65,20 @@ class MultiHeadAttention(torch.nn.Module):
             raise ValueError("batch 维度必须匹配")
         if key.shape[1] != value.shape[1]:
             raise ValueError("key 与 value 的时间长度必须一致")
-        if query.shape[2] != self.embed_dim or key.shape[2] != self.embed_dim or value.shape[2] != self.embed_dim:
+        if (
+            query.shape[2] != self.embed_dim
+            or key.shape[2] != self.embed_dim
+            or value.shape[2] != self.embed_dim
+        ):
             raise ValueError("输入最后一维必须等于 embed_dim")
 
         projected_query = self._project(query, self.query_weight, self.query_bias)
         projected_key = self._project(key, self.key_weight, self.key_bias)
         projected_value = self._project(value, self.value_weight, self.value_bias)
 
-        scores = torch.matmul(projected_query, projected_key.transpose(-2, -1)) / math.sqrt(self.head_dim)
+        scores = torch.matmul(
+            projected_query, projected_key.transpose(-2, -1)
+        ) / math.sqrt(self.head_dim)
         if mask is not None:
             if mask.shape != scores.shape:
                 raise ValueError("mask 形状必须为 (batch, heads, query_time, key_time)")
@@ -76,7 +86,9 @@ class MultiHeadAttention(torch.nn.Module):
 
         attention_weights = torch.softmax(scores, dim=-1)
         attended = torch.matmul(attention_weights, projected_value)
-        attended = attended.permute(0, 2, 1, 3).reshape(query.shape[0], query.shape[1], self.embed_dim)
+        attended = attended.permute(0, 2, 1, 3).reshape(
+            query.shape[0], query.shape[1], self.embed_dim
+        )
         return attended @ self.output_weight + self.output_bias, attention_weights
 
     def training_step(

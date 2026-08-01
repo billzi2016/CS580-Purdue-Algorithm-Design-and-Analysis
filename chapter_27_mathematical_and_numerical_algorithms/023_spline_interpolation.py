@@ -3,7 +3,9 @@
 """
 
 
-def natural_cubic_spline_coefficients(xs: list[float], ys: list[float]) -> tuple[list[float], list[float], list[float], list[float]]:
+def natural_cubic_spline_coefficients(
+    xs: list[float], ys: list[float]
+) -> tuple[list[float], list[float], list[float], list[float]]:
     """返回每段样条的 a,b,c,d 系数。"""
 
     if len(xs) != len(ys) or len(xs) < 2:
@@ -14,7 +16,9 @@ def natural_cubic_spline_coefficients(xs: list[float], ys: list[float]) -> tuple
     h_values = [xs[i + 1] - xs[i] for i in range(n_value)]
     alpha = [0.0] * (n_value + 1)
     for i in range(1, n_value):
-        alpha[i] = 3 / h_values[i] * (ys[i + 1] - ys[i]) - 3 / h_values[i - 1] * (ys[i] - ys[i - 1])
+        alpha[i] = 3 / h_values[i] * (ys[i + 1] - ys[i]) - 3 / h_values[i - 1] * (
+            ys[i] - ys[i - 1]
+        )
     l_values = [1.0] + [0.0] * n_value
     mu_values = [0.0] * (n_value + 1)
     z_values = [0.0] * (n_value + 1)
@@ -29,12 +33,18 @@ def natural_cubic_spline_coefficients(xs: list[float], ys: list[float]) -> tuple
     a_values = ys[:-1]
     for j in range(n_value - 1, -1, -1):
         c_values[j] = z_values[j] - mu_values[j] * c_values[j + 1]
-        b_values[j] = (ys[j + 1] - ys[j]) / h_values[j] - h_values[j] * (c_values[j + 1] + 2 * c_values[j]) / 3
+        b_values[j] = (ys[j + 1] - ys[j]) / h_values[j] - h_values[j] * (
+            c_values[j + 1] + 2 * c_values[j]
+        ) / 3
         d_values[j] = (c_values[j + 1] - c_values[j]) / (3 * h_values[j])
     return a_values, b_values, c_values[:-1], d_values
 
 
-def evaluate_spline(xs: list[float], coefficients: tuple[list[float], list[float], list[float], list[float]], x_value: float) -> float:
+def evaluate_spline(
+    xs: list[float],
+    coefficients: tuple[list[float], list[float], list[float], list[float]],
+    x_value: float,
+) -> float:
     """在所属区间内计算自然三次样条值。"""
 
     if not xs or x_value < xs[0] or x_value > xs[-1]:
@@ -44,7 +54,12 @@ def evaluate_spline(xs: list[float], coefficients: tuple[list[float], list[float
     if interval == len(xs) - 1:
         interval -= 1
     delta = x_value - xs[interval]
-    return a_values[interval] + b_values[interval] * delta + c_values[interval] * delta**2 + d_values[interval] * delta**3
+    return (
+        a_values[interval]
+        + b_values[interval] * delta
+        + c_values[interval] * delta**2
+        + d_values[interval] * delta**3
+    )
 
 
 if __name__ == "__main__":

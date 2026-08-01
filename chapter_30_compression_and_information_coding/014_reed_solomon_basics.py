@@ -11,7 +11,6 @@ Berlekamp-Massey、Chien 搜索或 Forney 算法，因此只能报告是否检�
 来源：James S. Plank, “A Tutorial on Reed-Solomon Coding for Fault-Tolerance in RAID-like Systems”。
 """
 
-
 FIELD_PRIMITIVE_POLYNOMIAL = 0x11D
 FIELD_SIZE = 256
 FIELD_ORDER = 255
@@ -26,7 +25,11 @@ def gf_multiply(left: int, right: int) -> int:
     关键算法点：域加法为 XOR；每次左移若溢出 8 位，就 XOR 本原多项式以完成模多项式约化。
     """
     for value, name in ((left, "left"), (right, "right")):
-        if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value < FIELD_SIZE:
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or not 0 <= value < FIELD_SIZE
+        ):
             raise ValueError(f"{name} 必须是 0 到 255 的整数")
     product = 0
     while right:
@@ -57,7 +60,9 @@ def _polynomial_multiply(left: list[int], right: list[int]) -> list[int]:
     result = [0] * (len(left) + len(right) - 1)
     for left_index, left_coefficient in enumerate(left):
         for right_index, right_coefficient in enumerate(right):
-            result[left_index + right_index] ^= gf_multiply(left_coefficient, right_coefficient)
+            result[left_index + right_index] ^= gf_multiply(
+                left_coefficient, right_coefficient
+            )
     return result
 
 
@@ -70,7 +75,11 @@ def rs_generator_polynomial(parity_symbols: int) -> list[int]:
     关键算法点：在特征为 2 的域中减法与加法都等于 XOR，故因子 ``(x - α^i)`` 表示为
         系数 ``[1, α^i]``。
     """
-    if isinstance(parity_symbols, bool) or not isinstance(parity_symbols, int) or not 1 <= parity_symbols < FIELD_ORDER:
+    if (
+        isinstance(parity_symbols, bool)
+        or not isinstance(parity_symbols, int)
+        or not 1 <= parity_symbols < FIELD_ORDER
+    ):
         raise ValueError("parity_symbols 必须是 1 到 254 的整数")
     generator = [1]
     for exponent in range(parity_symbols):
@@ -104,7 +113,9 @@ def reed_solomon_encode(message: bytes, parity_symbols: int) -> bytes:
         if leading:
             # 消去当前最高次项；首项系数为 1，因此无需做域除法。
             for generator_index in range(1, len(generator)):
-                working[message_index + generator_index] ^= gf_multiply(generator[generator_index], leading)
+                working[message_index + generator_index] ^= gf_multiply(
+                    generator[generator_index], leading
+                )
     return message + bytes(working[-parity_symbols:])
 
 
@@ -124,12 +135,20 @@ def reed_solomon_syndromes(codeword: bytes, parity_symbols: int) -> list[int]:
     边界情况：空码字、长度超限或参数非法抛出 ValueError。
     关键算法点：合法码字被生成多项式整除，故在生成多项式的每个根 α^i 处求值都应为 0。
     """
-    _validate_message(codeword[:-parity_symbols] if isinstance(codeword, bytes) and len(codeword) >= parity_symbols else b"", parity_symbols)
+    _validate_message(
+        codeword[:-parity_symbols]
+        if isinstance(codeword, bytes) and len(codeword) >= parity_symbols
+        else b"",
+        parity_symbols,
+    )
     if not isinstance(codeword, bytes) or len(codeword) < parity_symbols:
         raise ValueError("codeword 长度至少应等于 parity_symbols")
     if len(codeword) > FIELD_ORDER:
         raise ValueError("codeword 长度不能超过 255")
-    return [_evaluate_polynomial(codeword, gf_power(2, exponent)) for exponent in range(parity_symbols)]
+    return [
+        _evaluate_polynomial(codeword, gf_power(2, exponent))
+        for exponent in range(parity_symbols)
+    ]
 
 
 def reed_solomon_verify(codeword: bytes, parity_symbols: int) -> bool:
@@ -140,7 +159,9 @@ def reed_solomon_verify(codeword: bytes, parity_symbols: int) -> bool:
     边界情况：格式或参数错误抛出 ValueError；本函数检测错误但不定位或修正错误。
     关键算法点：只要至少一个根处求值非零，码字就不再满足生成多项式的整除条件。
     """
-    return all(syndrome == 0 for syndrome in reed_solomon_syndromes(codeword, parity_symbols))
+    return all(
+        syndrome == 0 for syndrome in reed_solomon_syndromes(codeword, parity_symbols)
+    )
 
 
 if __name__ == "__main__":

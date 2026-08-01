@@ -11,7 +11,9 @@ def project_to_box(value: float, lower: float, upper: float) -> float:
     return max(lower, min(upper, value))
 
 
-def projected_gradient_descent(initial_x: float, learning_rate: float, steps: int, lower: float, upper: float) -> list[float]:
+def projected_gradient_descent(
+    initial_x: float, learning_rate: float, steps: int, lower: float, upper: float
+) -> list[float]:
     """优化 f(x)=0.5*(x-3)^2，并限制 x 落在区间内。"""
 
     if learning_rate <= 0 or steps < 0:

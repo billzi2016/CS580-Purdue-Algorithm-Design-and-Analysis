@@ -29,7 +29,9 @@ class Segment:
     finish: int
 
 
-def shortest_remaining_time_first(processes: list[Process]) -> tuple[list[Segment], dict[str, int]]:
+def shortest_remaining_time_first(
+    processes: list[Process],
+) -> tuple[list[Segment], dict[str, int]]:
     """返回抢占式执行片段和每个进程的完成时间。"""
 
     _validate(processes)
@@ -66,10 +68,14 @@ def shortest_remaining_time_first(processes: list[Process]) -> tuple[list[Segmen
     return timeline, completion
 
 
-def turnaround_times(processes: list[Process], completion: dict[str, int]) -> dict[str, int]:
+def turnaround_times(
+    processes: list[Process], completion: dict[str, int]
+) -> dict[str, int]:
     """根据完成时间计算周转时间。"""
 
-    return {process.pid: completion[process.pid] - process.arrival for process in processes}
+    return {
+        process.pid: completion[process.pid] - process.arrival for process in processes
+    }
 
 
 def _append_segment(timeline: list[Segment], pid: str, start: int, finish: int) -> None:

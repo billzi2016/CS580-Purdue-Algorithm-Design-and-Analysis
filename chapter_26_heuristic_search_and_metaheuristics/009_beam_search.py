@@ -12,7 +12,14 @@ from typing import TypeVar
 
 State = TypeVar("State")
 
-def beam_search(initial: State, expand: Callable[[State], Iterable[State]], score: Callable[[State], float], width: int, depth: int) -> State:
+
+def beam_search(
+    initial: State,
+    expand: Callable[[State], Iterable[State]],
+    score: Callable[[State], float],
+    width: int,
+    depth: int,
+) -> State:
     """执行固定深度的最大化束搜索，返回最后一层得分最高状态。"""
     if width < 1 or depth < 0:
         raise ValueError("束宽和深度无效")
@@ -29,6 +36,9 @@ def beam_search(initial: State, expand: Callable[[State], Iterable[State]], scor
 if __name__ == "__main__":
     tree = {"S": ["A", "B"], "A": ["AA", "AB"], "B": ["BA", "BB"]}
     scores = {"S": 0, "A": 2, "B": 1, "AA": 3, "AB": 9, "BA": 4, "BB": 5}
-    assert beam_search("S", lambda node: tree.get(node, []), scores.__getitem__, 2, 2) == "AB"
+    assert (
+        beam_search("S", lambda node: tree.get(node, []), scores.__getitem__, 2, 2)
+        == "AB"
+    )
     assert beam_search("S", lambda _: [], scores.__getitem__, 1, 3) == "S"
     print("009_beam_search: all examples passed")

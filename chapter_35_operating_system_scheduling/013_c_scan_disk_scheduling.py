@@ -53,7 +53,9 @@ def _validate(requests: list[int], head: int, disk_size: int, direction: str) ->
 
 
 if __name__ == "__main__":
-    order, distance = c_scan_disk_scheduling([82, 170, 43, 140, 24, 16, 190], 50, 200, "up")
+    order, distance = c_scan_disk_scheduling(
+        [82, 170, 43, 140, 24, 16, 190], 50, 200, "up"
+    )
     assert order == [82, 140, 170, 190, 199, 0, 16, 24, 43]
     assert distance == 391
 

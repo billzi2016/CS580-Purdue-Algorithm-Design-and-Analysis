@@ -63,10 +63,18 @@ def simulated_annealing(
 
 
 if __name__ == "__main__":
+
     def move(value: int, generator: random.Random) -> int:
         return max(0, min(10, value + generator.choice([-1, 1])))
 
-    result = simulated_annealing(0, lambda value: -(value - 7) ** 2, move, lambda step: 5 / (step + 1), 100, seed=3)
+    result = simulated_annealing(
+        0,
+        lambda value: -((value - 7) ** 2),
+        move,
+        lambda step: 5 / (step + 1),
+        100,
+        seed=3,
+    )
     assert result.state == 7 and result.score == 0
     assert result.accepted_moves > 0
     zero_step = simulated_annealing(2, float, move, lambda _: 1, 0)

@@ -18,7 +18,9 @@ def orientation(first: Point, second: Point, third: Point) -> int:
     边界情况：重合点使叉积为零，按共线处理。
     关键算法点：只关心叉积符号，避免进行除法或角度计算。
     """
-    cross_product = (second[0] - first[0]) * (third[1] - first[1]) - (second[1] - first[1]) * (third[0] - first[0])
+    cross_product = (second[0] - first[0]) * (third[1] - first[1]) - (
+        second[1] - first[1]
+    ) * (third[0] - first[0])
     if cross_product > 0:
         return 1
     if cross_product < 0:

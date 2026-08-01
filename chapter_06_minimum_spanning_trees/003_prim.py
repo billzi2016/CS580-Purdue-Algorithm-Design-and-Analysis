@@ -28,7 +28,9 @@ Graph = dict[Node, list[tuple[Node, float]]]
 TreeEdge = tuple[Node, Node, float]
 
 
-def prim_minimum_spanning_tree(graph: Graph, start: Node) -> tuple[list[TreeEdge], float]:
+def prim_minimum_spanning_tree(
+    graph: Graph, start: Node
+) -> tuple[list[TreeEdge], float]:
     """
     从 start 所在连通分量中计算最小生成树。
 
@@ -84,7 +86,9 @@ if __name__ == "__main__":
     assert isolated_total == 0.0
 
     disconnected_graph = {"A": [("B", 1)], "B": [("A", 1)], "C": []}
-    component_edges, component_total = prim_minimum_spanning_tree(disconnected_graph, "C")
+    component_edges, component_total = prim_minimum_spanning_tree(
+        disconnected_graph, "C"
+    )
     assert component_edges == []
     assert component_total == 0.0
 

@@ -28,7 +28,12 @@ def shortest_edit_operations(first: str, second: str) -> list[str]:
     row, column = len(first), len(second)
     operations: list[str] = []
     while row or column:
-        if row and column and first[row - 1] == second[column - 1] and table[row][column] == table[row - 1][column - 1]:
+        if (
+            row
+            and column
+            and first[row - 1] == second[column - 1]
+            and table[row][column] == table[row - 1][column - 1]
+        ):
             operations.append("match")
             row, column = row - 1, column - 1
         elif row and column and table[row][column] == table[row - 1][column - 1] + 1:
@@ -53,8 +58,12 @@ def _distance_table(first: str, second: str) -> list[list[int]]:
         table[0][column] = column
     for row in range(1, len(first) + 1):
         for column in range(1, len(second) + 1):
-            substitution = table[row - 1][column - 1] + (first[row - 1] != second[column - 1])
-            table[row][column] = min(table[row - 1][column] + 1, table[row][column - 1] + 1, substitution)
+            substitution = table[row - 1][column - 1] + (
+                first[row - 1] != second[column - 1]
+            )
+            table[row][column] = min(
+                table[row - 1][column] + 1, table[row][column - 1] + 1, substitution
+            )
     return table
 
 
@@ -67,6 +76,11 @@ if __name__ == "__main__":
     assert edit_distance("GATTACA", "GACTATA") == 2
     assert edit_distance("ACG", "ACGT") == 1
     assert edit_distance("", "AC") == 2
-    assert shortest_edit_operations("ACG", "ACGT") == ["match", "match", "match", "insert"]
+    assert shortest_edit_operations("ACG", "ACGT") == [
+        "match",
+        "match",
+        "match",
+        "insert",
+    ]
     assert shortest_edit_operations("", "") == []
     print("006_edit_distance: all examples passed")

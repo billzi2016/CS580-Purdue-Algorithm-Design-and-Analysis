@@ -106,8 +106,9 @@ if __name__ == "__main__":
     assert is_connected({})
 
     value_only_node_graph = {"A": ["B"]}
-    assert {frozenset(component) for component in connected_components(value_only_node_graph)} == {
-        frozenset({"A", "B"})
-    }
+    assert {
+        frozenset(component)
+        for component in connected_components(value_only_node_graph)
+    } == {frozenset({"A", "B"})}
 
     print("003_connected_components: all examples passed")

@@ -8,7 +8,11 @@
 
 def _key_shifts(key: str) -> list[int]:
     """将关键字转换为 0–25 位移序列，并严格校验其格式。"""
-    if not isinstance(key, str) or not key or any(not ("A" <= char <= "Z" or "a" <= char <= "z") for char in key):
+    if (
+        not isinstance(key, str)
+        or not key
+        or any(not ("A" <= char <= "Z" or "a" <= char <= "z") for char in key)
+    ):
         raise ValueError("key 必须是非空 ASCII 字母串")
     return [ord(char.lower()) - ord("a") for char in key]
 

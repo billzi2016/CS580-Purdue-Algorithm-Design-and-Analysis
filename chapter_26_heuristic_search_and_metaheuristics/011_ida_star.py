@@ -12,12 +12,19 @@ from typing import Hashable, TypeVar
 
 State = TypeVar("State", bound=Hashable)
 
+
 @dataclass(frozen=True)
 class IDAResult:
     path: tuple[object, ...]
     cost: float
 
-def ida_star(start: State, is_goal: Callable[[State], bool], successors: Callable[[State], Iterable[tuple[State, float]]], heuristic: Callable[[State], float]) -> IDAResult | None:
+
+def ida_star(
+    start: State,
+    is_goal: Callable[[State], bool],
+    successors: Callable[[State], Iterable[tuple[State, float]]],
+    heuristic: Callable[[State], float],
+) -> IDAResult | None:
     """执行 IDA*；每轮 DFS 都只允许 f 值不超过当前阈值。"""
     bound = heuristic(start)
     path = [start]
@@ -29,7 +36,15 @@ def ida_star(start: State, is_goal: Callable[[State], bool], successors: Callabl
             return None
         bound = outcome
 
-def _search(path: list[State], cost: float, bound: float, is_goal: Callable[[State], bool], successors: Callable[[State], Iterable[tuple[State, float]]], heuristic: Callable[[State], float]) -> IDAResult | float:
+
+def _search(
+    path: list[State],
+    cost: float,
+    bound: float,
+    is_goal: Callable[[State], bool],
+    successors: Callable[[State], Iterable[tuple[State, float]]],
+    heuristic: Callable[[State], float],
+) -> IDAResult | float:
     state = path[-1]
     estimate = cost + heuristic(state)
     if estimate > bound:
@@ -50,9 +65,15 @@ def _search(path: list[State], cost: float, bound: float, is_goal: Callable[[Sta
         path.pop()
     return minimum
 
+
 if __name__ == "__main__":
     graph = {0: [(1, 1), (2, 3)], 1: [(2, 1), (3, 4)], 2: [(3, 1)], 3: []}
-    result = ida_star(0, lambda state: state == 3, graph.__getitem__, {0: 3, 1: 2, 2: 1, 3: 0}.__getitem__)
+    result = ida_star(
+        0,
+        lambda state: state == 3,
+        graph.__getitem__,
+        {0: 3, 1: 2, 2: 1, 3: 0}.__getitem__,
+    )
     assert result == IDAResult((0, 1, 2, 3), 3)
     assert ida_star(3, lambda state: state == 0, graph.__getitem__, lambda _: 0) is None
     print("011_ida_star: all examples passed")

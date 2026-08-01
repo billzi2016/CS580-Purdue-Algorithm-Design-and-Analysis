@@ -7,7 +7,9 @@
 """
 
 
-def sgd_epoch(xs: list[float], ys: list[float], weight: float, learning_rate: float) -> float:
+def sgd_epoch(
+    xs: list[float], ys: list[float], weight: float, learning_rate: float
+) -> float:
     """执行一个 epoch 的顺序 SGD。"""
 
     if len(xs) != len(ys) or not xs:
@@ -42,7 +44,9 @@ def stochastic_gradient_descent(
 if __name__ == "__main__":
     xs = [1.0, 2.0, 3.0]
     ys = [2.0, 4.0, 6.0]
-    history = stochastic_gradient_descent(xs, ys, initial_weight=0.0, learning_rate=0.05, epochs=4)
+    history = stochastic_gradient_descent(
+        xs, ys, initial_weight=0.0, learning_rate=0.05, epochs=4
+    )
     assert len(history) == 5
     assert history[-1] > history[1]
     assert abs(sgd_epoch(xs, ys, 2.0, 0.01) - 2.0) < 1e-9

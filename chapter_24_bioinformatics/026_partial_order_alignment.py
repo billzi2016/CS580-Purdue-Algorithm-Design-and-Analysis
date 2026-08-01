@@ -15,6 +15,7 @@ DNA = frozenset("ACGTN")
 @dataclass(frozen=True)
 class POANode:
     """POA 节点：所属列、碱基与该碱基在该列的支持次数。"""
+
     column: int
     symbol: str
     support: int
@@ -23,6 +24,7 @@ class POANode:
 @dataclass(frozen=True)
 class POAGraph:
     """按列拓扑有序的节点与去重边。"""
+
     nodes: tuple[POANode, ...]
     edges: frozenset[tuple[int, int]]
 
@@ -36,20 +38,28 @@ def build_poa(alignment: list[str]) -> POAGraph:
     关键算法点：相同列的不同碱基没有直接边，因此每一条路径最多选择该列的一个替代节点。
     """
     _validate(alignment)
-    identifiers: dict[tuple[int, str], int] = {}; counts: dict[tuple[int, str], int] = {}
+    identifiers: dict[tuple[int, str], int] = {}
+    counts: dict[tuple[int, str], int] = {}
     for row in alignment:
         for column, symbol in enumerate(row):
-            if symbol != "-": counts[(column, symbol)] = counts.get((column, symbol), 0) + 1
-    for key in sorted(counts): identifiers[key] = len(identifiers)
+            if symbol != "-":
+                counts[(column, symbol)] = counts.get((column, symbol), 0) + 1
+    for key in sorted(counts):
+        identifiers[key] = len(identifiers)
     edges: set[tuple[int, int]] = set()
     for row in alignment:
         previous: int | None = None
         for column, symbol in enumerate(row):
-            if symbol == "-": continue
+            if symbol == "-":
+                continue
             current = identifiers[(column, symbol)]
-            if previous is not None: edges.add((previous, current))
+            if previous is not None:
+                edges.add((previous, current))
             previous = current
-    nodes = tuple(POANode(column, symbol, counts[(column, symbol)]) for (column, symbol), _ in sorted(identifiers.items(), key=lambda item: item[1]))
+    nodes = tuple(
+        POANode(column, symbol, counts[(column, symbol)])
+        for (column, symbol), _ in sorted(identifiers.items(), key=lambda item: item[1])
+    )
     return POAGraph(nodes, frozenset(edges))
 
 
@@ -61,20 +71,28 @@ def consensus_path(graph: POAGraph) -> str:
     边界情况：同分时保留较早拓扑节点，结果可复现。
     关键算法点：边只向更大列前进，按节点顺序处理即可完成 DAG 最长路径动态规划。
     """
-    if not graph.nodes: return ""
-    score = [node.support for node in graph.nodes]; parent: list[int | None] = [None] * len(graph.nodes)
+    if not graph.nodes:
+        return ""
+    score = [node.support for node in graph.nodes]
+    parent: list[int | None] = [None] * len(graph.nodes)
     for left, right in sorted(graph.edges, key=lambda edge: (edge[1], edge[0])):
         candidate = score[left] + graph.nodes[right].support
-        if candidate > score[right]: score[right], parent[right] = candidate, left
-    end = max(range(len(graph.nodes)), key=lambda index: score[index]); path: list[str] = []
-    while end is not None: path.append(graph.nodes[end].symbol); end = parent[end]
+        if candidate > score[right]:
+            score[right], parent[right] = candidate, left
+    end = max(range(len(graph.nodes)), key=lambda index: score[index])
+    path: list[str] = []
+    while end is not None:
+        path.append(graph.nodes[end].symbol)
+        end = parent[end]
     return "".join(reversed(path))
 
 
 def _validate(alignment: list[str]) -> None:
     """验证等长 DNA/gap MSA。"""
-    if not alignment or len({len(row) for row in alignment}) != 1: raise ValueError("MSA 必须非空且所有行等长")
-    if any(symbol not in DNA | {"-"} for row in alignment for symbol in row): raise ValueError("MSA 只允许 DNA 字符和 gap")
+    if not alignment or len({len(row) for row in alignment}) != 1:
+        raise ValueError("MSA 必须非空且所有行等长")
+    if any(symbol not in DNA | {"-"} for row in alignment for symbol in row):
+        raise ValueError("MSA 只允许 DNA 字符和 gap")
 
 
 if __name__ == "__main__":
@@ -82,6 +100,9 @@ if __name__ == "__main__":
     assert len(graph.nodes) == 5
     assert consensus_path(graph) == "ACGT"
     assert consensus_path(build_poa(["--", "--"])) == ""
-    try: build_poa(["A", "AA"]); raise AssertionError("应拒绝不等长 MSA")
-    except ValueError: pass
+    try:
+        build_poa(["A", "AA"])
+        raise AssertionError("应拒绝不等长 MSA")
+    except ValueError:
+        pass
     print("026_partial_order_alignment: all examples passed")

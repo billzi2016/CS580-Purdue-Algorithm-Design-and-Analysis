@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -15,7 +16,9 @@ import torch
 class VGGBlock(torch.nn.Module):
     """显式堆叠 3x3 卷积、ReLU 和末尾最大池化的 VGG 模块。"""
 
-    def __init__(self, convolution_count: int, input_channels: int, output_channels: int) -> None:
+    def __init__(
+        self, convolution_count: int, input_channels: int, output_channels: int
+    ) -> None:
         """构建 VGG 卷积块。
 
         参数：convolution_count、input_channels、output_channels 必须为正。
@@ -29,7 +32,11 @@ class VGGBlock(torch.nn.Module):
         layers: list[torch.nn.Module] = []
         current_channels = input_channels
         for _ in range(convolution_count):
-            layers.append(torch.nn.Conv2d(current_channels, output_channels, kernel_size=3, padding=1))
+            layers.append(
+                torch.nn.Conv2d(
+                    current_channels, output_channels, kernel_size=3, padding=1
+                )
+            )
             layers.append(torch.nn.ReLU())
             current_channels = output_channels
         self.convolutions = torch.nn.Sequential(*layers)
@@ -47,7 +54,9 @@ class VGGBlock(torch.nn.Module):
             raise ValueError("VGGBlock 需要 NCHW 输入")
         return self.pool(self.convolutions(features))
 
-    def training_step(self, features: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, features: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """以 MSE 目标执行一次反向传播和手写 SGD 更新。
 
         参数：features 为输入，target 与 forward 输出同形，learning_rate 为正数。

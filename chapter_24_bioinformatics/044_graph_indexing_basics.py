@@ -8,7 +8,9 @@
 """
 
 
-def build_graph_kmer_index(node_labels: dict[str, str], edges: dict[str, list[str]], starts: list[str], k: int) -> dict[str, list[str]]:
+def build_graph_kmer_index(
+    node_labels: dict[str, str], edges: dict[str, list[str]], starts: list[str], k: int
+) -> dict[str, list[str]]:
     """从给定起点集合构建图上 k-mer 倒排索引。"""
 
     if k <= 0:
@@ -35,7 +37,15 @@ def _dfs_collect(
         for offset in range(len(sequence) - k + 1):
             index.setdefault(sequence[offset : offset + k], []).append(origin)
     for target in edges.get(node_id, []):
-        _dfs_collect(node_labels, edges, target, k, sequence[-(k - 1) :] if k > 1 else "", origin, index)
+        _dfs_collect(
+            node_labels,
+            edges,
+            target,
+            k,
+            sequence[-(k - 1) :] if k > 1 else "",
+            origin,
+            index,
+        )
 
 
 if __name__ == "__main__":

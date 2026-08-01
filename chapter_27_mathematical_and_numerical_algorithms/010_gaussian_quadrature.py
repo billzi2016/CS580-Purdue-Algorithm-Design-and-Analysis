@@ -11,7 +11,10 @@ def gauss_legendre_two_point(function, left: float, right: float) -> float:
     midpoint = (left + right) / 2
     half_length = (right - left) / 2
     offset = 1 / sqrt(3)
-    return half_length * (function(midpoint - half_length * offset) + function(midpoint + half_length * offset))
+    return half_length * (
+        function(midpoint - half_length * offset)
+        + function(midpoint + half_length * offset)
+    )
 
 
 if __name__ == "__main__":

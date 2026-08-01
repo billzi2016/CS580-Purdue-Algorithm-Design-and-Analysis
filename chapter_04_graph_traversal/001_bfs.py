@@ -26,7 +26,9 @@ Node = Hashable
 Graph = dict[Node, list[Node]]
 
 
-def breadth_first_search(graph: Graph, start: Node) -> tuple[list[Node], dict[Node, Node | None], dict[Node, int]]:
+def breadth_first_search(
+    graph: Graph, start: Node
+) -> tuple[list[Node], dict[Node, Node | None], dict[Node, int]]:
     """
     从 start 开始执行 BFS。
 

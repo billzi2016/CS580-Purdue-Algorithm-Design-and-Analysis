@@ -22,7 +22,9 @@ class GlobalAlignment:
     second: str
 
 
-def needleman_wunsch(first: str, second: str, match: int = 1, mismatch: int = -1, gap: int = -1) -> GlobalAlignment:
+def needleman_wunsch(
+    first: str, second: str, match: int = 1, mismatch: int = -1, gap: int = -1
+) -> GlobalAlignment:
     """计算两条 DNA 序列的一组最优全局比对。
 
     参数：first、second 为 DNA 序列；match、mismatch、gap 是统一整数评分。
@@ -39,19 +41,32 @@ def needleman_wunsch(first: str, second: str, match: int = 1, mismatch: int = -1
         scores[0][column] = scores[0][column - 1] + gap
     for row in range(1, len(first) + 1):
         for column in range(1, len(second) + 1):
-            diagonal = scores[row - 1][column - 1] + (match if first[row - 1] == second[column - 1] else mismatch)
-            scores[row][column] = max(diagonal, scores[row - 1][column] + gap, scores[row][column - 1] + gap)
+            diagonal = scores[row - 1][column - 1] + (
+                match if first[row - 1] == second[column - 1] else mismatch
+            )
+            scores[row][column] = max(
+                diagonal, scores[row - 1][column] + gap, scores[row][column - 1] + gap
+            )
     return _backtrack(first, second, scores, match, mismatch, gap)
 
 
-def _backtrack(first: str, second: str, scores: list[list[int]], match: int, mismatch: int, gap: int) -> GlobalAlignment:
+def _backtrack(
+    first: str,
+    second: str,
+    scores: list[list[int]],
+    match: int,
+    mismatch: int,
+    gap: int,
+) -> GlobalAlignment:
     """从右下角回溯一条产生最优全局得分的路径。"""
     row, column = len(first), len(second)
     aligned_first: list[str] = []
     aligned_second: list[str] = []
     while row or column:
         if row and column:
-            diagonal = scores[row - 1][column - 1] + (match if first[row - 1] == second[column - 1] else mismatch)
+            diagonal = scores[row - 1][column - 1] + (
+                match if first[row - 1] == second[column - 1] else mismatch
+            )
             if scores[row][column] == diagonal:
                 aligned_first.append(first[row - 1])
                 aligned_second.append(second[column - 1])
@@ -65,7 +80,11 @@ def _backtrack(first: str, second: str, scores: list[list[int]], match: int, mis
             aligned_first.append("-")
             aligned_second.append(second[column - 1])
             column -= 1
-    return GlobalAlignment(scores[-1][-1], "".join(reversed(aligned_first)), "".join(reversed(aligned_second)))
+    return GlobalAlignment(
+        scores[-1][-1],
+        "".join(reversed(aligned_first)),
+        "".join(reversed(aligned_second)),
+    )
 
 
 def _validate(sequence: str) -> None:

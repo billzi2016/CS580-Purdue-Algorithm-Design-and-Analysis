@@ -10,7 +10,6 @@
 来源：RFC 1952，第 2.3.1 节及附录的 CRC 示例代码。
 """
 
-
 CRC32_POLYNOMIAL = 0xEDB88320
 CRC32_MASK = 0xFFFFFFFF
 
@@ -45,7 +44,11 @@ def verify_crc32(data: bytes, expected_crc: int) -> bool:
     边界情况：expected_crc 不是 32 位整数时抛出 ValueError；数据本身沿用 crc32 的类型要求。
     关键算法点：校验必须重新计算完整数据的 CRC，而非比较某个局部哈希或长度。
     """
-    if isinstance(expected_crc, bool) or not isinstance(expected_crc, int) or not 0 <= expected_crc <= CRC32_MASK:
+    if (
+        isinstance(expected_crc, bool)
+        or not isinstance(expected_crc, int)
+        or not 0 <= expected_crc <= CRC32_MASK
+    ):
         raise ValueError("expected_crc 必须是 32 位非负整数")
     return crc32(data) == expected_crc
 

@@ -28,7 +28,9 @@ class CentroidDecomposition:
         self._validate_connected_acyclic()
         self.blocked = [False] * self.vertex_count
         self.centroid_parent = [-1] * self.vertex_count
-        self.centroid_distances: list[list[tuple[int, int]]] = [[] for _ in range(self.vertex_count)]
+        self.centroid_distances: list[list[tuple[int, int]]] = [
+            [] for _ in range(self.vertex_count)
+        ]
         self._best_distance = [float("inf")] * self.vertex_count
         self._active = [False] * self.vertex_count
         self._decompose(0, -1)
@@ -47,11 +49,15 @@ class CentroidDecomposition:
         self._active[vertex] = active
         if active:
             for centroid, distance in self.centroid_distances[vertex]:
-                self._best_distance[centroid] = min(self._best_distance[centroid], distance)
+                self._best_distance[centroid] = min(
+                    self._best_distance[centroid], distance
+                )
             return
         # 为保持实现透明，教学版停用时从全部顶点重建相关重心的最优值，代价 O(n log n)。
         # 高性能可删除版本通常为每个重心维护可惰性删除的堆。
-        affected_centroids = [centroid for centroid, _ in self.centroid_distances[vertex]]
+        affected_centroids = [
+            centroid for centroid, _ in self.centroid_distances[vertex]
+        ]
         for centroid in affected_centroids:
             best = float("inf")
             for candidate, is_active in enumerate(self._active):
@@ -127,7 +133,9 @@ class CentroidDecomposition:
                 best_vertex = vertex
         return best_vertex
 
-    def _append_distances(self, centroid: int, vertex: int, parent: int, distance: int) -> None:
+    def _append_distances(
+        self, centroid: int, vertex: int, parent: int, distance: int
+    ) -> None:
         self.centroid_distances[vertex].append((centroid, distance))
         for neighbor in self.tree[vertex]:
             if neighbor != parent and not self.blocked[neighbor]:
@@ -156,7 +164,10 @@ class CentroidDecomposition:
         for vertex, neighbors in enumerate(tree):
             if vertex in neighbors or len(set(neighbors)) != len(neighbors):
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
 

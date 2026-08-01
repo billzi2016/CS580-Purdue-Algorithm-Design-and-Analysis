@@ -45,7 +45,9 @@ def optimal_bst_cost(frequencies: list[int]) -> int:
 
             for candidate_root in range(start, end + 1):
                 left_cost = dp[left][candidate_root - 1] if candidate_root > left else 0
-                right_cost = dp[candidate_root + 1][right] if candidate_root < right else 0
+                right_cost = (
+                    dp[candidate_root + 1][right] if candidate_root < right else 0
+                )
                 cost = left_cost + right_cost + weight_sum
                 if cost < dp[left][right]:
                     dp[left][right] = cost

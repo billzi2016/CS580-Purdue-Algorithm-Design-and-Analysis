@@ -3,7 +3,9 @@ Euler ODE 方法。
 """
 
 
-def euler_method(derivative, x0: float, y0: float, step: float, steps: int) -> list[tuple[float, float]]:
+def euler_method(
+    derivative, x0: float, y0: float, step: float, steps: int
+) -> list[tuple[float, float]]:
     """求解 y' = f(x,y) 的显式 Euler 轨迹。"""
 
     if step <= 0 or steps < 0:

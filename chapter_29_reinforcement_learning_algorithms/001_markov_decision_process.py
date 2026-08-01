@@ -41,7 +41,9 @@ class FiniteMDP:
             raise ValueError("states 必须是非空且不重复的列表")
         self.states = states[:]
         self._state_set = set(states)
-        self.terminal_states = set() if terminal_states is None else set(terminal_states)
+        self.terminal_states = (
+            set() if terminal_states is None else set(terminal_states)
+        )
         if not self.terminal_states.issubset(self._state_set):
             raise ValueError("terminal_states 包含未知状态")
         self.actions = {state: choices[:] for state, choices in actions.items()}
@@ -60,7 +62,10 @@ class FiniteMDP:
                     raise ValueError("每个声明动作必须拥有转移结果")
                 probability_sum = 0.0
                 for outcome in outcomes:
-                    if outcome.probability < 0 or outcome.next_state not in self._state_set:
+                    if (
+                        outcome.probability < 0
+                        or outcome.next_state not in self._state_set
+                    ):
                         raise ValueError("转移概率或下一状态无效")
                     probability_sum += outcome.probability
                 if abs(probability_sum - 1.0) > 1e-9:

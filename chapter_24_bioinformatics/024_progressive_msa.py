@@ -10,7 +10,9 @@
 DNA = frozenset("ACGTN")
 
 
-def progressive_msa(sequences: list[str], match: int = 1, mismatch: int = -1, gap: int = -1) -> list[str]:
+def progressive_msa(
+    sequences: list[str], match: int = 1, mismatch: int = -1, gap: int = -1
+) -> list[str]:
     """以第一条为中心构造星形渐进 MSA。
 
     参数：sequences 是至少一条大写 DNA；其余参数为统一全局比对评分。
@@ -31,45 +33,82 @@ def progressive_msa(sequences: list[str], match: int = 1, mismatch: int = -1, ga
     return alignment
 
 
-def _global_align(first: str, second: str, match: int, mismatch: int, gap: int) -> tuple[str, str]:
+def _global_align(
+    first: str, second: str, match: int, mismatch: int, gap: int
+) -> tuple[str, str]:
     """手写两行回溯所需完整 DP，返回一组全局对齐。"""
     dp = [[0] * (len(second) + 1) for _ in range(len(first) + 1)]
-    for i in range(1, len(first) + 1): dp[i][0] = dp[i-1][0] + gap
-    for j in range(1, len(second) + 1): dp[0][j] = dp[0][j-1] + gap
+    for i in range(1, len(first) + 1):
+        dp[i][0] = dp[i - 1][0] + gap
+    for j in range(1, len(second) + 1):
+        dp[0][j] = dp[0][j - 1] + gap
     for i in range(1, len(first) + 1):
         for j in range(1, len(second) + 1):
-            dp[i][j] = max(dp[i-1][j-1] + (match if first[i-1] == second[j-1] else mismatch), dp[i-1][j] + gap, dp[i][j-1] + gap)
-    left: list[str] = []; right: list[str] = []; i, j = len(first), len(second)
+            dp[i][j] = max(
+                dp[i - 1][j - 1]
+                + (match if first[i - 1] == second[j - 1] else mismatch),
+                dp[i - 1][j] + gap,
+                dp[i][j - 1] + gap,
+            )
+    left: list[str] = []
+    right: list[str] = []
+    i, j = len(first), len(second)
     while i or j:
-        if i and j and dp[i][j] == dp[i-1][j-1] + (match if first[i-1] == second[j-1] else mismatch):
-            left.append(first[i-1]); right.append(second[j-1]); i -= 1; j -= 1
-        elif i and dp[i][j] == dp[i-1][j] + gap:
-            left.append(first[i-1]); right.append("-"); i -= 1
+        if (
+            i
+            and j
+            and dp[i][j]
+            == dp[i - 1][j - 1] + (match if first[i - 1] == second[j - 1] else mismatch)
+        ):
+            left.append(first[i - 1])
+            right.append(second[j - 1])
+            i -= 1
+            j -= 1
+        elif i and dp[i][j] == dp[i - 1][j] + gap:
+            left.append(first[i - 1])
+            right.append("-")
+            i -= 1
         else:
-            left.append("-"); right.append(second[j-1]); j -= 1
+            left.append("-")
+            right.append(second[j - 1])
+            j -= 1
     return "".join(reversed(left)), "".join(reversed(right))
 
 
-def _merge_center_alignment(existing: list[str], fresh_center: str, fresh_sequence: str) -> list[str]:
+def _merge_center_alignment(
+    existing: list[str], fresh_center: str, fresh_sequence: str
+) -> list[str]:
     """将 fresh_center 的新 gap 插入所有已有行，并附加新序列。
 
     旧中心行的 gap 对应先前加入序列的共享列；新中心的 gap 对应本轮才引入、必须补入旧行的新列。
     """
-    old_center = existing[0]; rebuilt = ["" for _ in existing]; new_row: list[str] = []
+    old_center = existing[0]
+    rebuilt = ["" for _ in existing]
+    new_row: list[str] = []
     old_index = fresh_index = 0
     while old_index < len(old_center) or fresh_index < len(fresh_center):
         old_symbol = old_center[old_index] if old_index < len(old_center) else None
-        fresh_symbol = fresh_center[fresh_index] if fresh_index < len(fresh_center) else None
+        fresh_symbol = (
+            fresh_center[fresh_index] if fresh_index < len(fresh_center) else None
+        )
         if fresh_symbol == "-":
-            rebuilt = [row + "-" for row in rebuilt]; new_row.append(fresh_sequence[fresh_index]); fresh_index += 1
+            rebuilt = [row + "-" for row in rebuilt]
+            new_row.append(fresh_sequence[fresh_index])
+            fresh_index += 1
         elif old_symbol == "-":
-            for index, row in enumerate(existing): rebuilt[index] += row[old_index]
-            new_row.append("-"); old_index += 1
+            for index, row in enumerate(existing):
+                rebuilt[index] += row[old_index]
+            new_row.append("-")
+            old_index += 1
         else:
             # 两行此处均消费同一个原始中心字符；不相等说明 merge 不变量被破坏。
-            if old_symbol != fresh_symbol: raise ValueError("中心序列合并不变量被破坏")
-            for index, row in enumerate(existing): rebuilt[index] += row[old_index]
-            new_row.append(fresh_sequence[fresh_index]); old_index += 1; fresh_index += 1
+            if old_symbol != fresh_symbol:
+                raise ValueError("中心序列合并不变量被破坏")
+            for index, row in enumerate(existing):
+                rebuilt[index] += row[old_index]
+            new_row.append(fresh_sequence[fresh_index])
+            old_index += 1
+            fresh_index += 1
     return rebuilt + ["".join(new_row)]
 
 
@@ -79,6 +118,8 @@ if __name__ == "__main__":
     assert [row.replace("-", "") for row in rows] == ["ACGT", "AGT", "ACCT"]
     assert progressive_msa(["", "AC"]) == ["--", "AC"]
     try:
-        progressive_msa([]); raise AssertionError("应拒绝空列表")
-    except ValueError: pass
+        progressive_msa([])
+        raise AssertionError("应拒绝空列表")
+    except ValueError:
+        pass
     print("024_progressive_msa: all examples passed")

@@ -21,7 +21,9 @@ def surrogate_mean(candidate: float, observations: list[tuple[float, float]]) ->
     return numerator / denominator
 
 
-def upper_confidence_bound(candidate: float, observations: list[tuple[float, float]], exploration: float) -> float:
+def upper_confidence_bound(
+    candidate: float, observations: list[tuple[float, float]], exploration: float
+) -> float:
     """极简 UCB：均值加上与最近观测距离相关的探索项。"""
 
     if exploration < 0:
@@ -41,7 +43,12 @@ def bayesian_optimization_step(
 
     if not candidates:
         raise ValueError("candidates 不能为空")
-    return max(candidates, key=lambda candidate: upper_confidence_bound(candidate, observations, exploration))
+    return max(
+        candidates,
+        key=lambda candidate: upper_confidence_bound(
+            candidate, observations, exploration
+        ),
+    )
 
 
 if __name__ == "__main__":

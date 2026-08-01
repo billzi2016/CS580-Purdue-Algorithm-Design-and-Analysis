@@ -80,6 +80,7 @@ class OrderStatisticTree:
         边界情况：重复键仅增加同一节点 count。
         关键算法点：递归插入后若孩子优先级更高，通过旋转恢复堆序。
         """
+
         def visit(node: _Node | None) -> _Node:
             if node is None:
                 return _Node(key, self._priority())
@@ -95,6 +96,7 @@ class OrderStatisticTree:
                     node = self._rotate_left(node)
             _refresh(node)
             return node
+
         self._root = visit(self._root)
 
     def discard(self, key: int) -> bool:
@@ -106,6 +108,7 @@ class OrderStatisticTree:
         关键算法点：两个孩子都存在时先旋转优先级更高的孩子，再继续删除。
         """
         removed = False
+
         def visit(node: _Node | None) -> _Node | None:
             nonlocal removed
             if node is None:
@@ -130,6 +133,7 @@ class OrderStatisticTree:
                     node.left = visit(node.left)
             _refresh(node)
             return node
+
         self._root = visit(self._root)
         return removed
 

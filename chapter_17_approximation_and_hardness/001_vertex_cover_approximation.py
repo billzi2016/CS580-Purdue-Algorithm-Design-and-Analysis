@@ -11,7 +11,6 @@
 - 大小不超过最优解的 2 倍。
 """
 
-
 Edge = tuple[int, int]
 
 
@@ -28,9 +27,7 @@ def approximate_vertex_cover(edges: list[Edge]) -> set[int]:
 
         # 选中 u 和 v 后，所有与它们相邻的边都已经被覆盖，可以从未覆盖集合移除。
         uncovered = {
-            (a, b)
-            for a, b in uncovered
-            if a not in (u, v) and b not in (u, v)
+            (a, b) for a, b in uncovered if a not in (u, v) and b not in (u, v)
         }
 
     return cover

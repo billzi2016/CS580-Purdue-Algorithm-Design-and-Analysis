@@ -56,7 +56,9 @@ class _RegexParser:
         fragment = self._parse_union()
         if self.position != len(self.pattern):
             character = self.pattern[self.position]
-            raise ValueError(f"位置 {self.position} 的字符 {character!r} 不能出现在这里")
+            raise ValueError(
+                f"位置 {self.position} 的字符 {character!r} 不能出现在这里"
+            )
         return NFA(fragment.start, fragment.accept, self.transitions)
 
     def _parse_union(self) -> _Fragment:
@@ -153,7 +155,14 @@ class _RegexParser:
 
     @staticmethod
     def _is_literal(character: str | None) -> bool:
-        return character is not None and character not in {"|", "*", "(", ")", ".", "\\"}
+        return character is not None and character not in {
+            "|",
+            "*",
+            "(",
+            ")",
+            ".",
+            "\\",
+        }
 
     def _starts_atom(self, character: str | None) -> bool:
         return character == "(" or self._is_literal(character)

@@ -40,13 +40,20 @@ def sequence_to_graph_alignment(
         label = node_labels[node_id]
         parents = predecessors.get(node_id, [])
         for query_index in range(1, len(query) + 1):
-            diagonal_sources = [dp[parent][query_index - 1] for parent in parents] if parents else [0]
-            left_sources = [dp[parent][query_index] for parent in parents] if parents else [0]
+            diagonal_sources = (
+                [dp[parent][query_index - 1] for parent in parents] if parents else [0]
+            )
+            left_sources = (
+                [dp[parent][query_index] for parent in parents] if parents else [0]
+            )
             diagonal = max(diagonal_sources)
             vertical = max(left_sources)
             score = max(
                 0,
-                diagonal + (match_score if label == query[query_index - 1] else mismatch_penalty),
+                diagonal
+                + (
+                    match_score if label == query[query_index - 1] else mismatch_penalty
+                ),
                 dp[node_id][query_index - 1] + gap_penalty,
                 vertical + gap_penalty,
             )
@@ -59,7 +66,9 @@ def sequence_to_graph_alignment(
 if __name__ == "__main__":
     node_labels = {"n1": "A", "n2": "C", "n3": "T"}
     predecessors = {"n1": [], "n2": ["n1"], "n3": ["n1"]}
-    result = sequence_to_graph_alignment(node_labels, predecessors, ["n1", "n2", "n3"], "ACT")
+    result = sequence_to_graph_alignment(
+        node_labels, predecessors, ["n1", "n2", "n3"], "ACT"
+    )
     assert result.score >= 4
     assert result.end_node in {"n2", "n3"}
     print("043_sequence_to_graph_alignment: all examples passed")

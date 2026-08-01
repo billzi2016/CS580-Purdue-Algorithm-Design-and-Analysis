@@ -56,7 +56,9 @@ def multiples_union_count(limit: int, divisors: list[int]) -> int:
         for index in subset:
             divisor = unique_divisors[index]
             greatest_common_divisor = _gcd(least_common_multiple, divisor)
-            least_common_multiple = least_common_multiple // greatest_common_divisor * divisor
+            least_common_multiple = (
+                least_common_multiple // greatest_common_divisor * divisor
+            )
             if least_common_multiple > limit:
                 return 0
         return limit // least_common_multiple
@@ -73,7 +75,12 @@ def _gcd(left: int, right: int) -> int:
 
 if __name__ == "__main__":
     sets = [{1, 2, 3}, {3, 4}, {2, 4, 5}]
-    assert union_size_by_inclusion_exclusion(3, lambda chosen: len(set.intersection(*(sets[i] for i in chosen)))) == 5
+    assert (
+        union_size_by_inclusion_exclusion(
+            3, lambda chosen: len(set.intersection(*(sets[i] for i in chosen)))
+        )
+        == 5
+    )
     assert union_size_by_inclusion_exclusion(0, lambda chosen: 0) == 0
     assert multiples_union_count(10, [2, 3]) == 7
     assert multiples_union_count(20, [2, 2, 5]) == 12

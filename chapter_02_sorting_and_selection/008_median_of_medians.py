@@ -40,7 +40,7 @@ def median_of_medians_select(values: list[T], k: int) -> T:
 
     group_medians: list[T] = []
     for start in range(0, len(values), 5):
-        group = _insertion_sorted(values[start:start + 5])
+        group = _insertion_sorted(values[start : start + 5])
         group_medians.append(group[len(group) // 2])
     pivot = median_of_medians_select(group_medians, len(group_medians) // 2)
 

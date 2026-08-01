@@ -17,7 +17,11 @@ def kosaraju_scc(graph: list[list[int]]) -> list[list[int]]:
     关键算法点：反向图中的一次 DFS 不会跨越原图 SCC 缩点图的边界。
     """
     vertex_count = len(graph)
-    if any(neighbor < 0 or neighbor >= vertex_count for neighbors in graph for neighbor in neighbors):
+    if any(
+        neighbor < 0 or neighbor >= vertex_count
+        for neighbors in graph
+        for neighbor in neighbors
+    ):
         raise ValueError("graph 包含超出邻接表范围的顶点编号")
     reverse_graph = [[] for _ in range(vertex_count)]
     for vertex, neighbors in enumerate(graph):
@@ -60,8 +64,13 @@ def kosaraju_scc(graph: list[list[int]]) -> list[list[int]]:
 if __name__ == "__main__":
     graph = [[1], [2, 3], [0], [4], [3], []]
     assert {frozenset(component) for component in kosaraju_scc(graph)} == {
-        frozenset({0, 1, 2}), frozenset({3, 4}), frozenset({5})
+        frozenset({0, 1, 2}),
+        frozenset({3, 4}),
+        frozenset({5}),
     }
     assert kosaraju_scc([]) == []
-    assert {frozenset(component) for component in kosaraju_scc([[0], []])} == {frozenset({0}), frozenset({1})}
+    assert {frozenset(component) for component in kosaraju_scc([[0], []])} == {
+        frozenset({0}),
+        frozenset({1}),
+    }
     print("002_kosaraju_scc: all examples passed")

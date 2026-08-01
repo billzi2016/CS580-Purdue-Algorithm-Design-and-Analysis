@@ -89,7 +89,9 @@ class BPlusTree:
         leaf.next_leaf = right
         return right.keys[0], right
 
-    def _insert_into_parent(self, node: BPlusNode, left: BPlusNode, key: int, right: BPlusNode) -> bool:
+    def _insert_into_parent(
+        self, node: BPlusNode, left: BPlusNode, key: int, right: BPlusNode
+    ) -> bool:
         if node.leaf:
             return False
         for index, child in enumerate(node.children):

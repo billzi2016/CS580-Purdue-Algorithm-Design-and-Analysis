@@ -46,7 +46,9 @@ class ParsimonyResult:
     ancestral_sequences: dict[str, str]
 
 
-def fitch_parsimony(root: ParsimonyNode, leaf_sequences: dict[str, str]) -> ParsimonyResult:
+def fitch_parsimony(
+    root: ParsimonyNode, leaf_sequences: dict[str, str]
+) -> ParsimonyResult:
     """计算固定二叉树拓扑的 Fitch 简约分数。
 
     参数：

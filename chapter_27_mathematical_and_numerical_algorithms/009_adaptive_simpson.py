@@ -5,10 +5,14 @@
 
 def simpson_segment(function, left: float, right: float) -> float:
     middle = (left + right) / 2
-    return (right - left) * (function(left) + 4 * function(middle) + function(right)) / 6
+    return (
+        (right - left) * (function(left) + 4 * function(middle) + function(right)) / 6
+    )
 
 
-def adaptive_simpson(function, left: float, right: float, tolerance: float, depth: int = 20) -> float:
+def adaptive_simpson(
+    function, left: float, right: float, tolerance: float, depth: int = 20
+) -> float:
     """递归自适应 Simpson。"""
 
     if tolerance <= 0 or depth < 0:
@@ -17,15 +21,17 @@ def adaptive_simpson(function, left: float, right: float, tolerance: float, dept
     return _adaptive(function, left, right, tolerance, whole, depth)
 
 
-def _adaptive(function, left: float, right: float, tolerance: float, whole: float, depth: int) -> float:
+def _adaptive(
+    function, left: float, right: float, tolerance: float, whole: float, depth: int
+) -> float:
     middle = (left + right) / 2
     left_part = simpson_segment(function, left, middle)
     right_part = simpson_segment(function, middle, right)
     if depth == 0 or abs(left_part + right_part - whole) < 15 * tolerance:
         return left_part + right_part + (left_part + right_part - whole) / 15
-    return _adaptive(function, left, middle, tolerance / 2, left_part, depth - 1) + _adaptive(
-        function, middle, right, tolerance / 2, right_part, depth - 1
-    )
+    return _adaptive(
+        function, left, middle, tolerance / 2, left_part, depth - 1
+    ) + _adaptive(function, middle, right, tolerance / 2, right_part, depth - 1)
 
 
 if __name__ == "__main__":

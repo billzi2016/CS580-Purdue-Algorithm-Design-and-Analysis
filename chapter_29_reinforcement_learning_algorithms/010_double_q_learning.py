@@ -22,11 +22,17 @@ def double_q_learning(
     边界情况：终止下一状态不查询动作；样本数与更新选择长度不等或参数非法时抛出 ValueError。
     关键算法点：被更新表负责 argmax，另一张表提供该动作的 bootstrap 估值。
     """
-    if len(transitions) != len(update_tables) or not 0 < learning_rate <= 1 or not 0 <= discount <= 1:
+    if (
+        len(transitions) != len(update_tables)
+        or not 0 < learning_rate <= 1
+        or not 0 <= discount <= 1
+    ):
         raise ValueError("样本长度、学习率或折扣参数无效")
     first: dict[tuple[str, str], float] = {}
     second: dict[tuple[str, str], float] = {}
-    for (state, action, reward, next_state), selected in zip(transitions, update_tables):
+    for (state, action, reward, next_state), selected in zip(
+        transitions, update_tables
+    ):
         if selected not in (0, 1):
             raise ValueError("更新选择只能是 0 或 1")
         updated, evaluator = (first, second) if selected == 0 else (second, first)
@@ -42,18 +48,25 @@ def double_q_learning(
                         best_action, best_value = candidate, candidate_value
                 target += discount * evaluator.get((next_state, best_action), 0.0)
         key = (state, action)
-        updated[key] = updated.get(key, 0.0) + learning_rate * (target - updated.get(key, 0.0))
+        updated[key] = updated.get(key, 0.0) + learning_rate * (
+            target - updated.get(key, 0.0)
+        )
     return first, second
 
 
 if __name__ == "__main__":
     q1, q2 = double_q_learning(
-        [('B', 'right', 2.0, None), ('A', 'go', 0.0, 'B'), ('B', 'right', 4.0, None), ('A', 'go', 0.0, 'B')],
-        {'B': ['left', 'right']},
+        [
+            ("B", "right", 2.0, None),
+            ("A", "go", 0.0, "B"),
+            ("B", "right", 4.0, None),
+            ("A", "go", 0.0, "B"),
+        ],
+        {"B": ["left", "right"]},
         [0, 1, 1, 0],
         1.0,
         0.5,
     )
-    assert q1[('B', 'right')] == 2.0 and q2[('B', 'right')] == 4.0
-    assert q1[('A', 'go')] == 2.0 and q2[('A', 'go')] == 0.0
+    assert q1[("B", "right")] == 2.0 and q2[("B", "right")] == 4.0
+    assert q1[("A", "go")] == 2.0 and q2[("A", "go")] == 0.0
     print("010_double_q_learning: all examples passed")

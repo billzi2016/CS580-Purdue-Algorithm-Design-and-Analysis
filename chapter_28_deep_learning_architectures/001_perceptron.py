@@ -61,7 +61,13 @@ class Perceptron:
         边界情况：空数据返回零；形状、标签或轮数无效时抛出 ValueError。
         关键算法点：只有 y*(w·x+b)<=0 的误分类或边界样本才触发 y*x、y 更新。
         """
-        if features.ndim != 2 or features.shape[1] != self.weights.numel() or labels.ndim != 1 or labels.numel() != features.shape[0] or epochs < 0:
+        if (
+            features.ndim != 2
+            or features.shape[1] != self.weights.numel()
+            or labels.ndim != 1
+            or labels.numel() != features.shape[0]
+            or epochs < 0
+        ):
             raise ValueError("训练数据形状或 epochs 无效")
         if any(int(label) not in (-1, 1) for label in labels):
             raise ValueError("labels 必须只包含 -1 和 1")

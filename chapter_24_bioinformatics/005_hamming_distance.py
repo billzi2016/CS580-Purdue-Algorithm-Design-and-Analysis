@@ -25,7 +25,9 @@ def hamming_distance(first: str, second: str) -> int:
 def mismatch_positions(first: str, second: str) -> list[int]:
     """返回两条等长 DNA 序列中全部不匹配的零基位置。"""
     _validate_pair(first, second)
-    return [index for index, (left, right) in enumerate(zip(first, second)) if left != right]
+    return [
+        index for index, (left, right) in enumerate(zip(first, second)) if left != right
+    ]
 
 
 def _validate_pair(first: str, second: str) -> None:

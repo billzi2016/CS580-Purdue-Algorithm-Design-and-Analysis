@@ -66,13 +66,18 @@ def random_restart_hill_climb(
 
 
 if __name__ == "__main__":
+
     def starts(generator: random.Random) -> int:
         return generator.randrange(0, 9)
 
     def neighbors(value: int) -> list[int]:
-        return [candidate for candidate in (value - 1, value + 1) if 0 <= candidate <= 8]
+        return [
+            candidate for candidate in (value - 1, value + 1) if 0 <= candidate <= 8
+        ]
 
-    result = random_restart_hill_climb(starts, lambda value: -(value - 6) ** 2, neighbors, 8, seed=7)
+    result = random_restart_hill_climb(
+        starts, lambda value: -((value - 6) ** 2), neighbors, 8, seed=7
+    )
     assert result.state == 6 and result.score == 0
     assert len(result.run_scores) == 8
     try:

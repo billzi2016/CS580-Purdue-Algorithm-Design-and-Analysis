@@ -52,7 +52,9 @@ class UnionFind:
         return True
 
 
-def kruskal_minimum_spanning_forest(nodes: Iterable[Node], edges: list[Edge]) -> tuple[list[Edge], float]:
+def kruskal_minimum_spanning_forest(
+    nodes: Iterable[Node], edges: list[Edge]
+) -> tuple[list[Edge], float]:
     """
     使用 Kruskal 算法计算最小生成树或最小生成森林。
 
@@ -97,7 +99,9 @@ if __name__ == "__main__":
         frozenset(("C", "D")),
     }
 
-    forest_edges, forest_total = kruskal_minimum_spanning_forest(["A", "B", "C"], [("A", "B", 7)])
+    forest_edges, forest_total = kruskal_minimum_spanning_forest(
+        ["A", "B", "C"], [("A", "B", 7)]
+    )
     assert forest_edges == [("A", "B", 7)]
     assert forest_total == 7.0
 

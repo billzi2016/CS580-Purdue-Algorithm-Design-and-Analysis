@@ -2,7 +2,6 @@
 用有限差分近似梯度、Jacobian 和 Hessian。
 """
 
-
 Vector = list[float]
 
 
@@ -53,12 +52,24 @@ def hessian(function, point: Vector, step: float = 1e-4) -> list[Vector]:
 
 
 if __name__ == "__main__":
-    scalar = lambda point: point[0] ** 2 + point[0] * point[1] + point[1] ** 2
+
+    def scalar(point: Vector) -> float:
+        return point[0] ** 2 + point[0] * point[1] + point[1] ** 2
+
     grad = gradient(scalar, [1.0, 2.0])
     assert [round(value, 3) for value in grad] == [4.0, 5.0]
-    jac = jacobian([lambda point: point[0] + point[1], lambda point: point[0] * point[1]], [2.0, 3.0])
-    assert [[round(value, 3) for value in row] for row in jac] == [[1.0, 1.0], [3.0, 2.0]]
+    jac = jacobian(
+        [lambda point: point[0] + point[1], lambda point: point[0] * point[1]],
+        [2.0, 3.0],
+    )
+    assert [[round(value, 3) for value in row] for row in jac] == [
+        [1.0, 1.0],
+        [3.0, 2.0],
+    ]
     hes = hessian(scalar, [1.0, 2.0])
-    assert [[round(value, 1) for value in row] for row in hes] == [[2.0, 1.0], [1.0, 2.0]]
+    assert [[round(value, 1) for value in row] for row in hes] == [
+        [2.0, 1.0],
+        [1.0, 2.0],
+    ]
 
     print("002_gradient_jacobian_hessian: all examples passed")

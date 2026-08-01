@@ -27,10 +27,14 @@ class BitmapIndex:
             bitmap |= self.bitmaps.get(value, 0)
         return self._decode(bitmap)
 
-    def and_query(self, left_value: str, other: "BitmapIndex", right_value: str) -> list[int]:
+    def and_query(
+        self, left_value: str, other: "BitmapIndex", right_value: str
+    ) -> list[int]:
         """两个 bitmap index 的等值条件求交。"""
 
-        return self._decode(self.bitmaps.get(left_value, 0) & other.bitmaps.get(right_value, 0))
+        return self._decode(
+            self.bitmaps.get(left_value, 0) & other.bitmaps.get(right_value, 0)
+        )
 
     def _decode(self, bitmap: int) -> list[int]:
         result: list[int] = []

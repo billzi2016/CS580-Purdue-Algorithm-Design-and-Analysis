@@ -46,7 +46,9 @@ def count_inversions(nums: list[int]) -> tuple[int, list[int]]:
     return left_count + right_count + split_count, merged
 
 
-def _merge_and_count_split_inversions(left: list[int], right: list[int]) -> tuple[int, list[int]]:
+def _merge_and_count_split_inversions(
+    left: list[int], right: list[int]
+) -> tuple[int, list[int]]:
     """
     合并两个有序数组，并统计跨左右两侧的逆序对。
 

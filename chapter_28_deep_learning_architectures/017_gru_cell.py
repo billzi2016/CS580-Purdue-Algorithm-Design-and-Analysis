@@ -126,6 +126,8 @@ if __name__ == "__main__":
     loss_value = gru.training_step(example_inputs, torch.zeros_like(outputs), 0.01)
     assert loss_value >= 0.0
     assert not torch.equal(previous_gate_weight, gru.gate_weight.detach())
-    assert not torch.equal(previous_candidate_weight, gru.candidate_input_weight.detach())
+    assert not torch.equal(
+        previous_candidate_weight, gru.candidate_input_weight.detach()
+    )
 
     print("017_gru_cell: all examples passed")

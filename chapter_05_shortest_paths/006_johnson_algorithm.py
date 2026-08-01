@@ -30,6 +30,7 @@ WeightedGraph = dict[Node, list[tuple[Node, float]]]
 
 class _MinHeap:
     """Johnson 重赋权后 Dijkstra 使用的手写二叉最小堆。"""
+
     def __init__(self) -> None:
         self.data: list[tuple[float, Node]] = []
 
@@ -50,7 +51,10 @@ class _MinHeap:
             index = 0
             while index * 2 + 1 < len(self.data):
                 child = index * 2 + 1
-                if child + 1 < len(self.data) and self.data[child + 1][0] < self.data[child][0]:
+                if (
+                    child + 1 < len(self.data)
+                    and self.data[child + 1][0] < self.data[child][0]
+                ):
                     child += 1
                 if self.data[child][0] >= last[0]:
                     break
@@ -63,7 +67,9 @@ class _MinHeap:
         return bool(self.data)
 
 
-def johnson_all_pairs_shortest_paths(nodes: list[Node], edges: list[Edge]) -> dict[Node, dict[Node, float]]:
+def johnson_all_pairs_shortest_paths(
+    nodes: list[Node], edges: list[Edge]
+) -> dict[Node, dict[Node, float]]:
     """
     使用 Johnson 算法计算所有点对最短路径。
 
@@ -77,7 +83,10 @@ def johnson_all_pairs_shortest_paths(nodes: list[Node], edges: list[Edge]) -> di
     unique_nodes = list(dict.fromkeys(nodes))
     super_source = object()
     augmented_nodes: list[Node] = [*unique_nodes, super_source]
-    augmented_edges: list[Edge] = [*edges, *[(super_source, node, 0.0) for node in unique_nodes]]
+    augmented_edges: list[Edge] = [
+        *edges,
+        *[(super_source, node, 0.0) for node in unique_nodes],
+    ]
 
     potential = _bellman_ford_potential(augmented_nodes, augmented_edges, super_source)
 
@@ -107,7 +116,9 @@ def johnson_all_pairs_shortest_paths(nodes: list[Node], edges: list[Edge]) -> di
     return all_distances
 
 
-def _bellman_ford_potential(nodes: list[Node], edges: list[Edge], source: Node) -> dict[Node, float]:
+def _bellman_ford_potential(
+    nodes: list[Node], edges: list[Edge], source: Node
+) -> dict[Node, float]:
     """
     使用 Bellman-Ford 计算 Johnson 势函数。
     """

@@ -19,13 +19,19 @@ def compute_dominators(entry: int, cfg: dict[int, set[int]]) -> dict[int, set[in
         for target in cfg.get(source, set()):
             if target in reachable:
                 predecessors[target].add(source)
-    dominators = {node: ({entry} if node == entry else set(reachable)) for node in reachable}
+    dominators = {
+        node: ({entry} if node == entry else set(reachable)) for node in reachable
+    }
     changed = True
     while changed:
         changed = False
         for node in reachable - {entry}:
             incoming = predecessors[node]
-            common = set.intersection(*(dominators[parent] for parent in incoming)) if incoming else set()
+            common = (
+                set.intersection(*(dominators[parent] for parent in incoming))
+                if incoming
+                else set()
+            )
             updated = common | {node}
             if updated != dominators[node]:
                 dominators[node] = updated
@@ -44,7 +50,15 @@ def immediate_dominators(entry: int, cfg: dict[int, set[int]]) -> dict[int, int 
         if node == entry:
             continue
         strict = doms - {node}
-        result[node] = next(candidate for candidate in strict if all(candidate not in dominators[other] - {other} for other in strict if other != candidate))
+        result[node] = next(
+            candidate
+            for candidate in strict
+            if all(
+                candidate not in dominators[other] - {other}
+                for other in strict
+                if other != candidate
+            )
+        )
     return result
 
 

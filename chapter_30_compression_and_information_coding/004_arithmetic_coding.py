@@ -33,13 +33,19 @@ def build_frequency_model(text: str) -> FrequencyModel:
     return model
 
 
-def _validated_intervals(model: FrequencyModel) -> tuple[list[tuple[str, Fraction, Fraction]], int]:
+def _validated_intervals(
+    model: FrequencyModel,
+) -> tuple[list[tuple[str, Fraction, Fraction]], int]:
     """将频率模型转换为 [0, 1) 中连续且不重叠的累计概率区间。"""
     total = 0
     for symbol, frequency in model.items():
         if not isinstance(symbol, str) or len(symbol) != 1:
             raise ValueError("模型符号必须恰好包含一个字符")
-        if isinstance(frequency, bool) or not isinstance(frequency, int) or frequency <= 0:
+        if (
+            isinstance(frequency, bool)
+            or not isinstance(frequency, int)
+            or frequency <= 0
+        ):
             raise ValueError("模型频率必须是正整数")
         total += frequency
     if not model:
@@ -72,7 +78,10 @@ def arithmetic_encode(text: str, model: FrequencyModel) -> Fraction:
     if not intervals:
         raise ValueError("非空文本需要非空频率模型")
 
-    interval_by_symbol = {symbol: (symbol_low, symbol_high) for symbol, symbol_low, symbol_high in intervals}
+    interval_by_symbol = {
+        symbol: (symbol_low, symbol_high)
+        for symbol, symbol_low, symbol_high in intervals
+    }
     low, high = Fraction(0, 1), Fraction(1, 1)
     for symbol in text:
         if symbol not in interval_by_symbol:
@@ -94,7 +103,11 @@ def arithmetic_decode(tag: Fraction, model: FrequencyModel, symbol_count: int) -
     边界情况：长度为零时只接受空模型和标签 0；标签越界或长度非法时抛出 ValueError。
     关键算法点：将标签相对当前区间归一化到 [0, 1)，即可定位下一字符的累计概率区间。
     """
-    if isinstance(symbol_count, bool) or not isinstance(symbol_count, int) or symbol_count < 0:
+    if (
+        isinstance(symbol_count, bool)
+        or not isinstance(symbol_count, int)
+        or symbol_count < 0
+    ):
         raise ValueError("symbol_count 必须是非负整数")
     if not isinstance(tag, Fraction) or not Fraction(0, 1) <= tag < Fraction(1, 1):
         raise ValueError("tag 必须是 [0, 1) 内的 Fraction")

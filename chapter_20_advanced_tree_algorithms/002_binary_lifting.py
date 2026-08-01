@@ -43,7 +43,9 @@ class BinaryLifting:
         self.up = [parent_zero]
         for _ in range(1, self.levels):
             previous = self.up[-1]
-            self.up.append([previous[previous[vertex]] for vertex in range(self.vertex_count)])
+            self.up.append(
+                [previous[previous[vertex]] for vertex in range(self.vertex_count)]
+            )
 
     def kth_ancestor(self, vertex: int, steps: int) -> int | None:
         """返回 vertex 向根方向走 steps 步后的祖先。
@@ -106,7 +108,10 @@ class BinaryLifting:
         for vertex, neighbors in enumerate(tree):
             if vertex in neighbors or len(set(neighbors)) != len(neighbors):
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
 

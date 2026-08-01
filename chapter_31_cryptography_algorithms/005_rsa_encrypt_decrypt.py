@@ -22,7 +22,15 @@ def _validate_key_and_value(value: int, key: tuple[int, int]) -> tuple[int, int]
     if not isinstance(key, tuple) or len(key) != 2:
         raise ValueError("key 必须是 (n, exponent) 元组")
     modulus, exponent = key
-    if any(isinstance(item, bool) or not isinstance(item, int) for item in (value, modulus, exponent)) or modulus <= 1 or exponent <= 0 or not 0 <= value < modulus:
+    if (
+        any(
+            isinstance(item, bool) or not isinstance(item, int)
+            for item in (value, modulus, exponent)
+        )
+        or modulus <= 1
+        or exponent <= 0
+        or not 0 <= value < modulus
+    ):
         raise ValueError("消息、模数和指数范围无效")
     return modulus, exponent
 

@@ -13,13 +13,20 @@ from typing import Hashable, TypeVar
 
 State = TypeVar("State", bound=Hashable)
 
+
 @dataclass(frozen=True)
 class TabuResult:
     state: object
     score: float
 
 
-def tabu_search(initial: State, objective: Callable[[State], float], neighbors: Callable[[State], Iterable[State]], iterations: int = 100, tenure: int = 5) -> TabuResult:
+def tabu_search(
+    initial: State,
+    objective: Callable[[State], float],
+    neighbors: Callable[[State], Iterable[State]],
+    iterations: int = 100,
+    tenure: int = 5,
+) -> TabuResult:
     """执行带特赦准则的禁忌搜索，并返回历史最佳状态。
 
     关键点：禁忌仅限制重复访问，特赦允许候选若刷新全局最佳，避免错过真正改进。
@@ -45,7 +52,12 @@ def tabu_search(initial: State, objective: Callable[[State], float], neighbors: 
 
 
 if __name__ == "__main__":
-    result = tabu_search(0, lambda value: -(value - 5) ** 2, lambda value: [value - 1, value + 1], iterations=20)
+    result = tabu_search(
+        0,
+        lambda value: -((value - 5) ** 2),
+        lambda value: [value - 1, value + 1],
+        iterations=20,
+    )
     assert result.state == 5 and result.score == 0
     assert tabu_search(3, float, lambda _: [], iterations=3).state == 3
     print("008_tabu_search: all examples passed")

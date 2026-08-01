@@ -20,7 +20,10 @@ def central_difference(function, x_value: float, step: float) -> float:
 
 
 if __name__ == "__main__":
-    square = lambda x_value: x_value * x_value
+
+    def square(x_value: float) -> float:
+        return x_value * x_value
+
     assert round(forward_difference(square, 3.0, 1e-4), 3) == 6.0
     assert round(central_difference(square, 3.0, 1e-4), 6) == 6.0
 

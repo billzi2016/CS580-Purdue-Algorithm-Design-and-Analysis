@@ -8,7 +8,11 @@
 """
 
 
-def sarsa(transitions: list[tuple[str, str, float, str | None, str | None]], learning_rate: float, discount: float) -> dict[tuple[str, str], float]:
+def sarsa(
+    transitions: list[tuple[str, str, float, str | None, str | None]],
+    learning_rate: float,
+    discount: float,
+) -> dict[tuple[str, str], float]:
     """按样本顺序执行 SARSA 动作价值更新。
 
     参数：项为 (state, action, reward, next_state, next_action)；终止时后两项可为 None。
@@ -21,12 +25,26 @@ def sarsa(transitions: list[tuple[str, str, float, str | None, str | None]], lea
     values: dict[tuple[str, str], float] = {}
     for state, action, reward, next_state, next_action in transitions:
         key = (state, action)
-        next_value = values.get((next_state, next_action), 0.0) if next_state is not None and next_action is not None else 0.0
-        values[key] = values.get(key, 0.0) + learning_rate * (reward + discount * next_value - values.get(key, 0.0))
+        next_value = (
+            values.get((next_state, next_action), 0.0)
+            if next_state is not None and next_action is not None
+            else 0.0
+        )
+        values[key] = values.get(key, 0.0) + learning_rate * (
+            reward + discount * next_value - values.get(key, 0.0)
+        )
     return values
 
 
 if __name__ == "__main__":
-    q_values = sarsa([('A', 'go', 0.0, 'B', 'finish'), ('B', 'finish', 1.0, None, None), ('A', 'go', 0.0, 'B', 'finish')], 1.0, 0.9)
-    assert q_values == {('A', 'go'): 0.9, ('B', 'finish'): 1.0}
+    q_values = sarsa(
+        [
+            ("A", "go", 0.0, "B", "finish"),
+            ("B", "finish", 1.0, None, None),
+            ("A", "go", 0.0, "B", "finish"),
+        ],
+        1.0,
+        0.9,
+    )
+    assert q_values == {("A", "go"): 0.9, ("B", "finish"): 1.0}
     print("007_sarsa: all examples passed")

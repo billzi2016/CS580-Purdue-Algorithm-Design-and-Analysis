@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -15,7 +16,13 @@ import torch
 class ResNetBottleneckBlock(torch.nn.Module):
     """三层卷积的 bottleneck 残差块。"""
 
-    def __init__(self, input_channels: int, bottleneck_channels: int, stride: int = 1, expansion: int = 4) -> None:
+    def __init__(
+        self,
+        input_channels: int,
+        bottleneck_channels: int,
+        stride: int = 1,
+        expansion: int = 4,
+    ) -> None:
         """创建 bottleneck 残差分支与捷径。
 
         参数：input_channels、bottleneck_channels、stride、expansion 均为正。
@@ -24,16 +31,39 @@ class ResNetBottleneckBlock(torch.nn.Module):
         关键算法点：最终输出通道为 bottleneck_channels*expansion，捷径必须投影到同一形状。
         """
         super().__init__()
-        if input_channels <= 0 or bottleneck_channels <= 0 or stride <= 0 or expansion <= 0:
+        if (
+            input_channels <= 0
+            or bottleneck_channels <= 0
+            or stride <= 0
+            or expansion <= 0
+        ):
             raise ValueError("bottleneck 参数必须为正")
         output_channels = bottleneck_channels * expansion
         self.conv1 = torch.nn.Conv2d(input_channels, bottleneck_channels, 1, bias=False)
         self.norm1 = torch.nn.BatchNorm2d(bottleneck_channels)
-        self.conv2 = torch.nn.Conv2d(bottleneck_channels, bottleneck_channels, 3, stride=stride, padding=1, bias=False)
+        self.conv2 = torch.nn.Conv2d(
+            bottleneck_channels,
+            bottleneck_channels,
+            3,
+            stride=stride,
+            padding=1,
+            bias=False,
+        )
         self.norm2 = torch.nn.BatchNorm2d(bottleneck_channels)
-        self.conv3 = torch.nn.Conv2d(bottleneck_channels, output_channels, 1, bias=False)
+        self.conv3 = torch.nn.Conv2d(
+            bottleneck_channels, output_channels, 1, bias=False
+        )
         self.norm3 = torch.nn.BatchNorm2d(output_channels)
-        self.shortcut = torch.nn.Identity() if input_channels == output_channels and stride == 1 else torch.nn.Sequential(torch.nn.Conv2d(input_channels, output_channels, 1, stride=stride, bias=False), torch.nn.BatchNorm2d(output_channels))
+        self.shortcut = (
+            torch.nn.Identity()
+            if input_channels == output_channels and stride == 1
+            else torch.nn.Sequential(
+                torch.nn.Conv2d(
+                    input_channels, output_channels, 1, stride=stride, bias=False
+                ),
+                torch.nn.BatchNorm2d(output_channels),
+            )
+        )
         self.relu = torch.nn.ReLU()
 
     def forward(self, features: torch.Tensor) -> torch.Tensor:
@@ -51,7 +81,9 @@ class ResNetBottleneckBlock(torch.nn.Module):
         residual = self.norm3(self.conv3(hidden))
         return self.relu(residual + self.shortcut(features))
 
-    def training_step(self, features: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, features: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """以 MSE 执行一次反向传播和手写 SGD。
 
         参数：features 为输入，target 与输出同形，learning_rate 为正。

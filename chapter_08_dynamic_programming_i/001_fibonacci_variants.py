@@ -88,7 +88,9 @@ def _fib_pair(n: int) -> tuple[int, int]:
     return d, c + d
 
 
-def _matrix_power_2x2(matrix: tuple[tuple[int, int], tuple[int, int]], exponent: int) -> tuple[tuple[int, int], tuple[int, int]]:
+def _matrix_power_2x2(
+    matrix: tuple[tuple[int, int], tuple[int, int]], exponent: int
+) -> tuple[tuple[int, int], tuple[int, int]]:
     """手写 2x2 矩阵快速幂。"""
     result = ((1, 0), (0, 1))
     current = matrix
@@ -101,11 +103,20 @@ def _matrix_power_2x2(matrix: tuple[tuple[int, int], tuple[int, int]], exponent:
     return result
 
 
-def _multiply_2x2(left: tuple[tuple[int, int], tuple[int, int]], right: tuple[tuple[int, int], tuple[int, int]]) -> tuple[tuple[int, int], tuple[int, int]]:
+def _multiply_2x2(
+    left: tuple[tuple[int, int], tuple[int, int]],
+    right: tuple[tuple[int, int], tuple[int, int]],
+) -> tuple[tuple[int, int], tuple[int, int]]:
     """手写 2x2 矩阵乘法。"""
     return (
-        (left[0][0] * right[0][0] + left[0][1] * right[1][0], left[0][0] * right[0][1] + left[0][1] * right[1][1]),
-        (left[1][0] * right[0][0] + left[1][1] * right[1][0], left[1][0] * right[0][1] + left[1][1] * right[1][1]),
+        (
+            left[0][0] * right[0][0] + left[0][1] * right[1][0],
+            left[0][0] * right[0][1] + left[0][1] * right[1][1],
+        ),
+        (
+            left[1][0] * right[0][0] + left[1][1] * right[1][0],
+            left[1][0] * right[0][1] + left[1][1] * right[1][1],
+        ),
     )
 
 

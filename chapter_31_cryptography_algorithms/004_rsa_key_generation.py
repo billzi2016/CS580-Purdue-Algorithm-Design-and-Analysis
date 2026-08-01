@@ -36,15 +36,24 @@ def _is_prime(value: int) -> bool:
     return True
 
 
-def rsa_keypair_from_primes(first_prime: int, second_prime: int, public_exponent: int = 65537) -> tuple[tuple[int, int], tuple[int, int]]:
+def rsa_keypair_from_primes(
+    first_prime: int, second_prime: int, public_exponent: int = 65537
+) -> tuple[tuple[int, int], tuple[int, int]]:
     """以两个不同素数构造 RSA ``((n,e),(n,d))``。
 
     参数为 p、q 与 e；返回公钥和私钥。非素数、相同素数或不互素 e 会抛出 ValueError。
     核心：d 是 e 对 φ(n)=(p-1)(q-1) 的逆元，故 ed≡1 mod φ(n)。
     """
-    if any(isinstance(value, bool) or not isinstance(value, int) for value in (first_prime, second_prime, public_exponent)):
+    if any(
+        isinstance(value, bool) or not isinstance(value, int)
+        for value in (first_prime, second_prime, public_exponent)
+    ):
         raise ValueError("p、q、e 必须是整数")
-    if first_prime == second_prime or not _is_prime(first_prime) or not _is_prime(second_prime):
+    if (
+        first_prime == second_prime
+        or not _is_prime(first_prime)
+        or not _is_prime(second_prime)
+    ):
         raise ValueError("p、q 必须是不同素数")
     modulus = first_prime * second_prime
     phi = (first_prime - 1) * (second_prime - 1)

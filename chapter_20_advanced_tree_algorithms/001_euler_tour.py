@@ -86,7 +86,10 @@ class EulerTour:
         for vertex, neighbors in enumerate(tree):
             if vertex in neighbors or len(set(neighbors)) != len(neighbors):
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
 

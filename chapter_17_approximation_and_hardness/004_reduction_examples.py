@@ -9,12 +9,13 @@
 这些函数不是求解 NP-hard 问题，而是展示证明 NP-hardness 时常用的结构映射。
 """
 
-
 Edge = tuple[int, int]
 Clause = tuple[str, str, str]
 
 
-def independent_set_to_vertex_cover_target(vertex_count: int, independent_size: int) -> int:
+def independent_set_to_vertex_cover_target(
+    vertex_count: int, independent_size: int
+) -> int:
     """Independent Set 大小 k 转为 Vertex Cover 大小 n-k。
 
     在同一张图中，S 是 independent set 当且仅当 V-S 是 vertex cover。

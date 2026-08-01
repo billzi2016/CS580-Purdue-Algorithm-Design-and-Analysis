@@ -36,7 +36,9 @@ class PositionalEncoding(torch.nn.Module):
         encoding = torch.zeros((max_length, embed_dim), dtype=torch.float32)
         encoding[:, 0::2] = torch.sin(position * div_term)
         if embed_dim > 1:
-            encoding[:, 1::2] = torch.cos(position * div_term[: encoding[:, 1::2].shape[1]])
+            encoding[:, 1::2] = torch.cos(
+                position * div_term[: encoding[:, 1::2].shape[1]]
+            )
 
         self.encoding = torch.nn.Parameter(encoding, requires_grad=False)
 
@@ -55,7 +57,9 @@ class PositionalEncoding(torch.nn.Module):
 
         return inputs + self.encoding[: inputs.shape[1]].to(inputs.device, inputs.dtype)
 
-    def training_step(self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """对输入张量执行一次梯度更新，验证位置编码能参与反向传播。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")

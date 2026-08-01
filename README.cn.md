@@ -748,20 +748,48 @@ python3 main.py
 
 初始建设顺序：
 
-1. 创建 chapter 目录结构。
-2. 添加基础算法和直接可运行的示例。
-3. 添加图算法和动态规划实现。
-4. 添加竞赛中常用的数据结构。
-5. 添加网络流、匹配、字符串算法、计算几何等高级主题。
-6. 添加高级竞赛算法，例如树链剖分、DSU on Tree、CDQ、莫队、FFT、NTT。
-7. 添加非 AI 生物信息学算法。
-8. 添加 ML/DL 优化算法。
-9. 添加启发式优化、MCTS 和数学/数值算法。
-10. 添加深度学习网络架构的手写核心实现。
-11. 添加强化学习、压缩、密码学、编译器、数据库、分布式和操作系统调度算法。
-12. 添加图机器学习采样算法。
-13. 添加仓库级 `main.py` smoke test 入口。
-14. 当实现数量增加后，再补充可选的 `pytest` 测试。
+- [x] 创建 chapter 目录结构。
+- [x] 添加基础算法和直接可运行的示例。
+- [x] 添加图算法和动态规划实现。
+- [x] 添加竞赛中常用的数据结构。
+- [x] 添加网络流、匹配、字符串算法、计算几何等高级主题。
+- [x] 添加高级竞赛算法，例如树链剖分、DSU on Tree、CDQ、莫队、FFT、NTT。
+- [x] 添加非 AI 生物信息学算法。
+- [x] 添加 ML/DL 优化算法。
+- [x] 添加启发式优化、MCTS 和数学/数值算法。
+- [x] 添加深度学习网络架构的手写核心实现。
+- [x] 添加强化学习、压缩、密码学、编译器、数据库、分布式和操作系统调度算法。
+- [x] 添加图机器学习采样算法。
+- [x] 添加仓库级 `main.py` smoke test 入口。
+- [x] 添加覆盖所有 chapter 示例的参数化 `pytest` 测试。
+
+## 本地 CI/CD 质量门禁
+
+本仓库主动采用本地、平台无关的质量命令，不运行特定托管平台的 CI/CD job。
+完整验证覆盖数百个算法程序，包含计算量较大的深度学习示例，并可在适合时使用
+本地 GPU 环境。将质量门禁放在本地运行，既能保持验证可复现，也能避免不必要地
+占用云端计算资源。首先安装已声明的依赖：
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+使用以下命令运行完整的本地质量门禁：
+
+```bash
+scripts/lint_and_format_all_python.sh
+PYTHONDONTWRITEBYTECODE=1 python3 main.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -p no:cacheprovider -q
+```
+
+Ruff 脚本会格式化全部 Python 文件，并应用配置允许的 lint 自动修复。
+`main.py` 与 `scripts/run_all_python_examples.sh` 分别为 Python 和 Bash 环境提供
+等价的仓库级 smoke test 入口。参数化 pytest 测试会在隔离子进程中运行每个
+`chapter_*/*.py` 示例。
+
+本教学仓库有意不启用托管 workflow 与远程部署 pipeline；如果后续团队策略需要
+自动化，现有命令仍可直接迁移到 CI 环境。只有本地质量门禁全部通过后，才应
+commit 或 push 变更。
 
 ## Commit 信息规范
 

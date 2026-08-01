@@ -59,7 +59,9 @@ def sketch_jaccard(left: list[int], right: list[int]) -> float:
 def mash_style_distance(left: str, right: str, k: int, sketch_size: int) -> float:
     """按 Mash 的 -1/k * ln(2j/(1+j)) 形式估计距离。"""
 
-    jaccard = sketch_jaccard(mash_sketch(left, k, sketch_size), mash_sketch(right, k, sketch_size))
+    jaccard = sketch_jaccard(
+        mash_sketch(left, k, sketch_size), mash_sketch(right, k, sketch_size)
+    )
     if jaccard <= 0:
         return 1.0
     if jaccard >= 1.0:

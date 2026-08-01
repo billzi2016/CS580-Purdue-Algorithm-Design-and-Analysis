@@ -45,7 +45,14 @@ def bucket_sort(values: list[float]) -> list[float]:
 if __name__ == "__main__":
     assert bucket_sort([]) == []
     assert bucket_sort([0.5]) == [0.5]
-    assert bucket_sort([0.78, 0.17, 0.39, 0.26, 0.72, 0.17]) == [0.17, 0.17, 0.26, 0.39, 0.72, 0.78]
+    assert bucket_sort([0.78, 0.17, 0.39, 0.26, 0.72, 0.17]) == [
+        0.17,
+        0.17,
+        0.26,
+        0.39,
+        0.72,
+        0.78,
+    ]
     try:
         bucket_sort([1.0])
         assert False, "区间外值应被拒绝"

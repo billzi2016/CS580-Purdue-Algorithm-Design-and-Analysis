@@ -20,7 +20,9 @@ def has_same_parity_invariant(source: list[int], target: list[int]) -> bool:
     return sum(source) % 2 == sum(target) % 2
 
 
-def construct_pair_flip_sequence(source: list[int], target: list[int]) -> list[tuple[int, int]] | None:
+def construct_pair_flip_sequence(
+    source: list[int], target: list[int]
+) -> list[tuple[int, int]] | None:
     """构造从 source 到 target 的两位翻转序列。
 
     参数：source 和 target 是等长二进制状态；一次操作翻转两个不同下标。
@@ -30,7 +32,11 @@ def construct_pair_flip_sequence(source: list[int], target: list[int]) -> list[t
     """
     if not has_same_parity_invariant(source, target):
         return None
-    mismatches = [index for index, (current, desired) in enumerate(zip(source, target)) if current != desired]
+    mismatches = [
+        index
+        for index, (current, desired) in enumerate(zip(source, target))
+        if current != desired
+    ]
     if len(mismatches) % 2:
         raise AssertionError("同奇偶状态的不同位置数量必须为偶数")
     operations: list[tuple[int, int]] = []
@@ -52,7 +58,11 @@ def apply_pair_flips(state: list[int], operations: list[tuple[int, int]]) -> lis
         raise ValueError("state 必须只包含 0 和 1")
     result = state.copy()
     for first, second in operations:
-        if first == second or not 0 <= first < len(result) or not 0 <= second < len(result):
+        if (
+            first == second
+            or not 0 <= first < len(result)
+            or not 0 <= second < len(result)
+        ):
             raise ValueError("每个操作必须给出两个不同的有效下标")
         result[first] ^= 1
         result[second] ^= 1

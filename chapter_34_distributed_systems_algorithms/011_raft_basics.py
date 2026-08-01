@@ -16,7 +16,9 @@ class RaftNode:
     voted_for: str | None = None
     log: list[tuple[int, str]] = field(default_factory=list)
 
-    def request_vote(self, term: int, candidate_id: str, last_log_index: int, last_log_term: int) -> bool:
+    def request_vote(
+        self, term: int, candidate_id: str, last_log_index: int, last_log_term: int
+    ) -> bool:
         """处理 RequestVote RPC。"""
 
         if term < self.current_term:
@@ -31,14 +33,23 @@ class RaftNode:
         self.voted_for = candidate_id
         return True
 
-    def append_entries(self, term: int, prev_log_index: int, prev_log_term: int, entries: list[tuple[int, str]]) -> bool:
+    def append_entries(
+        self,
+        term: int,
+        prev_log_index: int,
+        prev_log_term: int,
+        entries: list[tuple[int, str]],
+    ) -> bool:
         """处理 AppendEntries RPC 的日志一致性检查。"""
 
         if term < self.current_term:
             return False
         self.current_term = term
         if prev_log_index >= 0:
-            if prev_log_index >= len(self.log) or self.log[prev_log_index][0] != prev_log_term:
+            if (
+                prev_log_index >= len(self.log)
+                or self.log[prev_log_index][0] != prev_log_term
+            ):
                 return False
         self.log = self.log[: prev_log_index + 1] + entries
         return True

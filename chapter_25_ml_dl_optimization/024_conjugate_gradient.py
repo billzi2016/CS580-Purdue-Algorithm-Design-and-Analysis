@@ -2,12 +2,13 @@
 共轭梯度：求解对称正定线性系统 Ax=b。
 """
 
-
 Vector = list[float]
 Matrix = list[list[float]]
 
 
-def conjugate_gradient(matrix: Matrix, vector: Vector, steps: int) -> tuple[Vector, list[float]]:
+def conjugate_gradient(
+    matrix: Matrix, vector: Vector, steps: int
+) -> tuple[Vector, list[float]]:
     """从零向量开始求解，返回解和残差范数轨迹。"""
 
     if len(matrix) != len(vector) or steps < 0:
@@ -35,7 +36,10 @@ def conjugate_gradient(matrix: Matrix, vector: Vector, steps: int) -> tuple[Vect
 
 
 def multiply(matrix: Matrix, vector: Vector) -> Vector:
-    return [sum(item * component for item, component in zip(row, vector, strict=True)) for row in matrix]
+    return [
+        sum(item * component for item, component in zip(row, vector, strict=True))
+        for row in matrix
+    ]
 
 
 def dot(left: Vector, right: Vector) -> float:
@@ -47,7 +51,9 @@ def squared_norm(vector: Vector) -> float:
 
 
 if __name__ == "__main__":
-    solution, residuals = conjugate_gradient([[4.0, 1.0], [1.0, 3.0]], [1.0, 2.0], steps=3)
+    solution, residuals = conjugate_gradient(
+        [[4.0, 1.0], [1.0, 3.0]], [1.0, 2.0], steps=3
+    )
     assert round(solution[0], 6) == 0.090909
     assert round(solution[1], 6) == 0.636364
     assert residuals[-1] <= residuals[0]

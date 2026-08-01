@@ -42,9 +42,15 @@ def propose(acceptors: list[Acceptor], proposal_number: int, value: str) -> str 
     ok_promises = [item for item in promises if item[0]]
     if len(ok_promises) < quorum:
         return None
-    inherited = [(number, accepted) for _, number, accepted in ok_promises if accepted is not None]
+    inherited = [
+        (number, accepted)
+        for _, number, accepted in ok_promises
+        if accepted is not None
+    ]
     chosen = max(inherited)[1] if inherited else value
-    accepted_count = sum(1 for acceptor in acceptors if acceptor.accept(proposal_number, chosen))
+    accepted_count = sum(
+        1 for acceptor in acceptors if acceptor.accept(proposal_number, chosen)
+    )
     return chosen if accepted_count >= quorum else None
 
 

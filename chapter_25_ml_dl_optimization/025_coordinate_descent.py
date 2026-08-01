@@ -3,7 +3,9 @@
 """
 
 
-def coordinate_descent(initial_x: float, initial_y: float, steps: int) -> list[tuple[float, float]]:
+def coordinate_descent(
+    initial_x: float, initial_y: float, steps: int
+) -> list[tuple[float, float]]:
     """优化 f(x,y)=(x-1)^2 + (y+2)^2。"""
 
     if steps < 0:

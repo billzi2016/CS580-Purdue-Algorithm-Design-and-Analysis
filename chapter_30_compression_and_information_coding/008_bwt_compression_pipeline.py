@@ -84,7 +84,9 @@ def bwt_inverse(last_column: str, primary_index: int) -> str:
 
     rows = [""] * len(last_column)
     for _ in range(len(last_column)):
-        rows = _insertion_sort_strings([last_column[index] + rows[index] for index in range(len(last_column))])
+        rows = _insertion_sort_strings(
+            [last_column[index] + rows[index] for index in range(len(last_column))]
+        )
     return rows[primary_index]
 
 
@@ -111,7 +113,13 @@ def _rle_decode(runs: list[Run]) -> str:
         if not isinstance(run, tuple) or len(run) != 2:
             raise ValueError("每个游程必须是 (字符, 次数) 元组")
         symbol, count = run
-        if not isinstance(symbol, str) or len(symbol) != 1 or isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        if (
+            not isinstance(symbol, str)
+            or len(symbol) != 1
+            or isinstance(count, bool)
+            or not isinstance(count, int)
+            or count <= 0
+        ):
             raise ValueError("游程格式无效")
         pieces.append(symbol * count)
     return "".join(pieces)

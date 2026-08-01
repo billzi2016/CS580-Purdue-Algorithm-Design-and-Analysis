@@ -44,7 +44,9 @@ def hamming_encode(data_bits: str) -> str:
     if not data_bits:
         return ""
     codeword_length = len(data_bits) + _required_parity_bits(len(data_bits))
-    codeword = [0] * (codeword_length + 1)  # 下标 0 不使用，使数组下标等于 Hamming 的 1 基位置。
+    codeword = [0] * (
+        codeword_length + 1
+    )  # 下标 0 不使用，使数组下标等于 Hamming 的 1 基位置。
     data_index = 0
     for position in range(1, codeword_length + 1):
         if not _is_power_of_two(position):
@@ -89,7 +91,11 @@ def hamming_decode_and_correct(codeword_bits: str) -> tuple[str, int]:
         raise ValueError("syndrome 指向码字外位置，输入不是可修正的单比特错误")
     if syndrome:
         codeword[syndrome] ^= 1
-    data_bits = "".join(str(codeword[position]) for position in range(1, len(codeword)) if not _is_power_of_two(position))
+    data_bits = "".join(
+        str(codeword[position])
+        for position in range(1, len(codeword))
+        if not _is_power_of_two(position)
+    )
     return data_bits, syndrome
 
 

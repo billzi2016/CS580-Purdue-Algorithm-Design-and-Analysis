@@ -17,11 +17,14 @@ INF = 10**12
 @dataclass(frozen=True)
 class BandedAlignment:
     """带内最优编辑距离和从左到右的操作串。"""
+
     distance: int
     operations: str
 
 
-def banded_global_alignment(first: str, second: str, band: int) -> BandedAlignment | None:
+def banded_global_alignment(
+    first: str, second: str, band: int
+) -> BandedAlignment | None:
     """在主对角线两侧 band 宽度内计算全局编辑距离并恢复一条路径。
 
     参数：first、second 是 DNA；band 为非负对角线半宽。
@@ -44,14 +47,22 @@ def banded_global_alignment(first: str, second: str, band: int) -> BandedAlignme
                 continue
             candidates: list[tuple[int, str]] = []
             if row and column and (row - 1, column - 1) in scores:
-                candidates.append((scores[(row - 1, column - 1)] + (first[row - 1] != second[column - 1]), "M" if first[row - 1] == second[column - 1] else "X"))
+                candidates.append(
+                    (
+                        scores[(row - 1, column - 1)]
+                        + (first[row - 1] != second[column - 1]),
+                        "M" if first[row - 1] == second[column - 1] else "X",
+                    )
+                )
             if row and (row - 1, column) in scores:
                 candidates.append((scores[(row - 1, column)] + 1, "D"))
             if column and (row, column - 1) in scores:
                 candidates.append((scores[(row, column - 1)] + 1, "I"))
             if candidates:
                 # 相同代价按对角、删除、插入的加入顺序定向，便于结果可复现。
-                scores[(row, column)], parents[(row, column)] = min(candidates, key=lambda item: item[0])
+                scores[(row, column)], parents[(row, column)] = min(
+                    candidates, key=lambda item: item[0]
+                )
     endpoint = (len(first), len(second))
     if endpoint not in scores:
         return None

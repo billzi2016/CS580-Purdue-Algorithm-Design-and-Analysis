@@ -8,6 +8,7 @@
 """
 
 import os
+
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import torch
 
@@ -29,7 +30,13 @@ class DenseNetBlock(torch.nn.Module):
         self.layers = torch.nn.ModuleList()
         for index in range(layer_count):
             channels = input_channels + index * growth_rate
-            self.layers.append(torch.nn.Sequential(torch.nn.BatchNorm2d(channels), torch.nn.ReLU(), torch.nn.Conv2d(channels, growth_rate, 3, padding=1)))
+            self.layers.append(
+                torch.nn.Sequential(
+                    torch.nn.BatchNorm2d(channels),
+                    torch.nn.ReLU(),
+                    torch.nn.Conv2d(channels, growth_rate, 3, padding=1),
+                )
+            )
 
     def forward(self, features: torch.Tensor) -> torch.Tensor:
         """逐层拼接新旧特征并返回全部累计特征。
@@ -46,23 +53,32 @@ class DenseNetBlock(torch.nn.Module):
             current = torch.cat((current, layer(current)), dim=1)
         return current
 
-    def training_step(self, features: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, features: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """以 MSE 进行一次反向和手写 SGD 更新。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
         for parameter in self.parameters():
-            if parameter.grad is not None: parameter.grad.zero_()
+            if parameter.grad is not None:
+                parameter.grad.zero_()
         output = self.forward(features)
-        if output.shape != target.shape: raise ValueError("target 形状不匹配")
-        loss = torch.mean((output-target)**2); loss.backward()
+        if output.shape != target.shape:
+            raise ValueError("target 形状不匹配")
+        loss = torch.mean((output - target) ** 2)
+        loss.backward()
         with torch.no_grad():
-            for parameter in self.parameters(): parameter -= learning_rate*parameter.grad
+            for parameter in self.parameters():
+                parameter -= learning_rate * parameter.grad
         return float(loss.detach())
 
 
 if __name__ == "__main__":
-    block=DenseNetBlock(2,3,4); data=torch.randn((2,3,8,8)); output=block(data)
-    assert output.shape==(2,11,8,8)
-    before=block.layers[0][2].weight.detach().clone(); assert block.training_step(data,torch.zeros_like(output),0.01)>=0.0
-    assert not torch.equal(before,block.layers[0][2].weight.detach())
+    block = DenseNetBlock(2, 3, 4)
+    data = torch.randn((2, 3, 8, 8))
+    output = block(data)
+    assert output.shape == (2, 11, 8, 8)
+    before = block.layers[0][2].weight.detach().clone()
+    assert block.training_step(data, torch.zeros_like(output), 0.01) >= 0.0
+    assert not torch.equal(before, block.layers[0][2].weight.detach())
     print("011_densenet_block: all examples passed")

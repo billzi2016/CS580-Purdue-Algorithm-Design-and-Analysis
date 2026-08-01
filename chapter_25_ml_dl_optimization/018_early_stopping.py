@@ -19,7 +19,10 @@ class EarlyStopping:
 
         if self.patience < 0 or self.min_delta < 0:
             raise ValueError("patience 和 min_delta 不能为负数")
-        if self.best_score is None or validation_loss < self.best_score - self.min_delta:
+        if (
+            self.best_score is None
+            or validation_loss < self.best_score - self.min_delta
+        ):
             self.best_score = validation_loss
             self.bad_epochs = 0
             return False

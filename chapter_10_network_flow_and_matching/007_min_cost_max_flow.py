@@ -240,6 +240,8 @@ if __name__ == "__main__":
 
     disconnected_solver = MinCostMaxFlow(3)
     disconnected_solver.add_edge(0, 1, 5, 2)
-    assert disconnected_solver.min_cost_max_flow(0, 2) == FlowCostResult(flow=0.0, cost=0.0)
+    assert disconnected_solver.min_cost_max_flow(0, 2) == FlowCostResult(
+        flow=0.0, cost=0.0
+    )
 
     print("007_min_cost_max_flow: all examples passed")

@@ -29,7 +29,9 @@ class UngappedExtension:
         return self.query_start, self.query_end
 
 
-def blast_style_seed_extend(query: str, target: str, k: int, match: int = 1, mismatch: int = -1, x_drop: int = 2) -> list[UngappedExtension]:
+def blast_style_seed_extend(
+    query: str, target: str, k: int, match: int = 1, mismatch: int = -1, x_drop: int = 2
+) -> list[UngappedExtension]:
     """以所有精确 k-mer 为种子执行手写无缺口 X-drop 双向延伸。
 
     参数：query、target 为 DNA；k 是种子长度；match/mismatch 是字符评分；x_drop 为非负停止阈值。
@@ -50,11 +52,27 @@ def blast_style_seed_extend(query: str, target: str, k: int, match: int = 1, mis
     for target_start in range(len(target) - k + 1):
         word = target[target_start : target_start + k]
         for query_start in index.get(word, []):
-            unique.add(_extend(query, target, query_start, target_start, k, match, mismatch, x_drop))
-    return sorted(unique, key=lambda hit: (-hit.score, hit.query_start, hit.target_start, hit.query_end))
+            unique.add(
+                _extend(
+                    query, target, query_start, target_start, k, match, mismatch, x_drop
+                )
+            )
+    return sorted(
+        unique,
+        key=lambda hit: (-hit.score, hit.query_start, hit.target_start, hit.query_end),
+    )
 
 
-def _extend(query: str, target: str, query_start: int, target_start: int, k: int, match: int, mismatch: int, x_drop: int) -> UngappedExtension:
+def _extend(
+    query: str,
+    target: str,
+    query_start: int,
+    target_start: int,
+    k: int,
+    match: int,
+    mismatch: int,
+    x_drop: int,
+) -> UngappedExtension:
     """从一个精确种子向两侧 X-drop 延伸，并返回分数最优的截断位置。"""
     seed_score = k * match
     left_score, left_best = 0, 0
@@ -81,7 +99,13 @@ def _extend(query: str, target: str, query_start: int, target_start: int, k: int
             break
         query_right += 1
         target_right += 1
-    return UngappedExtension(best_query_start, best_query_end, best_target_start, best_target_end, seed_score + left_best + right_best)
+    return UngappedExtension(
+        best_query_start,
+        best_query_end,
+        best_target_start,
+        best_target_end,
+        seed_score + left_best + right_best,
+    )
 
 
 def _validate_dna(sequence: str) -> None:

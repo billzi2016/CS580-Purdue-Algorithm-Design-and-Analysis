@@ -12,7 +12,9 @@
 
 def _validate_integers(values: list[int], name: str) -> None:
     """验证列表元素是普通整数而非布尔值，防止 True/False 被静默当作 1/0。"""
-    if not isinstance(values, list) or any(isinstance(value, bool) or not isinstance(value, int) for value in values):
+    if not isinstance(values, list) or any(
+        isinstance(value, bool) or not isinstance(value, int) for value in values
+    ):
         raise ValueError(f"{name} 必须是整数列表")
 
 

@@ -49,7 +49,13 @@ class SimpleLSMTree:
         for run in self.runs:
             for key, value in run:
                 merged[key] = value
-        self.runs = [[(key, value) for key, value in sorted(merged.items()) if value is not self.TOMBSTONE]]
+        self.runs = [
+            [
+                (key, value)
+                for key, value in sorted(merged.items())
+                if value is not self.TOMBSTONE
+            ]
+        ]
 
     def _flush_if_needed(self) -> None:
         if len(self.memtable) < self.memtable_limit:

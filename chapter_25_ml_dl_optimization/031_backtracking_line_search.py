@@ -23,7 +23,10 @@ def backtracking_line_search(
     if alpha <= 0 or not 0 < beta < 1 or not 0 < c < 1:
         raise ValueError("参数范围非法")
     gradient = quadratic_gradient(x_value)
-    while quadratic_value(x_value + alpha * direction) > quadratic_value(x_value) + c * alpha * gradient * direction:
+    while (
+        quadratic_value(x_value + alpha * direction)
+        > quadratic_value(x_value) + c * alpha * gradient * direction
+    ):
         alpha *= beta
     return alpha
 

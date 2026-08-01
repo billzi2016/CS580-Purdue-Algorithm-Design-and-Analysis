@@ -51,14 +51,20 @@ class TransformerEncoderBlock(torch.nn.Module):
         variance = ((tensor - mean) ** 2).mean(dim=-1, keepdim=True)
         return (tensor - mean) / torch.sqrt(variance + epsilon)
 
-    def _project(self, tensor: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
+    def _project(
+        self, tensor: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor
+    ) -> torch.Tensor:
         """线性投影并拆成多头。"""
         batch_size, time_steps, _ = tensor.shape
         projected = tensor @ weight + bias
-        projected = projected.reshape(batch_size, time_steps, self.num_heads, self.head_dim)
+        projected = projected.reshape(
+            batch_size, time_steps, self.num_heads, self.head_dim
+        )
         return projected.permute(0, 2, 1, 3)
 
-    def _self_attention(self, inputs: torch.Tensor, mask: torch.Tensor | None) -> tuple[torch.Tensor, torch.Tensor]:
+    def _self_attention(
+        self, inputs: torch.Tensor, mask: torch.Tensor | None
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """执行多头自注意力。"""
         query = self._project(inputs, self.query_weight, self.query_bias)
         key = self._project(inputs, self.key_weight, self.key_bias)
@@ -72,10 +78,14 @@ class TransformerEncoderBlock(torch.nn.Module):
 
         attention_weights = torch.softmax(scores, dim=-1)
         attended = torch.matmul(attention_weights, value)
-        attended = attended.permute(0, 2, 1, 3).reshape(inputs.shape[0], inputs.shape[1], self.embed_dim)
+        attended = attended.permute(0, 2, 1, 3).reshape(
+            inputs.shape[0], inputs.shape[1], self.embed_dim
+        )
         return attended @ self.output_weight + self.output_bias, attention_weights
 
-    def forward(self, inputs: torch.Tensor, mask: torch.Tensor | None = None) -> tuple[torch.Tensor, torch.Tensor]:
+    def forward(
+        self, inputs: torch.Tensor, mask: torch.Tensor | None = None
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """返回编码器块输出和注意力权重。"""
         if inputs.ndim != 3 or inputs.shape[2] != self.embed_dim:
             raise ValueError("inputs 形状必须为 (batch,time,embed_dim)")
@@ -83,11 +93,15 @@ class TransformerEncoderBlock(torch.nn.Module):
         attention_output, attention_weights = self._self_attention(inputs, mask)
         attention_residual = self._layer_norm(inputs + attention_output)
 
-        feed_forward = torch.relu(attention_residual @ self.ffn_weight_1 + self.ffn_bias_1)
+        feed_forward = torch.relu(
+            attention_residual @ self.ffn_weight_1 + self.ffn_bias_1
+        )
         feed_forward = feed_forward @ self.ffn_weight_2 + self.ffn_bias_2
         return self._layer_norm(attention_residual + feed_forward), attention_weights
 
-    def training_step(self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次 encoder block 训练步。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")

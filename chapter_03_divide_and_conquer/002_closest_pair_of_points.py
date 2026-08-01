@@ -55,7 +55,9 @@ def closest_pair(points: Sequence[Point]) -> tuple[Point, Point, float]:
     return _closest_pair_recursive(points_by_x, points_by_y)
 
 
-def _closest_pair_recursive(points_by_x: list[Point], points_by_y: list[Point]) -> tuple[Point, Point, float]:
+def _closest_pair_recursive(
+    points_by_x: list[Point], points_by_y: list[Point]
+) -> tuple[Point, Point, float]:
     """
     在已按 x/y 排序的点集中递归求最近点对。
     """

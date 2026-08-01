@@ -8,7 +8,9 @@
 """
 
 
-def monte_carlo_prediction(episodes: list[list[tuple[str, float]]], discount: float) -> dict[str, float]:
+def monte_carlo_prediction(
+    episodes: list[list[tuple[str, float]]], discount: float
+) -> dict[str, float]:
     """用 first-visit Monte Carlo 估计状态价值。
 
     参数：每条轨迹的项为 (state, reward_after_visit)；discount 为折扣因子。
@@ -36,7 +38,7 @@ def monte_carlo_prediction(episodes: list[list[tuple[str, float]]], discount: fl
 
 
 if __name__ == "__main__":
-    values = monte_carlo_prediction([[('A', 0.0), ('B', 1.0)], [('A', 2.0)]], 1.0)
-    assert values == {'A': 1.5, 'B': 1.0}
+    values = monte_carlo_prediction([[("A", 0.0), ("B", 1.0)], [("A", 2.0)]], 1.0)
+    assert values == {"A": 1.5, "B": 1.0}
     assert monte_carlo_prediction([[]], 0.9) == {}
     print("004_monte_carlo_prediction: all examples passed")

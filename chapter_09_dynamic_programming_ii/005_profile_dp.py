@@ -26,8 +26,6 @@ def count_domino_tilings(rows: int, cols: int) -> int:
         rows, cols = cols, rows
 
     dp = {0: 1}
-    full_mask = (1 << cols) - 1
-
     for _ in range(rows):
         next_dp: dict[int, int] = {}
         for mask, count in dp.items():
@@ -38,7 +36,9 @@ def count_domino_tilings(rows: int, cols: int) -> int:
     return dp.get(0, 0)
 
 
-def _generate_next_masks(cols: int, position: int, current_mask: int, next_mask: int) -> list[int]:
+def _generate_next_masks(
+    cols: int, position: int, current_mask: int, next_mask: int
+) -> list[int]:
     """递归生成当前行 mask 对应的所有下一行 mask。"""
     if position == cols:
         return [next_mask]
@@ -47,7 +47,11 @@ def _generate_next_masks(cols: int, position: int, current_mask: int, next_mask:
 
     result: list[int] = []
     # 竖放骨牌，占用下一行同列。
-    result.extend(_generate_next_masks(cols, position + 1, current_mask, next_mask | (1 << position)))
+    result.extend(
+        _generate_next_masks(
+            cols, position + 1, current_mask, next_mask | (1 << position)
+        )
+    )
     # 横放骨牌，占用当前行相邻两格。
     if position + 1 < cols and not (current_mask & (1 << (position + 1))):
         result.extend(_generate_next_masks(cols, position + 2, current_mask, next_mask))

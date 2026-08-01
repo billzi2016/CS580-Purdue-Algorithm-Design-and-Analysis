@@ -4,8 +4,6 @@ Hash Index：把 key 映射到桶，桶内保存记录位置。
 意图：展示等值查询索引的核心结构；范围查询不是 hash index 的强项。
 """
 
-from collections import defaultdict
-
 
 class HashIndex:
     """支持重复 key 的链式 hash index。"""
@@ -24,7 +22,11 @@ class HashIndex:
     def lookup(self, key: str) -> list[int]:
         """返回所有匹配 key 的 row_id。"""
 
-        return [row_id for existing, row_id in self.buckets[self._bucket(key)] if existing == key]
+        return [
+            row_id
+            for existing, row_id in self.buckets[self._bucket(key)]
+            if existing == key
+        ]
 
     def delete(self, key: str, row_id: int) -> bool:
         """删除一条映射，成功返回 True。"""

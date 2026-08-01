@@ -61,11 +61,17 @@ def convolution(left: list[int], right: list[int]) -> list[int]:
     transform_length = 1
     while transform_length < result_length:
         transform_length *= 2
-    left_values = [complex(value) for value in left] + [0j] * (transform_length - len(left))
-    right_values = [complex(value) for value in right] + [0j] * (transform_length - len(right))
+    left_values = [complex(value) for value in left] + [0j] * (
+        transform_length - len(left)
+    )
+    right_values = [complex(value) for value in right] + [0j] * (
+        transform_length - len(right)
+    )
     left_spectrum = fft(left_values)
     right_spectrum = fft(right_values)
-    product_spectrum = [first * second for first, second in zip(left_spectrum, right_spectrum)]
+    product_spectrum = [
+        first * second for first, second in zip(left_spectrum, right_spectrum)
+    ]
     restored = fft(product_spectrum, invert=True)
     return [round(value.real) for value in restored[:result_length]]
 
@@ -81,7 +87,10 @@ def _bit_reverse_permute(values: list[complex]) -> None:
             bit >>= 1
         reversed_index ^= bit
         if index < reversed_index:
-            values[index], values[reversed_index] = values[reversed_index], values[index]
+            values[index], values[reversed_index] = (
+                values[reversed_index],
+                values[index],
+            )
 
 
 if __name__ == "__main__":

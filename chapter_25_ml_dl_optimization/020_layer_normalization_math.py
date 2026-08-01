@@ -5,7 +5,9 @@ LayerNorm 优化数学：对单个样本内部特征归一化。
 from math import sqrt
 
 
-def layer_norm_forward(values: list[list[float]], epsilon: float = 1e-5) -> tuple[list[list[float]], list[float], list[float]]:
+def layer_norm_forward(
+    values: list[list[float]], epsilon: float = 1e-5
+) -> tuple[list[list[float]], list[float], list[float]]:
     """返回逐样本归一化结果及每行均值、方差。"""
 
     if not values or not values[0] or epsilon <= 0:

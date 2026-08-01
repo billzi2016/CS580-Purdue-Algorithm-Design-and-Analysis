@@ -10,12 +10,21 @@ import random
 from collections.abc import Callable
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class CEMResult:
     chromosome: tuple[int, ...]
     score: float
 
-def cross_entropy_method(fitness: Callable[[tuple[int, ...]], float], length: int, samples: int = 50, iterations: int = 50, elite_fraction: float = 0.2, seed: int | None = None) -> CEMResult:
+
+def cross_entropy_method(
+    fitness: Callable[[tuple[int, ...]], float],
+    length: int,
+    samples: int = 50,
+    iterations: int = 50,
+    elite_fraction: float = 0.2,
+    seed: int | None = None,
+) -> CEMResult:
     """以精英样本频率反复更新每个位为 1 的采样概率。"""
     if length < 1 or samples < 2 or iterations < 0 or not 0 < elite_fraction <= 1:
         raise ValueError("CEM 参数无效")
@@ -23,13 +32,20 @@ def cross_entropy_method(fitness: Callable[[tuple[int, ...]], float], length: in
     best, best_score = tuple(0 for _ in range(length)), float("-inf")
     elite_count = max(1, int(samples * elite_fraction))
     for _ in range(iterations):
-        population = [tuple(int(rng.random() < probability) for probability in probabilities) for _ in range(samples)]
+        population = [
+            tuple(int(rng.random() < probability) for probability in probabilities)
+            for _ in range(samples)
+        ]
         ranked = sorted(population, key=fitness, reverse=True)
         if fitness(ranked[0]) > best_score:
             best, best_score = ranked[0], fitness(ranked[0])
         elites = ranked[:elite_count]
-        probabilities = [min(0.99, max(0.01, sum(item[index] for item in elites) / elite_count)) for index in range(length)]
+        probabilities = [
+            min(0.99, max(0.01, sum(item[index] for item in elites) / elite_count))
+            for index in range(length)
+        ]
     return CEMResult(best, best_score)
+
 
 if __name__ == "__main__":
     result = cross_entropy_method(sum, 10, samples=60, iterations=40, seed=9)

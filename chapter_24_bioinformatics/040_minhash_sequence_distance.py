@@ -23,7 +23,10 @@ def kmer_set(sequence: str, k: int) -> set[str]:
         raise ValueError("k 必须为正整数")
     if len(sequence) < k:
         return set()
-    return {canonical_kmer(sequence[index : index + k]) for index in range(len(sequence) - k + 1)}
+    return {
+        canonical_kmer(sequence[index : index + k])
+        for index in range(len(sequence) - k + 1)
+    }
 
 
 def minhash_signature(tokens: set[str], signature_size: int) -> list[int]:
@@ -50,7 +53,11 @@ def minhash_similarity(left: str, right: str, k: int, signature_size: int) -> fl
         return 0.0
     left_signature = minhash_signature(left_tokens, signature_size)
     right_signature = minhash_signature(right_tokens, signature_size)
-    matches = sum(1 for left_hash, right_hash in zip(left_signature, right_signature, strict=True) if left_hash == right_hash)
+    matches = sum(
+        1
+        for left_hash, right_hash in zip(left_signature, right_signature, strict=True)
+        if left_hash == right_hash
+    )
     return matches / signature_size
 
 

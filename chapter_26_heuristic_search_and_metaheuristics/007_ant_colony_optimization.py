@@ -16,15 +16,31 @@ class ACOResult:
     length: float
 
 
-def ant_colony_tsp(distances: list[list[float]], ants: int = 20, iterations: int = 80, evaporation: float = 0.3, seed: int | None = None) -> ACOResult:
+def ant_colony_tsp(
+    distances: list[list[float]],
+    ants: int = 20,
+    iterations: int = 80,
+    evaporation: float = 0.3,
+    seed: int | None = None,
+) -> ACOResult:
     """用信息素引导的随机回路构造近似最短 TSP 回路。
 
     距离矩阵必须为对称方阵。关键点：较短回路沉积更多 ``1/length`` 信息素，蒸发避免早期路径永久垄断。
     """
     size = len(distances)
-    if size < 2 or ants < 1 or iterations < 0 or not 0 < evaporation < 1 or any(len(row) != size for row in distances):
+    if (
+        size < 2
+        or ants < 1
+        or iterations < 0
+        or not 0 < evaporation < 1
+        or any(len(row) != size for row in distances)
+    ):
         raise ValueError("ACO 参数或距离矩阵无效")
-    if any(distances[i][j] < 0 or distances[i][j] != distances[j][i] for i in range(size) for j in range(size)):
+    if any(
+        distances[i][j] < 0 or distances[i][j] != distances[j][i]
+        for i in range(size)
+        for j in range(size)
+    ):
         raise ValueError("距离必须非负且对称")
     rng = random.Random(seed)
     pheromone = [[1.0 for _ in range(size)] for _ in range(size)]
@@ -37,7 +53,10 @@ def ant_colony_tsp(distances: list[list[float]], ants: int = 20, iterations: int
             tour = [start]
             while len(tour) < size:
                 candidates = [node for node in range(size) if node not in tour]
-                weights = [pheromone[tour[-1]][node] / max(distances[tour[-1]][node], 1e-12) for node in candidates]
+                weights = [
+                    pheromone[tour[-1]][node] / max(distances[tour[-1]][node], 1e-12)
+                    for node in candidates
+                ]
                 tour.append(rng.choices(candidates, weights=weights)[0])
             length = sum(distances[tour[i]][tour[(i + 1) % size]] for i in range(size))
             tours.append((tuple(tour), length))

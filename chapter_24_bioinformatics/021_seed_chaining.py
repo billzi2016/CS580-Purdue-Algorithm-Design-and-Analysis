@@ -38,7 +38,9 @@ class SeedChain:
     covered_bases: int
 
 
-def chain_seeds(anchors: list[SeedAnchor], max_gap: int = 100, gap_penalty: int = 1) -> SeedChain:
+def chain_seeds(
+    anchors: list[SeedAnchor], max_gap: int = 100, gap_penalty: int = 1
+) -> SeedChain:
     """用手写 O(a²) 动态规划选择一条高分共线锚点链。
 
     参数：anchors 是未排序精确种子；max_gap 限制相邻锚点任一轴的空档；gap_penalty 为每个对角线偏差单位的扣分。
@@ -49,7 +51,10 @@ def chain_seeds(anchors: list[SeedAnchor], max_gap: int = 100, gap_penalty: int 
     _validate_inputs(anchors, max_gap, gap_penalty)
     if not anchors:
         return SeedChain((), 0, 0)
-    ordered = sorted(anchors, key=lambda anchor: (anchor.reference_start, anchor.query_start, anchor.length))
+    ordered = sorted(
+        anchors,
+        key=lambda anchor: (anchor.reference_start, anchor.query_start, anchor.length),
+    )
     scores = [anchor.length for anchor in ordered]
     predecessors: list[int | None] = [None] * len(ordered)
     for current_index, current in enumerate(ordered):
@@ -63,17 +68,28 @@ def chain_seeds(anchors: list[SeedAnchor], max_gap: int = 100, gap_penalty: int 
             if candidate > scores[current_index]:
                 scores[current_index] = candidate
                 predecessors[current_index] = previous_index
-    best_index = max(range(len(ordered)), key=lambda index: (scores[index], -ordered[index].reference_start, -ordered[index].query_start))
+    best_index = max(
+        range(len(ordered)),
+        key=lambda index: (
+            scores[index],
+            -ordered[index].reference_start,
+            -ordered[index].query_start,
+        ),
+    )
     path: list[SeedAnchor] = []
     cursor: int | None = best_index
     while cursor is not None:
         path.append(ordered[cursor])
         cursor = predecessors[cursor]
     path.reverse()
-    return SeedChain(tuple(path), scores[best_index], sum(anchor.length for anchor in path))
+    return SeedChain(
+        tuple(path), scores[best_index], sum(anchor.length for anchor in path)
+    )
 
 
-def _transition_score(previous: SeedAnchor, current: SeedAnchor, max_gap: int, gap_penalty: int) -> int | None:
+def _transition_score(
+    previous: SeedAnchor, current: SeedAnchor, max_gap: int, gap_penalty: int
+) -> int | None:
     """计算合法前驱的对角线间隙成本；不共线或太远时返回 None。"""
     reference_gap = current.reference_start - previous.reference_end
     query_gap = current.query_start - previous.query_end
@@ -95,13 +111,27 @@ def _validate_inputs(anchors: list[SeedAnchor], max_gap: int, gap_penalty: int) 
 
 
 if __name__ == "__main__":
-    anchors = [SeedAnchor(10, 11, 3), SeedAnchor(0, 0, 4), SeedAnchor(5, 5, 3), SeedAnchor(20, 2, 4)]
+    anchors = [
+        SeedAnchor(10, 11, 3),
+        SeedAnchor(0, 0, 4),
+        SeedAnchor(5, 5, 3),
+        SeedAnchor(20, 2, 4),
+    ]
     chain = chain_seeds(anchors, max_gap=10)
-    assert chain.anchors == (SeedAnchor(0, 0, 4), SeedAnchor(5, 5, 3), SeedAnchor(10, 11, 3))
+    assert chain.anchors == (
+        SeedAnchor(0, 0, 4),
+        SeedAnchor(5, 5, 3),
+        SeedAnchor(10, 11, 3),
+    )
     assert chain.score == 9
     assert chain.covered_bases == 10
     assert chain_seeds([]) == SeedChain((), 0, 0)
-    assert chain_seeds([SeedAnchor(0, 0, 3), SeedAnchor(20, 20, 3)], max_gap=5).covered_bases == 3
+    assert (
+        chain_seeds(
+            [SeedAnchor(0, 0, 3), SeedAnchor(20, 20, 3)], max_gap=5
+        ).covered_bases
+        == 3
+    )
     try:
         chain_seeds([SeedAnchor(-1, 0, 3)])
         raise AssertionError("应拒绝负坐标")

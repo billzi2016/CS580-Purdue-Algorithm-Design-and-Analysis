@@ -20,7 +20,11 @@ class DsuOnTree:
         关键算法点：Euler 序使任一子树可用一个连续区间整体加入或删除。
         """
         self.vertex_count = len(tree)
-        if self.vertex_count == 0 or len(colors) != self.vertex_count or not 0 <= root < self.vertex_count:
+        if (
+            self.vertex_count == 0
+            or len(colors) != self.vertex_count
+            or not 0 <= root < self.vertex_count
+        ):
             raise ValueError("tree、colors 和 root 必须描述一棵非空树")
         self._validate_adjacency(tree)
         self.tree = tree
@@ -50,7 +54,10 @@ class DsuOnTree:
             for neighbor in tree[vertex]:
                 if self.parent[neighbor] == vertex:
                     self.size[vertex] += self.size[neighbor]
-                    if self.heavy[vertex] == -1 or self.size[neighbor] > self.size[self.heavy[vertex]]:
+                    if (
+                        self.heavy[vertex] == -1
+                        or self.size[neighbor] > self.size[self.heavy[vertex]]
+                    ):
                         self.heavy[vertex] = neighbor
         self.tin = [0] * self.vertex_count
         self.tout = [0] * self.vertex_count
@@ -122,7 +129,10 @@ class DsuOnTree:
         for vertex, neighbors in enumerate(tree):
             if vertex in neighbors or len(set(neighbors)) != len(neighbors):
                 raise ValueError("tree 不能包含自环或平行边")
-            if any(neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor] for neighbor in neighbors):
+            if any(
+                neighbor < 0 or neighbor >= len(tree) or vertex not in tree[neighbor]
+                for neighbor in neighbors
+            ):
                 raise ValueError("tree 必须是对称无向邻接表")
 
 

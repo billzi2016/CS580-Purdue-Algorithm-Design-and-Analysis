@@ -3,7 +3,9 @@ Dual Averaging：累积全部历史梯度，再统一决定当前参数。
 """
 
 
-def dual_averaging(initial_x: float, gradients: list[float], learning_rate: float) -> list[float]:
+def dual_averaging(
+    initial_x: float, gradients: list[float], learning_rate: float
+) -> list[float]:
     """返回 dual averaging 参数轨迹。"""
 
     if learning_rate <= 0:

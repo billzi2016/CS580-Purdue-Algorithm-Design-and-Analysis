@@ -10,7 +10,9 @@ from typing import Any
 Row = dict[str, Any]
 
 
-def sort_merge_join(left_rows: list[Row], right_rows: list[Row], left_key: str, right_key: str) -> list[Row]:
+def sort_merge_join(
+    left_rows: list[Row], right_rows: list[Row], left_key: str, right_key: str
+) -> list[Row]:
     """执行等值 sort-merge join。"""
 
     left = sorted(left_rows, key=lambda row: row[left_key])
@@ -55,6 +57,10 @@ if __name__ == "__main__":
     left = [{"k": 2, "l": "b"}, {"k": 1, "l": "a"}]
     right = [{"k": 1, "r": "x"}, {"k": 2, "r": "y"}, {"k": 2, "r": "z"}]
     joined = sort_merge_join(left, right, "k", "k")
-    assert [(row["l"], row["r"]) for row in joined] == [("a", "x"), ("b", "y"), ("b", "z")]
+    assert [(row["l"], row["r"]) for row in joined] == [
+        ("a", "x"),
+        ("b", "y"),
+        ("b", "z"),
+    ]
 
     print("008_sort_merge_join: all examples passed")

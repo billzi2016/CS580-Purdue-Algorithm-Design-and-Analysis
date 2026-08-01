@@ -24,7 +24,9 @@ class LocalAlignment:
     second_interval: tuple[int, int]
 
 
-def smith_waterman(first: str, second: str, match: int = 2, mismatch: int = -1, gap: int = -1) -> LocalAlignment:
+def smith_waterman(
+    first: str, second: str, match: int = 2, mismatch: int = -1, gap: int = -1
+) -> LocalAlignment:
     """计算一组最高分局部 DNA 序列比对。
 
     参数：first、second 是 DNA 序列；其余为统一整数评分。
@@ -39,27 +41,59 @@ def smith_waterman(first: str, second: str, match: int = 2, mismatch: int = -1, 
     best_cell = (0, 0)
     for row in range(1, len(first) + 1):
         for column in range(1, len(second) + 1):
-            diagonal = scores[row - 1][column - 1] + (match if first[row - 1] == second[column - 1] else mismatch)
-            scores[row][column] = max(0, diagonal, scores[row - 1][column] + gap, scores[row][column - 1] + gap)
+            diagonal = scores[row - 1][column - 1] + (
+                match if first[row - 1] == second[column - 1] else mismatch
+            )
+            scores[row][column] = max(
+                0,
+                diagonal,
+                scores[row - 1][column] + gap,
+                scores[row][column - 1] + gap,
+            )
             if scores[row][column] > best_score:
                 best_score, best_cell = scores[row][column], (row, column)
-    return _backtrack(first, second, scores, best_score, best_cell, match, mismatch, gap)
+    return _backtrack(
+        first, second, scores, best_score, best_cell, match, mismatch, gap
+    )
 
 
-def _backtrack(first: str, second: str, scores: list[list[int]], best_score: int, best_cell: tuple[int, int], match: int, mismatch: int, gap: int) -> LocalAlignment:
+def _backtrack(
+    first: str,
+    second: str,
+    scores: list[list[int]],
+    best_score: int,
+    best_cell: tuple[int, int],
+    match: int,
+    mismatch: int,
+    gap: int,
+) -> LocalAlignment:
     row, column = best_cell
     end = (row, column)
     aligned_first: list[str] = []
     aligned_second: list[str] = []
     while row and column and scores[row][column]:
-        diagonal = scores[row - 1][column - 1] + (match if first[row - 1] == second[column - 1] else mismatch)
+        diagonal = scores[row - 1][column - 1] + (
+            match if first[row - 1] == second[column - 1] else mismatch
+        )
         if scores[row][column] == diagonal:
-            aligned_first.append(first[row - 1]); aligned_second.append(second[column - 1]); row, column = row - 1, column - 1
+            aligned_first.append(first[row - 1])
+            aligned_second.append(second[column - 1])
+            row, column = row - 1, column - 1
         elif scores[row][column] == scores[row - 1][column] + gap:
-            aligned_first.append(first[row - 1]); aligned_second.append("-"); row -= 1
+            aligned_first.append(first[row - 1])
+            aligned_second.append("-")
+            row -= 1
         else:
-            aligned_first.append("-"); aligned_second.append(second[column - 1]); column -= 1
-    return LocalAlignment(best_score, "".join(reversed(aligned_first)), "".join(reversed(aligned_second)), (row, end[0]), (column, end[1]))
+            aligned_first.append("-")
+            aligned_second.append(second[column - 1])
+            column -= 1
+    return LocalAlignment(
+        best_score,
+        "".join(reversed(aligned_first)),
+        "".join(reversed(aligned_second)),
+        (row, end[0]),
+        (column, end[1]),
+    )
 
 
 def _validate(sequence: str) -> None:

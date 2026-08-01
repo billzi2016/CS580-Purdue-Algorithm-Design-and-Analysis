@@ -26,7 +26,9 @@ Node = Hashable
 WeightedGraph = dict[Node, list[tuple[Node, float]]]
 
 
-def dijkstra(graph: WeightedGraph, source: Node) -> tuple[dict[Node, float], dict[Node, Node | None]]:
+def dijkstra(
+    graph: WeightedGraph, source: Node
+) -> tuple[dict[Node, float], dict[Node, Node | None]]:
     """
     计算 source 到所有可达节点的最短距离。
 
@@ -89,7 +91,9 @@ def _validate_non_negative_edges(graph: WeightedGraph) -> None:
     for node, edges in graph.items():
         for neighbor, weight in edges:
             if weight < 0:
-                raise ValueError(f"Dijkstra 不支持负权边：{node} -> {neighbor} 权重 {weight}")
+                raise ValueError(
+                    f"Dijkstra 不支持负权边：{node} -> {neighbor} 权重 {weight}"
+                )
 
 
 if __name__ == "__main__":

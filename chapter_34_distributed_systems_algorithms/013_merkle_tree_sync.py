@@ -14,7 +14,10 @@ def merkle_root(items: list[str]) -> str:
         return _hash("")
     level = [_hash(item) for item in items]
     while len(level) > 1:
-        level = [_hash(level[i] + (level[i + 1] if i + 1 < len(level) else level[i])) for i in range(0, len(level), 2)]
+        level = [
+            _hash(level[i] + (level[i + 1] if i + 1 < len(level) else level[i]))
+            for i in range(0, len(level), 2)
+        ]
     return level[0]
 
 
@@ -28,7 +31,9 @@ def differing_indices(left: list[str], right: list[str]) -> list[int]:
     return result
 
 
-def _diff_range(left: list[str], right: list[str], start: int, end: int, result: list[int]) -> None:
+def _diff_range(
+    left: list[str], right: list[str], start: int, end: int, result: list[int]
+) -> None:
     if start >= end:
         return
     if merkle_root(left[start:end]) == merkle_root(right[start:end]):

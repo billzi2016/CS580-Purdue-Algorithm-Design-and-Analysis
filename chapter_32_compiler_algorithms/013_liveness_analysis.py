@@ -8,19 +8,32 @@
 from __future__ import annotations
 
 
-def liveness_analysis(cfg: dict[int, set[int]], uses: dict[int, set[str]], definitions: dict[int, set[str]]) -> tuple[dict[int, set[str]], dict[int, set[str]]]:
+def liveness_analysis(
+    cfg: dict[int, set[int]],
+    uses: dict[int, set[str]],
+    definitions: dict[int, set[str]],
+) -> tuple[dict[int, set[str]], dict[int, set[str]]]:
     """计算每个 CFG 节点前后的活跃变量集合。
 
     关键点：这是反向问题，先由后继汇总 OUT，随后删除本节点定义的旧值再加入使用值。
     """
-    nodes = set(cfg) | set(uses) | set(definitions) | {target for targets in cfg.values() for target in targets}
+    nodes = (
+        set(cfg)
+        | set(uses)
+        | set(definitions)
+        | {target for targets in cfg.values() for target in targets}
+    )
     live_in = {node: set() for node in nodes}
     live_out = {node: set() for node in nodes}
     changed = True
     while changed:
         changed = False
         for node in nodes:
-            new_out = set().union(*(live_in[successor] for successor in cfg.get(node, set()))) if cfg.get(node, set()) else set()
+            new_out = (
+                set().union(*(live_in[successor] for successor in cfg.get(node, set())))
+                if cfg.get(node, set())
+                else set()
+            )
             new_in = uses.get(node, set()) | (new_out - definitions.get(node, set()))
             if new_out != live_out[node] or new_in != live_in[node]:
                 live_out[node], live_in[node] = new_out, new_in
@@ -30,7 +43,9 @@ def liveness_analysis(cfg: dict[int, set[int]], uses: dict[int, set[str]], defin
 
 if __name__ == "__main__":
     cfg = {0: {1}, 1: {2}, 2: set()}
-    live_in, live_out = liveness_analysis(cfg, {0: {"a", "b"}, 1: {"x", "c"}, 2: {"y"}}, {0: {"x"}, 1: {"y"}, 2: set()})
+    live_in, live_out = liveness_analysis(
+        cfg, {0: {"a", "b"}, 1: {"x", "c"}, 2: {"y"}}, {0: {"x"}, 1: {"y"}, 2: set()}
+    )
     assert live_in[2] == {"y"}
     assert live_out[1] == {"y"}
     assert live_in[1] == {"x", "c"}

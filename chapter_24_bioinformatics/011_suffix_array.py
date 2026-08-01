@@ -24,14 +24,25 @@ def build_suffix_array(text: str) -> list[int]:
     width = 1
     while width < size:
         # 越过文本末尾的第二关键字为 -1，故短后缀排在有相同前缀的长后缀之前。
-        suffixes.sort(key=lambda start: (rank[start], rank[start + width] if start + width < size else -1))
+        suffixes.sort(
+            key=lambda start: (
+                rank[start],
+                rank[start + width] if start + width < size else -1,
+            )
+        )
         new_rank = [0] * size
         class_id = 0
         new_rank[suffixes[0]] = class_id
         for position in range(1, size):
             current, previous = suffixes[position], suffixes[position - 1]
-            current_key = (rank[current], rank[current + width] if current + width < size else -1)
-            previous_key = (rank[previous], rank[previous + width] if previous + width < size else -1)
+            current_key = (
+                rank[current],
+                rank[current + width] if current + width < size else -1,
+            )
+            previous_key = (
+                rank[previous],
+                rank[previous + width] if previous + width < size else -1,
+            )
             if current_key != previous_key:
                 class_id += 1
             new_rank[current] = class_id

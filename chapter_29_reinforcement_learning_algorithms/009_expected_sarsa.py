@@ -35,21 +35,25 @@ def expected_sarsa(
                 if probability < 0:
                     raise ValueError("策略概率不能为负")
                 probability_sum += probability
-                expected_value += probability * values.get((next_state, next_action), 0.0)
+                expected_value += probability * values.get(
+                    (next_state, next_action), 0.0
+                )
             if abs(probability_sum - 1.0) > 1e-9:
                 raise ValueError("策略概率必须归一化")
         key = (state, action)
-        values[key] = values.get(key, 0.0) + learning_rate * (reward + discount * expected_value - values.get(key, 0.0))
+        values[key] = values.get(key, 0.0) + learning_rate * (
+            reward + discount * expected_value - values.get(key, 0.0)
+        )
     return values
 
 
 if __name__ == "__main__":
-    policy = {'B': {'left': 0.5, 'right': 0.5}}
+    policy = {"B": {"left": 0.5, "right": 0.5}}
     q_values = expected_sarsa(
-        [('B', 'left', 2.0, None), ('B', 'right', 4.0, None), ('A', 'go', 0.0, 'B')],
+        [("B", "left", 2.0, None), ("B", "right", 4.0, None), ("A", "go", 0.0, "B")],
         policy,
         1.0,
         0.9,
     )
-    assert q_values == {('B', 'left'): 2.0, ('B', 'right'): 4.0, ('A', 'go'): 2.7}
+    assert q_values == {("B", "left"): 2.0, ("B", "right"): 4.0, ("A", "go"): 2.7}
     print("009_expected_sarsa: all examples passed")

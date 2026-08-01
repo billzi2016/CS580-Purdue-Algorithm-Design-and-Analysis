@@ -24,7 +24,10 @@ def gaussian_elimination(matrix: list[list[float]], vector: list[float]) -> list
             b_vector[row] -= factor * b_vector[pivot]
     solution = [0.0] * n_value
     for row in range(n_value - 1, -1, -1):
-        remaining = sum(a_matrix[row][column] * solution[column] for column in range(row + 1, n_value))
+        remaining = sum(
+            a_matrix[row][column] * solution[column]
+            for column in range(row + 1, n_value)
+        )
         solution[row] = (b_vector[row] - remaining) / a_matrix[row][row]
     return solution
 

@@ -11,8 +11,12 @@ from __future__ import annotations
 
 
 OPERATORS = {
-    "+": (1, "left"), "-": (1, "left"), "*": (2, "left"), "/": (2, "left"),
-    "^": (3, "right"), "u-": (4, "right"),
+    "+": (1, "left"),
+    "-": (1, "left"),
+    "*": (2, "left"),
+    "/": (2, "left"),
+    "^": (3, "right"),
+    "u-": (4, "right"),
 }
 
 
@@ -97,7 +101,8 @@ def infix_to_postfix(expression: str) -> list[str]:
     if expect_operand:
         raise ValueError("表达式不能以运算符结束")
     while stack:
-        if stack[-1] == "(": raise ValueError("左括号没有匹配的右括号")
+        if stack[-1] == "(":
+            raise ValueError("左括号没有匹配的右括号")
         output.append(stack.pop())
     return output
 
@@ -111,7 +116,9 @@ def _must_pop(top: str, incoming: str) -> bool:
     """按 incoming 的结合性判断栈顶运算符是否必须先输出。"""
     top_priority, _ = OPERATORS[top]
     incoming_priority, associativity = OPERATORS[incoming]
-    return top_priority > incoming_priority or (top_priority == incoming_priority and associativity == "left")
+    return top_priority > incoming_priority or (
+        top_priority == incoming_priority and associativity == "left"
+    )
 
 
 if __name__ == "__main__":

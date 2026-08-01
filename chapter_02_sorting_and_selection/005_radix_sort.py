@@ -49,7 +49,16 @@ def radix_sort(values: list[int]) -> list[int]:
 if __name__ == "__main__":
     assert radix_sort([]) == []
     assert radix_sort([0]) == [0]
-    assert radix_sort([170, 45, 75, 90, 802, 24, 2, 66]) == [2, 24, 45, 66, 75, 90, 170, 802]
+    assert radix_sort([170, 45, 75, 90, 802, 24, 2, 66]) == [
+        2,
+        24,
+        45,
+        66,
+        75,
+        90,
+        170,
+        802,
+    ]
     assert radix_sort([10, 1, 10, 0]) == [0, 1, 10, 10]
     try:
         radix_sort([1, -1])

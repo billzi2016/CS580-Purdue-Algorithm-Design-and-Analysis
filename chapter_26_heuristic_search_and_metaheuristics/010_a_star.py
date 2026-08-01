@@ -13,12 +13,19 @@ from typing import Hashable, TypeVar
 
 Node = TypeVar("Node", bound=Hashable)
 
+
 @dataclass(frozen=True)
 class PathResult:
     path: tuple[object, ...]
     cost: float
 
-def a_star(graph: dict[Node, list[tuple[Node, float]]], start: Node, goal: Node, heuristic: Callable[[Node], float]) -> PathResult | None:
+
+def a_star(
+    graph: dict[Node, list[tuple[Node, float]]],
+    start: Node,
+    goal: Node,
+    heuristic: Callable[[Node], float],
+) -> PathResult | None:
     """返回从 start 到 goal 的最短路径；没有路径时返回 ``None``。"""
     queue: list[tuple[float, int, Node]] = [(heuristic(start), 0, start)]
     costs, parents, counter = {start: 0.0}, {start: None}, 0
@@ -37,11 +44,19 @@ def a_star(graph: dict[Node, list[tuple[Node, float]]], start: Node, goal: Node,
             if candidate < costs.get(neighbor, float("inf")):
                 costs[neighbor], parents[neighbor] = candidate, node
                 counter += 1
-                heapq.heappush(queue, (candidate + heuristic(neighbor), counter, neighbor))
+                heapq.heappush(
+                    queue, (candidate + heuristic(neighbor), counter, neighbor)
+                )
     return None
 
+
 if __name__ == "__main__":
-    graph = {"A": [("B", 1), ("C", 4)], "B": [("C", 1), ("D", 5)], "C": [("D", 1)], "D": []}
+    graph = {
+        "A": [("B", 1), ("C", 4)],
+        "B": [("C", 1), ("D", 5)],
+        "C": [("D", 1)],
+        "D": [],
+    }
     result = a_star(graph, "A", "D", {"A": 3, "B": 2, "C": 1, "D": 0}.__getitem__)
     assert result == PathResult(("A", "B", "C", "D"), 3)
     assert a_star(graph, "D", "A", lambda _: 0) is None

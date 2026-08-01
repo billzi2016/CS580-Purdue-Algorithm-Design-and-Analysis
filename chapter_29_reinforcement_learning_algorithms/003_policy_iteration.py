@@ -26,7 +26,12 @@ def policy_iteration(
     边界情况：无动作状态价值固定为零；非法参数、重复状态或缺失转移抛出 ValueError。
     关键算法点：只有策略评估充分收敛后才进行改进，稳定策略即满足 Bellman 最优性条件。
     """
-    if not 0 <= discount < 1 or tolerance <= 0 or max_policy_iterations <= 0 or max_evaluation_iterations <= 0:
+    if (
+        not 0 <= discount < 1
+        or tolerance <= 0
+        or max_policy_iterations <= 0
+        or max_evaluation_iterations <= 0
+    ):
         raise ValueError("迭代参数或 discount 无效")
     if len(set(states)) != len(states):
         raise ValueError("states 不能重复")
@@ -47,7 +52,10 @@ def policy_iteration(
             raise ValueError("转移概率必须归一化")
         return result
 
-    policy = {state: (actions.get(state, [None])[0] if actions.get(state, []) else None) for state in states}
+    policy = {
+        state: (actions.get(state, [None])[0] if actions.get(state, []) else None)
+        for state in states
+    }
     values = {state: 0.0 for state in states}
     for _ in range(max_policy_iterations):
         for _ in range(max_evaluation_iterations):
@@ -59,7 +67,9 @@ def policy_iteration(
                     updated[state] = 0.0
                 else:
                     updated[state] = expected_return(state, action, values)
-                maximum_change = max(maximum_change, abs(updated[state] - values[state]))
+                maximum_change = max(
+                    maximum_change, abs(updated[state] - values[state])
+                )
             values = updated
             if maximum_change <= tolerance:
                 break

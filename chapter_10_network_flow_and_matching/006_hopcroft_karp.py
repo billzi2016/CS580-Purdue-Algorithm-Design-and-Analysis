@@ -103,11 +103,7 @@ def hopcroft_karp(graph: dict[str, list[str]]) -> dict[str, str]:
             if left_match[left] is None:
                 dfs(left)
 
-    return {
-        right: left
-        for right, left in right_match.items()
-        if left is not None
-    }
+    return {right: left for right, left in right_match.items() if left is not None}
 
 
 if __name__ == "__main__":

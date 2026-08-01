@@ -7,7 +7,6 @@
 关键边界情况：空多项式返回空；变换长度必须为二的幂且不能超过该模数支持的最大二次幂长度。
 """
 
-
 MODULUS = 998_244_353
 PRIMITIVE_ROOT = 3
 
@@ -66,7 +65,9 @@ def convolution_mod(left: list[int], right: list[int]) -> list[int]:
     right_values = right + [0] * (transform_length - len(right))
     left_spectrum = ntt(left_values)
     right_spectrum = ntt(right_values)
-    product_spectrum = [first * second % MODULUS for first, second in zip(left_spectrum, right_spectrum)]
+    product_spectrum = [
+        first * second % MODULUS for first, second in zip(left_spectrum, right_spectrum)
+    ]
     return ntt(product_spectrum, invert=True)[:result_length]
 
 
@@ -81,7 +82,10 @@ def _bit_reverse_permute(values: list[int]) -> None:
             bit >>= 1
         reversed_index ^= bit
         if index < reversed_index:
-            values[index], values[reversed_index] = values[reversed_index], values[index]
+            values[index], values[reversed_index] = (
+                values[reversed_index],
+                values[index],
+            )
 
 
 if __name__ == "__main__":

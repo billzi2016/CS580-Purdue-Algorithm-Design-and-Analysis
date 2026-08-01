@@ -8,7 +8,9 @@
 """
 
 
-def mean_squared_error_gradient(xs: list[float], ys: list[float], weight: float) -> float:
+def mean_squared_error_gradient(
+    xs: list[float], ys: list[float], weight: float
+) -> float:
     """计算一元线性模型 y_hat = weight * x 的平均平方损失梯度。"""
 
     if len(xs) != len(ys) or not xs:

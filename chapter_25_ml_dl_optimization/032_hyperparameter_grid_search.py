@@ -5,7 +5,9 @@ Grid Search：穷举离散超参数网格并选择最优配置。
 from itertools import product
 
 
-def grid_search(space: dict[str, list[float]], score_function) -> tuple[dict[str, float], float]:
+def grid_search(
+    space: dict[str, list[float]], score_function
+) -> tuple[dict[str, float], float]:
     """遍历参数网格，返回最优参数和分数。"""
 
     if not space:
@@ -26,7 +28,7 @@ def grid_search(space: dict[str, list[float]], score_function) -> tuple[dict[str
 if __name__ == "__main__":
     params, score = grid_search(
         {"lr": [0.01, 0.1], "wd": [0.0, 0.1]},
-        lambda item: -(item["lr"] - 0.1) ** 2 - item["wd"],
+        lambda item: -((item["lr"] - 0.1) ** 2) - item["wd"],
     )
     assert params == {"lr": 0.1, "wd": 0.0}
     assert score == 0.0

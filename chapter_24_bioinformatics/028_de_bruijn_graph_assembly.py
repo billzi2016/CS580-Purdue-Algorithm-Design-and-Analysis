@@ -89,7 +89,9 @@ def build_de_bruijn_graph(reads: list[str], k: int) -> DeBruijnGraph:
         indegree.setdefault(node, 0)
         outdegree.setdefault(node, 0)
         adjacency.setdefault(node, ())
-    return DeBruijnGraph(tuple(sorted(nodes)), tuple(edges), adjacency, indegree, outdegree)
+    return DeBruijnGraph(
+        tuple(sorted(nodes)), tuple(edges), adjacency, indegree, outdegree
+    )
 
 
 def extract_non_branching_contigs(graph: DeBruijnGraph) -> list[str]:
@@ -130,7 +132,9 @@ def assemble_de_bruijn(reads: list[str], k: int) -> list[str]:
     return extract_non_branching_contigs(build_de_bruijn_graph(reads, k))
 
 
-def _consume_path(graph: DeBruijnGraph, first_edge_id: int, used_edges: list[bool]) -> str:
+def _consume_path(
+    graph: DeBruijnGraph, first_edge_id: int, used_edges: list[bool]
+) -> str:
     """从一条出边开始扩展非分叉路径并返回拼接后的 contig。"""
 
     edge = graph.edges[first_edge_id]
@@ -138,7 +142,11 @@ def _consume_path(graph: DeBruijnGraph, first_edge_id: int, used_edges: list[boo
     symbols = [edge.source, edge.target[-1]]
     current = edge.target
     while _is_one_in_one_out(graph, current):
-        next_edge_id = next(identifier for identifier in graph.adjacency[current] if not used_edges[identifier])
+        next_edge_id = next(
+            identifier
+            for identifier in graph.adjacency[current]
+            if not used_edges[identifier]
+        )
         next_edge = graph.edges[next_edge_id]
         used_edges[next_edge_id] = True
         symbols.append(next_edge.target[-1])
@@ -146,7 +154,9 @@ def _consume_path(graph: DeBruijnGraph, first_edge_id: int, used_edges: list[boo
     return "".join(symbols)
 
 
-def _consume_cycle(graph: DeBruijnGraph, first_edge_id: int, used_edges: list[bool]) -> str:
+def _consume_cycle(
+    graph: DeBruijnGraph, first_edge_id: int, used_edges: list[bool]
+) -> str:
     """提取剩余的纯 1 入 1 出环。"""
 
     edge = graph.edges[first_edge_id]
@@ -155,7 +165,11 @@ def _consume_cycle(graph: DeBruijnGraph, first_edge_id: int, used_edges: list[bo
     start = edge.source
     current = edge.target
     while current != start:
-        next_edge_id = next(identifier for identifier in graph.adjacency[current] if not used_edges[identifier])
+        next_edge_id = next(
+            identifier
+            for identifier in graph.adjacency[current]
+            if not used_edges[identifier]
+        )
         next_edge = graph.edges[next_edge_id]
         used_edges[next_edge_id] = True
         symbols.append(next_edge.target[-1])
@@ -180,7 +194,9 @@ if __name__ == "__main__":
     graph = build_de_bruijn_graph(["AAG", "AGA", "GAT", "ATT", "TTC", "TCT", "CTA"], 3)
     assert graph.outdegree["AA"] == 1
     assert graph.indegree["CT"] == 1
-    assert assemble_de_bruijn(["AAG", "AGA", "GAT", "ATT", "TTC", "TCT", "CTA"], 3) == ["AAGATTCTA"]
+    assert assemble_de_bruijn(["AAG", "AGA", "GAT", "ATT", "TTC", "TCT", "CTA"], 3) == [
+        "AAGATTCTA"
+    ]
     assert len(assemble_de_bruijn(["AAGA", "AGAT", "GATT"], 3)) > 1
     assert assemble_de_bruijn(["ATG", "TGA", "GAT"], 3) == ["ATGAT"]
     assert assemble_de_bruijn([], 3) == []

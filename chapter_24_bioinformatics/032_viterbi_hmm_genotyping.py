@@ -67,7 +67,9 @@ def viterbi_decode(
     - `backpointer[t][state]` 记录第 `t` 位到达 `state` 的最佳前驱状态。
     """
 
-    _validate_hmm(states, start_probability, transition_probability, emission_probability)
+    _validate_hmm(
+        states, start_probability, transition_probability, emission_probability
+    )
 
     if not observations:
         return ViterbiResult(states=(), log_probability=0.0)
@@ -82,7 +84,9 @@ def viterbi_decode(
 
     for state in states:
         initial_score = _safe_log(start_probability.get(state, 0.0))
-        emission_score = _safe_log(emission_probability.get(state, {}).get(first_observation, 0.0))
+        emission_score = _safe_log(
+            emission_probability.get(state, {}).get(first_observation, 0.0)
+        )
         first_scores[state] = initial_score + emission_score
         first_previous[state] = None
 
@@ -107,7 +111,9 @@ def viterbi_decode(
             for previous_state in states:
                 previous_score = score_table[position - 1][previous_state]
                 transition_score = _safe_log(
-                    transition_probability.get(previous_state, {}).get(current_state, 0.0)
+                    transition_probability.get(previous_state, {}).get(
+                        current_state, 0.0
+                    )
                 )
                 candidate_score = previous_score + transition_score + emission_score
                 if candidate_score > best_score:
@@ -159,8 +165,12 @@ def _validate_hmm(
             raise ValueError(f"缺少状态 {state} 的转移概率")
         if state not in emission_probability:
             raise ValueError(f"缺少状态 {state} 的发射概率")
-        _validate_probability_row(transition_probability[state], f"状态 {state} 的转移概率")
-        _validate_probability_row(emission_probability[state], f"状态 {state} 的发射概率")
+        _validate_probability_row(
+            transition_probability[state], f"状态 {state} 的转移概率"
+        )
+        _validate_probability_row(
+            emission_probability[state], f"状态 {state} 的发射概率"
+        )
 
 
 def _validate_probability_row(probabilities: dict[str, float], row_name: str) -> None:
@@ -203,7 +213,13 @@ if __name__ == "__main__":
         "AA": {"ref": 0.08, "alt": 0.92},
     }
 
-    decoded = viterbi_decode(["ref", "ref", "alt", "alt", "alt", "alt"], hidden_states, start, transition, emission)
+    decoded = viterbi_decode(
+        ["ref", "ref", "alt", "alt", "alt", "alt"],
+        hidden_states,
+        start,
+        transition,
+        emission,
+    )
     assert decoded.states == ("RR", "RR", "RA", "AA", "AA", "AA")
     assert decoded.log_probability < 0.0
 

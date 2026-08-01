@@ -42,7 +42,9 @@ class NJNode:
     members: tuple[str, ...] = ()
 
 
-def neighbor_joining_tree(labels: list[str], distances: dict[tuple[str, str], float]) -> NJNode:
+def neighbor_joining_tree(
+    labels: list[str], distances: dict[tuple[str, str], float]
+) -> NJNode:
     """用 Neighbor Joining 算法构建系统发育树。
 
     参数：
@@ -70,8 +72,7 @@ def neighbor_joining_tree(labels: list[str], distances: dict[tuple[str, str], fl
     _validate_distance_matrix(labels, distances)
 
     active_nodes: dict[str, NJNode] = {
-        label: NJNode(name=label, members=(label,))
-        for label in labels
+        label: NJNode(name=label, members=(label,)) for label in labels
     }
     current_distances = {
         frozenset({left, right}): _distance_between(left, right, distances)
@@ -110,7 +111,9 @@ def neighbor_joining_tree(labels: list[str], distances: dict[tuple[str, str], fl
         )
 
         pair_distance = current_distances[frozenset({left_name, right_name})]
-        delta = (total_distance[left_name] - total_distance[right_name]) / (remaining - 2)
+        delta = (total_distance[left_name] - total_distance[right_name]) / (
+            remaining - 2
+        )
         left_length = max(0.0, 0.5 * (pair_distance + delta))
         right_length = max(0.0, pair_distance - left_length)
 
@@ -127,11 +130,7 @@ def neighbor_joining_tree(labels: list[str], distances: dict[tuple[str, str], fl
             members=left_node.members + right_node.members,
         )
 
-        other_names = [
-            name
-            for name in names
-            if name not in {left_name, right_name}
-        ]
+        other_names = [name for name in names if name not in {left_name, right_name}]
         for other_name in other_names:
             merged_distance = 0.5 * (
                 current_distances[frozenset({left_name, other_name})]
@@ -152,7 +151,8 @@ def neighbor_joining_tree(labels: list[str], distances: dict[tuple[str, str], fl
         right=active_nodes[final_right_name],
         left_length=final_distance / 2.0,
         right_length=final_distance / 2.0,
-        members=active_nodes[final_left_name].members + active_nodes[final_right_name].members,
+        members=active_nodes[final_left_name].members
+        + active_nodes[final_right_name].members,
     )
 
 
@@ -171,7 +171,9 @@ def _to_newick(node: NJNode) -> str:
     left_text = _to_newick(node.left)
     right_text = _to_newick(node.right)
     if node.name == "root":
-        return f"({left_text}:{node.left_length:.6f},{right_text}:{node.right_length:.6f})"
+        return (
+            f"({left_text}:{node.left_length:.6f},{right_text}:{node.right_length:.6f})"
+        )
     return f"({left_text}:{node.left_length:.6f},{right_text}:{node.right_length:.6f}){node.name}"
 
 

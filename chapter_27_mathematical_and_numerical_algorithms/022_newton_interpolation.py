@@ -11,11 +11,15 @@ def divided_differences(xs: list[float], ys: list[float]) -> list[float]:
     coefficients = ys[:]
     for order in range(1, len(xs)):
         for index in range(len(xs) - 1, order - 1, -1):
-            coefficients[index] = (coefficients[index] - coefficients[index - 1]) / (xs[index] - xs[index - order])
+            coefficients[index] = (coefficients[index] - coefficients[index - 1]) / (
+                xs[index] - xs[index - order]
+            )
     return coefficients
 
 
-def evaluate_newton_form(xs: list[float], coefficients: list[float], x_value: float) -> float:
+def evaluate_newton_form(
+    xs: list[float], coefficients: list[float], x_value: float
+) -> float:
     """用嵌套乘法求值。"""
 
     result = coefficients[-1]

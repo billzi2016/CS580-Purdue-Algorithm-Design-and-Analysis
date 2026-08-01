@@ -28,7 +28,9 @@ class MonotonicConvexHullTrick:
     def add_line(self, slope: int, intercept: int) -> None:
         """添加直线 y = slope * x + intercept，要求 slope 单调递减或递增且不破坏本例顺序。"""
         new_line = (slope, intercept)
-        while len(self.lines) >= 2 and _is_bad(self.lines[-2], self.lines[-1], new_line):
+        while len(self.lines) >= 2 and _is_bad(
+            self.lines[-2], self.lines[-1], new_line
+        ):
             self.lines.pop()
         self.lines.append(new_line)
         self.pointer = min(self.pointer, len(self.lines) - 1)
@@ -37,7 +39,9 @@ class MonotonicConvexHullTrick:
         """查询给定 x 下所有直线的最小 y 值，要求 x 单调不降。"""
         if not self.lines:
             raise ValueError("没有可查询的直线")
-        while self.pointer + 1 < len(self.lines) and _value(self.lines[self.pointer + 1], x) <= _value(self.lines[self.pointer], x):
+        while self.pointer + 1 < len(self.lines) and _value(
+            self.lines[self.pointer + 1], x
+        ) <= _value(self.lines[self.pointer], x):
             self.pointer += 1
         return _value(self.lines[self.pointer], x)
 

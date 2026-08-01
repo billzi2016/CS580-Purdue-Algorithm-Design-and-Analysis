@@ -3,7 +3,9 @@ Nesterov Accelerated Gradient：先看一眼前瞻位置，再计算梯度。
 """
 
 
-def nesterov_optimize(initial_x: float, learning_rate: float, momentum: float, steps: int) -> list[float]:
+def nesterov_optimize(
+    initial_x: float, learning_rate: float, momentum: float, steps: int
+) -> list[float]:
     """优化 f(x)=0.5*(x-3)^2，返回参数轨迹。"""
 
     if learning_rate <= 0 or not 0 <= momentum < 1 or steps < 0:

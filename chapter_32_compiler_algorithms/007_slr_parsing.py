@@ -103,8 +103,12 @@ def slr_parse(table: SLRTable, tokens: list[str]) -> bool:
             return kind == "accept" and stream[position] == END
 
 
-def _canonical_collection(grammar: Grammar, augmented_start: str) -> tuple[list[frozenset[Item]], dict[tuple[int, str], int]]:
-    initial = _closure({(augmented_start, (grammar[augmented_start][0][0],), 0)}, grammar)
+def _canonical_collection(
+    grammar: Grammar, augmented_start: str
+) -> tuple[list[frozenset[Item]], dict[tuple[int, str], int]]:
+    initial = _closure(
+        {(augmented_start, (grammar[augmented_start][0][0],), 0)}, grammar
+    )
     states = [initial]
     numbers = {initial: 0}
     pending = [initial]
@@ -139,7 +143,11 @@ def _closure(items: set[Item], grammar: Grammar) -> frozenset[Item]:
 
 
 def _goto(items: frozenset[Item], symbol: str, grammar: Grammar) -> frozenset[Item]:
-    advanced = {(left, right, dot + 1) for left, right, dot in items if dot < len(right) and right[dot] == symbol}
+    advanced = {
+        (left, right, dot + 1)
+        for left, right, dot in items
+        if dot < len(right) and right[dot] == symbol
+    }
     return _closure(advanced, grammar) if advanced else frozenset()
 
 
@@ -174,7 +182,9 @@ def _follow_sets(grammar: Grammar, start: str) -> dict[str, set[str]]:
     return follow
 
 
-def _first_of(sequence: list[str], first: dict[str, set[str]], nonterminals: set[str]) -> set[str]:
+def _first_of(
+    sequence: list[str], first: dict[str, set[str]], nonterminals: set[str]
+) -> set[str]:
     if not sequence:
         return {"ε"}
     result: set[str] = set()
@@ -189,12 +199,20 @@ def _first_of(sequence: list[str], first: dict[str, set[str]], nonterminals: set
 def _place_action(action: dict, key: tuple[int, str], value: tuple) -> None:
     previous = action.get(key)
     if previous is not None and previous != value:
-        raise SLRConflictError(f"SLR 冲突：状态 {key[0]}，符号 {key[1]!r}，{previous} 与 {value}")
+        raise SLRConflictError(
+            f"SLR 冲突：状态 {key[0]}，符号 {key[1]!r}，{previous} 与 {value}"
+        )
     action[key] = value
 
 
 def _terminals(grammar: Grammar, nonterminals: set[str]) -> set[str]:
-    return {symbol for alternatives in grammar.values() for right in alternatives for symbol in right if symbol not in nonterminals}
+    return {
+        symbol
+        for alternatives in grammar.values()
+        for right in alternatives
+        for symbol in right
+        if symbol not in nonterminals
+    }
 
 
 def _fresh_start(nonterminals: set[str]) -> str:
@@ -207,7 +225,11 @@ def _fresh_start(nonterminals: set[str]) -> str:
 def _validate(grammar: Grammar, start: str) -> None:
     if start not in grammar:
         raise ValueError("开始符号必须存在于文法中")
-    if any(not isinstance(right, list) for alternatives in grammar.values() for right in alternatives):
+    if any(
+        not isinstance(right, list)
+        for alternatives in grammar.values()
+        for right in alternatives
+    ):
         raise ValueError("产生式右侧必须是列表")
 
 

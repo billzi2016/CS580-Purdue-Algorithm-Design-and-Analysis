@@ -27,7 +27,9 @@ def unbounded_knapsack(items: list[Item], capacity: int) -> int:
         if weight <= 0 or value < 0:
             raise ValueError(f"物品必须满足 weight > 0 且 value >= 0：{name}")
         for current_capacity in range(weight, capacity + 1):
-            dp[current_capacity] = max(dp[current_capacity], dp[current_capacity - weight] + value)
+            dp[current_capacity] = max(
+                dp[current_capacity], dp[current_capacity - weight] + value
+            )
     return dp[capacity]
 
 

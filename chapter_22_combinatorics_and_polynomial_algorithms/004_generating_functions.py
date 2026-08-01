@@ -8,7 +8,9 @@
 """
 
 
-def truncated_polynomial_product(left: list[int], right: list[int], max_degree: int) -> list[int]:
+def truncated_polynomial_product(
+    left: list[int], right: list[int], max_degree: int
+) -> list[int]:
     """计算两个普通生成函数系数的截断乘积。
 
     参数：left/right 按升幂存储系数；max_degree 是保留的最高次数。

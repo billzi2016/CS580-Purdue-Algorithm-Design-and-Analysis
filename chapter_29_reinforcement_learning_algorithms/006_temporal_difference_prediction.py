@@ -10,7 +10,9 @@
 Transition = tuple[str, float, str | None]
 
 
-def td_zero_prediction(transitions: list[Transition], learning_rate: float, discount: float) -> dict[str, float]:
+def td_zero_prediction(
+    transitions: list[Transition], learning_rate: float, discount: float
+) -> dict[str, float]:
     """按给定时间顺序执行 TD(0) 状态价值更新。
 
     参数：项为 (state, reward, next_state_or_none)，learning_rate 在 (0,1]，discount 在 [0,1]。
@@ -23,12 +25,22 @@ def td_zero_prediction(transitions: list[Transition], learning_rate: float, disc
     values: dict[str, float] = {}
     for state, reward, next_state in transitions:
         current = values.get(state, 0.0)
-        target = reward + (discount * values.get(next_state, 0.0) if next_state is not None else 0.0)
+        target = reward + (
+            discount * values.get(next_state, 0.0) if next_state is not None else 0.0
+        )
         values[state] = current + learning_rate * (target - current)
     return values
 
 
 if __name__ == "__main__":
-    assert td_zero_prediction([('A', 0.0, 'B'), ('B', 1.0, None)], 1.0, 0.9) == {'A': 0.0, 'B': 1.0}
-    assert td_zero_prediction([('A', 0.0, 'B'), ('B', 1.0, None), ('A', 0.0, 'B')], 1.0, 0.9)['A'] == 0.9
+    assert td_zero_prediction([("A", 0.0, "B"), ("B", 1.0, None)], 1.0, 0.9) == {
+        "A": 0.0,
+        "B": 1.0,
+    }
+    assert (
+        td_zero_prediction(
+            [("A", 0.0, "B"), ("B", 1.0, None), ("A", 0.0, "B")], 1.0, 0.9
+        )["A"]
+        == 0.9
+    )
     print("006_temporal_difference_prediction: all examples passed")

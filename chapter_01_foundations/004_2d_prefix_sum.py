@@ -45,7 +45,9 @@ def build_2d_prefix_sum(matrix: list[list[int]]) -> list[list[int]]:
     return prefix
 
 
-def region_sum(prefix: list[list[int]], top: int, left: int, bottom: int, right: int) -> int:
+def region_sum(
+    prefix: list[list[int]], top: int, left: int, bottom: int, right: int
+) -> int:
     """
     查询闭矩形区域 [(top, left), (bottom, right)] 的元素和。
 

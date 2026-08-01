@@ -13,7 +13,10 @@ def external_merge_sort(values: list[int], memory_limit: int) -> list[int]:
 
     if memory_limit <= 0:
         raise ValueError("memory_limit 必须为正数")
-    runs = [sorted(values[index : index + memory_limit]) for index in range(0, len(values), memory_limit)]
+    runs = [
+        sorted(values[index : index + memory_limit])
+        for index in range(0, len(values), memory_limit)
+    ]
     return merge_sorted_runs(runs)
 
 

@@ -24,7 +24,9 @@
 import math
 
 
-def classify_master_theorem(a: int, b: int, k: float, log_power: float = 0.0) -> tuple[str, str]:
+def classify_master_theorem(
+    a: int, b: int, k: float, log_power: float = 0.0
+) -> tuple[str, str]:
     """
     分类 T(n) = aT(n / b) + Theta(n^k log^p n)。
 

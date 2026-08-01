@@ -21,7 +21,9 @@ class PeriodicTask:
     deadline: int
 
 
-def earliest_deadline_first(tasks: list[PeriodicTask], horizon: int) -> tuple[list[str | None], bool]:
+def earliest_deadline_first(
+    tasks: list[PeriodicTask], horizon: int
+) -> tuple[list[str | None], bool]:
     """返回 EDF timeline 和是否无截止期违约。"""
 
     _validate(tasks, horizon)

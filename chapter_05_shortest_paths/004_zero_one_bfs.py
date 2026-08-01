@@ -59,7 +59,9 @@ def _validate_zero_one_edges(graph: ZeroOneGraph) -> None:
     for node, edges in graph.items():
         for neighbor, weight in edges:
             if weight not in (0, 1):
-                raise ValueError(f"0-1 BFS 只支持 0/1 边权：{node} -> {neighbor} 权重 {weight}")
+                raise ValueError(
+                    f"0-1 BFS 只支持 0/1 边权：{node} -> {neighbor} 权重 {weight}"
+                )
 
 
 if __name__ == "__main__":

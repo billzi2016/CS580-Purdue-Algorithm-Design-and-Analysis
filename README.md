@@ -766,16 +766,51 @@ For example, Dijkstra's algorithm should explicitly state that the standard vers
 
 Initial build order:
 
-- [ ] Create the chapter directory structure.
-- [ ] Add foundational algorithms with direct examples.
-- [ ] Add graph algorithms and dynamic programming implementations.
-- [ ] Add data structures commonly used in contest problems.
-- [ ] Add advanced topics such as flow, matching, string algorithms, and computational geometry.
-- [ ] Add advanced competitive-programming topics such as HLD, DSU on tree, CDQ, Mo's algorithm, FFT, and NTT.
-- [ ] Add classical non-AI bioinformatics algorithms.
-- [ ] Add ML/DL optimization algorithms.
-- [ ] Add a repository-level `main.py` smoke-test runner.
-- [ ] Add optional `pytest` tests once the implementation set becomes large.
+- [x] Create the chapter directory structure.
+- [x] Add foundational algorithms with direct examples.
+- [x] Add graph algorithms and dynamic programming implementations.
+- [x] Add data structures commonly used in contest problems.
+- [x] Add advanced topics such as flow, matching, string algorithms, and computational geometry.
+- [x] Add advanced competitive-programming topics such as HLD, DSU on tree, CDQ, Mo's algorithm, FFT, and NTT.
+- [x] Add classical non-AI bioinformatics algorithms.
+- [x] Add ML/DL optimization algorithms.
+- [x] Add heuristic optimization, MCTS, and mathematical/numerical algorithms.
+- [x] Add hand-written core implementations of deep-learning architectures.
+- [x] Add reinforcement learning, compression, cryptography, compiler, database, distributed-system, and operating-system algorithms.
+- [x] Add graph machine-learning sampling algorithms.
+- [x] Add a repository-level `main.py` smoke-test runner.
+- [x] Add parameterized `pytest` coverage for all chapter examples.
+
+## Local CI/CD Quality Gate
+
+This repository deliberately uses local, platform-neutral quality commands instead
+of provider-specific CI/CD jobs. Full validation covers hundreds of algorithm
+programs, includes compute-intensive deep-learning examples, and can use a local
+GPU-enabled environment when appropriate. Running the quality gate locally avoids
+unnecessary consumption of hosted compute resources while keeping validation
+reproducible. Install the declared dependencies first:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Run the complete local quality gate with the following commands:
+
+```bash
+scripts/lint_and_format_all_python.sh
+PYTHONDONTWRITEBYTECODE=1 python3 main.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -p no:cacheprovider -q
+```
+
+The Ruff script formats every Python file and applies the configured lint fixes.
+`main.py` and `scripts/run_all_python_examples.sh` are equivalent repository-level
+smoke-test entry points for Python and Bash environments. The parameterized pytest
+suite runs every `chapter_*/*.py` example in an isolated subprocess.
+
+Hosted workflows and remote deployment pipelines are intentionally not enabled for
+this educational repository. The commands remain CI-compatible if automation is
+later required by team policy. Changes should be committed or pushed only after the
+local quality gate passes.
 
 ## Commit Message Standard
 

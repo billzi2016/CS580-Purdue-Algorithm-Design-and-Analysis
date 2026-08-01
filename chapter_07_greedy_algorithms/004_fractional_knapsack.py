@@ -19,7 +19,9 @@ Item = tuple[str, float, float]
 ChosenItem = tuple[str, float, float]
 
 
-def fractional_knapsack(items: list[Item], capacity: float) -> tuple[float, list[ChosenItem]]:
+def fractional_knapsack(
+    items: list[Item], capacity: float
+) -> tuple[float, list[ChosenItem]]:
     """
     求分数背包的最大价值。
 
@@ -41,7 +43,9 @@ def fractional_knapsack(items: list[Item], capacity: float) -> tuple[float, list
     total_value = 0.0
     chosen: list[ChosenItem] = []
 
-    for name, value, weight in sorted(items, key=lambda item: item[1] / item[2], reverse=True):
+    for name, value, weight in sorted(
+        items, key=lambda item: item[1] / item[2], reverse=True
+    ):
         if remaining == 0:
             break
 

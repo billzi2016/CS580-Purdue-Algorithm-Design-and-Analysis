@@ -5,7 +5,9 @@ Cosine Annealing：让学习率按余弦曲线平滑下降。
 from math import cos, pi
 
 
-def cosine_annealing_lr(max_lr: float, min_lr: float, step: int, total_steps: int) -> float:
+def cosine_annealing_lr(
+    max_lr: float, min_lr: float, step: int, total_steps: int
+) -> float:
     """计算单周期余弦退火学习率。"""
 
     if max_lr <= 0 or min_lr < 0 or min_lr > max_lr or total_steps <= 0 or step < 0:

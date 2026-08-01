@@ -8,7 +8,9 @@
 """
 
 
-def find_euler_path(vertex_count: int, edges: list[tuple[int, int]]) -> list[int] | None:
+def find_euler_path(
+    vertex_count: int, edges: list[tuple[int, int]]
+) -> list[int] | None:
     """返回有向图的一条欧拉路径，或在不存在时返回 None。
 
     参数：vertex_count 是顶点数，edges 是 (source, target) 有向边列表。
@@ -44,7 +46,9 @@ def find_euler_path(vertex_count: int, edges: list[tuple[int, int]]) -> list[int
             end_count += 1
         elif difference != 0:
             return None
-    if not ((start_count == 1 and end_count == 1) or (start_count == 0 and end_count == 0)):
+    if not (
+        (start_count == 1 and end_count == 1) or (start_count == 0 and end_count == 0)
+    ):
         return None
     if start == -1:
         start = next(vertex for vertex in range(vertex_count) if out_degree[vertex] > 0)
@@ -59,7 +63,10 @@ def find_euler_path(vertex_count: int, edges: list[tuple[int, int]]) -> list[int
             if not seen[neighbor]:
                 seen[neighbor] = True
                 pending.append(neighbor)
-    if any((in_degree[vertex] or out_degree[vertex]) and not seen[vertex] for vertex in range(vertex_count)):
+    if any(
+        (in_degree[vertex] or out_degree[vertex]) and not seen[vertex]
+        for vertex in range(vertex_count)
+    ):
         return None
 
     cursor = [0] * vertex_count

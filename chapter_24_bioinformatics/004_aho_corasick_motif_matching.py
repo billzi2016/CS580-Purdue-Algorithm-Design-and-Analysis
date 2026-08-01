@@ -24,7 +24,9 @@ class AhoCorasickMotifMatcher:
         边界情况：空列表可构建空自动机；空、重复或非法模式抛出 ValueError。
         关键算法点：BFS 按深度构造失败指针，保证访问节点时其失败节点已准备完毕。
         """
-        if len(set(patterns)) != len(patterns) or any(not pattern for pattern in patterns):
+        if len(set(patterns)) != len(patterns) or any(
+            not pattern for pattern in patterns
+        ):
             raise ValueError("patterns 必须互异且非空")
         for pattern in patterns:
             _validate_dna(pattern, "pattern")

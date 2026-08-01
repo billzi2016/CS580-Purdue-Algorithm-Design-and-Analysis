@@ -59,7 +59,9 @@ class ImplicitTreap:
         self._seed = (1103515245 * self._seed + 12345) & 0x7FFFFFFF
         return self._seed
 
-    def _split(self, node: _Node | None, count: int) -> tuple[_Node | None, _Node | None]:
+    def _split(
+        self, node: _Node | None, count: int
+    ) -> tuple[_Node | None, _Node | None]:
         """按前 count 个元素把 node 分成左右两棵 Treap。"""
         if node is None:
             return None, None
@@ -96,7 +98,9 @@ class ImplicitTreap:
         if index < 0 or index > len(self):
             raise IndexError("插入位置越界")
         left, right = self._split(self._root, index)
-        self._root = self._merge(self._merge(left, _Node(value, self._next_priority())), right)
+        self._root = self._merge(
+            self._merge(left, _Node(value, self._next_priority())), right
+        )
 
     def remove(self, index: int) -> int:
         """删除并返回 index 位置元素。

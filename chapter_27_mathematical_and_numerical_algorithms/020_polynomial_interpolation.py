@@ -41,7 +41,10 @@ def gaussian_elimination(matrix: list[list[float]], vector: list[float]) -> list
             b_vector[row] -= factor * b_vector[pivot]
     result = [0.0] * size
     for row in range(size - 1, -1, -1):
-        result[row] = (b_vector[row] - sum(a_matrix[row][col] * result[col] for col in range(row + 1, size))) / a_matrix[row][row]
+        result[row] = (
+            b_vector[row]
+            - sum(a_matrix[row][col] * result[col] for col in range(row + 1, size))
+        ) / a_matrix[row][row]
     return result
 
 

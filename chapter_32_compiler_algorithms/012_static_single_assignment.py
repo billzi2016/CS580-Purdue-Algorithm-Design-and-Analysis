@@ -12,6 +12,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Assignment:
     """一条三地址赋值：目标由操作数和零至两个源操作数计算。"""
+
     target: str
     operator: str
     operands: tuple[str, ...]
@@ -25,9 +26,17 @@ def rename_to_ssa(assignments: list[Assignment]) -> list[Assignment]:
     versions: dict[str, int] = {}
     result: list[Assignment] = []
     for assignment in assignments:
-        renamed_operands = tuple(_current_name(name, versions) for name in assignment.operands)
+        renamed_operands = tuple(
+            _current_name(name, versions) for name in assignment.operands
+        )
         versions[assignment.target] = versions.get(assignment.target, 0) + 1
-        result.append(Assignment(f"{assignment.target}_{versions[assignment.target]}", assignment.operator, renamed_operands))
+        result.append(
+            Assignment(
+                f"{assignment.target}_{versions[assignment.target]}",
+                assignment.operator,
+                renamed_operands,
+            )
+        )
     return result
 
 
@@ -36,8 +45,16 @@ def _current_name(name: str, versions: dict[str, int]) -> str:
 
 
 if __name__ == "__main__":
-    source = [Assignment("x", "=", ("a",)), Assignment("x", "+", ("x", "b")), Assignment("y", "*", ("x", "x"))]
+    source = [
+        Assignment("x", "=", ("a",)),
+        Assignment("x", "+", ("x", "b")),
+        Assignment("y", "*", ("x", "x")),
+    ]
     ssa = rename_to_ssa(source)
-    assert ssa == [Assignment("x_1", "=", ("a_0",)), Assignment("x_2", "+", ("x_1", "b_0")), Assignment("y_1", "*", ("x_2", "x_2"))]
+    assert ssa == [
+        Assignment("x_1", "=", ("a_0",)),
+        Assignment("x_2", "+", ("x_1", "b_0")),
+        Assignment("y_1", "*", ("x_2", "x_2")),
+    ]
     assert rename_to_ssa([]) == []
     print("012_static_single_assignment: all examples passed")

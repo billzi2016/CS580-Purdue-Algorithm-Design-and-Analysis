@@ -16,7 +16,9 @@ from typing import TypeAlias
 LZ77Token: TypeAlias = tuple[int, int, str | None]
 
 
-def lz77_encode(text: str, window_size: int = 32, lookahead_size: int = 16) -> list[LZ77Token]:
+def lz77_encode(
+    text: str, window_size: int = 32, lookahead_size: int = 16
+) -> list[LZ77Token]:
     """使用有限滑动窗口生成 LZ77 三元组。
 
     参数：text 为待压缩字符串；window_size 限制回看窗口；lookahead_size 限制最长匹配。
@@ -26,7 +28,12 @@ def lz77_encode(text: str, window_size: int = 32, lookahead_size: int = 16) -> l
     """
     if not isinstance(text, str):
         raise TypeError("text 必须是字符串")
-    if isinstance(window_size, bool) or isinstance(lookahead_size, bool) or window_size <= 0 or lookahead_size <= 0:
+    if (
+        isinstance(window_size, bool)
+        or isinstance(lookahead_size, bool)
+        or window_size <= 0
+        or lookahead_size <= 0
+    ):
         raise ValueError("window_size 和 lookahead_size 必须是正整数")
 
     tokens: list[LZ77Token] = []
@@ -40,7 +47,10 @@ def lz77_encode(text: str, window_size: int = 32, lookahead_size: int = 16) -> l
             length = 0
             # text 作为完整原始输入，允许 source_start + length 进入当前待编码区域，
             # 这等价于解码端逐字符追加时的重叠复制。
-            while length < maximum_length and text[source_start + length] == text[position + length]:
+            while (
+                length < maximum_length
+                and text[source_start + length] == text[position + length]
+            ):
                 length += 1
                 if source_start + length >= position + length:
                     break
@@ -69,13 +79,23 @@ def lz77_decode(tokens: list[LZ77Token]) -> str:
         if not isinstance(token, tuple) or len(token) != 3:
             raise ValueError("每个 token 必须是 (距离, 长度, 下一个字符) 元组")
         distance, length, next_symbol = token
-        if any(isinstance(value, bool) for value in (distance, length)) or not isinstance(distance, int) or not isinstance(length, int):
+        if (
+            any(isinstance(value, bool) for value in (distance, length))
+            or not isinstance(distance, int)
+            or not isinstance(length, int)
+        ):
             raise ValueError("距离和长度必须是整数")
-        if distance < 0 or length < 0 or (length > 0 and (distance == 0 or distance > len(output))):
+        if (
+            distance < 0
+            or length < 0
+            or (length > 0 and (distance == 0 or distance > len(output)))
+        ):
             raise ValueError("token 的距离或长度无效")
         if distance == 0 and length != 0:
             raise ValueError("距离为 0 时匹配长度必须为 0")
-        if next_symbol is not None and (not isinstance(next_symbol, str) or len(next_symbol) != 1):
+        if next_symbol is not None and (
+            not isinstance(next_symbol, str) or len(next_symbol) != 1
+        ):
             raise ValueError("下一个字符必须是单字符或 None")
         if next_symbol is None and token_index != len(tokens) - 1:
             raise ValueError("只有最后一个 token 可以没有下一个字符")

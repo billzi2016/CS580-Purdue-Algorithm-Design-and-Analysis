@@ -13,7 +13,11 @@ def caesar_encrypt(text: str, shift: int) -> str:
     边界：空串返回空串，非字符串或非整数（含 bool）抛出 ValueError。
     关键点：用模 26 把移出字母表末端的字符绕回开头，非字母不参与位移。
     """
-    if not isinstance(text, str) or isinstance(shift, bool) or not isinstance(shift, int):
+    if (
+        not isinstance(text, str)
+        or isinstance(shift, bool)
+        or not isinstance(shift, int)
+    ):
         raise ValueError("text 必须是字符串且 shift 必须是整数")
     result: list[str] = []
     for character in text:

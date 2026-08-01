@@ -19,7 +19,6 @@
     O(n^2)
 """
 
-
 Matrix = list[list[int]]
 
 
@@ -74,10 +73,18 @@ def _multiply_square_recursive(left: Matrix, right: Matrix) -> Matrix:
     a11, a12, a21, a22 = _split_quadrants(left)
     b11, b12, b21, b22 = _split_quadrants(right)
 
-    c11 = _add_matrices(_multiply_square_recursive(a11, b11), _multiply_square_recursive(a12, b21))
-    c12 = _add_matrices(_multiply_square_recursive(a11, b12), _multiply_square_recursive(a12, b22))
-    c21 = _add_matrices(_multiply_square_recursive(a21, b11), _multiply_square_recursive(a22, b21))
-    c22 = _add_matrices(_multiply_square_recursive(a21, b12), _multiply_square_recursive(a22, b22))
+    c11 = _add_matrices(
+        _multiply_square_recursive(a11, b11), _multiply_square_recursive(a12, b21)
+    )
+    c12 = _add_matrices(
+        _multiply_square_recursive(a11, b12), _multiply_square_recursive(a12, b22)
+    )
+    c21 = _add_matrices(
+        _multiply_square_recursive(a21, b11), _multiply_square_recursive(a22, b21)
+    )
+    c22 = _add_matrices(
+        _multiply_square_recursive(a21, b12), _multiply_square_recursive(a22, b22)
+    )
 
     return _combine_quadrants(c11, c12, c21, c22)
 
@@ -147,7 +154,9 @@ def _combine_quadrants(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Ma
     将四个象限合并为一个方阵。
     """
     top = [left_row + right_row for left_row, right_row in zip(c11, c12, strict=True)]
-    bottom = [left_row + right_row for left_row, right_row in zip(c21, c22, strict=True)]
+    bottom = [
+        left_row + right_row for left_row, right_row in zip(c21, c22, strict=True)
+    ]
     return top + bottom
 
 
@@ -156,13 +165,22 @@ if __name__ == "__main__":
     right_matrix = [[5, 6], [7, 8]]
     expected_square = [[19, 22], [43, 50]]
     assert multiply_matrices_naive(left_matrix, right_matrix) == expected_square
-    assert multiply_matrices_divide_and_conquer(left_matrix, right_matrix) == expected_square
+    assert (
+        multiply_matrices_divide_and_conquer(left_matrix, right_matrix)
+        == expected_square
+    )
 
     rectangular_left = [[1, 2, 3], [4, 5, 6]]
     rectangular_right = [[7, 8], [9, 10], [11, 12]]
     expected_rectangular = [[58, 64], [139, 154]]
-    assert multiply_matrices_naive(rectangular_left, rectangular_right) == expected_rectangular
-    assert multiply_matrices_divide_and_conquer(rectangular_left, rectangular_right) == expected_rectangular
+    assert (
+        multiply_matrices_naive(rectangular_left, rectangular_right)
+        == expected_rectangular
+    )
+    assert (
+        multiply_matrices_divide_and_conquer(rectangular_left, rectangular_right)
+        == expected_rectangular
+    )
 
     try:
         multiply_matrices_naive([[1, 2]], [[1, 2]])

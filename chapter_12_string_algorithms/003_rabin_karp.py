@@ -8,7 +8,9 @@
 """
 
 
-def rabin_karp_search(text: str, pattern: str, base: int = 257, modulus: int = 1_000_000_007) -> list[int]:
+def rabin_karp_search(
+    text: str, pattern: str, base: int = 257, modulus: int = 1_000_000_007
+) -> list[int]:
     """返回 pattern 在 text 中全部（可重叠）出现的起始下标。
 
     参数：text、pattern 为字符串；base 和 modulus 是正的滚动哈希参数。
@@ -30,11 +32,16 @@ def rabin_karp_search(text: str, pattern: str, base: int = 257, modulus: int = 1
         window_hash = (window_hash * base + ord(text[index])) % modulus
     matches: list[int] = []
     for start in range(len(text) - pattern_length + 1):
-        if window_hash == pattern_hash and text[start:start + pattern_length] == pattern:
+        if (
+            window_hash == pattern_hash
+            and text[start : start + pattern_length] == pattern
+        ):
             matches.append(start)
         if start + pattern_length < len(text):
             window_hash = (window_hash - ord(text[start]) * highest_power) % modulus
-            window_hash = (window_hash * base + ord(text[start + pattern_length])) % modulus
+            window_hash = (
+                window_hash * base + ord(text[start + pattern_length])
+            ) % modulus
     return matches
 
 

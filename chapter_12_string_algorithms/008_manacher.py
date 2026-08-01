@@ -25,8 +25,14 @@ def longest_palindromic_substring(text: str) -> str:
     best_start = 0
     best_length = 1
     for center in range(length):
-        radius = 1 if center > right else min(odd[left + right - center], right - center + 1)
-        while center - radius >= 0 and center + radius < length and text[center - radius] == text[center + radius]:
+        radius = (
+            1 if center > right else min(odd[left + right - center], right - center + 1)
+        )
+        while (
+            center - radius >= 0
+            and center + radius < length
+            and text[center - radius] == text[center + radius]
+        ):
             radius += 1
         odd[center] = radius
         candidate_length = 2 * radius - 1
@@ -40,8 +46,16 @@ def longest_palindromic_substring(text: str) -> str:
     left = 0
     right = -1
     for center in range(length):
-        radius = 0 if center > right else min(even[left + right - center + 1], right - center + 1)
-        while center - radius - 1 >= 0 and center + radius < length and text[center - radius - 1] == text[center + radius]:
+        radius = (
+            0
+            if center > right
+            else min(even[left + right - center + 1], right - center + 1)
+        )
+        while (
+            center - radius - 1 >= 0
+            and center + radius < length
+            and text[center - radius - 1] == text[center + radius]
+        ):
             radius += 1
         even[center] = radius
         candidate_length = 2 * radius
@@ -50,7 +64,7 @@ def longest_palindromic_substring(text: str) -> str:
             best_start, best_length = candidate_start, candidate_length
         if center + radius - 1 > right:
             left, right = center - radius, center + radius - 1
-    return text[best_start:best_start + best_length]
+    return text[best_start : best_start + best_length]
 
 
 if __name__ == "__main__":

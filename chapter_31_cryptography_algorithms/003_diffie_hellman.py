@@ -15,7 +15,14 @@ def modular_power(base: int, exponent: int, modulus: int) -> int:
     参数均为整数，exponent 非负且 modulus 大于 1；返回模幂结果。
     关键点：循环不变量为 result * base^remaining 与初始幂在模 modulus 下相等。
     """
-    if any(isinstance(value, bool) or not isinstance(value, int) for value in (base, exponent, modulus)) or exponent < 0 or modulus <= 1:
+    if (
+        any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in (base, exponent, modulus)
+        )
+        or exponent < 0
+        or modulus <= 1
+    ):
         raise ValueError("base、exponent 必须为整数，exponent 非负且 modulus 大于 1")
     result = 1
     base %= modulus
@@ -43,7 +50,10 @@ def _is_prime(value: int) -> bool:
 
 def _validate_domain(prime_modulus: int, generator: int) -> None:
     """验证教学有限域参数；不替代标准群、子群和对手公钥完整验证。"""
-    if any(isinstance(value, bool) or not isinstance(value, int) for value in (prime_modulus, generator)):
+    if any(
+        isinstance(value, bool) or not isinstance(value, int)
+        for value in (prime_modulus, generator)
+    ):
         raise ValueError("域参数必须是整数")
     if not _is_prime(prime_modulus) or prime_modulus <= 3:
         raise ValueError("prime_modulus 必须是大于 3 的素数")
@@ -58,23 +68,41 @@ def dh_public_value(prime_modulus: int, generator: int, private_exponent: int) -
     返回值：可公开发送的有限域元素。私钥必须在 [1, p-2]；本函数不负责安全随机生成。
     """
     _validate_domain(prime_modulus, generator)
-    if isinstance(private_exponent, bool) or not isinstance(private_exponent, int) or not 1 <= private_exponent <= prime_modulus - 2:
+    if (
+        isinstance(private_exponent, bool)
+        or not isinstance(private_exponent, int)
+        or not 1 <= private_exponent <= prime_modulus - 2
+    ):
         raise ValueError("private_exponent 必须位于 [1, prime_modulus - 2]")
     return modular_power(generator, private_exponent, prime_modulus)
 
 
-def dh_shared_secret(prime_modulus: int, own_private_exponent: int, peer_public_value: int) -> int:
+def dh_shared_secret(
+    prime_modulus: int, own_private_exponent: int, peer_public_value: int
+) -> int:
     """计算 peer_public_value^own_private_exponent mod p 的共享整数。
 
     参数：p、己方私钥和对方公开值。返回共享整数。
     边界：拒绝不在 [2, p-2] 的对方公开值；这仍不构成生产所需的完整子群验证。
     关键点：两方分别得到 (g^b)^a 与 (g^a)^b，指数乘法交换性使其相同。
     """
-    if isinstance(prime_modulus, bool) or not isinstance(prime_modulus, int) or not _is_prime(prime_modulus):
+    if (
+        isinstance(prime_modulus, bool)
+        or not isinstance(prime_modulus, int)
+        or not _is_prime(prime_modulus)
+    ):
         raise ValueError("prime_modulus 必须是素数")
-    if isinstance(own_private_exponent, bool) or not isinstance(own_private_exponent, int) or not 1 <= own_private_exponent <= prime_modulus - 2:
+    if (
+        isinstance(own_private_exponent, bool)
+        or not isinstance(own_private_exponent, int)
+        or not 1 <= own_private_exponent <= prime_modulus - 2
+    ):
         raise ValueError("own_private_exponent 必须位于 [1, p-2]")
-    if isinstance(peer_public_value, bool) or not isinstance(peer_public_value, int) or not 2 <= peer_public_value <= prime_modulus - 2:
+    if (
+        isinstance(peer_public_value, bool)
+        or not isinstance(peer_public_value, int)
+        or not 2 <= peer_public_value <= prime_modulus - 2
+    ):
         raise ValueError("peer_public_value 必须位于 [2, p-2]")
     return modular_power(peer_public_value, own_private_exponent, prime_modulus)
 
@@ -85,7 +113,9 @@ if __name__ == "__main__":
     bob_public = dh_public_value(p, g, bob_private)
     assert alice_public == 8 and bob_public == 19
     assert dh_shared_secret(p, alice_private, bob_public) == 2
-    assert dh_shared_secret(p, alice_private, bob_public) == dh_shared_secret(p, bob_private, alice_public)
+    assert dh_shared_secret(p, alice_private, bob_public) == dh_shared_secret(
+        p, bob_private, alice_public
+    )
     assert modular_power(7, 0, 13) == 1
     try:
         dh_public_value(21, 5, 2)

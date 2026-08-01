@@ -57,10 +57,11 @@ def hill_climb(
 
 
 if __name__ == "__main__":
+
     def integer_neighbors(value: int) -> list[int]:
         return [value - 1, value + 1]
 
-    result = hill_climb(0, lambda value: -(value - 4) ** 2, integer_neighbors)
+    result = hill_climb(0, lambda value: -((value - 4) ** 2), integer_neighbors)
     assert result.state == 4
     assert result.score == 0
     assert result.steps == 4

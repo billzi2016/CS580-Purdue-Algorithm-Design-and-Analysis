@@ -33,7 +33,9 @@ def _merge_sort_points(points: list[Point]) -> list[Point]:
 
 def _cross(origin: Point, first: Point, second: Point) -> int:
     """返回 origin->first 与 origin->second 的叉积。"""
-    return (first[0] - origin[0]) * (second[1] - origin[1]) - (first[1] - origin[1]) * (second[0] - origin[0])
+    return (first[0] - origin[0]) * (second[1] - origin[1]) - (first[1] - origin[1]) * (
+        second[0] - origin[0]
+    )
 
 
 def convex_hull(points: list[Point]) -> list[Point]:
@@ -68,5 +70,9 @@ if __name__ == "__main__":
     assert convex_hull([]) == []
     assert convex_hull([(1, 1)]) == [(1, 1)]
     assert convex_hull([(0, 0), (1, 0), (2, 0), (1, 0)]) == [(0, 0), (2, 0)]
-    assert convex_hull([(0, 0), (1, 1), (2, 0), (1, 2), (1, 0)]) == [(0, 0), (2, 0), (1, 2)]
+    assert convex_hull([(0, 0), (1, 1), (2, 0), (1, 2), (1, 0)]) == [
+        (0, 0),
+        (2, 0),
+        (1, 2),
+    ]
     print("004_convex_hull: all examples passed")

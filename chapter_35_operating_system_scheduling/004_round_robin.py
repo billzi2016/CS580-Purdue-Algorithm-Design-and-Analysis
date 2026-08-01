@@ -29,7 +29,9 @@ class Segment:
     finish: int
 
 
-def round_robin(processes: list[Process], quantum: int) -> tuple[list[Segment], dict[str, int]]:
+def round_robin(
+    processes: list[Process], quantum: int
+) -> tuple[list[Segment], dict[str, int]]:
     """执行 Round Robin，返回 timeline 和完成时间。"""
 
     if quantum <= 0:

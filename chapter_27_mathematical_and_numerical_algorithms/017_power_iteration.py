@@ -5,20 +5,26 @@
 from math import sqrt
 
 
-def power_iteration(matrix: list[list[float]], initial: list[float], steps: int) -> tuple[float, list[float]]:
+def power_iteration(
+    matrix: list[list[float]], initial: list[float], steps: int
+) -> tuple[float, list[float]]:
     """返回主特征值近似和单位化特征向量近似。"""
 
     if steps < 0 or len(matrix) != len(initial):
         raise ValueError("参数范围非法")
     vector = initial[:]
     for _ in range(steps):
-        next_vector = [sum(matrix[row][column] * vector[column] for column in range(len(vector))) for row in range(len(vector))]
+        next_vector = [
+            sum(matrix[row][column] * vector[column] for column in range(len(vector)))
+            for row in range(len(vector))
+        ]
         norm = sqrt(sum(value * value for value in next_vector))
         if norm == 0:
             raise ValueError("幂迭代遇到零向量，输入矩阵或初始向量不适合继续迭代")
         vector = [value / norm for value in next_vector]
     numerator = sum(
-        vector[row] * sum(matrix[row][column] * vector[column] for column in range(len(vector)))
+        vector[row]
+        * sum(matrix[row][column] * vector[column] for column in range(len(vector)))
         for row in range(len(vector))
     )
     return numerator, vector

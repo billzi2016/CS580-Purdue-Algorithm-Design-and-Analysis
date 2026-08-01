@@ -25,7 +25,11 @@ def grace_hash_join(
     right_partitions = _partition(right_rows, right_key, partition_count)
     result: list[Row] = []
     for bucket in range(partition_count):
-        result.extend(_hash_join_partition(left_partitions[bucket], right_partitions[bucket], left_key, right_key))
+        result.extend(
+            _hash_join_partition(
+                left_partitions[bucket], right_partitions[bucket], left_key, right_key
+            )
+        )
     return result
 
 
@@ -36,7 +40,9 @@ def _partition(rows: list[Row], key: str, partition_count: int) -> list[list[Row
     return partitions
 
 
-def _hash_join_partition(left: list[Row], right: list[Row], left_key: str, right_key: str) -> list[Row]:
+def _hash_join_partition(
+    left: list[Row], right: list[Row], left_key: str, right_key: str
+) -> list[Row]:
     table: dict[Any, list[Row]] = {}
     for row in left:
         table.setdefault(row[left_key], []).append(row)

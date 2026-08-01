@@ -80,7 +80,9 @@ def predictive_parse(table: ParsingTable, start_symbol: str, tokens: list[str]) 
     return False
 
 
-def _compute_first_sets(grammar: Grammar, nonterminals: set[str]) -> dict[str, set[str]]:
+def _compute_first_sets(
+    grammar: Grammar, nonterminals: set[str]
+) -> dict[str, set[str]]:
     first_sets = {nonterminal: set() for nonterminal in nonterminals}
     changed = True
     while changed:
@@ -173,7 +175,17 @@ if __name__ == "__main__":
     assert not predictive_parse(table, "E", ["id", "+"])
 
     try:
-        build_ll1_table({"S": [["a", "A"], ["a", "B"],], "A": [[]], "B": [[]]}, "S")
+        build_ll1_table(
+            {
+                "S": [
+                    ["a", "A"],
+                    ["a", "B"],
+                ],
+                "A": [[]],
+                "B": [[]],
+            },
+            "S",
+        )
         raise AssertionError("FIRST/FIRST 冲突必须被检测")
     except LL1ConflictError:
         pass

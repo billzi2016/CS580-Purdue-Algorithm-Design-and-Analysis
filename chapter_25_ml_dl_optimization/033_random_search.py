@@ -24,7 +24,10 @@ def random_search(
     best_params = {"lr": 0.0, "wd": 0.0}
     best_score = float("-inf")
     for _ in range(trials):
-        params = {"lr": sample_uniform(0.001, 0.2, rng), "wd": sample_uniform(0.0, 0.2, rng)}
+        params = {
+            "lr": sample_uniform(0.001, 0.2, rng),
+            "wd": sample_uniform(0.0, 0.2, rng),
+        }
         score = score_function(params)
         if score > best_score:
             best_score = score
@@ -33,7 +36,9 @@ def random_search(
 
 
 if __name__ == "__main__":
-    params, score = random_search(20, 7, lambda item: -(item["lr"] - 0.1) ** 2 - item["wd"])
+    params, score = random_search(
+        20, 7, lambda item: -((item["lr"] - 0.1) ** 2) - item["wd"]
+    )
     assert 0.001 <= params["lr"] <= 0.2
     assert 0.0 <= params["wd"] <= 0.2
     assert score <= 0.0

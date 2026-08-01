@@ -33,19 +33,33 @@ class GraphConvolutionLayer(torch.nn.Module):
         """执行一次图卷积。"""
         if adjacency.ndim != 2 or adjacency.shape[0] != adjacency.shape[1]:
             raise ValueError("adjacency 必须是方阵")
-        if features.ndim != 2 or features.shape[0] != adjacency.shape[0] or features.shape[1] != self.input_dim:
+        if (
+            features.ndim != 2
+            or features.shape[0] != adjacency.shape[0]
+            or features.shape[1] != self.input_dim
+        ):
             raise ValueError("features 形状必须为 (num_nodes,input_dim)")
 
-        identity = torch.eye(adjacency.shape[0], dtype=adjacency.dtype, device=adjacency.device)
+        identity = torch.eye(
+            adjacency.shape[0], dtype=adjacency.dtype, device=adjacency.device
+        )
         adjacency_with_self_loop = adjacency + identity
         degree = adjacency_with_self_loop.sum(dim=1)
         degree_inverse_sqrt = torch.pow(degree, -0.5)
         degree_inverse_sqrt[torch.isinf(degree_inverse_sqrt)] = 0.0
-        normalized = degree_inverse_sqrt.unsqueeze(1) * adjacency_with_self_loop * degree_inverse_sqrt.unsqueeze(0)
+        normalized = (
+            degree_inverse_sqrt.unsqueeze(1)
+            * adjacency_with_self_loop
+            * degree_inverse_sqrt.unsqueeze(0)
+        )
         return normalized @ features @ self.weight + self.bias
 
     def training_step(
-        self, adjacency: torch.Tensor, features: torch.Tensor, target: torch.Tensor, learning_rate: float
+        self,
+        adjacency: torch.Tensor,
+        features: torch.Tensor,
+        target: torch.Tensor,
+        learning_rate: float,
     ) -> float:
         """执行一次 GCN 层训练步。"""
         if learning_rate <= 0:
@@ -85,7 +99,9 @@ if __name__ == "__main__":
     assert isolated_output.shape == (1, 2)
 
     previous_weight = layer.weight.detach().clone()
-    loss_value = layer.training_step(adjacency_matrix, feature_matrix, torch.zeros_like(output_matrix), 0.01)
+    loss_value = layer.training_step(
+        adjacency_matrix, feature_matrix, torch.zeros_like(output_matrix), 0.01
+    )
     assert loss_value >= 0.0
     assert not torch.equal(previous_weight, layer.weight.detach())
 

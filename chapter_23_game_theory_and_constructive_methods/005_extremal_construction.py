@@ -42,7 +42,11 @@ def is_valid_maximum_construction(n: int, chosen: list[int]) -> bool:
     边界情况：n 为负或 chosen 包含越界/重复值时返回假。
     关键算法点：排序后只需检查相邻选中值之差，大小再与已证明上界比较。
     """
-    if n < 0 or len(set(chosen)) != len(chosen) or any(value < 1 or value > n for value in chosen):
+    if (
+        n < 0
+        or len(set(chosen)) != len(chosen)
+        or any(value < 1 or value > n for value in chosen)
+    ):
         return False
     ordered = sorted(chosen)
     if any(right - left == 1 for left, right in zip(ordered, ordered[1:])):
@@ -60,7 +64,9 @@ def pair_block_upper_bound(n: int) -> list[tuple[int, int | None]]:
     """
     if n < 0:
         raise ValueError("n 必须是非负整数")
-    return [(start, start + 1 if start + 1 <= n else None) for start in range(1, n + 1, 2)]
+    return [
+        (start, start + 1 if start + 1 <= n else None) for start in range(1, n + 1, 2)
+    ]
 
 
 if __name__ == "__main__":

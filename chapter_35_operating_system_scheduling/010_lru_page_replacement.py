@@ -20,7 +20,9 @@ class PageEvent:
     frames_old_to_new: tuple[int, ...]
 
 
-def lru_page_replacement(references: list[int], frame_count: int) -> tuple[int, list[PageEvent]]:
+def lru_page_replacement(
+    references: list[int], frame_count: int
+) -> tuple[int, list[PageEvent]]:
     """执行 LRU 页面置换，返回缺页次数和事件列表。"""
 
     if frame_count <= 0:

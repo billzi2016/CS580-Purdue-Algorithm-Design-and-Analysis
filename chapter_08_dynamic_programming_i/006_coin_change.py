@@ -25,7 +25,9 @@ def min_coins(coins: list[int], amount: int) -> int:
     for current_amount in range(1, amount + 1):
         for coin in coins:
             if current_amount >= coin:
-                dp[current_amount] = min(dp[current_amount], dp[current_amount - coin] + 1)
+                dp[current_amount] = min(
+                    dp[current_amount], dp[current_amount - coin] + 1
+                )
     return -1 if dp[amount] == unreachable else dp[amount]
 
 

@@ -31,16 +31,32 @@ class TransformerDecoderBlock(torch.nn.Module):
         self.num_heads = num_heads
         self.head_dim = embed_dim // num_heads
 
-        self.self_query_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
-        self.self_key_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
-        self.self_value_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
+        self.self_query_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
+        self.self_key_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
+        self.self_value_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
 
-        self.cross_query_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
-        self.cross_key_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
-        self.cross_value_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
+        self.cross_query_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
+        self.cross_key_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
+        self.cross_value_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
 
-        self.self_output_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
-        self.cross_output_weight = torch.nn.Parameter(torch.randn(embed_dim, embed_dim) * 0.1)
+        self.self_output_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
+        self.cross_output_weight = torch.nn.Parameter(
+            torch.randn(embed_dim, embed_dim) * 0.1
+        )
         self.self_bias = torch.nn.Parameter(torch.zeros(embed_dim))
         self.cross_bias = torch.nn.Parameter(torch.zeros(embed_dim))
 
@@ -59,7 +75,9 @@ class TransformerDecoderBlock(torch.nn.Module):
         """线性投影并拆成多头。"""
         batch_size, time_steps, _ = tensor.shape
         projected = tensor @ weight
-        projected = projected.reshape(batch_size, time_steps, self.num_heads, self.head_dim)
+        projected = projected.reshape(
+            batch_size, time_steps, self.num_heads, self.head_dim
+        )
         return projected.permute(0, 2, 1, 3)
 
     def _attention(
@@ -86,7 +104,9 @@ class TransformerDecoderBlock(torch.nn.Module):
 
         weights = torch.softmax(scores, dim=-1)
         attended = torch.matmul(weights, value)
-        attended = attended.permute(0, 2, 1, 3).reshape(query_source.shape[0], query_source.shape[1], self.embed_dim)
+        attended = attended.permute(0, 2, 1, 3).reshape(
+            query_source.shape[0], query_source.shape[1], self.embed_dim
+        )
         return attended @ output_weight + output_bias, weights
 
     def forward(
@@ -99,7 +119,11 @@ class TransformerDecoderBlock(torch.nn.Module):
         """返回解码器输出、自注意力权重和交叉注意力权重。"""
         if target.ndim != 3 or memory.ndim != 3:
             raise ValueError("target 和 memory 必须都是三维张量")
-        if target.shape[0] != memory.shape[0] or target.shape[2] != self.embed_dim or memory.shape[2] != self.embed_dim:
+        if (
+            target.shape[0] != memory.shape[0]
+            or target.shape[2] != self.embed_dim
+            or memory.shape[2] != self.embed_dim
+        ):
             raise ValueError("target 与 memory 的 batch/embed_dim 必须匹配")
 
         self_output, self_weights = self._attention(
@@ -128,7 +152,11 @@ class TransformerDecoderBlock(torch.nn.Module):
 
         feed_forward = torch.relu(cross_residual @ self.ffn_weight_1 + self.ffn_bias_1)
         feed_forward = feed_forward @ self.ffn_weight_2 + self.ffn_bias_2
-        return self._layer_norm(cross_residual + feed_forward), self_weights, cross_weights
+        return (
+            self._layer_norm(cross_residual + feed_forward),
+            self_weights,
+            cross_weights,
+        )
 
     def training_step(
         self,
@@ -177,7 +205,9 @@ if __name__ == "__main__":
     assert torch.all(masked_self_weights[:, :, 0, 1:] < 1e-6)
 
     previous_weight = block.ffn_weight_2.detach().clone()
-    loss_value = block.training_step(target_tensor, memory_tensor, torch.zeros_like(outputs), 0.01)
+    loss_value = block.training_step(
+        target_tensor, memory_tensor, torch.zeros_like(outputs), 0.01
+    )
     assert loss_value >= 0.0
     assert not torch.equal(previous_weight, block.ffn_weight_2.detach())
 

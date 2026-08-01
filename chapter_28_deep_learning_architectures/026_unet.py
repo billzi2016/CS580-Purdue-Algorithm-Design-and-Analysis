@@ -25,15 +25,29 @@ class UNet(torch.nn.Module):
         if in_channels <= 0 or base_channels <= 0 or out_channels <= 0:
             raise ValueError("通道数必须为正")
 
-        self.encoder_conv1 = torch.nn.Conv2d(in_channels, base_channels, kernel_size=3, padding=1)
-        self.encoder_conv2 = torch.nn.Conv2d(base_channels, base_channels, kernel_size=3, padding=1)
-        self.bottleneck_conv1 = torch.nn.Conv2d(base_channels, base_channels * 2, kernel_size=3, padding=1)
-        self.bottleneck_conv2 = torch.nn.Conv2d(base_channels * 2, base_channels * 2, kernel_size=3, padding=1)
-        self.decoder_conv1 = torch.nn.Conv2d(base_channels * 3, base_channels, kernel_size=3, padding=1)
-        self.decoder_conv2 = torch.nn.Conv2d(base_channels, base_channels, kernel_size=3, padding=1)
+        self.encoder_conv1 = torch.nn.Conv2d(
+            in_channels, base_channels, kernel_size=3, padding=1
+        )
+        self.encoder_conv2 = torch.nn.Conv2d(
+            base_channels, base_channels, kernel_size=3, padding=1
+        )
+        self.bottleneck_conv1 = torch.nn.Conv2d(
+            base_channels, base_channels * 2, kernel_size=3, padding=1
+        )
+        self.bottleneck_conv2 = torch.nn.Conv2d(
+            base_channels * 2, base_channels * 2, kernel_size=3, padding=1
+        )
+        self.decoder_conv1 = torch.nn.Conv2d(
+            base_channels * 3, base_channels, kernel_size=3, padding=1
+        )
+        self.decoder_conv2 = torch.nn.Conv2d(
+            base_channels, base_channels, kernel_size=3, padding=1
+        )
         self.output_conv = torch.nn.Conv2d(base_channels, out_channels, kernel_size=1)
 
-    def _double_conv(self, first: torch.nn.Conv2d, second: torch.nn.Conv2d, inputs: torch.Tensor) -> torch.Tensor:
+    def _double_conv(
+        self, first: torch.nn.Conv2d, second: torch.nn.Conv2d, inputs: torch.Tensor
+    ) -> torch.Tensor:
         """执行两次卷积与 ReLU。"""
         hidden = torch.relu(first(inputs))
         return torch.relu(second(hidden))
@@ -45,16 +59,22 @@ class UNet(torch.nn.Module):
         if inputs.shape[2] % 2 != 0 or inputs.shape[3] % 2 != 0:
             raise ValueError("输入高宽必须为 2 的倍数")
 
-        encoder_features = self._double_conv(self.encoder_conv1, self.encoder_conv2, inputs)
+        encoder_features = self._double_conv(
+            self.encoder_conv1, self.encoder_conv2, inputs
+        )
         pooled = F.max_pool2d(encoder_features, kernel_size=2, stride=2)
-        bottleneck = self._double_conv(self.bottleneck_conv1, self.bottleneck_conv2, pooled)
+        bottleneck = self._double_conv(
+            self.bottleneck_conv1, self.bottleneck_conv2, pooled
+        )
 
         upsampled = F.interpolate(bottleneck, scale_factor=2, mode="nearest")
         merged = torch.cat((upsampled, encoder_features), dim=1)
         decoded = self._double_conv(self.decoder_conv1, self.decoder_conv2, merged)
         return self.output_conv(decoded)
 
-    def training_step(self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float) -> float:
+    def training_step(
+        self, inputs: torch.Tensor, target: torch.Tensor, learning_rate: float
+    ) -> float:
         """执行一次 U-Net 训练步。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
@@ -89,7 +109,9 @@ if __name__ == "__main__":
     assert zero_output.shape == (1, 2, 8, 8)
 
     previous_weight = model.output_conv.weight.detach().clone()
-    loss_value = model.training_step(image_tensor, torch.zeros_like(output_tensor), 0.001)
+    loss_value = model.training_step(
+        image_tensor, torch.zeros_like(output_tensor), 0.001
+    )
     assert loss_value >= 0.0
     assert not torch.equal(previous_weight, model.output_conv.weight.detach())
 

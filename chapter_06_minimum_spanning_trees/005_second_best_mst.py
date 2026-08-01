@@ -53,7 +53,9 @@ class UnionFind:
         return True
 
 
-def second_best_mst_weight(nodes: Iterable[Node], edges: list[Edge]) -> tuple[float, float | None]:
+def second_best_mst_weight(
+    nodes: Iterable[Node], edges: list[Edge]
+) -> tuple[float, float | None]:
     """
     计算 MST 权重和次小生成树权重。
 
@@ -83,7 +85,9 @@ def second_best_mst_weight(nodes: Iterable[Node], edges: list[Edge]) -> tuple[fl
     return mst_weight, None if best_candidate == float("inf") else best_candidate
 
 
-def _kruskal_with_indices(nodes: list[Node], edges: list[Edge]) -> tuple[list[Edge], float, set[int]]:
+def _kruskal_with_indices(
+    nodes: list[Node], edges: list[Edge]
+) -> tuple[list[Edge], float, set[int]]:
     """
     Kruskal 求 MST，同时记录被选中的原始边下标。
     """
@@ -104,7 +108,9 @@ def _kruskal_with_indices(nodes: list[Node], edges: list[Edge]) -> tuple[list[Ed
     return selected_edges, total_weight, selected_indices
 
 
-def _build_tree_adjacency(nodes: list[Node], edges: list[Edge]) -> dict[Node, list[tuple[Node, float]]]:
+def _build_tree_adjacency(
+    nodes: list[Node], edges: list[Edge]
+) -> dict[Node, list[tuple[Node, float]]]:
     """
     根据 MST 边构建无向树邻接表。
     """
@@ -115,7 +121,9 @@ def _build_tree_adjacency(nodes: list[Node], edges: list[Edge]) -> dict[Node, li
     return graph
 
 
-def _max_edge_weight_on_tree_path(graph: dict[Node, list[tuple[Node, float]]], start: Node, end: Node) -> float:
+def _max_edge_weight_on_tree_path(
+    graph: dict[Node, list[tuple[Node, float]]], start: Node, end: Node
+) -> float:
     """
     在树中查找 start 到 end 路径上的最大边权。
     """

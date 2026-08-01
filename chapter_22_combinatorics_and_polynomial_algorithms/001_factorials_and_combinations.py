@@ -33,7 +33,9 @@ class CombinatoricsTable:
         # 费马小定理在 modulus 为素数时给出 a^(p-2) ≡ a^(-1) (mod p)。
         self.inverse_factorial[max_n] = pow(self.factorial[max_n], modulus - 2, modulus)
         for value in range(max_n, 0, -1):
-            self.inverse_factorial[value - 1] = self.inverse_factorial[value] * value % modulus
+            self.inverse_factorial[value - 1] = (
+                self.inverse_factorial[value] * value % modulus
+            )
 
     def permutations(self, n: int, k: int) -> int:
         """返回从 n 个不同元素中取有序 k 元组的数量 P(n, k)。
@@ -59,7 +61,13 @@ class CombinatoricsTable:
         self._check_n(n)
         if k < 0 or k > n:
             return 0
-        return self.factorial[n] * self.inverse_factorial[k] % self.modulus * self.inverse_factorial[n - k] % self.modulus
+        return (
+            self.factorial[n]
+            * self.inverse_factorial[k]
+            % self.modulus
+            * self.inverse_factorial[n - k]
+            % self.modulus
+        )
 
     def _check_n(self, n: int) -> None:
         if not 0 <= n <= self.max_n:

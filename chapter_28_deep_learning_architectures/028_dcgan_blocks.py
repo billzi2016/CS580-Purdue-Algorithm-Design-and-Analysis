@@ -19,7 +19,9 @@ import torch.nn.functional as F
 class DCGANBlocks(torch.nn.Module):
     """手写最小 DCGAN 生成器块和判别器块。"""
 
-    def __init__(self, noise_channels: int, feature_channels: int, image_channels: int) -> None:
+    def __init__(
+        self, noise_channels: int, feature_channels: int, image_channels: int
+    ) -> None:
         """初始化转置卷积和卷积参数。"""
         super().__init__()
         if noise_channels <= 0 or feature_channels <= 0 or image_channels <= 0:
@@ -29,14 +31,20 @@ class DCGANBlocks(torch.nn.Module):
         self.image_channels = image_channels
 
         self.generator_block = torch.nn.Sequential(
-            torch.nn.ConvTranspose2d(noise_channels, feature_channels, kernel_size=4, stride=1, padding=0),
+            torch.nn.ConvTranspose2d(
+                noise_channels, feature_channels, kernel_size=4, stride=1, padding=0
+            ),
             torch.nn.BatchNorm2d(feature_channels),
             torch.nn.ReLU(),
-            torch.nn.ConvTranspose2d(feature_channels, image_channels, kernel_size=4, stride=2, padding=1),
+            torch.nn.ConvTranspose2d(
+                feature_channels, image_channels, kernel_size=4, stride=2, padding=1
+            ),
             torch.nn.Tanh(),
         )
         self.discriminator_block = torch.nn.Sequential(
-            torch.nn.Conv2d(image_channels, feature_channels, kernel_size=4, stride=2, padding=1),
+            torch.nn.Conv2d(
+                image_channels, feature_channels, kernel_size=4, stride=2, padding=1
+            ),
             torch.nn.LeakyReLU(0.2),
             torch.nn.Conv2d(feature_channels, 1, kernel_size=4, stride=1, padding=0),
             torch.nn.Sigmoid(),
@@ -54,7 +62,9 @@ class DCGANBlocks(torch.nn.Module):
             raise ValueError("images 形状必须为 (batch,image_channels,height,width)")
         return self.discriminator_block(images)
 
-    def training_step(self, real_images: torch.Tensor, noise: torch.Tensor, learning_rate: float) -> tuple[float, float]:
+    def training_step(
+        self, real_images: torch.Tensor, noise: torch.Tensor, learning_rate: float
+    ) -> tuple[float, float]:
         """执行一次最小 DCGAN 训练步。"""
         if learning_rate <= 0:
             raise ValueError("learning_rate 必须为正")
@@ -66,10 +76,9 @@ class DCGANBlocks(torch.nn.Module):
         fake_images = self.generate(noise).detach()
         real_scores = self.discriminate(real_images)
         fake_scores = self.discriminate(fake_images)
-        discriminator_loss = (
-            F.binary_cross_entropy(real_scores, torch.ones_like(real_scores))
-            + F.binary_cross_entropy(fake_scores, torch.zeros_like(fake_scores))
-        )
+        discriminator_loss = F.binary_cross_entropy(
+            real_scores, torch.ones_like(real_scores)
+        ) + F.binary_cross_entropy(fake_scores, torch.zeros_like(fake_scores))
         discriminator_loss.backward()
 
         with torch.no_grad():
@@ -83,7 +92,9 @@ class DCGANBlocks(torch.nn.Module):
 
         generated = self.generate(noise)
         generator_scores = self.discriminate(generated)
-        generator_loss = F.binary_cross_entropy(generator_scores, torch.ones_like(generator_scores))
+        generator_loss = F.binary_cross_entropy(
+            generator_scores, torch.ones_like(generator_scores)
+        )
         generator_loss.backward()
 
         with torch.no_grad():
@@ -108,10 +119,14 @@ if __name__ == "__main__":
     real_images = torch.randn((2, 3, 8, 8))
     previous_generator = model.generator_block[0].weight.detach().clone()
     previous_discriminator = model.discriminator_block[0].weight.detach().clone()
-    discriminator_loss, generator_loss = model.training_step(real_images, noise_tensor, 0.001)
+    discriminator_loss, generator_loss = model.training_step(
+        real_images, noise_tensor, 0.001
+    )
     assert discriminator_loss >= 0.0
     assert generator_loss >= 0.0
     assert not torch.equal(previous_generator, model.generator_block[0].weight.detach())
-    assert not torch.equal(previous_discriminator, model.discriminator_block[0].weight.detach())
+    assert not torch.equal(
+        previous_discriminator, model.discriminator_block[0].weight.detach()
+    )
 
     print("028_dcgan_blocks: all examples passed")

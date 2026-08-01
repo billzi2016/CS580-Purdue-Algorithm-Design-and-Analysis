@@ -78,7 +78,9 @@ def build_string_graph(reads: list[str], minimum_overlap: int = 1) -> StringGrap
                 continue
             overlap = overlap_length(source, target, minimum_overlap)
             if overlap:
-                candidate_edges.append(StringGraphEdge(source, target, overlap, target[overlap:]))
+                candidate_edges.append(
+                    StringGraphEdge(source, target, overlap, target[overlap:])
+                )
     irreducible = [
         edge for edge in candidate_edges if not _is_transitive(edge, candidate_edges)
     ]
@@ -91,7 +93,9 @@ def build_string_graph(reads: list[str], minimum_overlap: int = 1) -> StringGrap
         outdegree[edge.source] += 1
     edges = tuple(irreducible)
     adjacency = {read: tuple(edge_ids) for read, edge_ids in adjacency_lists.items()}
-    return StringGraph(tuple(sorted(filtered_reads)), edges, adjacency, indegree, outdegree)
+    return StringGraph(
+        tuple(sorted(filtered_reads)), edges, adjacency, indegree, outdegree
+    )
 
 
 def assemble_string_graph(reads: list[str], minimum_overlap: int = 1) -> list[str]:
@@ -146,7 +150,9 @@ def _is_transitive(edge: StringGraphEdge, edges: list[StringGraphEdge]) -> bool:
     return False
 
 
-def _consume_path(graph: StringGraph, first_edge_id: int, used_edges: list[bool]) -> str:
+def _consume_path(
+    graph: StringGraph, first_edge_id: int, used_edges: list[bool]
+) -> str:
     """从一条不可约边开始拼接非分叉路径。"""
 
     edge = graph.edges[first_edge_id]
@@ -154,7 +160,11 @@ def _consume_path(graph: StringGraph, first_edge_id: int, used_edges: list[bool]
     contig = edge.source + edge.extension
     current = edge.target
     while _is_one_in_one_out(graph, current):
-        next_edge_id = next(identifier for identifier in graph.adjacency[current] if not used_edges[identifier])
+        next_edge_id = next(
+            identifier
+            for identifier in graph.adjacency[current]
+            if not used_edges[identifier]
+        )
         next_edge = graph.edges[next_edge_id]
         used_edges[next_edge_id] = True
         contig += next_edge.extension
@@ -162,7 +172,9 @@ def _consume_path(graph: StringGraph, first_edge_id: int, used_edges: list[bool]
     return contig
 
 
-def _consume_cycle(graph: StringGraph, first_edge_id: int, used_edges: list[bool]) -> str:
+def _consume_cycle(
+    graph: StringGraph, first_edge_id: int, used_edges: list[bool]
+) -> str:
     """提取纯 1 入 1 出环。"""
 
     edge = graph.edges[first_edge_id]
@@ -171,7 +183,11 @@ def _consume_cycle(graph: StringGraph, first_edge_id: int, used_edges: list[bool
     start = edge.source
     current = edge.target
     while current != start:
-        next_edge_id = next(identifier for identifier in graph.adjacency[current] if not used_edges[identifier])
+        next_edge_id = next(
+            identifier
+            for identifier in graph.adjacency[current]
+            if not used_edges[identifier]
+        )
         next_edge = graph.edges[next_edge_id]
         used_edges[next_edge_id] = True
         if next_edge.target == start:
@@ -197,7 +213,10 @@ def _validate_reads(reads: list[str]) -> None:
 if __name__ == "__main__":
     graph = build_string_graph(["AAA", "AGA", "GAT", "ATC"], 2)
     assert graph.reads == ("AAA", "AGA", "ATC", "GAT")
-    assert {(edge.source, edge.target) for edge in graph.edges} == {("AGA", "GAT"), ("GAT", "ATC")}
+    assert {(edge.source, edge.target) for edge in graph.edges} == {
+        ("AGA", "GAT"),
+        ("GAT", "ATC"),
+    }
     graph = build_string_graph(["AAGT", "AGTC", "AAGTC"], 2)
     assert graph.reads == ("AAGTC",)
     graph = build_string_graph(["AAG", "AGT", "GTC", "AGTC"], 2)

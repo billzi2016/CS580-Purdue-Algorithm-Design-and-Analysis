@@ -69,8 +69,7 @@ def upgma_tree(labels: list[str], distances: dict[tuple[str, str], float]) -> UP
     _validate_distance_matrix(labels, distances)
 
     clusters: dict[str, UPGMANode] = {
-        label: UPGMANode(name=label, height=0.0, members=(label,))
-        for label in labels
+        label: UPGMANode(name=label, height=0.0, members=(label,)) for label in labels
     }
     cluster_distances = {
         frozenset({left, right}): _distance_between(left, right, distances)
@@ -81,11 +80,7 @@ def upgma_tree(labels: list[str], distances: dict[tuple[str, str], float]) -> UP
 
     while len(clusters) > 1:
         left_name, right_name = min(
-            (
-                tuple(pair)
-                for pair in cluster_distances
-                if pair.issubset(clusters)
-            ),
+            (tuple(pair) for pair in cluster_distances if pair.issubset(clusters)),
             key=lambda pair: (
                 cluster_distances[frozenset(pair)],
                 sorted(pair),

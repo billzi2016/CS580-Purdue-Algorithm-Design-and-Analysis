@@ -160,7 +160,9 @@ class _CodeGenerator:
             right = self.emit(expression.right)  # type: ignore[arg-type]
             # 先完整翻译左右子树，临时变量编号才与实际指令出现顺序保持一致。
             temporary = self._new_temporary()
-            self.instructions.append(Instruction(temporary, expression.operator, left, right))
+            self.instructions.append(
+                Instruction(temporary, expression.operator, left, right)
+            )
         return temporary
 
     def _new_temporary(self) -> str:
@@ -182,7 +184,11 @@ if __name__ == "__main__":
         "result = t3",
     ]
     unary = generate_three_address_code("x = -a + 2")
-    assert [instruction.render() for instruction in unary] == ["t1 = -a", "t2 = t1 + 2", "x = t2"]
+    assert [instruction.render() for instruction in unary] == [
+        "t1 = -a",
+        "t2 = t1 + 2",
+        "x = t2",
+    ]
     try:
         generate_three_address_code("a + b")
         raise AssertionError("缺失赋值号必须失败")

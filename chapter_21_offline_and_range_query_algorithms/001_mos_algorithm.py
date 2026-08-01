@@ -25,7 +25,12 @@ def mo_distinct_count(values: list[int], queries: list[tuple[int, int]]) -> list
     block_size = max(1, int(len(values) ** 0.5))
     indexed = list(enumerate(queries))
     # 奇偶块反向排列 right，减少跨块时右端点的大幅回跳。
-    indexed.sort(key=lambda item: (item[1][0] // block_size, item[1][1] if (item[1][0] // block_size) % 2 == 0 else -item[1][1]))
+    indexed.sort(
+        key=lambda item: (
+            item[1][0] // block_size,
+            item[1][1] if (item[1][0] // block_size) % 2 == 0 else -item[1][1],
+        )
+    )
     answer = [0] * len(queries)
     frequency: dict[int, int] = {}
     left, right, distinct = 0, -1, 0
@@ -63,7 +68,12 @@ def mo_distinct_count(values: list[int], queries: list[tuple[int, int]]) -> list
 
 
 if __name__ == "__main__":
-    assert mo_distinct_count([1, 1, 2, 1, 3, 2], [(0, 2), (1, 4), (3, 5), (2, 2)]) == [2, 3, 3, 1]
+    assert mo_distinct_count([1, 1, 2, 1, 3, 2], [(0, 2), (1, 4), (3, 5), (2, 2)]) == [
+        2,
+        3,
+        3,
+        1,
+    ]
     assert mo_distinct_count([7], [(0, 0)]) == [1]
     assert mo_distinct_count([], []) == []
     print("001_mos_algorithm: all examples passed")

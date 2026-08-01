@@ -61,7 +61,10 @@ def fasta_style_seed_lookup(query: str, target: str, k: int) -> list[DiagonalCan
         DiagonalCandidate(diagonal, tuple(hits), _longest_adjacent_run(hits, k))
         for diagonal, hits in grouped.items()
     ]
-    return sorted(candidates, key=lambda item: (-len(item.hits), -item.longest_adjacent_run, item.diagonal))
+    return sorted(
+        candidates,
+        key=lambda item: (-len(item.hits), -item.longest_adjacent_run, item.diagonal),
+    )
 
 
 def _build_query_table(query: str, k: int) -> dict[str, list[int]]:
@@ -99,7 +102,12 @@ def _validate_dna(sequence: str) -> None:
 if __name__ == "__main__":
     candidates = fasta_style_seed_lookup("ACGACG", "TTACGACGA", 3)
     assert candidates[0].diagonal == 2
-    assert [(hit.query_start, hit.target_start) for hit in candidates[0].hits] == [(0, 2), (1, 3), (2, 4), (3, 5)]
+    assert [(hit.query_start, hit.target_start) for hit in candidates[0].hits] == [
+        (0, 2),
+        (1, 3),
+        (2, 4),
+        (3, 5),
+    ]
     assert candidates[0].longest_adjacent_run == 4
     assert fasta_style_seed_lookup("AC", "ACGT", 3) == []
     assert fasta_style_seed_lookup("AAAA", "AAAAA", 2)[0].diagonal == 0

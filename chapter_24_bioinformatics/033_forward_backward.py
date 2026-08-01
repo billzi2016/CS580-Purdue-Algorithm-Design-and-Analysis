@@ -67,20 +67,23 @@ def forward_backward(
     - 后向递推与之对称，从右向左累积未来贡献。
     """
 
-    _validate_hmm(states, start_probability, transition_probability, emission_probability)
+    _validate_hmm(
+        states, start_probability, transition_probability, emission_probability
+    )
 
     if not observations:
-        return ForwardBackwardResult(forward=(), backward=(), posterior=(), sequence_probability=1.0)
+        return ForwardBackwardResult(
+            forward=(), backward=(), posterior=(), sequence_probability=1.0
+        )
 
     forward_table: list[dict[str, float]] = []
     first_forward: dict[str, float] = {}
     first_observation = observations[0]
 
     for state in states:
-        first_forward[state] = (
-            start_probability.get(state, 0.0)
-            * emission_probability.get(state, {}).get(first_observation, 0.0)
-        )
+        first_forward[state] = start_probability.get(
+            state, 0.0
+        ) * emission_probability.get(state, {}).get(first_observation, 0.0)
 
     if sum(first_forward.values()) == 0.0:
         raise ValueError("首个观测在模型下不可达")
@@ -94,13 +97,14 @@ def forward_backward(
         for current_state in states:
             path_sum = 0.0
             for previous_state in states:
-                path_sum += (
-                    forward_table[position - 1][previous_state]
-                    * transition_probability.get(previous_state, {}).get(current_state, 0.0)
+                path_sum += forward_table[position - 1][
+                    previous_state
+                ] * transition_probability.get(previous_state, {}).get(
+                    current_state, 0.0
                 )
-            current_forward[current_state] = (
-                path_sum * emission_probability.get(current_state, {}).get(observation, 0.0)
-            )
+            current_forward[current_state] = path_sum * emission_probability.get(
+                current_state, {}
+            ).get(observation, 0.0)
 
         if sum(current_forward.values()) == 0.0:
             raise ValueError(f"第 {position} 个观测在模型下不可达")
@@ -120,7 +124,9 @@ def forward_backward(
             for next_state in states:
                 suffix_sum += (
                     transition_probability.get(state, {}).get(next_state, 0.0)
-                    * emission_probability.get(next_state, {}).get(next_observation, 0.0)
+                    * emission_probability.get(next_state, {}).get(
+                        next_observation, 0.0
+                    )
                     * backward_table[position + 1][next_state]
                 )
             backward_table[position][state] = suffix_sum
@@ -177,8 +183,12 @@ def _validate_hmm(
             raise ValueError(f"缺少状态 {state} 的转移概率")
         if state not in emission_probability:
             raise ValueError(f"缺少状态 {state} 的发射概率")
-        _validate_probability_row(transition_probability[state], f"状态 {state} 的转移概率")
-        _validate_probability_row(emission_probability[state], f"状态 {state} 的发射概率")
+        _validate_probability_row(
+            transition_probability[state], f"状态 {state} 的转移概率"
+        )
+        _validate_probability_row(
+            emission_probability[state], f"状态 {state} 的发射概率"
+        )
 
 
 def _validate_probability_row(probabilities: dict[str, float], row_name: str) -> None:
@@ -211,7 +221,9 @@ if __name__ == "__main__":
         "AA": {"ref": 0.08, "alt": 0.92},
     }
 
-    result = forward_backward(["ref", "ref", "alt", "alt", "alt"], hidden_states, start, transition, emission)
+    result = forward_backward(
+        ["ref", "ref", "alt", "alt", "alt"], hidden_states, start, transition, emission
+    )
     assert result.sequence_probability > 0.0
     assert len(result.forward) == 5
     assert len(result.backward) == 5

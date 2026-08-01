@@ -56,7 +56,10 @@ class AhoCorasick:
                 failure = node.failure
                 while failure is not self._root and character not in failure.children:
                     failure = failure.failure
-                if character in failure.children and failure.children[character] is not child:
+                if (
+                    character in failure.children
+                    and failure.children[character] is not child
+                ):
                     child.failure = failure.children[character]
                 else:
                     child.failure = self._root
@@ -82,13 +85,21 @@ class AhoCorasick:
             else:
                 node = self._root
             for pattern_index in node.outputs:
-                matches.append((index - len(self._patterns[pattern_index]) + 1, pattern_index))
+                matches.append(
+                    (index - len(self._patterns[pattern_index]) + 1, pattern_index)
+                )
         return matches
 
 
 if __name__ == "__main__":
     automaton = AhoCorasick(["he", "she", "his", "hers"])
     assert set(automaton.search("ahishers")) == {(1, 2), (3, 1), (4, 0), (4, 3)}
-    assert AhoCorasick(["a", "aa", "a"]).search("aa") == [(0, 0), (0, 2), (0, 1), (1, 0), (1, 2)]
+    assert AhoCorasick(["a", "aa", "a"]).search("aa") == [
+        (0, 0),
+        (0, 2),
+        (0, 1),
+        (1, 0),
+        (1, 2),
+    ]
     assert AhoCorasick([]).search("text") == []
     print("005_aho_corasick: all examples passed")

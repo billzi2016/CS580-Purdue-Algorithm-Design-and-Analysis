@@ -28,7 +28,10 @@ class _LengthNode:
 def _take_two_lightest(nodes: list[_LengthNode]) -> tuple[int, int]:
     """找出权重最小的两个结点下标，以稳定顺序消除并列歧义。"""
     first, second = 0, 1
-    if (nodes[second].weight, nodes[second].order) < (nodes[first].weight, nodes[first].order):
+    if (nodes[second].weight, nodes[second].order) < (
+        nodes[first].weight,
+        nodes[first].order,
+    ):
         first, second = second, first
     for index in range(2, len(nodes)):
         key = (nodes[index].weight, nodes[index].order)
@@ -57,7 +60,10 @@ def huffman_code_lengths(text: str) -> dict[str, int]:
     for position, symbol in enumerate(text):
         frequencies[symbol] = frequencies.get(symbol, 0) + 1
         first_seen.setdefault(symbol, position)
-    nodes = [_LengthNode(frequencies[symbol], first_seen[symbol], symbol) for symbol in frequencies]
+    nodes = [
+        _LengthNode(frequencies[symbol], first_seen[symbol], symbol)
+        for symbol in frequencies
+    ]
     if len(nodes) == 1:
         return {nodes[0].symbol: 1}  # type: ignore[index]
 
@@ -66,7 +72,9 @@ def huffman_code_lengths(text: str) -> dict[str, int]:
         first, second = _take_two_lightest(nodes)
         right = nodes.pop(max(first, second))
         left = nodes.pop(min(first, second))
-        nodes.append(_LengthNode(left.weight + right.weight, next_order, left=left, right=right))
+        nodes.append(
+            _LengthNode(left.weight + right.weight, next_order, left=left, right=right)
+        )
         next_order += 1
 
     lengths: dict[str, int] = {}
@@ -90,7 +98,10 @@ def _insertion_sort_symbols(items: list[tuple[str, int]]) -> list[tuple[str, int
     for index in range(1, len(ordered)):
         current = ordered[index]
         previous = index - 1
-        while previous >= 0 and (ordered[previous][1], ordered[previous][0]) > (current[1], current[0]):
+        while previous >= 0 and (ordered[previous][1], ordered[previous][0]) > (
+            current[1],
+            current[0],
+        ):
             ordered[previous + 1] = ordered[previous]
             previous -= 1
         ordered[previous + 1] = current
@@ -156,7 +167,12 @@ def canonical_decode(bits: str, codebook: dict[str, str]) -> str:
     tree: dict[str, object] = {}
     terminal = "_symbol"
     for symbol, code in codebook.items():
-        if not isinstance(symbol, str) or len(symbol) != 1 or not code or any(bit not in "01" for bit in code):
+        if (
+            not isinstance(symbol, str)
+            or len(symbol) != 1
+            or not code
+            or any(bit not in "01" for bit in code)
+        ):
             raise ValueError("码表包含非法符号或码字")
         node = tree
         for bit in code:
@@ -191,8 +207,15 @@ if __name__ == "__main__":
     sample = "MISSISSIPPI"
     lengths = huffman_code_lengths(sample)
     sample_codebook = build_canonical_codebook(lengths)
-    assert canonical_decode(canonical_encode(sample, sample_codebook), sample_codebook) == sample
-    assert build_canonical_codebook({"A": 1, "B": 2, "C": 2}) == {"A": "0", "B": "10", "C": "11"}
+    assert (
+        canonical_decode(canonical_encode(sample, sample_codebook), sample_codebook)
+        == sample
+    )
+    assert build_canonical_codebook({"A": 1, "B": 2, "C": 2}) == {
+        "A": "0",
+        "B": "10",
+        "C": "11",
+    }
     assert huffman_code_lengths("") == {}
     assert build_canonical_codebook({"Z": 1}) == {"Z": "0"}
     try:

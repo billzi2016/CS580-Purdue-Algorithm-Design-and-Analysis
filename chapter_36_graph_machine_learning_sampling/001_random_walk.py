@@ -13,7 +13,9 @@ from random import Random
 Graph = dict[str, list[str]]
 
 
-def random_walk(graph: Graph, start: str, walk_length: int, seed: int | None = None) -> list[str]:
+def random_walk(
+    graph: Graph, start: str, walk_length: int, seed: int | None = None
+) -> list[str]:
     """从 start 开始生成最多 walk_length 个节点的随机游走序列。"""
 
     if walk_length <= 0:

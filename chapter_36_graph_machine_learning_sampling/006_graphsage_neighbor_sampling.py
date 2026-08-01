@@ -45,7 +45,14 @@ def graphsage_sample_neighbors(
 
 
 if __name__ == "__main__":
-    graph = {"A": ["B", "C", "D"], "B": ["E"], "C": ["E", "F"], "D": [], "E": [], "F": []}
+    graph = {
+        "A": ["B", "C", "D"],
+        "B": ["E"],
+        "C": ["E", "F"],
+        "D": [],
+        "E": [],
+        "F": [],
+    }
     layers = graphsage_sample_neighbors(graph, ["A"], [2, 1], seed=1)
     assert layers == [{"A"}, {"B", "D"}, {"E"}]
     assert graphsage_sample_neighbors(graph, ["D"], [2], seed=1) == [{"D"}, set()]

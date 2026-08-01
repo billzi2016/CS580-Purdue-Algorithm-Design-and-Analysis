@@ -80,7 +80,9 @@ def lzw_decode(codes: list[int], alphabet: list[str]) -> str:
         这是编码器刚输出并新增该短语时造成的唯一合法前向引用。
     """
     _validate_alphabet(alphabet)
-    if not isinstance(codes, list) or any(isinstance(code, bool) or not isinstance(code, int) for code in codes):
+    if not isinstance(codes, list) or any(
+        isinstance(code, bool) or not isinstance(code, int) for code in codes
+    ):
         raise ValueError("codes 必须是整数列表")
     if not codes:
         if alphabet:

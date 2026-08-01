@@ -30,7 +30,9 @@ class DiffusionReverseStep(torch.nn.Module):
             torch.linspace(beta_start, beta_end, steps=num_steps), requires_grad=False
         )
         self.alphas = torch.nn.Parameter(1.0 - self.betas, requires_grad=False)
-        self.alpha_bars = torch.nn.Parameter(torch.cumprod(self.alphas, dim=0), requires_grad=False)
+        self.alpha_bars = torch.nn.Parameter(
+            torch.cumprod(self.alphas, dim=0), requires_grad=False
+        )
 
     def forward(
         self,
@@ -53,11 +55,21 @@ class DiffusionReverseStep(torch.nn.Module):
             raise ValueError("stochastic_noise 形状必须与样本一致")
 
         beta_t = self.betas[time_steps].reshape((-1,) + (1,) * (noisy_samples.ndim - 1))
-        alpha_t = self.alphas[time_steps].reshape((-1,) + (1,) * (noisy_samples.ndim - 1))
-        alpha_bar_t = self.alpha_bars[time_steps].reshape((-1,) + (1,) * (noisy_samples.ndim - 1))
+        alpha_t = self.alphas[time_steps].reshape(
+            (-1,) + (1,) * (noisy_samples.ndim - 1)
+        )
+        alpha_bar_t = self.alpha_bars[time_steps].reshape(
+            (-1,) + (1,) * (noisy_samples.ndim - 1)
+        )
 
-        mean = (noisy_samples - beta_t / torch.sqrt(1.0 - alpha_bar_t) * predicted_noise) / torch.sqrt(alpha_t)
-        nonzero_mask = (time_steps > 0).reshape((-1,) + (1,) * (noisy_samples.ndim - 1)).to(noisy_samples.dtype)
+        mean = (
+            noisy_samples - beta_t / torch.sqrt(1.0 - alpha_bar_t) * predicted_noise
+        ) / torch.sqrt(alpha_t)
+        nonzero_mask = (
+            (time_steps > 0)
+            .reshape((-1,) + (1,) * (noisy_samples.ndim - 1))
+            .to(noisy_samples.dtype)
+        )
         return mean + nonzero_mask * torch.sqrt(beta_t) * stochastic_noise
 
     def training_step(
@@ -95,11 +107,20 @@ if __name__ == "__main__":
     noisy_tensor = torch.ones((2, 3))
     predicted_noise_tensor = torch.zeros((2, 3))
     time_tensor = torch.tensor([0, 4], dtype=torch.long)
-    previous_tensor = step(noisy_tensor, time_tensor, predicted_noise_tensor, torch.zeros_like(noisy_tensor))
+    previous_tensor = step(
+        noisy_tensor,
+        time_tensor,
+        predicted_noise_tensor,
+        torch.zeros_like(noisy_tensor),
+    )
     assert previous_tensor.shape == (2, 3)
-    assert torch.allclose(previous_tensor[0], noisy_tensor[0] / torch.sqrt(step.alphas[0]), atol=1e-6)
+    assert torch.allclose(
+        previous_tensor[0], noisy_tensor[0] / torch.sqrt(step.alphas[0]), atol=1e-6
+    )
 
-    loss_value = step.training_step(noisy_tensor, time_tensor, torch.zeros_like(noisy_tensor), 0.01)
+    loss_value = step.training_step(
+        noisy_tensor, time_tensor, torch.zeros_like(noisy_tensor), 0.01
+    )
     assert loss_value >= 0.0
 
     print("030_diffusion_reverse_step: all examples passed")

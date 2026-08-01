@@ -12,6 +12,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Instruction:
     """简化控制流指令；跳转类指令的 ``target`` 为标签名。"""
+
     op: str
     text: str
     target: str | None = None
@@ -20,11 +21,14 @@ class Instruction:
 @dataclass
 class BasicBlock:
     """一个单入口、无内部跳转目标的最大指令区间。"""
+
     identifier: int
     instructions: list[Instruction]
 
 
-def build_basic_blocks_and_cfg(instructions: list[Instruction]) -> tuple[list[BasicBlock], dict[int, set[int]]]:
+def build_basic_blocks_and_cfg(
+    instructions: list[Instruction],
+) -> tuple[list[BasicBlock], dict[int, set[int]]]:
     """划分基本块并返回其 CFG。
 
     参数：指令序列；返回值为块列表与 ``块号 -> 后继块号``。空输入返回两个空容器。
@@ -32,7 +36,11 @@ def build_basic_blocks_and_cfg(instructions: list[Instruction]) -> tuple[list[Ba
     """
     if not instructions:
         return [], {}
-    labels = {item.text: index for index, item in enumerate(instructions) if item.op == "label"}
+    labels = {
+        item.text: index
+        for index, item in enumerate(instructions)
+        if item.op == "label"
+    }
     leaders = {0}
     for index, item in enumerate(instructions):
         if item.op in {"goto", "if_goto"}:
@@ -61,9 +69,13 @@ def build_basic_blocks_and_cfg(instructions: list[Instruction]) -> tuple[list[Ba
 
 if __name__ == "__main__":
     program = [
-        Instruction("assign", "x = 0"), Instruction("label", "loop"),
-        Instruction("if_goto", "if x < 3 goto done", "done"), Instruction("assign", "x = x + 1"),
-        Instruction("goto", "goto loop", "loop"), Instruction("label", "done"), Instruction("return", "return x"),
+        Instruction("assign", "x = 0"),
+        Instruction("label", "loop"),
+        Instruction("if_goto", "if x < 3 goto done", "done"),
+        Instruction("assign", "x = x + 1"),
+        Instruction("goto", "goto loop", "loop"),
+        Instruction("label", "done"),
+        Instruction("return", "return x"),
     ]
     blocks, cfg = build_basic_blocks_and_cfg(program)
     assert len(blocks) == 4

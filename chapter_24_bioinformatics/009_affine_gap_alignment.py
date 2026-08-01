@@ -6,11 +6,18 @@
 时间复杂度 O(nm)，空间复杂度 O(nm)。关键边界：空串允许；仅支持 A/C/G/T/N；这是教学版统一评分模型。
 """
 
-NEGATIVE_INFINITY = -10**12
+NEGATIVE_INFINITY = -(10**12)
 DNA = frozenset("ACGTN")
 
 
-def affine_gap_alignment_score(first: str, second: str, match: int = 2, mismatch: int = -1, gap_open: int = -2, gap_extend: int = -1) -> int:
+def affine_gap_alignment_score(
+    first: str,
+    second: str,
+    match: int = 2,
+    mismatch: int = -1,
+    gap_open: int = -2,
+    gap_extend: int = -1,
+) -> int:
     """计算 affine-gap 评分下的最优全局比对分数。
 
     参数：first、second 为 DNA 序列；gap_open 是开启缺口代价，gap_extend 是延长既有缺口代价。
@@ -33,10 +40,23 @@ def affine_gap_alignment_score(first: str, second: str, match: int = 2, mismatch
         first_gap[0][column] = gap_open + (column - 1) * gap_extend
     for row in range(1, rows):
         for column in range(1, columns):
-            first_gap[row][column] = max(matched[row][column - 1] + gap_open, first_gap[row][column - 1] + gap_extend)
-            second_gap[row][column] = max(matched[row - 1][column] + gap_open, second_gap[row - 1][column] + gap_extend)
+            first_gap[row][column] = max(
+                matched[row][column - 1] + gap_open,
+                first_gap[row][column - 1] + gap_extend,
+            )
+            second_gap[row][column] = max(
+                matched[row - 1][column] + gap_open,
+                second_gap[row - 1][column] + gap_extend,
+            )
             score = match if first[row - 1] == second[column - 1] else mismatch
-            matched[row][column] = max(matched[row - 1][column - 1], first_gap[row - 1][column - 1], second_gap[row - 1][column - 1]) + score
+            matched[row][column] = (
+                max(
+                    matched[row - 1][column - 1],
+                    first_gap[row - 1][column - 1],
+                    second_gap[row - 1][column - 1],
+                )
+                + score
+            )
     return max(matched[-1][-1], first_gap[-1][-1], second_gap[-1][-1])
 
 

@@ -16,7 +16,9 @@ def bully_election(process_ids: list[int], alive: set[int], initiator: int) -> i
     return max(higher_alive)
 
 
-def election_messages(process_ids: list[int], alive: set[int], initiator: int) -> list[tuple[int, int, str]]:
+def election_messages(
+    process_ids: list[int], alive: set[int], initiator: int
+) -> list[tuple[int, int, str]]:
     """返回教学用消息轨迹。"""
 
     messages: list[tuple[int, int, str]] = []
