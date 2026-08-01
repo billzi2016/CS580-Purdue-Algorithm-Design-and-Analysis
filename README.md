@@ -2,7 +2,9 @@
 
 中文版本: [README.cn.md](README.cn.md)
 
-This repository organizes implementations, notes, and runnable examples for **Purdue University CS 580: Algorithm Design and Analysis**, with additional coverage of LeetCode patterns, Codeforces-style competitive programming, mathematical algorithms, heuristic optimization, Monte Carlo Tree Search, machine-learning optimization, deep-learning architectures, and classical non-AI bioinformatics algorithms. The goal is to build a clean, chapter-based algorithm reference that connects core course topics with practical implementation patterns.
+This repository organizes implementations, notes, and runnable examples for **Purdue University CS 580: Algorithm Design and Analysis**, while also mapping the implementation plan to a broader set of Purdue Computer Science courses. It additionally covers LeetCode patterns, Codeforces-style competitive programming, mathematical algorithms, heuristic optimization, Monte Carlo Tree Search, machine-learning optimization, deep-learning architectures, and classical non-AI bioinformatics algorithms. The goal is to build a clean, chapter-based algorithm reference that connects Purdue course topics with practical implementation patterns.
+
+Over the past eight years, I have organized these notes and implementations through my work as a TA for seven Purdue CS courses: **Numerical Methods**, **Data Mining and Machine Learning**, **Introduction to Cryptography**, **Algorithm Design, Analysis, and Implementation**, **Programming Languages**, **Statistical Machine Learning**, and **Database Systems**. The repository is intended to consolidate the core methods from those areas into a maintainable, implementation-first algorithm handbook.
 
 The repository is structured so that each algorithm is easy to find, test, and extend. Every implementation should include a concise explanation, complexity analysis, and executable examples through a local `main` entry point.
 
@@ -45,9 +47,56 @@ Each algorithm file should provide:
 - edge case coverage;
 - a `main` block or callable demo function for quick verification.
 
+## Purdue Course Coverage Map
+
+This repository starts from CS 580 and expands into a broader Purdue CS algorithm implementation map. It is not a replacement for official syllabi; it is an implementation-oriented reference that connects course topics to hand-written algorithms and runnable examples.
+
+| Purdue Course | Course Name | Repository Coverage |
+|---|---|---|
+| CS 18000 | Problem Solving and Object-Oriented Programming | basic programming patterns, recursion, iteration, testing examples |
+| CS 18200 | Foundations of Computer Science | discrete math foundations, proof ideas, recurrence reasoning, combinatorics |
+| CS 24000 | Programming Laboratory in C | low-level implementation discipline, memory-aware algorithm examples |
+| CS 25000 | Computer Architecture | bit operations, integer representation, cache-aware reasoning, low-level performance notes |
+| CS 25100 | Data Structures and Algorithms | arrays, linked lists, stacks, queues, trees, heaps, hash tables, graphs, union-find |
+| CS 25200 | Systems Programming | systems-oriented data structures, file-oriented examples, scheduling-related simulations |
+| CS 25300 | Data Structures and Algorithms for DS/AI | data structures used in data science and AI pipelines |
+| CS 31100 | Competitive Programming II | contest patterns, graph algorithms, DP, number theory, data structures |
+| CS 31400 | Numerical Methods | numerical differentiation, integration, root finding, ODE solvers, numerical linear algebra |
+| CS 33400 | Fundamentals of Computer Graphics | computational geometry, transformations, interpolation, spatial algorithms |
+| CS 34800 | Information Systems | database indexing, query execution, join algorithms, transaction concepts |
+| CS 35200 | Compilers: Principles and Practice | automata, parsing, CFGs, SSA, liveness analysis, register allocation |
+| CS 35400 | Operating Systems | scheduling algorithms, page replacement, disk scheduling, concurrency-related models |
+| CS 35500 | Introduction to Cryptography | modular arithmetic, RSA, Diffie-Hellman, hashing, Merkle trees, ECC basics |
+| CS 37300 | Data Mining and Machine Learning | optimization, sampling, clustering-related primitives, ML algorithm foundations |
+| CS 38100 | Introduction to the Analysis of Algorithms | sorting, divide and conquer, greedy, DP, graph algorithms, flows, NP-completeness |
+| CS 41100 | Competitive Programming III | advanced contest data structures, HLD, Mo's algorithm, CDQ, FFT/NTT, constructive methods |
+| CS 42200 | Computer Networks | graph routing ideas, distributed coordination, hashing, protocol-state algorithms |
+| CS 42600 | Computer Security | cryptographic primitives, hashing, Merkle trees, security-related algorithm foundations |
+| CS 44000 | Large Scale Data Analytics | sketches, streaming algorithms, sampling, external-memory and large-scale processing |
+| CS 44800 | Introduction to Relational Database Systems | B-trees, B+ trees, joins, query planning, indexing, MVCC basics |
+| CS 47100 | Introduction to Artificial Intelligence | search algorithms, A*, IDA*, MCTS, optimization, planning foundations |
+| CS 47800 | Introduction to Bioinformatics | DNA matching, alignment, BLAST/FASTA-style search, genome assembly, pangenome graphs |
+| CS 48900 | Embedded Systems | bit-level algorithms, scheduling, memory-aware implementations |
+| CS 53000 | Introduction to Scientific Visualization | numerical methods, geometry, interpolation, graph and grid algorithms |
+| CS 53500 | Interactive Computer Graphics | geometry, spatial data structures, interpolation, transformations |
+| CS 53600 | Data Communication and Computer Networks | shortest paths, routing, hashing, distributed algorithms |
+| CS 54100 | Database Systems | storage structures, query optimization, joins, concurrency control |
+| CS 55100 | Cloud Computing Fundamentals | distributed algorithms, consistent hashing, replication, consensus basics |
+| CS 55800 | Introduction to Robot Learning | optimization, search, planning, reinforcement-learning foundations |
+| CS 56500 | Programming Languages | parsing, automata, program analysis, compiler algorithms |
+| CS 57800 | Statistical Machine Learning | optimization algorithms, gradient methods, regularization, model-training primitives |
+| CS 58000 | Algorithm Design, Analysis, and Implementation | full algorithm-design core: graph algorithms, flow, LP ideas, approximation, randomized algorithms, NP-completeness |
+| CS 58400 | Theory of Computation and Computational Complexity | automata, reductions, complexity, NP-completeness |
+| CS 58500 | Theoretical Computer Science Toolkit | mathematical toolkit, probability, combinatorics, proof techniques |
+| CS 53100 | Computational Geometry | geometric primitives, convex hull, sweep line, closest pair, spatial algorithms |
+| CS 55500 | Cryptography | number theory, public-key crypto, hashing, authentication primitives |
+| CS 590AA | Approximation Algorithms | approximation, LP rounding ideas, greedy approximation patterns |
+| CS 590RA | Randomized Algorithms | randomized algorithms, hashing, sampling, Monte Carlo methods |
+| CS 65500 | Advanced Cryptology | advanced cryptographic foundations and number-theoretic primitives |
+
 ## Algorithm Task List
 
-The chapter map is designed to cover standard algorithm-design material, LeetCode-style interview algorithms, Codeforces-style competitive-programming techniques, mathematical algorithms, classical non-AI bioinformatics algorithms, heuristic search and optimization, ML/DL optimization algorithms, and deep-learning architectures. Completed implementations can be marked with `- [x]`.
+The chapter map is designed to cover standard algorithm-design material, LeetCode-style interview algorithms, Codeforces-style competitive-programming techniques, mathematical algorithms, classical non-AI bioinformatics algorithms, heuristic search and optimization, ML/DL optimization algorithms, deep-learning architectures, compression, cryptography, compiler algorithms, database algorithms, distributed systems algorithms, operating-system scheduling, reinforcement learning, and graph machine-learning sampling. Completed implementations can be marked with `- [x]`.
 
 ### Chapter 01: Foundations
 
@@ -443,6 +492,150 @@ Bioinformatics implementations should clearly state whether an algorithm is exac
 - [ ] `chapter_28_deep_learning_architectures/031_graph_convolution_layer.py` — graph convolution layer
 - [ ] `chapter_28_deep_learning_architectures/032_graph_attention_layer.py` — graph attention layer
 
+### Chapter 29: Reinforcement Learning Algorithms
+
+`chapter_29_reinforcement_learning_algorithms/` focuses on classical reinforcement-learning algorithms and planning methods. Implementations should expose the update equations directly rather than delegating to RL libraries.
+
+- [ ] `chapter_29_reinforcement_learning_algorithms/001_markov_decision_process.py` — MDP basics
+- [ ] `chapter_29_reinforcement_learning_algorithms/002_value_iteration.py` — value iteration
+- [ ] `chapter_29_reinforcement_learning_algorithms/003_policy_iteration.py` — policy iteration
+- [ ] `chapter_29_reinforcement_learning_algorithms/004_monte_carlo_prediction.py` — Monte Carlo prediction
+- [ ] `chapter_29_reinforcement_learning_algorithms/005_monte_carlo_control.py` — Monte Carlo control
+- [ ] `chapter_29_reinforcement_learning_algorithms/006_temporal_difference_prediction.py` — TD(0)
+- [ ] `chapter_29_reinforcement_learning_algorithms/007_sarsa.py` — SARSA
+- [ ] `chapter_29_reinforcement_learning_algorithms/008_q_learning.py` — Q-learning
+- [ ] `chapter_29_reinforcement_learning_algorithms/009_expected_sarsa.py` — Expected SARSA
+- [ ] `chapter_29_reinforcement_learning_algorithms/010_double_q_learning.py` — Double Q-learning
+- [ ] `chapter_29_reinforcement_learning_algorithms/011_dyna_q.py` — Dyna-Q
+- [ ] `chapter_29_reinforcement_learning_algorithms/012_policy_gradient_reinforce.py` — REINFORCE
+- [ ] `chapter_29_reinforcement_learning_algorithms/013_actor_critic_basics.py` — actor-critic basics
+- [ ] `chapter_29_reinforcement_learning_algorithms/014_upper_confidence_bound_bandit.py` — UCB bandit
+- [ ] `chapter_29_reinforcement_learning_algorithms/015_thompson_sampling.py` — Thompson sampling
+
+### Chapter 30: Compression and Information Coding Algorithms
+
+`chapter_30_compression_and_information_coding/` focuses on lossless compression, entropy coding, error detection, and error-correcting codes.
+
+- [ ] `chapter_30_compression_and_information_coding/001_run_length_encoding.py` — run-length encoding
+- [ ] `chapter_30_compression_and_information_coding/002_huffman_coding.py` — Huffman coding
+- [ ] `chapter_30_compression_and_information_coding/003_canonical_huffman.py` — canonical Huffman coding
+- [ ] `chapter_30_compression_and_information_coding/004_arithmetic_coding.py` — arithmetic coding
+- [ ] `chapter_30_compression_and_information_coding/005_lz77.py` — LZ77
+- [ ] `chapter_30_compression_and_information_coding/006_lz78.py` — LZ78
+- [ ] `chapter_30_compression_and_information_coding/007_lzw.py` — LZW
+- [ ] `chapter_30_compression_and_information_coding/008_bwt_compression_pipeline.py` — BWT compression pipeline
+- [ ] `chapter_30_compression_and_information_coding/009_move_to_front.py` — move-to-front transform
+- [ ] `chapter_30_compression_and_information_coding/010_delta_encoding.py` — delta encoding
+- [ ] `chapter_30_compression_and_information_coding/011_varint_encoding.py` — variable-length integer encoding
+- [ ] `chapter_30_compression_and_information_coding/012_crc32.py` — CRC32
+- [ ] `chapter_30_compression_and_information_coding/013_hamming_code.py` — Hamming code
+- [ ] `chapter_30_compression_and_information_coding/014_reed_solomon_basics.py` — Reed-Solomon basics
+
+### Chapter 31: Cryptography Algorithms
+
+`chapter_31_cryptography_algorithms/` focuses on educational implementations of cryptographic primitives and protocols. These files are for learning and must not be used as production security code.
+
+- [ ] `chapter_31_cryptography_algorithms/001_caesar_cipher.py` — Caesar cipher
+- [ ] `chapter_31_cryptography_algorithms/002_vigenere_cipher.py` — Vigenere cipher
+- [ ] `chapter_31_cryptography_algorithms/003_diffie_hellman.py` — Diffie-Hellman key exchange
+- [ ] `chapter_31_cryptography_algorithms/004_rsa_key_generation.py` — RSA key generation
+- [ ] `chapter_31_cryptography_algorithms/005_rsa_encrypt_decrypt.py` — RSA encryption and decryption
+- [ ] `chapter_31_cryptography_algorithms/006_elgamal.py` — ElGamal
+- [ ] `chapter_31_cryptography_algorithms/007_sha256_core.py` — SHA-256 core structure
+- [ ] `chapter_31_cryptography_algorithms/008_hmac.py` — HMAC
+- [ ] `chapter_31_cryptography_algorithms/009_merkle_tree.py` — Merkle tree
+- [ ] `chapter_31_cryptography_algorithms/010_aes_sbox_and_rounds.py` — AES S-box and round structure
+- [ ] `chapter_31_cryptography_algorithms/011_elliptic_curve_group.py` — elliptic-curve group operations
+- [ ] `chapter_31_cryptography_algorithms/012_ecdsa_basics.py` — ECDSA basics
+
+### Chapter 32: Compiler Algorithms
+
+`chapter_32_compiler_algorithms/` focuses on parsing, program analysis, optimization, and register allocation algorithms.
+
+- [ ] `chapter_32_compiler_algorithms/001_regex_to_nfa.py` — regex to NFA
+- [ ] `chapter_32_compiler_algorithms/002_nfa_to_dfa.py` — NFA to DFA
+- [ ] `chapter_32_compiler_algorithms/003_dfa_minimization.py` — DFA minimization
+- [ ] `chapter_32_compiler_algorithms/004_first_follow_sets.py` — FIRST and FOLLOW sets
+- [ ] `chapter_32_compiler_algorithms/005_ll1_parsing_table.py` — LL(1) parsing table
+- [ ] `chapter_32_compiler_algorithms/006_lr0_items.py` — LR(0) items
+- [ ] `chapter_32_compiler_algorithms/007_slr_parsing.py` — SLR parsing
+- [ ] `chapter_32_compiler_algorithms/008_shunting_yard.py` — shunting-yard algorithm
+- [ ] `chapter_32_compiler_algorithms/009_three_address_code.py` — three-address code
+- [ ] `chapter_32_compiler_algorithms/010_basic_blocks_cfg.py` — basic blocks and CFG
+- [ ] `chapter_32_compiler_algorithms/011_dominators.py` — dominator computation
+- [ ] `chapter_32_compiler_algorithms/012_static_single_assignment.py` — SSA construction basics
+- [ ] `chapter_32_compiler_algorithms/013_liveness_analysis.py` — liveness analysis
+- [ ] `chapter_32_compiler_algorithms/014_graph_coloring_register_allocation.py` — graph-coloring register allocation
+
+### Chapter 33: Database Algorithms
+
+`chapter_33_database_algorithms/` focuses on storage indexes, query execution, query optimization, and transaction-control algorithms.
+
+- [ ] `chapter_33_database_algorithms/001_b_tree.py` — B-tree
+- [ ] `chapter_33_database_algorithms/002_b_plus_tree.py` — B+ tree
+- [ ] `chapter_33_database_algorithms/003_lsm_tree_basics.py` — LSM tree basics
+- [ ] `chapter_33_database_algorithms/004_hash_index.py` — hash index
+- [ ] `chapter_33_database_algorithms/005_bitmap_index.py` — bitmap index
+- [ ] `chapter_33_database_algorithms/006_nested_loop_join.py` — nested-loop join
+- [ ] `chapter_33_database_algorithms/007_hash_join.py` — hash join
+- [ ] `chapter_33_database_algorithms/008_sort_merge_join.py` — sort-merge join
+- [ ] `chapter_33_database_algorithms/009_external_merge_sort.py` — external merge sort
+- [ ] `chapter_33_database_algorithms/010_grace_hash_join.py` — Grace hash join
+- [ ] `chapter_33_database_algorithms/011_volcano_iterator_model.py` — Volcano iterator model
+- [ ] `chapter_33_database_algorithms/012_dynamic_programming_join_order.py` — DP join ordering
+- [ ] `chapter_33_database_algorithms/013_two_phase_locking.py` — two-phase locking
+- [ ] `chapter_33_database_algorithms/014_mvcc_basics.py` — MVCC basics
+
+### Chapter 34: Distributed Systems Algorithms
+
+`chapter_34_distributed_systems_algorithms/` focuses on algorithms used for coordination, consistency, replication, partitioning, and distributed state.
+
+- [ ] `chapter_34_distributed_systems_algorithms/001_consistent_hashing.py` — consistent hashing
+- [ ] `chapter_34_distributed_systems_algorithms/002_rendezvous_hashing.py` — rendezvous hashing
+- [ ] `chapter_34_distributed_systems_algorithms/003_vector_clock.py` — vector clock
+- [ ] `chapter_34_distributed_systems_algorithms/004_lamport_clock.py` — Lamport clock
+- [ ] `chapter_34_distributed_systems_algorithms/005_gossip_protocol.py` — gossip protocol
+- [ ] `chapter_34_distributed_systems_algorithms/006_leader_election_bully.py` — Bully leader election
+- [ ] `chapter_34_distributed_systems_algorithms/007_leader_election_ring.py` — ring leader election
+- [ ] `chapter_34_distributed_systems_algorithms/008_two_phase_commit.py` — two-phase commit
+- [ ] `chapter_34_distributed_systems_algorithms/009_three_phase_commit.py` — three-phase commit
+- [ ] `chapter_34_distributed_systems_algorithms/010_paxos_basics.py` — Paxos basics
+- [ ] `chapter_34_distributed_systems_algorithms/011_raft_basics.py` — Raft basics
+- [ ] `chapter_34_distributed_systems_algorithms/012_crdt_g_counter.py` — CRDT G-Counter
+- [ ] `chapter_34_distributed_systems_algorithms/013_merkle_tree_sync.py` — Merkle-tree synchronization
+
+### Chapter 35: Operating System Scheduling Algorithms
+
+`chapter_35_operating_system_scheduling/` focuses on CPU, memory, disk, and page-replacement scheduling algorithms.
+
+- [ ] `chapter_35_operating_system_scheduling/001_first_come_first_served.py` — FCFS scheduling
+- [ ] `chapter_35_operating_system_scheduling/002_shortest_job_first.py` — SJF scheduling
+- [ ] `chapter_35_operating_system_scheduling/003_shortest_remaining_time_first.py` — SRTF scheduling
+- [ ] `chapter_35_operating_system_scheduling/004_round_robin.py` — round-robin scheduling
+- [ ] `chapter_35_operating_system_scheduling/005_priority_scheduling.py` — priority scheduling
+- [ ] `chapter_35_operating_system_scheduling/006_multilevel_feedback_queue.py` — MLFQ
+- [ ] `chapter_35_operating_system_scheduling/007_rate_monotonic_scheduling.py` — rate-monotonic scheduling
+- [ ] `chapter_35_operating_system_scheduling/008_earliest_deadline_first.py` — earliest-deadline-first scheduling
+- [ ] `chapter_35_operating_system_scheduling/009_fifo_page_replacement.py` — FIFO page replacement
+- [ ] `chapter_35_operating_system_scheduling/010_lru_page_replacement.py` — LRU page replacement
+- [ ] `chapter_35_operating_system_scheduling/011_clock_page_replacement.py` — clock page replacement
+- [ ] `chapter_35_operating_system_scheduling/012_scan_disk_scheduling.py` — SCAN disk scheduling
+- [ ] `chapter_35_operating_system_scheduling/013_c_scan_disk_scheduling.py` — C-SCAN disk scheduling
+
+### Chapter 36: Graph Machine Learning Sampling Algorithms
+
+`chapter_36_graph_machine_learning_sampling/` focuses on graph sampling and random-walk algorithms commonly used before or inside graph ML pipelines.
+
+- [ ] `chapter_36_graph_machine_learning_sampling/001_random_walk.py` — random walk
+- [ ] `chapter_36_graph_machine_learning_sampling/002_personalized_pagerank.py` — personalized PageRank
+- [ ] `chapter_36_graph_machine_learning_sampling/003_deepwalk_sampling.py` — DeepWalk-style sampling
+- [ ] `chapter_36_graph_machine_learning_sampling/004_node2vec_sampling.py` — Node2Vec biased random walks
+- [ ] `chapter_36_graph_machine_learning_sampling/005_negative_sampling.py` — negative sampling
+- [ ] `chapter_36_graph_machine_learning_sampling/006_graphsage_neighbor_sampling.py` — GraphSAGE neighbor sampling
+- [ ] `chapter_36_graph_machine_learning_sampling/007_ladies_sampling_basics.py` — LADIES sampling basics
+- [ ] `chapter_36_graph_machine_learning_sampling/008_random_edge_sampling.py` — random edge sampling
+- [ ] `chapter_36_graph_machine_learning_sampling/009_subgraph_sampling.py` — subgraph sampling
+
 ## Implementation Standard
 
 Each Python implementation should follow a consistent structure:
@@ -608,4 +801,4 @@ Recommended format:
 
 ## License
 
-This repository is intended for educational use.
+This repository is licensed under the [MIT License](LICENSE).

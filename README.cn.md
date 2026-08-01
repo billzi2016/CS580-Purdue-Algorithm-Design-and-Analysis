@@ -1,6 +1,8 @@
 # CS 580：算法设计与分析
 
-本仓库用于整理 **Purdue University CS 580: Algorithm Design and Analysis** 相关的算法实现、学习笔记和可运行示例，同时覆盖 LeetCode 常见题型、Codeforces 竞赛算法、数学算法、启发式优化、蒙特卡洛树搜索、机器学习优化、深度学习网络架构，以及非 AI 生物信息学算法。目标是构建一个结构清晰、按章节组织的算法参考仓库，将课程中的核心算法设计内容与实际刷题、竞赛、数学计算、优化实现和工程化实现结合起来。
+本仓库用于整理 **Purdue University CS 580: Algorithm Design and Analysis** 相关的算法实现、学习笔记和可运行示例，并把实现规划扩展映射到更多 Purdue Computer Science 课程。同时覆盖 LeetCode 常见题型、Codeforces 竞赛算法、数学算法、启发式优化、蒙特卡洛树搜索、机器学习优化、深度学习网络架构，以及非 AI 生物信息学算法。目标是构建一个结构清晰、按章节组织的算法参考仓库，将 Purdue 课程主题与实际刷题、竞赛、数学计算、优化实现和工程化实现结合起来。
+
+在过去八年里，我作为 TA 参与了七门 Purdue CS 课程，并基于这些教学和课程支持经历整理出这些笔记与实现：**Numerical Methods**、**Data Mining and Machine Learning**、**Introduction to Cryptography**、**Algorithm Design, Analysis, and Implementation**、**Programming Languages**、**Statistical Machine Learning** 和 **Database Systems**。本仓库希望把这些方向中的核心方法系统整理成一个可维护、以实现为核心的算法手册。
 
 仓库会按照章节划分主题，使每个算法都便于查找、测试和扩展。每个实现都应包含简明说明、复杂度分析，以及可以直接运行的本地 `main` 示例。
 
@@ -43,9 +45,56 @@ chapter_XX_topic_name/
 - 边界情况覆盖；
 - 一个 `main` 入口或可调用的 demo 函数，用于快速验证。
 
+## Purdue 课程覆盖映射
+
+本仓库从 CS 580 出发，扩展成一个覆盖 Purdue 多门 CS 课程主题的算法实现地图。它不是官方 syllabus 的替代品，而是面向实现、注释、测试和工程维护的算法参考仓库。
+
+| Purdue 课程 | 课程名称 | 仓库覆盖方向 |
+|---|---|---|
+| CS 18000 | Problem Solving and Object-Oriented Programming | 基础编程模式、递归、迭代、测试示例 |
+| CS 18200 | Foundations of Computer Science | 离散数学基础、证明思路、递推分析、组合数学 |
+| CS 24000 | Programming Laboratory in C | 底层实现纪律、内存意识、偏系统的算法实现 |
+| CS 25000 | Computer Architecture | 位运算、整数表示、缓存意识、底层性能分析 |
+| CS 25100 | Data Structures and Algorithms | 数组、链表、栈、队列、树、堆、哈希表、图、并查集 |
+| CS 25200 | Systems Programming | 系统编程相关数据结构、文件处理示例、调度模拟 |
+| CS 25300 | Data Structures and Algorithms for DS/AI | 数据科学和 AI pipeline 中常用的数据结构 |
+| CS 31100 | Competitive Programming II | 竞赛模式、图算法、DP、数论、数据结构 |
+| CS 31400 | Numerical Methods | 数值微分、数值积分、求根、ODE、数值线性代数 |
+| CS 33400 | Fundamentals of Computer Graphics | 计算几何、变换、插值、空间算法 |
+| CS 34800 | Information Systems | 数据库索引、查询执行、join 算法、事务概念 |
+| CS 35200 | Compilers: Principles and Practice | 自动机、解析、CFG、SSA、活跃变量分析、寄存器分配 |
+| CS 35400 | Operating Systems | 调度算法、页面置换、磁盘调度、并发相关模型 |
+| CS 35500 | Introduction to Cryptography | 模运算、RSA、Diffie-Hellman、哈希、Merkle Tree、ECC 基础 |
+| CS 37300 | Data Mining and Machine Learning | 优化、采样、聚类基础组件、机器学习算法基础 |
+| CS 38100 | Introduction to the Analysis of Algorithms | 排序、分治、贪心、DP、图算法、网络流、NP 完全性 |
+| CS 41100 | Competitive Programming III | 高级竞赛数据结构、树链剖分、莫队、CDQ、FFT/NTT、构造题 |
+| CS 42200 | Computer Networks | 图路由思想、分布式协调、哈希、协议状态算法 |
+| CS 42600 | Computer Security | 密码学原语、哈希、Merkle Tree、安全算法基础 |
+| CS 44000 | Large Scale Data Analytics | sketch、流式算法、采样、外存算法、大规模处理 |
+| CS 44800 | Introduction to Relational Database Systems | B-tree、B+ tree、join、查询规划、索引、MVCC 基础 |
+| CS 47100 | Introduction to Artificial Intelligence | 搜索算法、A*、IDA*、MCTS、优化、规划基础 |
+| CS 47800 | Introduction to Bioinformatics | DNA 匹配、序列比对、BLAST/FASTA 风格搜索、基因组组装、pangenome graph |
+| CS 48900 | Embedded Systems | 位级算法、调度、内存敏感实现 |
+| CS 53000 | Introduction to Scientific Visualization | 数值方法、几何、插值、图和网格算法 |
+| CS 53500 | Interactive Computer Graphics | 几何、空间数据结构、插值、变换 |
+| CS 53600 | Data Communication and Computer Networks | 最短路、路由、哈希、分布式算法 |
+| CS 54100 | Database Systems | 存储结构、查询优化、join、并发控制 |
+| CS 55100 | Cloud Computing Fundamentals | 分布式算法、一致性哈希、复制、共识基础 |
+| CS 55800 | Introduction to Robot Learning | 优化、搜索、规划、强化学习基础 |
+| CS 56500 | Programming Languages | 解析、自动机、程序分析、编译器算法 |
+| CS 57800 | Statistical Machine Learning | 优化算法、梯度方法、正则化、模型训练基础组件 |
+| CS 58000 | Algorithm Design, Analysis, and Implementation | 图算法、网络流、线性规划思想、近似、随机化算法、NP 完全性 |
+| CS 58400 | Theory of Computation and Computational Complexity | 自动机、归约、复杂性、NP 完全性 |
+| CS 58500 | Theoretical Computer Science Toolkit | 数学工具、概率、组合、证明技巧 |
+| CS 53100 | Computational Geometry | 几何基础操作、凸包、扫描线、最近点对、空间算法 |
+| CS 55500 | Cryptography | 数论、公钥密码、哈希、认证原语 |
+| CS 590AA | Approximation Algorithms | 近似算法、LP rounding 思路、贪心近似模式 |
+| CS 590RA | Randomized Algorithms | 随机化算法、哈希、采样、Monte Carlo 方法 |
+| CS 65500 | Advanced Cryptology | 高级密码学基础和数论原语 |
+
 ## 算法任务清单
 
-章节设计同时覆盖标准算法设计课程内容、LeetCode 常见题型、Codeforces 竞赛算法、数学算法、非 AI 生物信息学算法、启发式搜索与优化、ML/DL 优化算法，以及深度学习网络架构。完成后可把对应条目从 `- [ ]` 改成 `- [x]`。
+章节设计同时覆盖标准算法设计课程内容、LeetCode 常见题型、Codeforces 竞赛算法、数学算法、非 AI 生物信息学算法、启发式搜索与优化、ML/DL 优化算法、深度学习网络架构、压缩与信息编码、密码学、编译器、数据库、分布式系统、操作系统调度、强化学习和图机器学习采样。完成后可把对应条目从 `- [ ]` 改成 `- [x]`。
 
 - [ ] `chapter_01_foundations/`：二分查找、上下界、前缀和、二维前缀和、差分数组、双指针、滑动窗口、快速幂、位运算、递归与迭代模式
 - [ ] `chapter_02_sorting_and_selection/`：归并排序、快速排序、堆排序、计数排序、基数排序、桶排序、快速选择、中位数的中位数
@@ -75,6 +124,14 @@ chapter_XX_topic_name/
 - [ ] `chapter_26_heuristic_search_and_metaheuristics/`：爬山法、随机重启爬山、模拟退火、粒子群优化、遗传算法、差分进化、蚁群算法、禁忌搜索、Beam Search、A*、IDA*、MCTS、UCB、交叉熵方法、CMA-ES 基础
 - [ ] `chapter_27_mathematical_and_numerical_algorithms/`：有限差分求导、梯度/Jacobian/Hessian、Newton 求根、二分求根、割线法、不动点迭代、梯形积分、Simpson 积分、自适应 Simpson、高斯求积、Monte Carlo 积分、Euler ODE、RK4、Gaussian elimination、LU、QR、幂迭代、SVD 基础、最小二乘、插值、样条、FFT 乘法、NTT 乘法
 - [ ] `chapter_28_deep_learning_architectures/`：Perceptron、MLP、Autoencoder、VAE core、手写 2D convolution、LeNet、AlexNet、VGG block、ResNet block、DenseNet block、Inception block、depthwise separable convolution、MobileNet block、RNN、LSTM、GRU、Seq2Seq、Attention、Multi-Head Attention、Positional Encoding、Transformer Encoder/Decoder、ViT、U-Net、GAN、DCGAN、Diffusion forward/reverse、GCN、GAT
+- [ ] `chapter_29_reinforcement_learning_algorithms/`：MDP、Value Iteration、Policy Iteration、Monte Carlo Prediction/Control、TD(0)、SARSA、Q-learning、Expected SARSA、Double Q-learning、Dyna-Q、REINFORCE、Actor-Critic、UCB Bandit、Thompson Sampling
+- [ ] `chapter_30_compression_and_information_coding/`：RLE、Huffman、Canonical Huffman、Arithmetic Coding、LZ77、LZ78、LZW、BWT compression pipeline、Move-to-Front、Delta Encoding、Varint、CRC32、Hamming Code、Reed-Solomon 基础
+- [ ] `chapter_31_cryptography_algorithms/`：Caesar、Vigenere、Diffie-Hellman、RSA key generation、RSA encrypt/decrypt、ElGamal、SHA-256 core、HMAC、Merkle Tree、AES S-box/rounds、ECC group operation、ECDSA 基础
+- [ ] `chapter_32_compiler_algorithms/`：Regex to NFA、NFA to DFA、DFA minimization、FIRST/FOLLOW、LL(1)、LR(0)、SLR、Shunting-yard、Three-address Code、Basic Blocks、CFG、Dominator、SSA、Liveness Analysis、Graph Coloring Register Allocation
+- [ ] `chapter_33_database_algorithms/`：B-tree、B+ tree、LSM tree、Hash Index、Bitmap Index、Nested-loop Join、Hash Join、Sort-merge Join、External Merge Sort、Grace Hash Join、Volcano Iterator、DP Join Ordering、Two-phase Locking、MVCC
+- [ ] `chapter_34_distributed_systems_algorithms/`：Consistent Hashing、Rendezvous Hashing、Vector Clock、Lamport Clock、Gossip、Bully Election、Ring Election、Two-phase Commit、Three-phase Commit、Paxos、Raft、CRDT G-Counter、Merkle Tree Sync
+- [ ] `chapter_35_operating_system_scheduling/`：FCFS、SJF、SRTF、Round Robin、Priority Scheduling、MLFQ、Rate Monotonic、Earliest Deadline First、FIFO Page Replacement、LRU、Clock、SCAN、C-SCAN
+- [ ] `chapter_36_graph_machine_learning_sampling/`：Random Walk、Personalized PageRank、DeepWalk Sampling、Node2Vec Sampling、Negative Sampling、GraphSAGE Neighbor Sampling、LADIES Sampling、Random Edge Sampling、Subgraph Sampling
 
 ## 实现规范
 
@@ -229,8 +286,10 @@ python3 main.py
 8. 添加 ML/DL 优化算法。
 9. 添加启发式优化、MCTS 和数学/数值算法。
 10. 添加深度学习网络架构的手写核心实现。
-11. 添加仓库级 `main.py` smoke test 入口。
-12. 当实现数量增加后，再补充可选的 `pytest` 测试。
+11. 添加强化学习、压缩、密码学、编译器、数据库、分布式和操作系统调度算法。
+12. 添加图机器学习采样算法。
+13. 添加仓库级 `main.py` smoke test 入口。
+14. 当实现数量增加后，再补充可选的 `pytest` 测试。
 
 ## Commit 信息规范
 
@@ -256,4 +315,4 @@ Commit 信息必须具体、清晰、可审查，总长度不超过 10 行。
 
 ## License
 
-本仓库用于教育和学习目的。
+本仓库使用 [MIT License](LICENSE) 开源。
